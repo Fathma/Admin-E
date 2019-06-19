@@ -1,6 +1,6 @@
 const express = require("express");
 // const handlebars = require("express-handlebars");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // const bodyParser = require("body-parser");
 // const flash = require("connect-flash");
 // const session = require("express-session");
@@ -12,7 +12,7 @@ const express = require("express");
 // var Supplier = require("./models/supplier.model");
 // var SubCategory = require("./models/subCategory.model");
 // var PostCategory = require('./models/PostCategory.model')
-// const keys = require('./config/keys')
+const keys = require('./config/keys')
 
 // var Brand = require("./models/brand.model");
 // const morgan = require("morgan");
@@ -49,11 +49,11 @@ const app = express();
 // // Map global promise
 // mongoose.Promise = global.Promise;
 
-// //DB Connection
-// mongoose.connect( keys.database.mongoURI, err => {
-//   if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
-//   else console.log("Error in DB connection :" + JSON.stringify(err, undefined, 2));
-// });
+//DB Connection
+mongoose.connect( keys.database.mongoURI, err => {
+  if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
+  else console.log("Error in DB connection :" + JSON.stringify(err, undefined, 2));
+});
 
 // HandlebarsIntl.registerWith(Handlebars);
 
