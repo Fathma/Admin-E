@@ -1,0 +1,54 @@
+<div class="register-box">
+  <div class="register-logo">
+    <a href="index.html"><b>Admin</b>Registration</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg">Register a new membership</p>
+
+    <form action="/users/register" method="POST">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="name" value="{{name}}" required  placeholder="Full Name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" name="email" class="form-control" value="{{email}}" required placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+       <div class="form-group has-feedback">
+        <input type="text" name="branch" class="form-control" value="{{branch}}" required placeholder="Branch">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password" class="form-control" value="{{password}}" required placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password2" class="form-control" value="{{password2}}" required placeholder="Confirm Password">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+
+      {{!-- role --}}
+      <div class="form-group">
+
+        <input type="text" name="role" list="roles" class="form-control" placeholder="Role">
+        <datalist id="roles">
+          <option value="Super">
+          <option value="Publisher">
+          <option value="moderator">
+        </datalist>
+
+      </div>
+      
+      <div class="row">
+
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.form-box -->
+</div>

@@ -1,0 +1,47 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a href="#"><b>Category</b>Registration</a>
+    </div>
+
+    <div class="register-box-body">
+
+        <form method="POST" action="/products/Discount/{{products._id}}">
+        <input type="hidden" id="selling_price" value="{{products.productPrice.listPrice}}">
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" name="name" value="{{products.name}}" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="wholeSalePrice">Purchase Price</label>
+                <input type="text" name="wholeSalePrice" value="{{products.productPrice.wholeSalePrice}}" class="form-control" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="wholeSalePrice">Unit/selling Price</label>
+                <input type="text" name="wholeSalePrice" value="{{products.productPrice.listPrice}}" class="form-control" readonly>
+            </div>
+
+            {{# if products.productPrice.salePrice}}
+            <div class="form-group">
+                <label for="salePrice">Previous Discount Price</label>
+                <input type="text" name="salePrice" value="{{products.productPrice.salePrice}}" class="form-control" readonly>
+            </div>
+            {{/if}}
+           
+            <div class="form-group">
+                <label for="price_discount">New Price</label>
+                <input type="text" id="price_discount" onkeyup="calculate_discount_percentage()"class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="discount123">Enter Discount(%)</label>
+                <input type="text" onkeyup="calculate_discount_price()"  id="discount123" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>
+</div>
+</div>

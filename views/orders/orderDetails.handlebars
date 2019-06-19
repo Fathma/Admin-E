@@ -1,0 +1,227 @@
+<div id="container" style="height: 1766px;">
+    <div class="row">
+
+
+    </div><Br></Br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 left-col">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Order Details</h3>
+                        <div class="pull-right">
+                            <div class="panel-chevron"></div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="order">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>Order ID:</td>
+                                            <td>{{order._id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Invoice No:</td>
+                                            <td><a href="/orders/ViewInvoice/{{order.invoice}}">{{order.invoice}}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Invoice No:</td>
+                                            <td>
+                                                <a href="/orders/generateInvoice/{{order._id}}" id="button-invoice"
+                                                    class="btn btn-success btn-xs">
+                                                    {{!-- <a href="/orders/setInvoiceValues/{{order._id}}" id="button-invoice" class="btn btn-success btn-xs"> --}}
+                                                    <i class="fa fa-cog"></i> Generate</a>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Customer:</td>
+                                            <td>{{order.user.profile.name}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>E-Mail:</td>
+                                            <td><a href="mailto:{{order.user.email}}">{{order.user.email}}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telephone:</td>
+                                            <td>{{order.user.contact}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total:</td>
+                                            <td>{{order.totalAmount}}TK</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Order Status:</td>
+                                            <td id="order-status">{{order.currentStatus}}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Order Date:</td>
+                                            <td>{{formatDate order.created}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Modified Date:</td>
+                                            <td>{{formatDate order.lastModified}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payment Method:</td>
+                                            <td>{{order.paymentMethod}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payment ID:</td>
+                                            <td>{{order.paymentId}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Products</h3>
+                        <div class="pull-right">
+                            <div class="panel-chevron"></div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="product">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td class="text-left">Option</td>
+                                            <td class="text-left">Product</td>
+                                            <td class="text-right">Quantity</td>
+                                            <td class="text-right">Unit Price</td>
+                                            <td class="text-right">Total</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{# each order.cart}}
+
+                                        <tr>
+                                            <td>
+                                                <a
+                                                    href="/orders/addSerialToProduct/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this._id}}">Add
+                                                    Serial Number</a></td>
+                                            <td class="text-left">
+                                                <a href="#">{{this.product.name}}</a>
+                                                <p>SN:{{# each this.serial}}
+                                                    {{this}}
+                                                    {{/each}}</p>
+                                                <br>
+                                            </td>
+
+                                            <td class="text-right">
+                                                <a href="/orders/Edit/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this.unitPrice}}/{{this._id}}"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit"
+                                                    style="padding: 0%" class="btn btn-primary"> <img
+                                                        src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>{{this.quantity}}
+                                            </td>
+                                            <td class="text-right">{{formatNumber this.unitPrice}}TK</td>
+                                            <td class="text-right">{{formatNumber this.price}}TK</td>
+                                        </tr>
+                                        {{/each}}
+                                        <tr>
+                                            <td colspan="4" class="text-right">Shipping Cost:</td>
+                                            <td class="text-right">{{formatNumber order.shippingCharge}}TK</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">Total:</td>
+                                            <td class="text-right">{{formatNumber order.totalAmount}}TK</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">History</h3>
+                        <div class="pull-right">
+                            <div class="panel-chevron"></div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="history">
+                            <div id="history">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td class="text-left">Date Added</td>
+                                                <td class="text-left">Comment</td>
+                                                <td class="text-left">Status</td>
+                                                <td class="text-left">Customer Notified</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{# each order.history}}
+                                            <tr>
+                                                <td class="text-left">{{formatDate this.date}}</td>
+                                                <td class="text-left">{{this.comment}}</td>
+
+                                                <td class="text-left">{{this.status}}</td>
+                                                <td class="text-left">{{this.customerNotified}}</td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <fieldset>
+                                <legend>Add Order History</legend>
+                                <form action="/orders/updateHistory/{{order._id}}" method="POST"
+                                    class="form-horizontal">
+                                    <input type="hidden" name="email" value="{{order.user.email}}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-order-status">Order
+                                            Status</label>
+                                        <select class="form-control" style="width: 15%" name="status" required>
+                                            <option value="New">New</option>
+                                            <option value="Processing">Processing</option>
+                                            <option value="Shipped">Shipped</option>
+                                            <option value="Delivered">Delivered</option>
+                                            <option value="canceled">Canceled</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-notify">Notify Customer</label>
+                                        <div class="col-sm-10">
+                                            <input type="checkbox" name="notify" value="1" id="input-notify">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-comment">Comment</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="comment" rows="8" id="input-comment"
+                                                class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" data-loading-text="Loading..." class="btn btn-primary"><i
+                                                class="fa fa-plus-circle"></i>
+                                            Add History</button>
+                                    </div>
+                                </form>
+
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+    </div>

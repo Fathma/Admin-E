@@ -1,0 +1,51 @@
+<div class="box">
+    <div class="register-logo">
+        <a href="#"><b>RestoreProductsTo</b>Inventory</a>
+    </div>
+
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-md-offset-2 col-sm-offset-3">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Select Serial numbers</h4>
+                            <div class="btn-group-vertical">
+                                {{# each live.live.serial}}
+                                <a class="btn" type="button" id="serial{{@index}}" onclick="set_disable(this.id)" class="btn btn-secondary">
+                                    {{this.serial}}
+                                </a>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+
+                        <div class="well">
+                            <form action="/products/Restore/{{live._id}}" method="POST">
+                                {{!-- {{!-- <input type="hidden" name="all_pp" id="all_pp"  value="{{highest_pp}}"> --}}
+                                <input type="hidden" name="live_quantity" value="{{live.live.quantity}}"> 
+                                <input type="hidden" name="live_frontquantity" value="{{live.frontQuantity}}"> 
+                                
+
+                                <div class="form-group">
+                                    <label for="model">Model</label>
+                                    <input type="text" name="model" class="form-control" value="{{live.model}}"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="serial">Serial Number</label>
+                                    <input type="text" name="serial" id="serial" class="form-control"></input>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

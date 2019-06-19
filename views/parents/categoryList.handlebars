@@ -1,0 +1,55 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Category</a>
+    </div>
+
+
+    <div style="background-color: white">
+        <table style="width:100%" class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {{# each category}}
+            <tr>
+                <td>{{this.name}}</td>
+                {{# if this.enabled}}
+                <td>Enabled</td>
+                {{else}}
+                <td>Disabled</td>
+                {{/if}}
+                <td>
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="#{{this._id}}"
+                        rel="modal:open">Edit</a>
+
+                    <div id="{{this._id}}" class="modal">
+                        <div class="form-group">
+                            <label for="cat" style="color:azure">Category</label>
+                            <input type="text" name="name" id="name" value="{{this.name}}"
+                                class="form-control">
+                            <input type="text" name="name" id="name" value="{{this._id}}"
+                                class="form-control">
+                        </div>
+                        <button id="edit_cat" class="btn btn-primary">Change</button>
+                    </div>
+
+                    {{# if this.enabled}}
+                    <a href="/category/category/changeStatus/{{this._id}}/false" data-toggle="tooltip" title="Edit info"
+                        class="btn btn-default">Disable</a>
+                    {{else}}
+                    <a href="/category/category/changeStatus/{{this._id}}/true" data-toggle="tooltip" title="Edit info"
+                        class="btn btn-default">Enable</a>
+                    {{/if}}
+                </td>
+            </tr>
+
+
+            {{/each}}
+        </table>
+
+
+
+    </div>
+
+</div>

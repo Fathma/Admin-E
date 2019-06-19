@@ -1,0 +1,81 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Suppliers</a>
+    </div>
+
+    <div style="background-color: white">
+        <table style="width:100%" class="table table-striped" >
+            <tr>
+                <th>Supplier ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact Person</th>
+                <th>Registration Number</th>
+                <th>Country</th>
+                <th>Industry</th>
+                <th>Additional Information</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+          {{# each supplier}}
+            <tr>
+                <td>{{this.supplier_id}}</td>
+                <td>
+                    <strong class="notranslate">{{this.cname}}</strong>
+                </td>
+                <td>
+                    <strong class="notranslate">
+                        {{# each this.address}}
+                            address:{{this.address}} <br>
+                            Zip:{{this.zip}} <br> 
+                            Telephone Number :{{this.contact}} <br><br>
+                        {{/each}}
+                    </strong>
+                </td>
+
+                <td>
+                   <strong class="notranslate">{{this.cemail}}</strong>
+                </td>
+                <td class="notranslate">
+                    {{# each this.contactPerson}}
+                        <Strong>Name:</Strong> {{this.contactName}} <br>
+                        <Strong>Position:</Strong>{{this.companyPosition}} <br>
+                        <Strong>Email:</Strong>{{this.email}} <br>
+                        <strong>Mobile:</strong> {{this.mobile}}<br>
+                        <Strong>Telephone:</Strong>{{this.telephone}} <br>
+                        <Strong>Extention:</Strong>{{this.extention}} <br>
+                    <br>
+                    {{/each}}
+                    
+                </td>
+                <td>
+                    <strong class="notranslate">{{this.registration_no}}</strong>
+                </td>
+                <td>
+                    <strong class="notranslate">{{this.country}}</strong>
+                </td>
+                <td>
+                    <strong class="notranslate">{{this.industry}}</strong>
+                </td>
+                <td>
+                    <strong class="notranslate">{{this.additionalInfo}}</strong>
+                </td>
+                 <td>
+                    <strong class="notranslate">{{formatDate this.created}}</strong>
+                </td>
+                <td>
+                    <a href="/supplier/Edit/{{this._id}}" data-toggle="tooltip" 
+                        title="Edit info" class="btn btn-success" style="padding:0%"> <img src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>
+                    <a href="/supplier/delete/{{this._id}}" data-toggle="tooltip" 
+                        title="Delete Supplier" class="btn btn-danger" style="padding:0%"><img src="https://img.icons8.com/ios/20/ffffff/x.png"></a>
+                </td>
+               
+            </tr>
+           
+            {{/each}}
+        </table>
+
+    </div>
+
+</div>

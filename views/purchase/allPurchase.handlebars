@@ -1,0 +1,55 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Local Purchase List</a>
+    </div>
+  
+    <div style="background-color: white">
+        <table style="width:100%" class="table table-striped">
+            <tr>
+                <th>LP Number</th>
+                <th>Date</th>
+                <th>Supplier</th>
+                <th>Address</th>
+                <th>Contact Person</th>
+                <th>Mobile</th>
+                <th>Sub Total</th>
+                <th>View</th>
+            </tr>
+            {{# each lp}}
+           
+            <tr>
+                
+                <td>
+                    <strong>{{this.number}}</strong>
+                </td>
+                
+                <td>
+                    <strong>{{formatDate this.date}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.supplier.cname}}</strong>
+                </td>
+
+                <td>
+                    <strong>{{this.address}}</strong>
+                </td>
+
+                <td>
+                   {{this.contactPerson}}
+                </td>
+
+                <td>
+                    {{this.mobile}}
+                </td>
+                <td>
+                    {{formatNumber this.subTotal}} TK
+                </td>
+                <td>
+                    <a href="/purchase/localPurchase/{{this.number}}">Details</a>
+                </td>
+            </tr>
+            
+            {{/each}}
+        </table>
+    </div>
+</div>

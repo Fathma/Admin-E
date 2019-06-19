@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{title}}</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery.modal.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/assets/css/ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/assets/css/_all-skins.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- Morris chart -->
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/assets/css/bootstrap3-wysihtml5.min.css">
+    <!-- jQuery 3 -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/assets/js/jquery-ui.min.js"></script>
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+    
+    <script src="/js.js"></script>
+    <script src="/inventory.js"></script>
+    {{!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script> --}}
+    {{!-- <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script> --}}
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.css">
+
+
+    <script>
+        $(document).ready(
+            function () {
+                $("#ttt").DataTable({
+                        "lengthMenu": [[5, 10, 15, 20, -1],
+                        [5, 10, 15, 20, "All"]],
+                        "ordering": false,
+                        stateSave: true
+                    });
+            });
+    </script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini" onload="set_var()">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            {{# if user}}
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>A</b>DB</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b>Dashboard</span>
+            </a>
+            {{else}}
+            <a href="#" class="logo">
+                <span class="logo-lg">ECL</span>
+            </a>
+            {{/if}}
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                {{# if user}}
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                {{/if}}
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        {{#if user}}
+
+                        <li class="nav-items">
+                            <form class="navbar-form" action="/products/search" method="POST">
+                                {{!-- <div class="input-group add-on"> --}}
+                                <input class="form-control" placeholder="Search" name="searchData" type="text">
+                                {{!-- <div class="input-group-btn"> --}}
+                                <button class="btn btn-default" type="submit">
+                                    <img src="https://img.icons8.com/cotton/17/000000/search.png">
+                                    </button>
+                                {{!-- </div> --}}
+                                {{!-- </div> --}}
+                            </form>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="dLabel" data-toggle="dropdown" data-target="hash" href="hash" aria-expanded="true">
+                                <img src="https://img.icons8.com/ios/20/ffffff/appointment-reminders-filled.png">
+                                <span id="notification"></span>
+                            </a>
+                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                <li>
+                                    <a id="set_href">
+                                        Low Live
+                                        <span name="lowLive" id="lowLive" style="padding: 5%; color:red"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><div id="google_translate_element"></div></li>
+
+                        <li class="nav-item">
+                            <a href="/users/register" class="nav-link">
+                                <img src="https://img.icons8.com/ios/20/ffffff/add-user-group-man-man-filled.png">
+                            </a>
+                        </li>
+
+                        <li class="nav-item"><a href="/users/logout" class="nav-link">Logout</a></li>
+
+                        {{else}}
+                        <li><a href="/users/login" class="nav-link">Login</a></li>
+
+                        {{/if}}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        {{#if user}}
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="/assets/img/avatar5.png" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>Admin</p>
+                        {{#if user}}
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        {{else}}
+                        <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                {{#if user}}
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/products/showDashboard"><i class="fa fa-circle-o"></i> Admin Activity Board</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li class="treeview">
+                        <a href="#">
+                             <i class="fa fa-truck" aria-hidden="true"></i>
+                            {{!-- <i class="fa fa-cubes"></i> --}}
+                            <span>Supplier</span>
+                            <span class="pull-right-container">
+                               
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/supplier/SupplierRegistrationPage"><i class="fa fa-circle-o"></i>New Supplier</a></li>
+                            <li><a href="/supplier/SupplierList"><i class="fa fa-circle-o"></i>All Suppliers</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                            {{!-- <i class="fa fa-cubes"></i> --}}
+                            <span>Local Purchase</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Local Purchase</a></li>
+                            <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>Local Purchase List</a></li>
+                            {{!-- <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Inventory</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="/products/InhouseInventory">
+                                            <i class="fa fa-location-arrow"aria-hidden="true"></i>In-house Stock Product
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/products/DealerInventory">
+                                            <i class="fa fa-location-arrow" aria-hidden="true"></i> Dealer Product
+                                        </a> 
+                                    </li>
+                                </ul>
+                            </li> --}}
+                        </ul>
+                    </li>
+                     <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cubes"></i>
+                            <span>Inventory</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/products/InhouseInventory"><i class="fa fa-circle-o"></i>In-house Stock Product</a></li>
+                            <li><a href="/products/DealerInventory"><i class="fa fa-circle-o"></i> Dealer Product</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cube" aria-hidden="true"></i>
+                            <span>Product</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/category/categoryList"><i class="fa fa-circle-o"></i>All Categories</a></li>
+                            <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>All Sub Categories</a></li>
+                            <li><a href="/category/brandList"><i class="fa fa-circle-o"></i>All Brands</a></li>
+                            <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>All Products</a></li>
+                            {{!-- <li><a href="/products/view"><i class="fa fa-circle-o"></i>All Inventories</a></li> --}}
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Sales</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/orders/orders"><i class="fa fa-circle-o"></i>Orders</a></li>
+                            <li><a href="/invoice/invoiceList"><i class="fa fa-circle-o"></i>Invoice</a></li>
+                            <li><a href="/returns/returnList"><i class="fa fa-circle-o"></i>Returns</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Reports</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Orders</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Invoice</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Returns</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-users"></i>
+                            <span>Customers' Information</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/customers/RegisteredCustomer">
+                                    <i class="fa fa-circle-o"></i>Registered Customers
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-commenting" aria-hidden="true"></i>
+                            <span>Forum</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/forum/posts"><i class="fa fa-circle-o"></i>Posts</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                {{else}}
+                <h4 style="color:lightskyblue">Please Log in first to Get Access</h4>
+                {{/if}}
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        {{else}}
+        <aside class="main-sidebar" style="background-color: #ecf0f5"></aside>
+        {{/if}}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <section class="content-header">
+                {{> _msg}}
+                {{> _errors}}
+            </section>
+            <div class="container-fluid">
+                {{{body}}}
+            </div>
+        </div>
+        
+        {{# if user}}
+        <footer id="footer" class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0.0
+            </div>
+            <strong>Copyright &copy; 2018 <a href="http://www.ecl-bd.com/">Everest Computers Ltd</a>.</strong> All
+            rights reserved.
+        </footer>
+        {{/if}}
+
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ 
+                    pageLanguage: 'en', 
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE 
+                    }, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        <!-- ./wrapper -->
+
+        <!-- jQuery 3 -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+        </script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <!-- Bootstrap WYSIHTML5 -->
+        <script src="/assets/js/bootstrap3-wysihtml5.all.min.js"></script>
+        <!-- Slimscroll -->
+        <script src="/assets/js/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="/assets/js/fastclick.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/assets/js/adminlte.min.js"></script>
+        <script type='text/javascript'
+            src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> --}}
+        {{!-- js library for generating pdf --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) 
+        <script src="assets/js/dashboard.js"></script>
+        //AdminLTE for demo purposes 
+        <script src="assets/js/demo.js"></script>-->
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+        <script src="/js.js"></script>
+        <script src="/purchase.js"></script>
+        <script src="/reg.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.js"></script>
+        <style type="text/css" media="print">
+            @page {
+                size: auto;
+                margin: 0;
+            }
+        </style>
+        {{!-- <script language="javascript">
+            populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
+            populateCountries("country2");
+            populateCountries("country2");
+        </script> --}}
+
+
+
+</body>
+
+</html>

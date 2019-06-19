@@ -1,0 +1,73 @@
+<div class="box">
+    <div class="register-logo">
+        <a href="#"><b>LiveProduct</b>Update</a>
+    </div>
+
+    <div class="box-body">
+
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-md-offset-2 col-sm-offset-3">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Select Serial numbers</h4>
+                            <div class="btn-group-vertical">
+                                {{# each inventory.serial}}
+                                <a class="btn" type="button" id="serial{{@index}}" onclick="set_disable(this.id)" class="btn btn-secondary">
+                                    {{this}}
+                                </a>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+
+                        <div class="well">
+                            <form action="/products/saveLive/{{inventory.product_id._id}}" method="POST">
+                            <input type="hidden" name="all_pp" id="all_pp"  value="{{highest_pp}}">
+                                <input type="hidden" name="remaining" value="{{inventory.remaining}}">
+                                <div class="form-group">
+                                    <label for="model">Model</label>
+                                    <input type="text" name="model" class="form-control" value="{{inventory.product_id.model}}"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lot_number">Lot Number</label>
+                                    <input type="text" name="lot_number" class="form-control" value="{{inventory._id}}"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="purchase_price">Purchase Price</label>
+                                    <input type="text" name="purchase_price"  class="form-control" value="{{inventory.purchasePrice}}"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit_price">Unit/Selling Price</label>
+                                    <input type="number" name="unit_price" id="unit_price" oninput="check_all_purchase_price()"  class="form-control" value="{{inventory.product_id.unitPrice}}"
+                                        required>
+                                        <p id="msg"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="text" name="quantity" id="quantity" class="form-control">
+                                </div>
+                                {{!-- {{# if inventory.product_id.original_serial}} --}}
+                                <div class="form-group">
+                                    <label for="serial">Serial Number</label>
+                                    <input type="text" name="serial" id="serial" class="form-control"></input>
+                                </div>
+                                {{!-- {{/if}} --}}
+
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Posts</a>
+    </div>
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <tr>
+                <th>User</th>
+                <th>Post Category</th>
+                <th>Title</th>
+                <th>Likes</th>
+                <th>Comments</th>
+                <th>Text</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            
+            {{# each posts}}
+            <tr>
+                <td>
+                    <strong>{{this.user.name}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.postCategory.name}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.name}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.total_likes}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.total_comments}}</strong>
+                </td>
+                <td>
+                    <strong>{{this.text}}</strong>
+                </td>
+                <td>
+                    {{# equality this.status "Active"}}
+                    <button class="btn btn-success" style="padding: 0%">Active</button>
+                    {{/equality}}
+                    {{# equality this.status "Blocked"}}
+                    <button class="btn btn-danger" style="padding: 0%">Blocked</button>
+                    {{/equality}}
+                    {{# equality this.status "New"}}
+                    <button class="btn btn-info" style="padding: 0%">New</button>
+                    {{/equality}}
+                </td>
+                <td>
+                    {{# equality this.status "Active"}}
+                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-default ">Block {{this._id}}</a>
+                    {{/equality}}
+
+                    {{# equality this.status "Blocked"}}
+                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-default">Active</a>
+                    {{/equality}}
+
+                    {{# equality this.status "new"}}
+                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-default">Active</a>
+                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-default ">Block</a>
+                    {{/equality}}
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>

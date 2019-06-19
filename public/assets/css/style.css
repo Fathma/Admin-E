@@ -1,0 +1,36 @@
+.lbl{
+    padding-left: 50px;
+    width: auto;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.775em;
+}
+
+
+.inp {
+   
+    font-family: "Poppins", sans-serif;
+    height: 25px;
+    padding: .375rem .75rem;
+    font-size: 0.875em;
+    /* font-weight: bold; */
+    line-height: 1.4em;
+    color: #525965;
+    
+}
+
+.md1{
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.md2{
+width:58%
+}
+.md3{
+width:29.67%
+}
+.col5{
+    width: 30.667%;
+}

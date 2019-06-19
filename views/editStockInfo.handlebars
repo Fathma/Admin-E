@@ -1,0 +1,132 @@
+<div class="box">
+    <div class="register-logo">
+        <a href="#"><b>Edit</b>Lot</a>
+    </div>
+    <div class="box-body">
+        <p class="login-box-msg" >Edit Lot Information</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <div class="row">
+                        <div class="well">
+                            <form action="/products/stockEdit/{{product.id}}" method="POST">
+                               
+                                <input type="hidden" name="pre_all_serials" id="pre_all_serials" value="{{serial_string}}">
+                                <div class="form-group">
+                                    <label for="model">All Serial</label>
+                                    <input type="text" class="form-control" name="pre_all_or_serials" id="pre_all_or_serials" value="{{original_serial}}"  readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Model</label>
+                                    <input type="text" name="model" class="form-control" value="{{product.product_id.model}}"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lot_number">Lot Number</label>
+                                    <input type="text" name="lot_number" class="form-control" value="{{product._id}}"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="purchase_price">Purchase Price</label>
+                                    <input type="number" name="purchase_price" class="form-control" value="{{product.purchasePrice}}"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Quantity</label>
+                                    <input type="number" name="quantity" id="quantity" class="form-control" value="{{product.remaining}}"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="serial">Serial Number</label>
+                                    <textarea name="serial" id="serial" class="form-control"readonly>{{serial_string}} 
+                            </textarea>
+                                </div>
+                                {{!-- <button type="submit" class="btn btn-primary"> Update</button> --}}
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="well">
+                            <h1>Change Purchase Price </h1>
+                            <form action="/products/EditPP/{{product.id}}/{{product.product_id._id}}" method="POST">
+                            
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="PP">Enter A Serial Number:</label>
+                                        <input type="text" name="PP" class="form-control">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 ">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="well">
+                                <h1>New Serial</h1>
+                                <form action="/products/EditAddOne/{{product.id}}/{{product.product_id._id}}" method="POST">
+                                    <div class="form-group">
+                                        <label for="new_serial">Enter A Serial Number:</label>
+                                        <input type="text" onkeyup="check_org()" name="new_serial" id="new_serial" class="form-control">
+                                        <input type="hidden" name="msg_err" id="msg_err" class="form-control">
+                                        <p id="msg"></p>
+                                    </div>
+                                    <button type="submit" onclick="check_org()" class="btn btn-primary"> Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="well">
+                                <h1>Replace a Serial</h1>
+                                <form action="/products/EditReplace/{{product.id}}/{{product.product_id._id}}" method="POST">
+                                
+                                    <div class="form-group">
+                                        <label for="new_serial">Select a Previous Serial Number:</label>
+                                        <select name="pre_serial">
+                                            {{# each product.serial}}
+                                            <option value="{{this}}">{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="replace_serial">Enter A Serial Number:</label>
+                                        <input type="text" name="replace_serial" id="replace_serial" onkeyup="check_org_replace()" class="form-control">
+                                        <input type="hidden" name="msg_err1" id="msg_err1" class="form-control">
+                                        <p id="msg1"></p>
+                                    </div>
+
+                                    <button type="submit" onclick="check_org_replace()" class="btn btn-primary"> Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="well">
+                                <h1>Delete a Serial</h1>
+                                <form action="/products/EditDelete/{{product.id}}/{{product.product_id._id}}" method="POST">
+                                    <div class="form-group">
+                                        <label for="pre_serial_del">Enter A Serial Number:</label>
+                                        <select name="pre_serial_del">
+                                            {{# each product.serial}}
+                                            <option value="{{this}}">{{this}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Delete </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,295 @@
+<div class="register-box-body col-md-5">
+    <div class="register-logo">
+        <b>Local</b>Purchase
+    </div>
+    <form action="/purchase/SaveLocalPurchase" method="POST">
+        <div class="row">
+
+            <div class="col-md-3">
+                <label class="lbl" for="date">Date:<span style="color:red">*</span> </label>
+            </div>
+
+            <div class="col-md-3">
+                {{# if lp.date}}
+                <input type="text" class="form-control inp" name="date" id="date" value=" {{formatDate lp.date}}"
+                    required>
+                {{else}}
+                <input type="date" class="form-control inp" style=" line-height: 19px;width: auto;" name="date"
+                    id="date" value="{{lp.date}}" required>
+                {{/if}}
+            </div>
+            <div class="col-md-3">
+                <label class="" for="number">Invoice :<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control inp" style="margin-left:-60px;" name="number" id="number"
+                    value="{{lp.number}}" required>
+            </div>
+
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="supplier">Supplier Name<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control inp" name="supplier" id="supplier">
+                    <option value="0">Select One</option>
+                    {{# each Supplier }}
+                    <option value="{{this._id}}" {{# equality this._id ../lp.supplier._id}} selected{{/equality}}>
+                        {{this.cname}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="address">Address<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control inp" name="address" id="address" required>
+                    <option value="0" selected>{{lp.address}}</option>
+                </select>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="contt">Contact Person<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <select class="form-control inp" name="contt" id="contt" required>
+                    <option value="0" selected>{{lp.contactPerson}}</option>
+                </select>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="cattN">Category<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                {{!-- <input type="text" list="cattNs" class="form-control inp" name="cattN" id="cattN"
+                    placeholder="Select a Category" required> --}}
+                <select  class="form-control inp" name="cattN" id="cattN">
+                    <option value="0">Select One</option>
+                    {{# each cat }}
+                    <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-1">
+                <a data-toggle="tooltip" title="New Category" class="btn btn-success inp" href="#ex1"
+                    rel="modal:open">New</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="subNn">Sub Category </label>
+            </div>
+            <div class="col-md-6">
+                {{!-- <input type="text" list="subNns" class="form-control inp" name="subNn" id="subNn"
+                    placeholder="Select a Sub Category"> --}}
+                <select class="form-control inp" name="subNn" id="subNn">
+                    <option value="0">Select One</option>
+                    {{# each categories }}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-1">
+                <a data-toggle="tooltip" title="New Sub Category" class="btn btn-success inp" href="#ex2"
+                    rel="modal:open">New</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="brandN">Brand<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                {{!-- <input type="text" list="brandNs" class="form-control inp" name="brandN" id="brandN"
+                    placeholder="Select a Brand" required> --}}
+                <select class="form-control inp" name="brandN" id="brandN">
+                    <option value="0">Select One</option>
+                    {{# each brand }}
+                    <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-1">
+                <a data-toggle="tooltip" title="New Brand" class="btn btn-success inp" href="#ex3"
+                    rel="modal:open">New</a>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="model1">Models<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" list="model1s" class="form-control inp" name="model1" id="model1" required>
+                <datalist id="model1s">
+                    {{# each Product }}
+                    <option value="{{this.model}}"></option>
+                    {{/each}}
+                </datalist>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="quantity">Quantity<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control inp" name="quantity" id="quantity" required>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="purchasePrice">Purchase Price<span style="color:red">*</span> </label>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control inp" name="purchasePrice" id="purchasePrice" required>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-5 col5">
+                <label class="lbl" for="serial_availablity">Serial Number
+                </label>
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" name="serial_availablity">
+            </div>
+        </div>
+        <br>
+        
+        <button style="margin-left:50px;" type="submit">Submit</button>
+        <a href="/purchase/localPurchase" style="float:right">New Local Purchase</a>
+    </form>
+    <div id="ex1" class="modal">
+        <div class="form-group">
+            <label for="cat" style="color:azure">Category</label>
+            <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control">
+        </div>
+        <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
+    </div>
+    <div id="ex2" class="modal">
+        <div class="form-group">
+            <label for="cate" style="color:azure">Category<span style="color: red">*</span></label>
+            <select class="form-control" name="cate" id="cate">
+                {{# each cat}}
+                <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="subCat" style="color:azure">Sub Category</label>
+            <input type="text" name="subCat" id="subCat" class="form-control">
+        </div>
+        <button id="save_sub" class="btn btn-primary">Submit</button>
+    </div>
+    <div id="ex3" class="modal">
+        <div class="form-group">
+            <label for="brand" style="color:azure">Brand<span style="color: red">*</span></label>
+            <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand">
+        </div>
+        <a id="save_brand" class="btn btn-primary">Submit</a>
+    </div>
+</div>
+
+
+<div class="col-md-1">
+</div>
+
+<div class="register-box-body col-md-6">
+    <div class="col-sm-12 left-col">
+        <div>
+            <div class="panel-body">
+                <div class="register-logo">
+                    <b>LP</b>Details
+                </div>
+                <table class="table table-Striped">
+                    <tbody>
+                        <tr>
+                            <td><b> Date:</b></td>
+                            {{# if lp.date}}
+                            <td>{{formatDate lp.date}}</td>
+                            {{else}}
+                            <td></td>
+                            {{/if}}
+                            <td><b>Invoice No:</b></td>
+                            <td>{{lp.number}}</td>
+                        </tr>
+                        <tr>
+                            <td><b> Supplier:</b></td>
+                            <td>{{lp.supplier.cname}}</td>
+                            <td><b>Address:</b></td>
+                            <td>{{lp.address}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Contact Person:</b></td>
+                            <td>{{lp.contactPerson}}</td>
+                            <td><b>Contact Number:</b></td>
+                            <td>{{lp.mobile}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-body">
+                <div class="product">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td class="text-left">S/L N</td>
+                                    <td class="text-left">Product Name</td>
+                                    <td class="text-right">Quantity</td>
+                                    <td class="text-right">Unit Price</td>
+                                    <td class="text-right">Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{# each lp.products}}
+                                <tr>
+                                    <td class="text-left"> {{this.num}} </td>
+                                    <td class="text-left">
+                                        <a href="#"> {{this.product.productName}}</a>
+                                    </td>
+                                    <td class="text-right"> {{this.quantity}}</td>
+                                    <td class="text-right">{{ this.purchasePrice}}TK</td>
+                                    <td class="text-right">{{ this.total}}</td>
+                                </tr>
+                                {{/each}}
+                                <tr>
+                                    <td colspan="4" class="text-right">SubTotal:</td>
+                                    <td class="text-right">{{ lp.subTotal}}TK</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br><br>
+                <div class="pull-right">
+                    <p class="pull-right">_____________</p><br>
+                    <p class="pull-right">Authorised Signature and Company Stamp</p>
+                </div><br><br>
+                <div>
+                    <p>Signature and Company Stamp</p>
+                    <p>Goods sold and received or accepted by the customers are not returnable.</p>
+                    <p>Warranty will void of all products if sticker is removed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

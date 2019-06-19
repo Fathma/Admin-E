@@ -1,0 +1,448 @@
+<div class="box">
+    <div class="register-logo">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    {{!-- <form id="contact"  > --}}
+                    <h3 class="text-center">Add New Product/ Model</h3><br>
+                    <input type="hidden" class="form-control inp" name="serial" id="serial">
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="invoice">LP Invoice<span style="color:red">*</span> </label>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control inp" name="invoice" id="invoice">
+                                <option value="0">Select One</option>
+                                {{# each LocalPurchase}}
+                                <option value="{{this._id}}">{{this.number}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="col-md-5 col5" style="width:16.667%">
+                            <label class="lbl" for="date">Date</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control inp" name="date" id="date">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="supplier">Supplier
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="supplier" id="supplier">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="products_invoice">Product<span style="color:red">*</span> </label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control inp" name="products_invoice" id="products_invoice">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="category">Category
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="category" id="category">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="subcategory">Sub Category
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="subcategory" id="subcategory">
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="brand">Brand
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="brand" id="brand">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="quantity">Quantity
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="quantity" id="quantity">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="unitPrice">Unit Price
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="unitPrice" id="unitPrice">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="sellingPrice">Selling Price<span style="color:red">*</span>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="model">Model
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="model" id="model">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="name">Title<span style="color:red">*</span>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="name" id="name">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div id="add">
+                        {{!-- adds previous features --}}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="new_feat_label">New Feature:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="hidden" id="new_feat" name="new_feat"
+                                value="0">{{!-- counts the total newly added features --}}
+                            <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
+                                placeholder="write a new feature name">
+                        </div>
+                        <div class="col-md-1">
+                            <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="weight">weight:
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="weight" id="weight">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="warranty">Warranty<span style="color:red">*</span></label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control inp" name="warranty" id="warranty">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="description">Description</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea type="text" class="form-control inp" name="description"
+                                id="description"></textarea>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="shippingInfo">shippingInfo</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea type="text" class="form-control inp" name="shippingInfo" id="shippingInfo"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="space">
+                        {{!-- place for serials --}}
+                    </div>
+
+                    <div class="row">
+                        <center>
+                            <button id="save_inventory" class="btn btn-default btn-md" type="submit">Insert Image</button>
+                        </center>
+                    </div>
+                    {{!-- </form> --}}
+                </div>
+            </div>
+            {{!-- <div class="col-md-1"></div> --}}
+            {{!-- <div class="col-md-6">
+                <div class="well">
+                    <h3 class="text-center">Add New Product/ Model</h3>
+                    <div class="well">
+                        <form action="/products/showfields" method="POST">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <label for="categg">Category<span style="color: red">*</span></label>
+                                    <select class="form-control" name="categg" id="categg" >
+                                        <option value="null" selected>Select One</option>
+                                        {{# each cat}}
+                                        <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"><br>
+                                    <p><a data-toggle="tooltip" title="New Category" class="btn btn-success" href="#ex1" rel="modal:open">+</a></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <label for="subCategg">Sub Category(optional)</label>
+                                    <select class="form-control" name="subCategg" id="subCategg">
+                                        <option value="null">select one</option>
+                                        {{# each categories}}
+                                        <option value="{{this._id}},{{this.name}}">{{this.name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"><br>
+                                    <p><a data-toggle="tooltip" title="New Sub Category" class="btn btn-success" href="#ex2" rel="modal:open">+</a></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <label for="brandg">Brand<span style="color: red">*</span></label>
+                                    <select class="form-control" name="brandg" id="brandg" >
+                                        <option value="null" selected>select one</option>
+                                        {{# each brand}}
+                                        <option value="{{this._id}},{{this.name}}">{{this.name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"><br>
+                                    <p><a data-toggle="tooltip" title="New Brand" class="btn btn-success" href="#ex3" rel="modal:open">+</a></p>
+                                </div>
+                            </div>
+
+                            {{# if catt}}
+                            <button type="submit" class="btn btn-default ">Submit</button> <br>
+                            <p style="color:red; float:left"> The form has submitted! </p>
+                            {{else}}
+                            <button type="submit" class="btn btn-danger ">Submit</button> <br>
+                            <p style="color:red; float:left"> Submit the form before filling up the product Information
+                            </p>
+                            {{/if}}
+                        </form>
+                    </div>
+                    <div id="ex1" class="modal">
+                        <form>
+                            <div class="form-group">
+                                <label for="cat">Category</label>
+                                <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control" >
+                            </div>
+                            <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
+                        </form>
+                    
+                    </div>
+                    <div id="ex2" class="modal">
+                        <form>
+                            <div class="form-group">
+                                <label for="cate">Category<span style="color: red">*</span></label>
+                                <select class="form-control" name="cate" id="cate" >
+                                    {{# each cat}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subCat">Sub Category</label>
+                                <input type="text" name="subCat" id="subCat" class="form-control" >
+                            </div>
+                            <button id="save_sub" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                    <div id="ex3" class="modal">
+                        <form>
+                            <div class="form-group">
+                                <label for="brand">Brand<span style="color: red">*</span></label>
+                                <input type="text" name="brand" id="brand" class="form-control"
+                                    placeholder="Enter New Brand" >
+                            </div>
+                            <a id="save_brand" class="btn btn-primary">Submit</a>
+                        </form>
+                    </div>
+
+                    {{# if cattN}}
+                    <form action="/products/regiSave" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="num" value="{{num}}">
+                        <input type="hidden" name="brand" value="{{brands}}">
+                        <input type="hidden" name="catt" value="{{catt}}">
+                        <input type="hidden" name="sub" value="{{sub}}">
+                        <input type="hidden" name="status" value="{{status}}">
+                        <input type="hidden" name="subN" value="{{subN}}">
+
+                        <div class="form-group">
+                            <label for="cattN">Category</label>
+                            <input type="text" name="cattN" class="form-control" value="{{cattN}}" readonly>
+                        </div>
+
+                        {{# if subN}}
+                        <div class="form-group">
+                            <label for="subNn">Sub Category</label>
+                            <input type="text" name="subNn" class="form-control" value="{{subN}}" readonly>
+                        </div>
+                        {{/if}}
+                        <div class="form-group">
+                            <label for="brandN">Brand</label>
+                            <input type="text" class="form-control" name="brandN" value="{{brandN}}" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" placeholder="Enter Title" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="model">Model</label>
+                            <input type="text" name="model" class="form-control" placeholder="Enter Model" >
+                        </div>
+
+                        {{# each features}}
+                        <div class="form-group">
+                            <input type="hidden" name="feature{{@index}}_label" value="{{this}}">
+                            <label for="feature{{@index}}_value">{{this}}</label>
+                            <input type="text" name="feature{{@index}}_value" class="form-control" placeholder="">
+                        </div>
+                        {{/each}}
+
+                        <div id="add">
+                        </div><br>
+
+                        <div class="row">
+
+                            <div class="col-sm-9">
+                                <input type="hidden" id="new_feat" name="new_feat" value="0">
+                                <input type="text" id="new_feat_label" name="new_feat_label" class="form-control"
+                                    placeholder="write a new feature name">
+                            </div>
+
+                            <div class="col-sm-2">
+                                <a onclick="setvisible()" class="btn btn-success">Add New Feature</a>
+                            </div>
+
+                        </div><br>
+
+                        <div class="form-group">
+                            <label for="weight">Weight(kg)</label>
+                            <input type="text" name="weight" class="form-control" placeholder="Enter weight" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="warranty">Warranty</label>
+                            <input type="text" name="warranty" class="form-control" placeholder="Enter Warranty" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea type="text" name="description" class="form-control" ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingInfo">Shipping Info</label>
+                            <textarea type="text" name="shippingInfo" class="form-control" > </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imagePath">Image<span style="color: red">*</span></label>
+                            <input type="file" name="imagePath" accept="image/png, image/jpeg" >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    {{/if}}
+                </div>
+
+            </div> --}}
+
+            <div class="col-md-6" >
+                 <a name="image_sec1"></a>
+                <div class="well">
+                <div id="all_img" class="row">
+
+                </div>
+                    <h3 class="text-center">Set Image</h3><br>
+                    <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="img_number" id="img_number">
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="pid">Product Name
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control inp" name="pname" id="pname">
+                                <input type="hidden" name="pid" id="pid">
+                                {{!-- <select class="form-control inp" name="pid" id="pid">
+                                    <option value="0">Select One</option>
+                                    {{# each Product}}
+                                    <option value="{{this._id}}">{{this.productName}}</option>
+                                    {{/each}}
+                                </select> --}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="imagePath">Select Image
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg" multiple>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <center>
+                                <button type="submit" id="save_img" class="btn btn-default btn-md" disabled>Submit</button>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Invoices</a>
+    </div>
+
+    <div style="background-color: white">
+        <table style="width:100%" class="table table-hover">
+            <tr>
+                <th>Invoice Number </th>
+                <th>Invoice Date</th>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Admin</th>
+                <th>Status</th>
+                <th>Total</th>
+            </tr>
+          {{# each invoices}}
+            <tr>
+                <td>
+                    <a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top"
+                        title="Edit" style="padding: 0%" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/ffffff/visible.png"></a>
+                    
+                    <strong>{{this._id}}</strong>
+                </td>
+
+                <td>
+                    <strong>{{this.created}}</strong>
+                </td>
+
+                <td>
+                    <strong>{{this.order._id}}</strong>
+                </td>
+
+                <td>
+                   <strong>{{this.order.created}}</strong>
+                </td>
+
+                <td>
+                    <strong>{{this.user.name}}</strong>
+                </td>
+
+                <td>
+                    <strong>{{this.order.currentStatus}}</strong>
+                </td>
+                
+                <td>
+                    <strong>{{this.order.totalAmount}}TK</strong>
+                </td>
+               
+            </tr>
+           
+            {{/each}}
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+<div class="box" >
+    <div class="register-logo">
+        <a href="#"><b>Add</b>Serial</a>
+    </div>
+    <div class="box-body">
+
+        <div class="row">
+            
+            <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                <div class="well">
+                  
+                    <form action="/orders/setSerials/{{order._id}}/{{model}}/{{item_id}}" method="POST">
+                        
+                       <input type="hidden" name="quantity" id="quantity" value="{{quantity}}">
+                        <div class="form-group">
+                            <label for="Order_ID">Order ID:</label>
+                            <input type="text" name="Order_ID" id="Order_ID" value="{{order._id}}" class="form-control"
+                                required>
+                        </div>
+                         <div class="form-group">
+                            <label for="model">Model:</label>
+                            <input type="text" name="model" id="model" value="{{model_name}}" class="form-control"
+                                required>
+                        </div>
+                        {{!-- {{warranted}}
+                      {{# if warranted}} --}}
+                         <div class="form-group">
+                            <label for="Serial">Serial Numbers</label>
+                            <input type="text" name="Serial" id="Serial" class="form-control"
+                            {{# if previous }}
+                            value="{{previous}}"{{/if}}
+
+                                required>
+                                <select id="selected" onchange="set_serial_last()">
+                                    <option value="0" selected>select Serial Numbers</option>
+                                    {{# each serial}}
+                                    <option value="{{this.serial}}">{{this.serial}}</option>
+                                    {{/each}}
+                                </select>
+                                <p id="new_msg"></p>
+                        </div>
+                        {{!-- {{/if}} --}}
+                        <button  type="submit" class="btn btn-primary">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

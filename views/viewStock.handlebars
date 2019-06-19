@@ -1,0 +1,62 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+
+    <div class="register-logo">
+        <a href="#"><b>Inventory</b>Details</a>
+    </div>
+   
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1 col-sm-offset-1">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        
+                        <div class="col-md-2 ">
+                            <strong>ID</strong>
+                        </div>
+                        <div class="col-md-2 ">
+                            <strong>Model</strong>
+                        </div>
+                        <div class="col-md-2 ">
+                            <strong>Serial</strong>
+                        </div>
+                        <div class="col-md-2 ">
+                            <strong>Purchase Price</strong>
+                        </div>
+                      <div class="col-md-2 ">
+                            <strong>Status</strong>
+                        </div>
+                        
+                    </div>
+                </li>
+                {{# each lot.arr}}
+
+                <li class="list-group-item">
+
+                    <div class="row">
+                        <div class="col-md-2 ">
+                            <strong>{{this.s_id}}</strong>
+                        </div>
+                       
+                        <div class="col-md-2 ">
+                            <strong>{{this.p_name}}</strong>
+                        </div>
+                        <div class="col-md-2 ">
+                            <strong>{{this.sl}}</strong>
+                        </div>
+                        
+                         <div class="col-md-2 ">
+                            <strong>{{this.pp}}</strong>
+                        </div>
+                        
+                        <div class="col-md-2 ">
+                            <strong>{{this.status}}</strong>
+                        </div>
+                    </div>
+                </li>
+                {{/each }}
+            </ul>
+        </div>
+    </div>
+   
+    
+</div>

@@ -1,0 +1,53 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "E-Commerce Application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Jihad",
+  "license": "ISC",
+  "dependencies": {
+    "array-includes": "^3.0.3",
+    "array-unique": "^0.3.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.4",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.16.1",
+    "express-validator": "^5.3.1",
+    "form-data": "^2.3.3",
+    "gridfs-stream": "^1.1.1",
+    "handlebars-intl": "^1.1.2",
+    "i18n": "^0.8.3",
+    "image-to-base64": "^2.0.1",
+    "jquery-ui": "^1.12.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.14",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3",
+    "nodemailer": "^5.1.1",
+    "nodemon": "^1.19.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "randomstring": "^1.1.5",
+    "string-split": "^0.3.1",
+    "text": "^0.1.0",
+    "trim": "0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fathma/Ecommerce-Admin"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}

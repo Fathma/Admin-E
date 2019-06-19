@@ -1,0 +1,40 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Email</b>Customers</a>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <form action="/customers/emailAll" method="POST">
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label for="recipient">Recipient</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="recipient" id="recipient" value="All" >
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label for="subject">Subject</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="subject" id="subject">
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label for="body">Body</label>
+                            </div>
+                            <div class="col-md-7">
+                                <textarea type="text" name="body" id="body">  </textarea>
+                            </div>
+                        </div>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
