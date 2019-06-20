@@ -1,11 +1,13 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
 
     <div class="register-logo">
-        <a href="#"><b>Registered</b>Customers</a>
+        <a href="#"><b>Registered</b>Customers</a><br>
+        <a class="btn btn-default"  href="/customers/email/page">Email All</a>
     </div>
-    <a href="/customers/email/page">Email All</a>
+   
     {{# if customer}}
     <div class="row">
+         
         <div class="col-sm-12 col-md-10 col-md-offset-1 col-sm-offset-1">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -21,7 +23,7 @@
                             <strong>Contact</strong>
                         </div>
                         <div class="col-md-2 ">
-                            <strong>Active</strong>
+                            <strong>Status</strong>
                         </div>
                         <div class="col-md-2 ">
                             <strong>Action</strong>
@@ -46,11 +48,19 @@
                             <strong>{{this.contact}}</strong>
                         </div>
                         <div class="col-md-2 ">
-                            <strong>{{this.isActive}}</strong>
+                            {{# if this.isActive}}
+                            <span  class="tags">Active</span>
+                            {{else}}
+                            <span  class="tags"  style="background: rgb(202, 111, 129)">Blocked</span>
+                            {{/if}}
                         </div>
                         <div class="col-md-2 ">
-                            <a href="/customers/single/{{this._id}}" class="btn btn-default">View</a>
+                            <a href="/customers/profile/{{this._id}}" class="btn btn-default">View</a>
+                            {{# if this.isActive}}
                             <a href="/customers/block/{{this._id}}" class="btn btn-default">Block</a>
+                            {{else}}
+                            <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
+                            {{/if}}
                             <a href="#ex1{{this._id}}" rel="modal:open" class="btn btn-default">Wishlist</a>
                             {{!-- /customers/wishlist/{{this._id}} --}}
                         </div>
@@ -62,21 +72,16 @@
                     <table class="table" >
                         <tr>
                             <th >Title</th>
-                           
                         </tr>
                           {{# each this.items}}
                         <tr>
-                           
                             <td  >{{this.product.name}}</td>
-                            
                         </tr>
                         {{/each}}
-
                     </table>
-                    
-                    
+                    {{else}}
+                     Wishlist is empty
                     {{/if}}
-
                 </div>
                 {{/each }}
             </ul>

@@ -38,13 +38,13 @@
                 </td>
                 <td>
                     {{# equality this.status "Active"}}
-                    <button class="btn btn-success" style="padding: 0%">Active</button>
+                    <span class="tags">Active</span>
                     {{/equality}}
                     {{# equality this.status "Blocked"}}
-                    <button class="btn btn-danger" style="padding: 0%">Blocked</button>
+                    <span class="tags" style="background: rgb(202, 111, 129)" >Blocked</span>
                     {{/equality}}
                     {{# equality this.status "New"}}
-                    <button class="btn btn-info" style="padding: 0%">New</button>
+                    <span class="tags" style="background: rgb(112, 190, 226)">New</span>
                     {{/equality}}
                 </td>
                 <td>

@@ -1,7 +1,8 @@
 // author: Fathma siddique
 // lastmodified: 16/6/2019
 // description: the file has all the Customer related controllers/ functions
-const Customerr = require('../models/userCustomer');
+const Customerr = require('../models/userCustomer')
+const Post = require('../models/posts.model') 
 const Wishlist = require('../models/wishlist.model')
 const Email = require('../helpers/email')
 
@@ -44,6 +45,28 @@ exports.emailAll = ( req, res )=>{
 }
 
 
+exports.getprofile = (req, res)=>{
+    Customerr.findOne({ _id: req.params.id }, (err, customer)=>{
+        Post.find({ user: req.params.id }, (err, posts)=>{
+            res.render('customer/profile', { customer, posts })
+        })
+    })
+}
+
+
+
+exports.getBlock = ( req, res )=>{
+    Customerr.update({ _id: req.params.id },{ $set: { isActive:false }}, ( err, customer)=>{
+        res.redirect('/customers/RegisteredCustomer')
+    })
+}
+
+
+exports.getUnblock = ( req, res )=>{
+    Customerr.update({ _id: req.params.id },{ $set: { isActive:true }}, ( err, customer)=>{
+        res.redirect('/customers/RegisteredCustomer')
+    })
+}
 exports.getWishlist = ( req, res )=>{
     Wishlist.find({ owner: req.params.id })
     .populate('items.product')
