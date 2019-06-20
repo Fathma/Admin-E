@@ -2,41 +2,64 @@
     <div class="register-logo">
         <a href="#"><b>Email</b>Customers</a>
     </div>
-    <div class="box-body" >
-        <div class="row">
-            <div class="col-md-6">
-                <div class="well" style="display: inline-block">
-                    <form action="/customers/emailAll" method="POST">
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label for="recipient">Recipient</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="recipient" id="recipient" value="All" >
-                            </div>
-                        </div><br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label for="subject">Subject</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="subject" id="subject">
-                            </div>
-                        </div><br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label for="body">Body</label>
-                            </div>
-                            <div class="col-md-7">
-                                <textarea type="text" name="body" id="body">  </textarea>
-                            </div>
+    <div class="box-body">
+        {{!-- <div class="well"> --}}
+            <div class="col-md-4"></div>
+            <div class="col-md-7">
+                <form action="/customers/emailAll" method="POST">
+                    <div class="form-group">
+                        <div class="col-xs-8">
+                            <label for="recipient">Recipient</label>
+                            <input class="form-control input-sm" type="text" name="recipient" id="recipient"
+                                value="All">
                         </div>
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
+                        <div class="col-xs-8">
+                            <label for="subject">Subject</label>
+                            <input class="form-control input-sm" type="text" name="subject" id="subject">
+                        </div>
+
+                        <div class="col-xs-8">
+                            <label for="body">Body</label>
+                            <textarea type="text" class="form-control input-sm" name="body" id="body">  </textarea>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <label>
+                                <button type="submit" class="btn btn-warning btn-md">submit</button>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-        </div>
+            <div class="col-md-1"></div>
+            {{!-- <form action="/customers/emailAll" method="POST">
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <label for="recipient">Recipient</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="recipient" id="recipient" value="All" >
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <label for="subject">Subject</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="subject" id="subject">
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-5 ">
+                        <label for="body">Body</label>
+                    </div>
+                    <div class="col-md-7">
+                        <textarea type="text" name="body" id="body">  </textarea>
+                    </div>
+                </div>
+                <button type="submit">submit</button>
+            </form> --}}
+        {{!-- </div> --}}
     </div>
 </div>
-
-
