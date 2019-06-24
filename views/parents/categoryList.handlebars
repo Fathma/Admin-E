@@ -1,7 +1,55 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
         <a href="#"><b>Category</a>
-    </div>
+    </div><br>
+    
+
+    
+    
+    
+    {{!-- <form style="width: 40%;margin-left:auto;margin-right:auto">
+             <div class="form-group row">
+            <div class="col-xs-8">
+                <label>Category:</label>
+                <select class="form-control input-sm" name="category" id="category">
+                    {{# each category}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="col-xs-8">
+                <label>New Name:</label>
+                <input type="text" class="form-control input-sm" name="name" id="name">
+            </div>
+
+              <div class="col-xs-8">
+           <hr>
+            </div>
+
+            <div class="col-xs-8">
+            <button>submit</button>
+            </div>
+        </div>
+       
+       
+    </form><br> --}}
+
+    {{!-- <form action="" >
+                  <div class="form-group">
+                Category:
+                <select name="category" id="category" class="form-control">
+                    {{# each category}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select><br>
+                New Name: <input type="text" name="name" id="name" class="form-control">
+                <button>submit</button>
+                 </div>
+            </form> --}}
+
+
+
 
 
     <div style="background-color: white">
@@ -20,19 +68,8 @@
                 <td>Disabled</td>
                 {{/if}}
                 <td>
-                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="#{{this._id}}"
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="#cat{{this._id}}"
                         rel="modal:open">Edit</a>
-
-                    <div id="{{this._id}}" class="modal">
-                        <div class="form-group">
-                            <label for="cat" style="color:azure">Category</label>
-                            <input type="text" name="name" id="name" value="{{this.name}}"
-                                class="form-control">
-                            <input type="text" name="name" id="name" value="{{this._id}}"
-                                class="form-control">
-                        </div>
-                        <button id="edit_cat" class="btn btn-primary">Change</button>
-                    </div>
 
                     {{# if this.enabled}}
                     <a href="/category/category/changeStatus/{{this._id}}/false" data-toggle="tooltip" title="Edit info"
@@ -44,12 +81,8 @@
                 </td>
             </tr>
 
-
             {{/each}}
         </table>
-
-
-
     </div>
 
 </div>

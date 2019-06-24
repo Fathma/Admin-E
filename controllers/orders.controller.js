@@ -6,8 +6,10 @@ const Email = require('../helpers/email')
 
 // view list of customers
 exports.showOrdersPage = (req, res) => {
-  allFuctions.get_orders({}, rs => {
-    res.render('orders/orders', { orders: rs })
+  Order.find()
+  .populate('user')
+  .exec((err, orders)=>{
+    res.render('orders/orders', { orders })
   })
 }
 
@@ -108,11 +110,14 @@ exports.ViewInvoice = (req, res) => {
 // view list of customers
 exports.showOrderDetails = (req, res) => {
   allFuctions.get_orders({ _id: req.params.id }, rs => {
-    for (var i = 0; i < rs[0].cart.length; i++) {
-      rs[0].cart[i].oid = req.params.id
-      rs[0].cart[i].totalAmount = rs[0].totalAmount
+    if(rs){
+      for (var i = 0; i < rs[0].cart.length; i++) {
+        rs[0].cart[i].oid = req.params.id
+        rs[0].cart[i].totalAmount = rs[0].totalAmount
+      }
+      res.render('orders/orderDetails', { order: rs[0], or_id: req.params.id })
     }
-    res.render('orders/orderDetails', { order: rs[0], or_id: req.params.id })
+   
   })
 }
 

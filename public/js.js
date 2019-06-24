@@ -210,6 +210,7 @@ function set_disableNoSerial(id) {
   }
 }
 
+
 // saving Inventory with serial numbers
 $("form").submit(function(e) {
   // this is to prevent double submit

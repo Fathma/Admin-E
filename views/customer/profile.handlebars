@@ -4,14 +4,22 @@
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
                     <h2> {{customer.profile.name}} </h2>
-                    <p><strong>Contact: </strong> {{customer.contact}} </p>
                     <p><strong>Email: </strong> {{customer.email}} </p>
-                    <p><strong>Address 1: </strong> {{customer.address.address1}}</p>
-                    <p><strong>Address 2: </strong> {{customer.address.address2}}</p>
-                    <p><strong>City: </strong> {{customer.address.city}}</p>
-                    <p><strong>District: </strong> {{customer.address.district}}</p>
-                    <p><strong>Country: </strong> {{customer.address.country}}</p>
-                    <p><strong>Postal Code: </strong> {{customer.address.postalCode}}</p>
+                    <hr>
+                    {{# each customer.shippingAddress}}
+                    <h4><strong>Address {{this.count}} </strong></h4> 
+                    <p><strong>Name: </strong> {{this.shippingAddressName}}</p> 
+                    <p><strong>Contact: </strong> {{this.shippingAddressPhone}}</p> 
+                    <p><strong>Address 1: </strong> {{this.shippingAddress1}}</p>
+                    <p><strong>Address 2: </strong> {{this.shippingAddress1}}</p>
+                    <p><strong>City: </strong> {{this.shippingAddressCity}}</p>
+                    <p><strong>District: </strong> {{this.shippingAddressDistrict}}</p>
+                    <p><strong>Division: </strong> {{this.shippingAddressDivision}}</p>
+                    <p><strong>Postal Code: </strong> {{this.shippingAddressPostalCode}}</p>
+                    <p><strong>Country: </strong> {{this.shippingAddressCountry}}</p>
+                    <hr>
+                    {{/each}}
+                   
                 </div>
                 <div class="col-xs-12 col-sm-4 text-center">
                     <figure>
@@ -78,51 +86,67 @@
   
     <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
         <div class="well profile">
-            <div class="col-xs-12 col-sm-12 ">
-                 
-                <div class="col-xs-12 col-sm-12">
-                     
-                    <h3>Order History </h3>
-                   
-                </div>
-                {{!-- <div class="col-xs-12 col-sm-4 text-center">
-                    <figure>
-                        
-                       
-                    </figure>
-                </div> --}}
+            <div class="col-sm-12 ">
+                <h3>Order History </h3>
+                {{# if orders}}
+                <table  class="table table-bordered">
+                    <th>Order ID</th>
+                    <th>Total Amount</th>
+                    <th>Order Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                    {{# each orders }}
+                    <tr>
+                        <td>{{this.orderId}}</td>
+                        <td>{{formatNumber this.totalAmount}}TK</td>
+                        <td>{{this.currentStatus}}</td>
+                        <td>{{formatDate this.created}}</td>
+                        <td><a href="/orders/orderDetails/{{this._id}}">Details</a></td>
+                    </tr>
+                    {{/each}}
+                </table>
+                {{else}}
+                No Order History
+                {{/if}}  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        <div class="well profile" style="min-width: 100%;">
+            <div class="col-sm-12 ">
+                <h3>Wishlist</h3>
+                {{# if wishlists}}
+                <table  class="table table-bordered">
+                    <th>Products</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    {{# each wishlists.items }}
+                    <tr>
+                        <td>{{this.product.name}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{formatNumber this.price}}TK</td>
+                        <td>{{formatDate this.addedDate}}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+                {{else}}
+                No posts
+                {{/if}}
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-  
     <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-        <div class="well profile">
-            <div class="col-xs-12 col-sm-12 ">
-                 
-                <div class="col-xs-12 col-sm-12">
-                     
-                    <h3>Cart </h3>
-                   
-                </div>
-                {{!-- <div class="col-xs-12 col-sm-4 text-center">
-                    <figure>
-                        
-                       
-                    </figure>
-                </div> --}}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-        <div class="well profile">
+        <div class="well profile" style="min-width: 100%;">
             <div class="col-sm-12 ">
                 <h3>Posts </h3>
                 {{# if posts}}
-                <table class="table">
+                <table  class="table table-bordered">
                     <th>Title</th>
                     <th>Text</th>
                     <th>Date</th>

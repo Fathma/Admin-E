@@ -1,7 +1,6 @@
 <div id="container" style="height: 1766px;">
     <div class="row">
 
-
     </div><Br></Br>
     <div class="container-fluid">
         <div class="row">
@@ -10,9 +9,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Order Details</h3>
-                        <div class="pull-right">
-                            <div class="panel-chevron"></div>
-                        </div>
                     </div>
 
                     <div class="panel-body">
@@ -22,21 +18,22 @@
                                     <tbody>
                                         <tr>
                                             <td>Order ID:</td>
-                                            <td>{{order._id}}</td>
+                                            <td>{{order.orderId}}</td>
                                         </tr>
                                         <tr>
                                             <td>Last Invoice No:</td>
-                                            <td><a href="/orders/ViewInvoice/{{order.invoice}}">{{order.invoice}}</a></td>
+                                            <td><a href="/orders/ViewInvoice/{{order.invoice}}">{{order.invoice}}</a>
+                                            </td>
                                         </tr>
-                                        <tr>
+                                        {{!-- <tr>
                                             <td>Invoice No:</td>
                                             <td>
                                                 <a href="/orders/generateInvoice/{{order._id}}" id="button-invoice"
                                                     class="btn btn-success btn-xs">
-                                                    {{!-- <a href="/orders/setInvoiceValues/{{order._id}}" id="button-invoice" class="btn btn-success btn-xs"> --}}
+                                                    
                                                     <i class="fa fa-cog"></i> Generate</a>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr>
                                             <td>Customer:</td>
@@ -47,13 +44,13 @@
                                             <td>E-Mail:</td>
                                             <td><a href="mailto:{{order.user.email}}">{{order.user.email}}</a></td>
                                         </tr>
-                                        <tr>
+                                        {{!-- <tr>
                                             <td>Telephone:</td>
                                             <td>{{order.user.contact}}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td>Total:</td>
-                                            <td>{{order.totalAmount}}TK</td>
+                                            <td>{{formatNumber order.totalAmount}}TK</td>
                                         </tr>
                                         <tr>
                                             <td>Order Status:</td>
@@ -76,11 +73,68 @@
                                             <td>Payment ID:</td>
                                             <td>{{order.paymentId}}</td>
                                         </tr>
+
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Shipping Info</h3>
+                    </div>
+ <div class="panel-body">
+                        <div class="order">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>{{order.shippingAddress.shippingAddressName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Number:</td>
+                                            <td>{{order.shippingAddress.shippingAddressPhone}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address part 1:</td>
+                                            <td>{{order.shippingAddress.shippingAddress1}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address part 2:</td>
+                                            <td>{{order.shippingAddress.shippingAddress2}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td>{{order.shippingAddress.shippingAddressCity}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>District:</td>
+                                            <td>{{order.shippingAddress.shippingAddressDistrict}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Division:</td>
+                                            <td>{{order.shippingAddress.shippingAddressDivision}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Postal Code:</td>
+                                            <td>{{order.shippingAddress.shippingAddressPostalCode}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country:</td>
+                                            <td>{{order.shippingAddress.shippingAddressCountry}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -124,17 +178,17 @@
                                                     style="padding: 0%" class="btn btn-primary"> <img
                                                         src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>{{this.quantity}}
                                             </td>
-                                            <td class="text-right">{{formatNumber this.unitPrice}}TK</td>
-                                            <td class="text-right">{{formatNumber this.price}}TK</td>
+                                            <td class="text-right">{{ this.unitPrice}}TK</td>
+                                            <td class="text-right">{{ this.price}}TK</td>
                                         </tr>
                                         {{/each}}
                                         <tr>
                                             <td colspan="4" class="text-right">Shipping Cost:</td>
-                                            <td class="text-right">{{formatNumber order.shippingCharge}}TK</td>
+                                            <td class="text-right">{{ order.shippingCharge}}TK</td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">Total:</td>
-                                            <td class="text-right">{{formatNumber order.totalAmount}}TK</td>
+                                            <td class="text-right">{{ order.totalAmount}}TK</td>
                                         </tr>
 
                                     </tbody>
@@ -166,7 +220,7 @@
                                         <tbody>
                                             {{# each order.history}}
                                             <tr>
-                                                <td class="text-left">{{formatDate this.date}}</td>
+                                                <td class="text-left">{{ this.date}}</td>
                                                 <td class="text-left">{{this.comment}}</td>
 
                                                 <td class="text-left">{{this.status}}</td>

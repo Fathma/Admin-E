@@ -61,28 +61,11 @@
                             {{else}}
                             <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
                             {{/if}}
-                            <a href="#ex1{{this._id}}" rel="modal:open" class="btn btn-default">Wishlist</a>
-                            {{!-- /customers/wishlist/{{this._id}} --}}
+                            
                         </div>
                     </div>
                 </li>
-                <div id="ex1{{this._id}}" class="modal" style="background: white">
-                    {{# if this.items}}
-                   
-                    <table class="table" >
-                        <tr>
-                            <th >Title</th>
-                        </tr>
-                          {{# each this.items}}
-                        <tr>
-                            <td  >{{this.product.name}}</td>
-                        </tr>
-                        {{/each}}
-                    </table>
-                    {{else}}
-                     Wishlist is empty
-                    {{/if}}
-                </div>
+                
                 {{/each }}
             </ul>
         </div>
@@ -93,8 +76,5 @@
             <h2 id="search-result" onclick="searchPartial()">No Item in found</h2>
         </div>
     </div>
-
     {{/if}}
-
-
 </div>

@@ -13,12 +13,12 @@ var WishListSchema = new Schema({
  owner: { type: Schema.Types.ObjectId, ref: "User" },
  total: { type: Number, default: 0 },
  items: [
-   {
-     product: { type: Schema.Types.ObjectId, ref: "Product" },
-     quantity: { type: Number, default: 1 },
-     price: { type: Number, default: 0 },
-     addedDate: { type: Date, default: Date.now }
-   }
+  {
+    product: { type: Schema.Types.ObjectId, ref: "Product" },
+    quantity: { type: Number, default: 1 },
+    price: { type: Number, default: 0 },
+    addedDate: { type: Date, default: Date.now }
+  }
  ]
 });
 

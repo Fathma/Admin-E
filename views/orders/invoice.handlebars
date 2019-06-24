@@ -76,18 +76,18 @@
                                         <p>SN:{{# each this.serial}} {{this}} {{/each}}</p>
                                         <br>
                                     </td>
-                                    <td class="text-right">{{formatNumber this.quantity}}</td>
-                                    <td class="text-right">{{formatNumber this.unitPrice}}TK</td>
-                                    <td class="text-right">{{formatNumber this.price}}TK</td>
+                                    <td class="text-right">{{ this.quantity}}</td>
+                                    <td class="text-right">{{ this.unitPrice}}TK</td>
+                                    <td class="text-right">{{ this.price}}TK</td>
                                 </tr>
                                 {{/each}}
                                 <tr>
                                     <td colspan="4" class="text-right">Shipping Cost:</td>
-                                    <td class="text-right">{{formatNumber order.shippingCharge}}TK</td>
+                                    <td class="text-right">{{ order.shippingCharge}}TK</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Total:</td>
-                                    <td class="text-right">{{formatNumber order.totalAmount}}TK</td>
+                                    <td class="text-right">{{ order.totalAmount}}TK</td>
                                 </tr>
 
                             </tbody>

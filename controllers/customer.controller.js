@@ -2,9 +2,11 @@
 // lastmodified: 16/6/2019
 // description: the file has all the Customer related controllers/ functions
 const Customerr = require('../models/userCustomer')
+const Order = require('../models/customerOrder')
 const Post = require('../models/posts.model') 
 const Wishlist = require('../models/wishlist.model')
 const Email = require('../helpers/email')
+var convert = require('object-array-converter');
 
 exports.emailAllPage = ( req, res )=> res.render('customer/emailAll')
 
@@ -21,9 +23,6 @@ exports.viewListOfCustomers =async (req, res) => {
         }
         new_cus.push(data)
     }
-       
-    
-    
     res.render('customer/customerlist',{ customer: new_cus }) 
 };
 
@@ -45,12 +44,17 @@ exports.emailAll = ( req, res )=>{
 }
 
 
-exports.getprofile = (req, res)=>{
-    Customerr.findOne({ _id: req.params.id }, (err, customer)=>{
-        Post.find({ user: req.params.id }, (err, posts)=>{
-            res.render('customer/profile', { customer, posts })
-        })
+exports.getprofile =async (req, res)=>{
+    var customer = await Customerr.findOne({ _id: req.params.id })
+    var posts = await Post.find({ user: req.params.id })
+    var orders = await Order.find({ user: req.params.id })
+    var wishlists = await Wishlist.findOne({ owner: req.params.id }).populate('items.product')
+    var count = 1
+    customer.shippingAddress.map(shippingAddress=>{
+        shippingAddress.count = count
+        count++
     })
+    res.render('customer/profile', { customer, posts, orders, wishlists })
 }
 
 
