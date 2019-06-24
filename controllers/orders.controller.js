@@ -2,6 +2,7 @@ const allFuctions = require('../helpers/allFuctions')
 const Invoice = require('../models/invoice.model')
 const Product = require('../models/Product')
 const Order = require('../models/customerOrder')
+const Serial = require('../models/serials.model')
 const Email = require('../helpers/email')
 
 // view list of customers
@@ -14,15 +15,16 @@ exports.showOrdersPage = (req, res) => {
 }
 
 // saving serial for order
-exports.saveSerialInOrders = (req, res) => {
+exports.saveSerialInOrders =async (req, res) => {
   var serials = req.body.Serial.split(',')
-  Order.update(
-    { _id: req.params.oid, 'cart._id': req.params.item_id },
-    { $set: { 'cart.$.serial': serials } },
-    { upsert: true },
-    (err, rs) => {
-      if (err) res.send(err);
+  var docs = await Order.findOne({ _id: req.params.oid })
+  docs.cart.map(item=>{
+    if(item._id == req.params.item_id){
+      item.serials = serials
+      new Order(docs).save().then(()=>{
       res.redirect('/orders/orderDetails/' + req.params.oid)
+      })
+    }
   })
 }
 
@@ -54,16 +56,17 @@ exports.saveEdit = (req, res) => {
 // returns the page to add serial to an ordered product
 exports.addSerialToProduct = (req, res) => {
   allFuctions.get_orders({ _id: req.params.oid }, rs => {
-    Product.find({ _id: req.params.pid }, function(err, docs) {
-      if (docs[0].warranted) {
+    Product.findOne({ _id: req.params.pid }, async function(err, docs) {
+      if (docs.serial_availablity) {
+        let serial = await Serial.find({ pid: req.params.pid })
         res.render('orders/setSerialInOrder', {
           order: rs[0],
           model: req.params.pid,
           model_name: req.params.pmodel,
           item_id: req.params.item_id,
           quantity: req.params.quantity,
-          serial: docs[0].live.serial,
-          warranted: docs[0].warranted
+          serial: serial
+          // warranted: docs[0].warranted
         })
       } else {
         req.flash('error_msg', 'Unwarranted product!');

@@ -14,7 +14,7 @@ var ProductSchema = new Schema({
     description: { type: String, default: 'None'},
     shippingInfo: {type:String, default:'None'},
     image:  { type: Array, default:[] },
-    weight:  {type:String, default:""},
+    weight:  { type: String, default:"" },
     serial_availablity:{ type: Boolean },
     frontQuantity: {type:Number, default:0},
     live: { 

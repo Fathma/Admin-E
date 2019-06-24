@@ -28,13 +28,13 @@
                             <label for="Serial">Serial Numbers</label>
                             <input type="text" name="Serial" id="Serial" class="form-control"
                             {{# if previous }}
-                            value="{{previous}}"{{/if}}
-
+                            value="{{previous}}"
+                            {{/if}}
                                 required>
                                 <select id="selected" onchange="set_serial_last()">
                                     <option value="0" selected>select Serial Numbers</option>
                                     {{# each serial}}
-                                    <option value="{{this.serial}}">{{this.serial}}</option>
+                                    <option value="{{this.number}}">{{this.number}}</option>
                                     {{/each}}
                                 </select>
                                 <p id="new_msg"></p>

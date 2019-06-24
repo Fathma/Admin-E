@@ -342,29 +342,29 @@ $("form").submit(function(e) {
 // tableCreate();
 
 // checking during selecting serial number for ordered products
-// function set_serial_last() {
-//   var product_serial =byId("Serial");
+function set_serial_last() {
+  var product_serial =byId("Serial");
 
-//   if (document.getElementById("selected").value === "0") {
-//   } else {
-//     if (product_serial.value === "") {
-//       product_serial.value =byId("selected").value;
-//      byId("new_msg").innerHTML ="You have to select " +byId("quantity").value;
-//     } else {
-//       if (product_serial.value.split(",").length === parseInt(document.getElementById("quantity").value)
-//       ) {
-//        byId("new_msg").innerHTML = "";
-//         alert("Quantity of the product is satisfied");
-//       }
-//       else {
-//        byId("new_msg").innerHTML ="You have to select " +byId("quantity").value;
-//         product_serial.value = product_serial.value +"," +byId("selected").value;
-//       }
-//     }
-//     var srr = ArrNoDupe(product_serial.value.split(","));
-//     product_serial.value = srr;
-//   }
-// }
+  if (document.getElementById("selected").value === "0") {
+  } else {
+    if (product_serial.value === "") {
+      product_serial.value =byId("selected").value;
+     byId("new_msg").innerHTML ="You have to select " +byId("quantity").value;
+    } else {
+      if (product_serial.value.split(",").length === parseInt(document.getElementById("quantity").value)
+      ) {
+       byId("new_msg").innerHTML = "";
+        alert("Quantity of the product is satisfied");
+      }
+      else {
+       byId("new_msg").innerHTML ="You have to select " +byId("quantity").value;
+        product_serial.value = product_serial.value +"," +byId("selected").value;
+      }
+    }
+    var srr = ArrNoDupe(product_serial.value.split(","));
+    product_serial.value = srr;
+  }
+}
 
 // // creating text fields on quantity input
 // function createtextfields() {
