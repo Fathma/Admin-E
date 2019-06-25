@@ -246,7 +246,7 @@ $(document).ready(()=>{
     // var a = $('input:not(form input)');
     // form_data = get_json(a);
    
-    
+    console.log(byId("invoice").value)
     // for getting serial numbers
     var pid = byId("products_invoice").value
     var serials = [];
@@ -260,7 +260,7 @@ $(document).ready(()=>{
         status: "In Stock"
       };
      
-      
+      console.log(obj)
       if(byId("serial").value === "true"){
         serial_array.push(byId("s" + i).value)
         obj.number= byId("s" + i).value

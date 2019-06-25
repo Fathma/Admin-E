@@ -4,11 +4,11 @@
 
 //Imports
 var mongo = require('mongodb')
-const Product = require('../models/Product')
-const Category = require('../models/category.model')
-const SubCategory = require('../models/subCategory.model')
-const Inventory = require('../models/inventory.model')
-const Serial = require('../models/serials.model')
+const Product = require('./Product')
+const Category = require('../parents/category.model')
+const SubCategory = require('../parents/subCategory.model')
+const Inventory = require('../../models/inventory.model')
+const Serial = require('./serials.model')
 const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
@@ -40,8 +40,6 @@ exports.SaveProductDealer = async(req, res)=>{
 // saving product for local purchase products
 exports.SaveProductLP = async(req, res)=>{
   var data = req.body.data
-  console.log(req.body.serials)
-
   await Product.update({ _id: data._id },{ $set: data },{ upsert: true })
   await Serial.insertMany(req.body.serials)
   res.send({})

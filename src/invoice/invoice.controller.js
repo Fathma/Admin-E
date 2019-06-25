@@ -1,4 +1,4 @@
-const Invoice = require('../models/invoice.model')
+const Invoice = require('./invoice.model')
 
 // view list of customers
 exports.showInvoiceList = (req, res)=>{

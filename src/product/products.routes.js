@@ -7,7 +7,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
-const product_controller = require('../controllers/product.controller')
+const product_controller = require('./product.controller')
 const { ensureAuthenticated } = require("../helpers/auth");
 mongoose.Promise = global.Promise;
 

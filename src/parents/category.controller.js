@@ -1,8 +1,8 @@
 // author: Fathma siddique
 // description: the file has all the category related controllers/ functions
-const Brand = require('../models/brand.model')
-const subCategory = require('../models/subCategory.model')
-const Cat = require('../models/category.model')
+const Brand = require('./brand.model')
+const subCategory = require('./subCategory.model')
+const Cat = require('./category.model')
 
 // saving category
 exports.addCategory = (req, res) => {

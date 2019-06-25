@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const forum = require('../controllers/forum.controller')
+const forum = require('./forum.controller')
 
 
 router.get('/posts', forum.getPosts)

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const category = require('../controllers/category.controller')
+const category = require('./category.controller')
 
 router.post('/addCategory', category.addCategory)
 router.post('/addSubCategory', category.addSubCategory)

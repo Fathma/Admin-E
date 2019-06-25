@@ -1,6 +1,6 @@
-const Product = require("../models/Product");
+const Product = require("../product/Product");
 // const Inventory = require("../models/inventory.model");
-const Order = require("../models/customerOrder");
+const Order = require("../order/customerOrder");
 
 // // get inventory list by filter
 // exports.get_inventory_list_new = async (condition, sort_obj, populate_obj) => {
@@ -53,7 +53,7 @@ exports.live_wise_inventory = (docs,cb)=>{
 
 // orders
 exports.get_orders = (condition, cb)=>{
-  Order.findOne(condition).sort({ "created": 1 }).populate("cart.product").populate("user").populate('cart.serials').exec((err, rs)=>{ cb(rs); })
+  Order.find(condition).sort({ "created": 1 }).populate("cart.product").populate("user").populate('cart.serials').exec((err, rs)=>{ cb(rs); })
 }
 
 // function for getting live data

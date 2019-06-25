@@ -25,7 +25,7 @@
                                             <td><a href="/orders/ViewInvoice/{{order.invoice}}">{{order.invoice}}</a>
                                             </td>
                                         </tr>
-                                        {{!-- <tr>
+                                        <tr>
                                             <td>Invoice No:</td>
                                             <td>
                                                 <a href="/orders/generateInvoice/{{order._id}}" id="button-invoice"
@@ -33,7 +33,7 @@
                                                     
                                                     <i class="fa fa-cog"></i> Generate</a>
                                             </td>
-                                        </tr> --}}
+                                        </tr>
 
                                         <tr>
                                             <td>Customer:</td>
@@ -87,7 +87,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Shipping Info</h3>
                     </div>
- <div class="panel-body">
+                    <div class="panel-body">
                         <div class="order">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -161,17 +161,18 @@
 
                                         <tr>
                                             <td>
-                                                <a href="/orders/addSerialToProduct/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this._id}}">Add
+                                                <a
+                                                    href="/orders/addSerialToProduct/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this._id}}">Add
                                                     Serial Number</a></td>
                                             <td class="text-left">
                                                 <a href="#">{{this.product.name}}</a>
                                                 <p>SN:
                                                     {{# each this.serials}}
-                                                        {{# if this.number}}
-                                                            {{this.number}}
-                                                        {{else}}
-                                                            {{this.sid}}
-                                                        {{/if}}
+                                                    {{# if this.number}}
+                                                    {{this.number}}
+                                                    {{else}}
+                                                    {{this.sid}}
+                                                    {{/if}}
                                                     {{/each}}</p>
                                                 <br>
                                             </td>

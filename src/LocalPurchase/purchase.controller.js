@@ -1,8 +1,8 @@
-const LP = require('../models/localPurchase.model');
-const Product = require('../models/Product');
-const Category = require('../models/category.model');
-const SubCategory = require('../models/subCategory.model');
-const Serials = require('../models/serials.model');
+const LP = require('../LocalPurchase/localPurchase.model');
+const Product = require('../product/Product');
+const Category = require('../parents/category.model');
+const SubCategory = require('../parents/subCategory.model');
+const Serials = require('../product/serials.model');
 
 // get supplier registration page
 exports.LocalPurchasePage = (req, res) => res.render('purchase/localPurchase');

@@ -1,10 +1,10 @@
 // author: Fathma siddique
 // lastmodified: 16/6/2019
 // description: the file has all the Customer related controllers/ functions
-const Customerr = require('../models/userCustomer')
-const Order = require('../models/customerOrder')
-const Post = require('../models/posts.model') 
-const Wishlist = require('../models/wishlist.model')
+const Customerr = require('./userCustomer')
+const Order = require('../order/customerOrder')
+const Post = require('../forum/posts.model') 
+const Wishlist = require('./wishlist.model')
 const Email = require('../helpers/email')
 var convert = require('object-array-converter');
 

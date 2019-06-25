@@ -6,15 +6,15 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 // const dbConfig = require("./config/database");
-var Category = require("./models/category.model");
-var Product = require("./models/Product");
-var LocalPurchase = require("./models/localPurchase.model");
-var Supplier = require("./models/supplier.model");
-var SubCategory = require("./models/subCategory.model");
-var PostCategory = require('./models/PostCategory.model')
+var Category = require("./src/parents/category.model");
+var Product = require("./src/product/Product");
+var LocalPurchase = require("./src/LocalPurchase/localPurchase.model");
+var Supplier = require("./src/supplier/supplier.model");
+var SubCategory = require("./src/parents/subCategory.model");
+var PostCategory = require('./src/forum/PostCategory.model')
 const keys = require('./config/keys')
 
-var Brand = require("./models/brand.model");
+var Brand = require("./src/parents/brand.model");
 const morgan = require("morgan");
 var path = require("path");
 var mongoStore = require("connect-mongo")(session);
@@ -26,22 +26,22 @@ var expressValidator = require('express-validator');
 moment().format();
 
 // // role
-const { ensureAuthenticated } = require("./helpers/auth");
+const { ensureAuthenticated } = require("./src/helpers/auth");
 // const { Super } = require("./helpers/rolecheck");
 // const { SuperPublisher } = require("./helpers/rolecheck");
 const app = express();
 
 // // Load routes controller
-const ordersRoutes = require("./routes/orders.routes");
-const categoryRoutes = require("./routes/category.routes");
-const usersRoutes = require("./routes/users.routes");
-const productsRoutes = require("./routes/products.routes");
-const customerRoutes = require("./routes/customer.routes");
-const invoiceRoutes = require("./routes/invoice.routes");
-const purchaseRoutes = require("./routes/purchase.routes");
-const supplierRoutes = require("./routes/supplier.routes");
-const generalRoutes = require("./routes/general.routes");
-var forumRoutes = require("./routes/forum.routes")
+const ordersRoutes = require("./src/order/orders.routes");
+const categoryRoutes = require("./src/parents/category.routes");
+const usersRoutes = require("./src/user/users.routes");
+const productsRoutes = require("./src/product/products.routes");
+const customerRoutes = require("./src/customer/customer.routes");
+const invoiceRoutes = require("./src/invoice/invoice.routes");
+const purchaseRoutes = require("./src/LocalPurchase/purchase.routes");
+const supplierRoutes = require("./src/supplier/supplier.routes");
+const generalRoutes = require("./src/general/general.routes");
+var forumRoutes = require("./src/forum/forum.routes")
 
 // Passport config
 require("./config/passport")(passport);

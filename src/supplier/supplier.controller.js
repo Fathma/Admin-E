@@ -1,4 +1,4 @@
-const Supplier = require('../models/supplier.model');
+const Supplier = require('./supplier.model');
 var randomstring = require('randomstring');
 
 // get supplier registration page

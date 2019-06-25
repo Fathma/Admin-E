@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const orders = require('../controllers/orders.controller')
+const orders = require('./orders.controller')
 
 router.get('/orders', orders.showOrdersPage)
 router.get('/generateInvoice/:oid', orders.generateInvoice)

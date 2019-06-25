@@ -1,8 +1,8 @@
 const allFuctions = require('../helpers/allFuctions')
-const Invoice = require('../models/invoice.model')
-const Product = require('../models/Product')
-const Order = require('../models/customerOrder')
-const Serial = require('../models/serials.model')
+const Invoice = require('../invoice/invoice.model')
+const Product = require('../product/Product')
+const Order = require('./customerOrder')
+const Serial = require('../product/serials.model')
 const Email = require('../helpers/email')
 
 // view list of customers
@@ -105,10 +105,13 @@ exports.ViewInvoice = (req, res) => {
     })
     .exec((err, rs) => {
       var count = 1
-      for (var i = 0; i < rs[0].order.cart.length; i++) {
-        rs[0].order.cart[i].num = count;
-        count++
+      if(rs[0].order.cart != null ){
+        for (var i = 0; i < rs[0].order.cart.length; i++) {
+          rs[0].order.cart[i].num = count;
+          count++
+        }
       }
+     
       res.render('orders/viewInvoice', { invoice: rs[0] })
     })
 }
@@ -117,6 +120,7 @@ exports.ViewInvoice = (req, res) => {
 exports.showOrderDetails = (req, res) => {
   allFuctions.get_orders({ _id: req.params.id }, rs => {
     if(rs){
+      console.log(rs)
       for (var i = 0; i < rs[0].cart.length; i++) {
         rs[0].cart[i].oid = req.params.id
         rs[0].cart[i].totalAmount = rs[0].totalAmount
@@ -154,7 +158,7 @@ exports.generateInvoice = (req, res) => {
 }
 
 // updateting order history
-exports.updateHistory = (req, res) => {
+exports.updateHistory =async (req, res) => {
   var status = req.body.status
 
   if (req.body.notify === '1') {
@@ -178,54 +182,20 @@ exports.updateHistory = (req, res) => {
     }, { upsert: true }, (err, rs2) => {
       if (err)  res.send(err)  
       else {
-        // populating product id inside the cart 
-        Order.populate(rs2, 'cart.product', (err1, rs) => {
-          // if delivered then delete serials from live (for warranted Product)
-          if (status === 'Delivered') {
-            rs.cart.map(item => {
-              if (item.product.warranted) {
-                var arr = item.serial;
-                // find the product id
-                Product.findOne( { _id: item.product._id }, async (err, docs) => {
-                  var all = [];
-                  // convert serials into object with inventory id
-                  await arr.map(selected => {
-                    docs.live.serial.map(obj => {
-                      if (obj.serial === selected) all.push(obj);
-                    })
-                  })
-                  // delete serials from product live and update quantity
-                  await Product.update( { _id: item.product._id },
-                    {
-                      $pull: { 'live.serial': { $in: all } },
-                      $set: { 'live.quantity': docs.live.quantity - item.quantity }
-                    },{ upsert: true }, (err, rs) => {
-                      if (err) res.send(err) 
-                      else console.log(all) 
-                  })
-                })
-                // if not delivered then update history only
-              } else {
-                var all = []
-                Product.findOne( { _id: item.product._id }, async (err, docs) => {
-                  for (var i = 0; i < item.quantity; i++) {
-                    all.push(item.product.live.serial[i])
-                  }
-                  Product.update( { _id: item.product._id },
-                    {
-                      $pull: { 'live.serial': { $in: all } },
-                      $set: {
-                        'live.quantity': docs.live.quantity - item.quantity
-                      }
-                    }, { upsert: true }, (err, rs) => {
-                      if (err) res.send(err)
-                    })
-                })
-              }
+        
+        if(status === "Delivered"){
+          rs2.cart.map( item=>{
+            item.serials.map(async serial=>{
+              console.log(serials)
+              var docs =await Serial.update({ _id: serial },{$set: { status:'Delivered', invoive: rs2._id }})
+               
             })
-          }
-          res.redirect('/orders/orderDetails/' + req.params.oid)
-        })
+           
+          })
+          
+        }
+       
+        res.redirect('/orders/orderDetails/' + req.params.oid)
       }
     })
 }

@@ -4,7 +4,7 @@ const Validation = require('../helpers/validations')
 
 // Load user model
 
-const User = require('../models/User')
+const User = require('./User')
 
 // User login route
 exports.loginPage = (req, res, next) => res.render('users/login')

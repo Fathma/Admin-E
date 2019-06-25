@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const purchase = require('../controllers/purchase.controller');
+const purchase = require('./purchase.controller');
 
 router.get('/localPurchase', purchase.LocalPurchasePage);
 router.get('/localPurchase/:invc', purchase.LocalPurchaseLPPage);

@@ -3,7 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated } = require("../helpers/auth");
 const { Super } = require("../helpers/rolecheck");
 const { SuperPublisher } = require("../helpers/rolecheck");
-const user = require('../controllers/users.controller');
+const user = require('./users.controller');
 
 router.get("/login",  user.loginPage);
 router.get("/register", ensureAuthenticated, Super, user.registrationPage);
