@@ -165,8 +165,13 @@
                                                     Serial Number</a></td>
                                             <td class="text-left">
                                                 <a href="#">{{this.product.name}}</a>
-                                                <p>SN:{{# each this.serials}}
-                                                    {{this}}
+                                                <p>SN:
+                                                    {{# each this.serials}}
+                                                        {{# if this.number}}
+                                                            {{this.number}}
+                                                        {{else}}
+                                                            {{this.sid}}
+                                                        {{/if}}
                                                     {{/each}}</p>
                                                 <br>
                                             </td>
@@ -177,17 +182,17 @@
                                                     style="padding: 0%" class="btn btn-primary"> <img
                                                         src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>{{this.quantity}}
                                             </td>
-                                            <td class="text-right">{{ this.unitPrice}}TK</td>
-                                            <td class="text-right">{{ this.price}}TK</td>
+                                            <td class="text-right">{{ this.unitPrice }}TK</td>
+                                            <td class="text-right">{{ this.price }}TK</td>
                                         </tr>
                                         {{/each}}
                                         <tr>
                                             <td colspan="4" class="text-right">Shipping Cost:</td>
-                                            <td class="text-right">{{ order.shippingCharge}}TK</td>
+                                            <td class="text-right">{{ order.shippingCharge }}TK</td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">Total:</td>
-                                            <td class="text-right">{{ order.totalAmount}}TK</td>
+                                            <td class="text-right">{{ order.totalAmount }}TK</td>
                                         </tr>
 
                                     </tbody>

@@ -53,7 +53,7 @@ exports.live_wise_inventory = (docs,cb)=>{
 
 // orders
 exports.get_orders = (condition, cb)=>{
-  Order.find(condition).sort({ "created": 1 }).populate("cart.product").populate("user").exec((err, rs)=>{ cb(rs); })
+  Order.findOne(condition).sort({ "created": 1 }).populate("cart.product").populate("user").populate('cart.serials').exec((err, rs)=>{ cb(rs); })
 }
 
 // function for getting live data

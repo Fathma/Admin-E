@@ -15,12 +15,18 @@ exports.showOrdersPage = (req, res) => {
 }
 
 // saving serial for order
-exports.saveSerialInOrders =async (req, res) => {
+exports.saveSerialInOrders = async (req, res) => {
   var serials = req.body.Serial.split(',')
+  var serial_id = []
+  // getting id of the
+  serials.map( async serial=>{
+    var id = await Serial.findOne({$or: [{number: serial}, {sid: serial}]})
+    serial_id.push(id._id)
+  })
   var docs = await Order.findOne({ _id: req.params.oid })
   docs.cart.map(item=>{
     if(item._id == req.params.item_id){
-      item.serials = serials
+      item.serials = serial_id
       new Order(docs).save().then(()=>{
       res.redirect('/orders/orderDetails/' + req.params.oid)
       })
@@ -55,23 +61,20 @@ exports.saveEdit = (req, res) => {
 
 // returns the page to add serial to an ordered product
 exports.addSerialToProduct = (req, res) => {
-  allFuctions.get_orders({ _id: req.params.oid }, rs => {
+  allFuctions.get_orders({ _id: req.params.oid }, order => {
     Product.findOne({ _id: req.params.pid }, async function(err, docs) {
-      if (docs.serial_availablity) {
+     
         let serial = await Serial.find({ pid: req.params.pid })
         res.render('orders/setSerialInOrder', {
-          order: rs[0],
+          order: order[0],
           model: req.params.pid,
           model_name: req.params.pmodel,
           item_id: req.params.item_id,
           quantity: req.params.quantity,
-          serial: serial
+          serial
           // warranted: docs[0].warranted
         })
-      } else {
-        req.flash('error_msg', 'Unwarranted product!');
-        res.redirect('/orders/orderDetails/' + req.params.oid);
-      }
+      
     })
   })
 }

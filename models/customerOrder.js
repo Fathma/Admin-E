@@ -11,7 +11,7 @@ var CustomerOrderSchema = new Schema({
      quantity: { type: Number },
      unitPrice: { type: Number },
      price: { type: Number },
-     serials: { type: Array }
+     serials: [ { type: Schema.Types.ObjectId, ref: "Serial" } ]
    }
  ],
  shippingAddress: {
