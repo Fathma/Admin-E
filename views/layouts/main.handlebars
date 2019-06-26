@@ -8,7 +8,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <link rel="stylesheet" href="/stylesheets/style.css">
-
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
+    {{!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> --}}
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/jquery.modal.min.css">
@@ -33,7 +34,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
-    
+
     <script src="/js.js"></script>
     <script src="/inventory.js"></script>
     {{!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script> --}}
@@ -43,19 +44,6 @@
         });
     </script> --}}
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.1/dist/bootstrap-table.min.css">
-
-
-    <script>
-        $(document).ready(
-            function () {
-                $("#ttt").DataTable({
-                        "lengthMenu": [[5, 10, 15, 20, -1],
-                        [5, 10, 15, 20, "All"]],
-                        "ordering": false,
-                        stateSave: true
-                    });
-            });
-    </script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" onload="set_var()">
@@ -93,7 +81,7 @@
                                 {{!-- <div class="input-group-btn"> --}}
                                 <button class="btn btn-default" type="submit">
                                     <img src="https://img.icons8.com/cotton/17/000000/search.png">
-                                    </button>
+                                </button>
                                 {{!-- </div> --}}
                                 {{!-- </div> --}}
                             </form>
@@ -106,15 +94,22 @@
                             </a>
                             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                 <li>
-                                    <a id="set_href">
-                                        Low Live
-                                        <span name="lowLive" id="lowLive" style="padding: 5%; color:red"></span>
+                                    <a id="set_href"><img
+                                            src="https://img.icons8.com/color/20/000000/medium-battery.png"> Low
+                                        Quantity <span name="lowLive" id="lowLive"
+                                            style="padding: 5%; color:red"></span>
+                                    </a>
+                                    <a id="newOrder_href"><img
+                                            src="https://img.icons8.com/ios/20/ffffff/shopping-cart-filled.png"> New
+                                        Orders<span name="newOrder" id="newOrder" style="padding: 5%; color:red"></span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li><div id="google_translate_element"></div></li>
+                        <li>
+                            <div id="google_translate_element"></div>
+                        </li>
 
                         <li class="nav-item">
                             <a href="/users/register" class="nav-link">
@@ -166,61 +161,42 @@
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                <a href="/products/showDashboard"><i class="fa fa-circle-o"></i> Admin Activity Board</a>
+                                <a href="/general/showDashboard"><i class="fa fa-circle-o"></i> Admin Activity Board</a>
                             </li>
                         </ul>
                     </li>
-                     <li class="treeview">
+                    <li class="treeview">
                         <a href="#">
-                             <i class="fa fa-truck" aria-hidden="true"></i>
-                            {{!-- <i class="fa fa-cubes"></i> --}}
+                            <i class="fa fa-truck" aria-hidden="true"></i>
+                           
                             <span>Supplier</span>
                             <span class="pull-right-container">
-                               
+
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/supplier/SupplierRegistrationPage"><i class="fa fa-circle-o"></i>New Supplier</a></li>
+                            <li><a href="/supplier/SupplierRegistrationPage"><i class="fa fa-circle-o"></i>New
+                                    Supplier</a></li>
                             <li><a href="/supplier/SupplierList"><i class="fa fa-circle-o"></i>All Suppliers</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
-                            {{!-- <i class="fa fa-cubes"></i> --}}
+                            
                             <span>Local Purchase</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Local Purchase</a></li>
+                            <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Local Purchase</a>
+                            </li>
                             <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>Local Purchase List</a></li>
-                            {{!-- <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    <span>Inventory</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li>
-                                        <a href="/products/InhouseInventory">
-                                            <i class="fa fa-location-arrow"aria-hidden="true"></i>In-house Stock Product
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/products/DealerInventory">
-                                            <i class="fa fa-location-arrow" aria-hidden="true"></i> Dealer Product
-                                        </a> 
-                                    </li>
-                                </ul>
-                            </li> --}}
                         </ul>
                     </li>
-                     <li class="treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cubes"></i>
                             <span>Inventory</span>
@@ -229,8 +205,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/products/InhouseInventory"><i class="fa fa-circle-o"></i>In-house Stock Product</a></li>
-                            <li><a href="/products/DealerInventory"><i class="fa fa-circle-o"></i> Dealer Product</a></li>
+                            <li><a href="/products/InhouseInventory"><i class="fa fa-circle-o"></i>In-house Stock
+                                    Product</a></li>
+                            <li><a href="/products/DealerInventory"><i class="fa fa-circle-o"></i> Dealer Product</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -247,7 +225,7 @@
                             <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>All Sub Categories</a></li>
                             <li><a href="/category/brandList"><i class="fa fa-circle-o"></i>All Brands</a></li>
                             <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>All Products</a></li>
-                            {{!-- <li><a href="/products/view"><i class="fa fa-circle-o"></i>All Inventories</a></li> --}}
+                            <li><a href="/products/serials"><i class="fa fa-circle-o"></i>Product Details</a></li>
                         </ul>
                     </li>
 
@@ -295,10 +273,9 @@
                                     <i class="fa fa-circle-o"></i>Registered Customers
                                 </a>
                             </li>
-                           
                         </ul>
                     </li>
-                    
+
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-commenting" aria-hidden="true"></i>
@@ -332,7 +309,7 @@
                 {{{body}}}
             </div>
         </div>
-        
+
         {{# if user}}
         <footer id="footer" class="main-footer">
             <div class="pull-right hidden-xs">
@@ -343,14 +320,15 @@
         </footer>
         {{/if}}
 
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
         <script type="text/javascript">
             function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ 
-                    pageLanguage: 'en', 
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE 
-                    }, 'google_translate_element');
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
             }
         </script>
 
@@ -384,7 +362,9 @@
         //AdminLTE for demo purposes 
         <script src="assets/js/demo.js"></script>-->
         <script>
+           
             $(document).ready(function () {
+                 $('#ptable').DataTable();
                 $('[data-toggle="tooltip"]').tooltip();
             });
         </script>
@@ -398,14 +378,6 @@
                 margin: 0;
             }
         </style>
-        {{!-- <script language="javascript">
-            populateCountries("country", "state"); // first parameter is id of country drop-down and second parameter is id of state drop-down
-            populateCountries("country2");
-            populateCountries("country2");
-        </script> --}}
-
-
-
 </body>
 
 </html>

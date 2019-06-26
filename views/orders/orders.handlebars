@@ -3,7 +3,8 @@
         <a href="#"><b>Orders</a>
     </div>
     <div style="background-color: white">
-        <table style="width:100%" class="table table-hover">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
             <tr>
                 <th>Customers</th>
                 <th>Status</th>
@@ -11,6 +12,8 @@
                 <th>Date Added </th>
                 <th>Date Modified</th>
             </tr>
+            </thead>
+            <tbody>
             {{# each orders}}
             <tr>
                 <td>
@@ -38,6 +41,7 @@
                 </td>
             </tr>
             {{/each}}
+            </tbody>
         </table>
     </div>
 </div>

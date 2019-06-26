@@ -120,8 +120,8 @@ $(document).ready(function() {
     doc.save("sample-file.pdf");
   });
 
-  // on product model change this function get all the previous serial numbers
-  // and adds to a hidden textfield
+  // // on product model change this function get all the previous serial numbers
+  // // and adds to a hidden textfield
   // $("#model").change(function(e) {
   //   $.get(
   //     // here model is the product_id
@@ -132,17 +132,17 @@ $(document).ready(function() {
   //   );
   // });
 
-  // // onload
-  // notificationCheck();
+  // onload
+  notificationCheck();
 
-  // window.setInterval(function() {
+  window.setInterval(function() {
 
-  //   notificationCheck();
-  // }, 10000);
+    notificationCheck();
+  }, 10000);
 
   // gets the notifications
   function notificationCheck() {
-    $.get("/products/dashboard", {}, function(data_string) {
+    $.get("/general/dashboard", {}, function(data_string) {
       if (data_string.count != 0) {
        byId("notification").textContent = JSON.stringify(
           data_string.count
@@ -152,6 +152,14 @@ $(document).ready(function() {
      byId("lowLive").textContent = JSON.stringify(
         data_string.quantity
       );
+      byId("newOrder").textContent = JSON.stringify(
+        data_string.new_order
+      );
+      if (data_string.new_order === 0) {
+        byId("newOrder_href").href = "#";
+       } else {
+        byId("newOrder_href").href = "/orders/newOrders";
+       }
 
       if (data_string.quantity === 0) {
        byId("set_href").href = "#";

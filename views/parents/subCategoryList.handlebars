@@ -1,16 +1,19 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Sub Category List</a>
+        <a href="#"><b>Sub Categories</a>
     </div>
 
     <div style="background-color: white">
-        <table style="width:100%" class="table table-striped" >
+        <table id="ptable" style="width:100%" class="table table-striped" >
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
+             </thead>
+             <tbody>
           {{# each subCategory}}
             <tr>
                 <td>{{this.name}}</td>
@@ -35,6 +38,7 @@
             </tr>
            
             {{/each}}
+            </tbody>
         </table>
 
     </div>

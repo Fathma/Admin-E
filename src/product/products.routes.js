@@ -68,6 +68,7 @@ router.get('/active/:id', ensureAuthenticated, product_controller.makeActive)
 router.get('/unactive/:id', ensureAuthenticated, product_controller.makeNotActive)
 router.get('/Available/:id', ensureAuthenticated, product_controller.makeAvailable)
 router.get('/notAvailable/:id', ensureAuthenticated, product_controller.makeNotAvailable)
+router.get('/serials', ensureAuthenticated, product_controller.getSerials)
 
 
 // previous 

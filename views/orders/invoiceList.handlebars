@@ -4,7 +4,8 @@
     </div>
 
     <div style="background-color: white">
-        <table style="width:100%" class="table table-hover">
+        <table id="ptable" style="width:100%" class="table table-striped" >
+            <thead>
             <tr>
                 <th>Invoice Number </th>
                 <th>Invoice Date</th>
@@ -14,6 +15,8 @@
                 <th>Status</th>
                 <th>Total</th>
             </tr>
+            </thead>
+            <tbody>
           {{# each invoices}}
             <tr>
                 <td>
@@ -50,6 +53,7 @@
             </tr>
            
             {{/each}}
+            </tbody>
         </table>
 
     </div>

@@ -186,16 +186,21 @@ exports.updateHistory =async (req, res) => {
         if(status === "Delivered"){
           rs2.cart.map( item=>{
             item.serials.map(async serial=>{
-              console.log(serials)
-              var docs =await Serial.update({ _id: serial },{$set: { status:'Delivered', invoive: rs2._id }})
-               
+              var {err, docs} = await Serial.update({ _id: serial },{$set: { status:'Delivered', invoive: rs2._id }})
+              console.log(err)
             })
-           
           })
-          
         }
-       
         res.redirect('/orders/orderDetails/' + req.params.oid)
       }
     })
+}
+
+
+exports.newOrders = (req, res)=>{
+  Order.find({ currentStatus: 'New Order'})
+  .populate('user')
+  .exec((err, orders)=>{
+    res.render('orders/orders', { orders })
+  })
 }

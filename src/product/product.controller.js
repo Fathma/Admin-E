@@ -418,6 +418,14 @@ exports.makeAvailable = (req, res)=>{
   });
 }
 
+exports.getSerials = (req, res)=>{
+  Serial.find()
+  .populate('pid')
+  .exec((err, serials)=>{
+    res.render('products/allSerials', { serials })
+  })
+}
+
 // make product not available
 exports.makeNotAvailable = (req, res)=>{
   console.log(req.params.id)

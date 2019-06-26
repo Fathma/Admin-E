@@ -5,6 +5,7 @@
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
             <tr>
                 <th>User</th>
                 <th>Post Category</th>
@@ -15,7 +16,8 @@
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            
+            </thead>
+            <tbody>
             {{# each posts}}
             <tr>
                 <td>
@@ -63,6 +65,7 @@
                 </td>
             </tr>
             {{/each}}
+            </tbody>
         </table>
     </div>
 </div>

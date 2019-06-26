@@ -1,18 +1,19 @@
 {{!-- <h1>{{quantity}}</h1> --}}
 <div style="margin-left: 5%;margin-right: 5%;">
 <div class="row">
-    {{# if data}}
+    {{!-- {{# if data}} --}}
     <a href="/products/viewLowLive" style="color: white "><div class="well col-sm-4" style="background-color:lightseagreen; height: 120px; ">
-        <h2>Low Live {{lowlive}}<span class="pull-right"><img src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
+        <h2>Low Live {{quantity}}<span class="pull-right"><img src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
     </div></a>
-    {{else}}
+    {{!-- {{else}}
     <a href="#"><div class="well col-sm-4" style="background-color:tomato; height: 120px; ">
         <h2>Low Live {{lowlive}}</h2>
+    </div></a> --}}
+    {{!-- {{/if}} --}}
+     <a href="/orders/newOrders" style="color: white "><div class="well col-sm-4" style="background-color:salmon; height: 120px;  height: 120px; ">
+        <h2>New Orders {{new_order}}<span class="pull-right"><img src="https://img.icons8.com/color/48/000000/shopping-cart.png"></span></h2>
     </div></a>
-    {{/if}}
-     <div class="well col-sm-4" style="background-color:salmon; height: 120px; ">
-
-    </div>
+    
      <div class="well col-sm-4" style="background-color:silver;  height: 120px; ">
 
     </div>
