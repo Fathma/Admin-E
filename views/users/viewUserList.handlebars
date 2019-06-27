@@ -1,0 +1,51 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Suppliers</a>
+    </div>
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped" >
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Role</th>
+                <th>Date</th>
+              
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+             
+          {{# each users}}
+            <tr>
+                <td>{{this.email}}</td>
+                <td>
+                    <strong class="notranslate">{{this.name}}</strong>
+                </td>
+                <td>
+                    <strong class="notranslate">{{this.branch}}</strong>
+                </td>
+
+                <td>
+                   <strong class="notranslate">{{this.role}}</strong>
+                </td>
+                <td>
+                   <strong class="notranslate">{{this.date}}</strong>
+                </td>
+                <td>
+                    <a href="/users/Edit/{{this._id}}" data-toggle="tooltip" 
+                        title="Edit info" class="btn btn-default" > Edit</a>
+                    
+                </td>
+               
+            </tr>
+           
+            {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

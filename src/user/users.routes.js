@@ -1,14 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const { ensureAuthenticated } = require("../helpers/auth");
-const { Super } = require("../helpers/rolecheck");
-const { SuperPublisher } = require("../helpers/rolecheck");
-const user = require('./users.controller');
+const express = require('express')
+const router = express.Router()
+const { ensureAuthenticated } = require("../helpers/auth")
+const { Super } = require("../helpers/rolecheck")
+const { SuperPublisher } = require("../helpers/rolecheck")
+const user = require('./users.controller')
 
-router.get("/login",  user.loginPage);
-router.get("/register", ensureAuthenticated, Super, user.registrationPage);
-router.post("/login",user.login);
-router.post("/register", ensureAuthenticated, Super,user.userregistration);
-router.get("/logout", user.logout);
-router.get("/dashboard", ensureAuthenticated, user.getDashbash);
-module.exports = router;
+router.get("/login",  user.loginPage)
+router.get("/register", ensureAuthenticated, Super, user.registrationPage)
+router.post("/login",user.login)
+router.post("/register", ensureAuthenticated, Super,user.userregistration)
+router.get("/logout", user.logout)
+router.get("/getUsers", user.getUsers)
+router.get("/Edit/:id", user.edit)
+router.post("/saveEdit", user.saveEdit)
+router.get("/profile/:id", user.profile)
+router.get("/changePass/:id", user.changePass)
+router.get("/changePassPage/:token", user.changePassPage)
+router.post("/SaveNewPass", user.SaveNewPass)
+
+module.exports = router

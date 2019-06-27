@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const Validation = require('../helpers/validations')
+const Email = require('../helpers/email')
+const jwt = require('jsonwebtoken')
+const _ = require('lodash') 
 
 // Load user model
 
@@ -11,9 +14,6 @@ exports.loginPage = (req, res, next) => res.render('users/login')
 
 // User register route
 exports.registrationPage = (req, res) => res.render('users/register')
-
-// User register route
-exports.getDashbash = (req, res) => res.render('dashboard')
 
 // Login form POST
 exports.login = (req, res, next) => {
@@ -68,3 +68,68 @@ exports.logout = (req, res) => {
 };
 
 
+exports.getUsers = (req, res)=>{
+  User.find((err, users)=>{
+    res.render('users/viewUserList',{users})
+  })
+}
+
+
+exports.edit = (req, res)=>{
+  User.findOne({ _id: req.params.id }, (err, user)=> res.render('users/updateUser',{ user }))
+}
+
+
+exports.saveEdit = (req, res)=>{
+  User.update({ _id: req.body._id}, { $set: req.body },(err, user)=>{
+    req.flash('success_msg','Info has updated')
+    res.redirect('/users/getUsers')
+  })
+}
+
+
+exports.profile = (req, res)=>{
+  User.findOne({ _id: req.params.id }, (err, user)=>{
+    res.render('users/profile', { user })
+  })
+}
+
+
+exports.changePass = (req, res)=>{
+  User.findOne({_id: req.params.id}, (err, user)=>{
+    
+    jwt.sign({ user: _.pick(user, '_id') }, 'sceretkey', { expiresIn:'1h' }, async (err, token)=> {
+      let url = `http://localhost:3000/users/changePassPage/${token}`
+      await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
+      req.flash('success_msg', 'A token has been sent to your email.')
+      res.redirect(`/users/profile/${user._id}`)
+    })
+  })
+}
+
+exports.changePassPage = (req, res)=>{
+    const { user } = jwt.verify(req.params.token, 'sceretkey') 
+    if(user){
+      res.render('users/setPass', { id: user._id, token: req.params.token })
+    }
+}
+
+exports.SaveNewPass = (req, res)=>{
+  var { _id, password, password2, token } = req.body;
+  
+  if ( password != password2 ) {
+    req.push('error_msg', 'Passwords do not match' )
+    res.redirect('/users/changePassPage'+token)
+  }
+
+  bcrypt.genSalt( 10, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) throw err
+      password = hash
+      User.update({_id},{$set:{password:password}},(err, user) => {
+          req.flash( 'success_msg', 'Your Password is changed successfully')
+          res.redirect('/users/profile/'+_id)
+        })
+    })
+  })
+}

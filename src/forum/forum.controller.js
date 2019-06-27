@@ -1,5 +1,5 @@
 // author: Fathma siddique
-// lastmodified: 16/6/2019
+// lastmodified: 27/6/2019
 // description: the file has all the forum related controllers/ functions
 const Post = require('./posts.model')
 
@@ -26,5 +26,12 @@ exports.blockPost = ( req, res )=>{
 exports.activePost = ( req, res )=>{
     Post.update({ _id: req.params.id },{ $set:{ status: 'Active' } }, (err, post)=>{
         res.redirect('/forum/posts')
+    })
+}
+
+
+exports.viewNewPost = (req, res)=>{
+    Post.find({ status: 'New'}, (err, posts)=>{
+        res.render('forum/allPosts', { posts })
     })
 }

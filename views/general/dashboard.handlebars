@@ -1,21 +1,25 @@
-{{!-- <h1>{{quantity}}</h1> --}}
 <div style="margin-left: 5%;margin-right: 5%;">
-<div class="row">
-    {{!-- {{# if data}} --}}
-    <a href="/products/viewLowQuantityProducts" style="color: white "><div class="well col-sm-4" style="background-color:#6c6a79; height: 120px; ">
-        <h2>Low Quantity {{quantity}}<span class="pull-right"><img src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
-    </div></a>
-    {{!-- {{else}}
-    <a href="#"><div class="well col-sm-4" style="background-color:tomato; height: 120px; ">
-        <h2>Low Live {{lowlive}}</h2>
-    </div></a> --}}
-    {{!-- {{/if}} --}}
-     <a href="/orders/newOrders" style="color: white "><div class="well col-sm-4" style="background-color: #63768d; height: 120px;  height: 120px; ">
-        <h2>New Orders {{new_order}}<span class="pull-right"><img src="https://img.icons8.com/bubbles/48/000000/violet-shopping-basket.png"></span></h2>
-    </div></a>
-    <a href="/products/viewLowQuantityProducts" style="color: white "><div class="well col-sm-4" style="background-color: #3c709a; height: 120px;  height: 120px; ">
-        <h2>New Posts {{new_post}}<span class="pull-right"><img src="https://img.icons8.com/office/48/000000/comment-discussion.png"></span></h2>
-    </div></a>
-    
-</div>
+    <div class="row">
+        <a href="/products/viewLowQuantityProducts" style="color: white ">
+            <div class="well col-sm-4" style="background-color:#6c6a79; height: 120px; ">
+                <h2>Low Quantity {{quantity}}<span class="pull-right"><img
+                            src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
+            </div>
+        </a>
+        <a href="/orders/newOrders" style="color: white ">
+            <div class="well col-sm-4" style="background-color: #63768d; height: 120px;  height: 120px; ">
+                <h2>
+                    New Orders {{new_order}}
+                    <span class="pull-right">
+                        <img src="https://img.icons8.com/bubbles/48/000000/violet-shopping-basket.png"></span>
+                </h2>
+            </div>
+        </a>
+        <a href="/forum/viewNewPost" style="color: white ">
+            <div class="well col-sm-4" style="background-color: #3c709a; height: 120px;  height: 120px; ">
+                <h2>New Posts {{newPost}}<span class="pull-right"><img
+                            src="https://img.icons8.com/office/48/000000/comment-discussion.png"></span></h2>
+            </div>
+        </a>
+    </div>
 </div>

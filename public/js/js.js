@@ -155,17 +155,27 @@ $(document).ready(function() {
       byId("newOrder").textContent = JSON.stringify(
         data_string.new_order
       );
+      
+      byId("newPost").textContent = JSON.stringify(
+        data_string.newPost
+      );
       if (data_string.new_order === 0) {
         byId("newOrder_href").href = "#";
        } else {
         byId("newOrder_href").href = "/orders/newOrders";
        }
-
+       
       if (data_string.quantity === 0) {
        byId("set_href").href = "#";
       } else {
        byId("set_href").href = "/products/viewLowQuantityProducts";
       }
+
+      if (data_string.newPost === 0) {
+        byId("set_href").href = "#";
+       } else {
+        byId("newPost_href").href = "/forum/viewNewPost";
+       }
     });
   }
   

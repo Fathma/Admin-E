@@ -1,0 +1,46 @@
+<div class="register-box">
+  <div class="register-logo">
+    <a href="index.html"><b>Edit</b>Admin Info</a>
+  </div>
+
+  <div class="register-box-body">
+
+    <form action="/users/saveEdit" method="POST">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="name" value="{{user.name}}"  >
+        <input type="hidden" class="form-control" name="_id" value="{{user._id}}" >
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" name="email" class="form-control" value="{{user.email}}" >
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+       <div class="form-group has-feedback">
+        <input type="text" name="branch" class="form-control" value="{{user.branch}}" >
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+
+      {{!-- role --}}
+      <div class="form-group">
+
+        <input type="text" name="role" list="roles" value="{{user.role}}" class="form-control" placeholder="Role">
+        <datalist id="roles">
+          <option value="Super">
+          <option value="Publisher">
+          <option value="moderator">
+        </datalist>
+
+      </div>
+      
+      <div class="row">
+
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Update</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.form-box -->
+</div>
