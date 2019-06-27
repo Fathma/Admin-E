@@ -41,13 +41,14 @@
                         </div>
                     </div>
                     <br>
-                     <div class="row">
+                    <div class="row">
                         <div class="col-md-5 col5">
                             <label class="lbl" for="sellingPrice">Selling Price
                             </label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" value="{{product.sellingPrice}}">
+                            <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice"
+                                value="{{product.sellingPrice}}">
                         </div>
                     </div>
                     <br>
@@ -344,16 +345,16 @@
                         <div class="col-sm-2">
                             <img src="{{this}}" alt="" style="width:100px; height:100px;">
                             <form action="/products/img/detete" method="POST">
-                            <input type="hidden" name="id" id="id" value="{{../product._id}}">
-                            <input type="hidden" name="img" id="img" value="{{this}}">
-                            <button type="submit">delete</button>
+                                <input type="hidden" name="id" id="id" value="{{../product._id}}">
+                                <input type="hidden" name="img" id="img" value="{{this}}">
+                                <button type="submit">delete</button>
                             </form>
                         </div>
                         {{/if}}
                         {{/each}}
                     </div>
                     <div class="row">
-                        
+
                     </div>
                     <br>
 
@@ -365,7 +366,8 @@
                                 </label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="pname" id="pname"  value="{{product.productName}}">
+                                <input type="text" class="form-control inp" name="pname" id="pname"
+                                    value="{{product.productName}}">
                                 <input type="hidden" name="pid" id="pid" value="{{product._id}}">
                                 {{!-- <select class="form-control inp" name="pid" id="pid">
                                     <option value="0">Select One</option>
@@ -382,13 +384,14 @@
                                 </label>
                             </div>
                             <div class="col-md-2">
-                                <input type="file" name="imagePath3" id="imagePath3" accept="image/png, image/jpeg" multiple>
+                                <input type="file" name="imagePath3" id="imagePath3" accept="image/png, image/jpeg"
+                                    multiple>
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <center>
-                                <button type="submit" id="save_img"   class="btn btn-default btn-md" >Submit</button>
+                                <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
                             </center>
                         </div>
                     </form>

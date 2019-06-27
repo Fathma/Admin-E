@@ -43,12 +43,6 @@ const storage = new GridFsStorage(
 
 const upload = multer({ storage })
 
-// mongoose.Promise = global.Promise
-
-// const upload = multer({
-//   dest: path.join(__dirname, '../public/photos')
-//   // "../public/photos"
-// })
 
 // 23/4/2019 new
 router.get('/InhouseInventory', ensureAuthenticated, product_controller.getInhouseInventoryPage)
@@ -69,6 +63,7 @@ router.get('/unactive/:id', ensureAuthenticated, product_controller.makeNotActiv
 router.get('/Available/:id', ensureAuthenticated, product_controller.makeAvailable)
 router.get('/notAvailable/:id', ensureAuthenticated, product_controller.makeNotAvailable)
 router.get('/serials', ensureAuthenticated, product_controller.getSerials)
+router.get('/viewLowQuantityProducts', ensureAuthenticated, product_controller.viewLowQuantityProducts)
 
 
 // previous 
@@ -89,7 +84,7 @@ router.post("/stockEditNoSerial/:lot/:pid", product_controller.stockEditNoSerial
 router.get("/view", product_controller.getAllProducts)
 router.get("/Online", product_controller.getOnlineProductsPage)
 router.get("/offline", product_controller.getOfflineProductsPage)
-router.get("/viewLowLive", product_controller.lowLiveQuantityDetails)
+// router.get("/viewLowLive", product_controller.lowLiveQuantityDetails)
 router.post("/getProductBySubcatNoSL/:sub_cat", product_controller.getProductBySubcatNoSerial)
 router.post("/getProductByCatNoSL/:cat", product_controller.getProductByCatNoSerial)
 router.get("/getProductBySubcatNoSL/:sub_cat", product_controller.getProductBySubcatNoSerial)
@@ -99,26 +94,23 @@ router.get("/getProductBySubcat/:sub_cat", product_controller.getProductBySubcat
 router.post("/getProductBySubcat/:sub_cat", product_controller.getProductBySubcat)
 router.get("/getProductByCat/:cat", product_controller.getProductByCat)
 router.post("/getProductByCat/:cat", product_controller.getProductByCat)
-router.get("/StockLowToHigh", product_controller.StockLowToHigh)
-router.get("/StockHighToLow", product_controller.StockHighToLow)
+// router.get("/StockLowToHigh", product_controller.StockLowToHigh)
+// router.get("/StockHighToLow", product_controller.StockHighToLow)
 router.get("/getProductByCat_filter/:cat", product_controller.getProductByCat_filter)
-router.get("/viewStock/:id", product_controller.viewStock)
+// router.get("/viewStock/:id", product_controller.viewStock)
 router.get("/stockInfo/:id", product_controller.stockInfo)
 router.get("/viewProducts", product_controller.viewProducts)
 // validation
 router.get("/check_availablity/:model", product_controller.check_availablity)
-// Save
-// router.post("/regiSave", upload.single("imagePath"), product_controller.SaveProduct)
-// router.post("/SaveImage",upload.single("x"), product_controller.SaveImage)
+
 router.post("/saveLive/:id", product_controller.saveLive)
 // live
-router.get("/liveStockEdit/:id/:pid", product_controller.getLiveStockEditpage)
-router.get("/liveStockEditNoSerial/:id/:pid", product_controller.getLiveStockEditNoSerialpage)
-router.get("/RestoreLivepage/:id", product_controller.getRestoreLivepage)
-router.get("/RestoreLiveNoserialPage/:id", product_controller.RestoreLiveNoserialPage)
-router.post("/Restore/:id", product_controller.getRestoreLive)
+// router.get("/liveStockEdit/:id/:pid", product_controller.getLiveStockEditpage)
+// router.get("/liveStockEditNoSerial/:id/:pid", product_controller.getLiveStockEditNoSerialpage)
+// router.get("/RestoreLivepage/:id", product_controller.getRestoreLivepage)
+// router.get("/RestoreLiveNoserialPage/:id", product_controller.RestoreLiveNoserialPage)
+// router.post("/Restore/:id", product_controller.getRestoreLive)
 
-// router.post("/update/:pid/:feat_num", upload.single("image"), product_controller.update_product);
 
 router.post("/search", product_controller.getSearchResult);
 

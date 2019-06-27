@@ -3,62 +3,66 @@
         <a href="#"><b>Products</a>
     </div>
 
-    {{!-- {{# if products}} --}}
     <div style="background-color: white">
+
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Product Name</th>
-                <th>Model</th>
-                <th>Status</th>
-                <th>Availablity</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Model</th>
+                    <th>Status</th>
+                    <th>Availablity</th>
+                    <th>Dealers' Product</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-            {{# each products}}
-            {{# if this._id}}
-            <tr>
-                <td>
-                    <strong>{{this.pid}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.productName}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.model}}</strong>
-                </td>
-                <td>
-                    {{# if this.isActive}}
-                   <strong>Enabled</strong>
-                    {{else}}
-                    <strong>Disabled</strong>
-                    {{/if}}
-                </td>
-                 <td>
-                    {{# if this.availablity}}
-                   <strong>Available</strong>
-                    {{else}}
-                    <strong>Not Available</strong>
-                    {{/if}}
-                </td>
-                <td>
-                    {{# if this.availablity}}
-                    <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
-                    {{else}}
-                    <a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>
-                    {{/if}}
-                    {{# if this.isActive}}
-                    <a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>
-                    {{else}}
-                    <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>
-                    {{/if}}
-                     <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a>
-                </td>
-            </tr>
-            {{/if}}
-            {{/each}}
+                {{# each products}}
+                {{# if this._id}}
+                <tr>
+                    <td>
+                        <strong>{{this.pid}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{this.productName}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{this.model}}</strong>
+                    </td>
+                    <td>
+                        {{# if this.isActive}}
+                        <strong>Enabled</strong>
+                        {{else}}
+                        <strong>Disabled</strong>
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{# if this.availablity}}
+                        <strong>Available</strong>
+                        {{else}}
+                        <strong>Not Available</strong>
+                        {{/if}}
+                    </td>
+                     <td>
+                        <strong>{{this.dealer}}</strong>
+                    </td>
+                    <td>
+                        {{# if this.availablity}}
+                        <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
+                        {{else}}
+                        <a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>
+                        {{/if}}
+                        {{# if this.isActive}}
+                        <a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>
+                        {{else}}
+                        <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>
+                        {{/if}}
+                        <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a>
+                    </td> 
+                </tr>
+                {{/if}}
+                {{/each}}
             </tbody>
         </table>
     </div>

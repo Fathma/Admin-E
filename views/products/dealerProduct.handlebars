@@ -15,7 +15,6 @@
                                 <div class="col-md-6">
                                     <select class="form-control inp" name="categg" id="categg">
                                         <option value="null" selected>Select One</option>
-                                        
                                         {{# each cat}}
                                         <option value="{{this._id}},{{this.name}}"{{# equality this._id ../product.category}} selected{{/equality}}>{{this.name}}</option>
                                         {{/each}}

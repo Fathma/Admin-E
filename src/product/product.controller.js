@@ -170,158 +170,158 @@ exports.showProductRegistrationFields =async (req, res, next) => {
   })
 };
 
-// view total stock information
-exports.viewStock = (req, res) =>{
-  var arr=[];
-  Inventory.findOne({ _id: req.params.id }).populate('product_id').exec((err, docs)=>{
-    docs.original_serial.map((sl)=>{
-      var count = 0;
-      var id='';
-      id+=(docs.product_id.categoryName.split(''))[0]+'0';
-      if(docs.product_id.subcategoryName === ''){
-        id+='1'+count;
-      }else{
-        id+=(docs.product_id.subcategoryName.split(''))[0]+'1'+count;
-      }
+// // view total stock information
+// exports.viewStock = (req, res) =>{
+//   var arr=[];
+//   Inventory.findOne({ _id: req.params.id }).populate('product_id').exec((err, docs)=>{
+//     docs.original_serial.map((sl)=>{
+//       var count = 0;
+//       var id='';
+//       id+=(docs.product_id.categoryName.split(''))[0]+'0';
+//       if(docs.product_id.subcategoryName === ''){
+//         id+='1'+count;
+//       }else{
+//         id+=(docs.product_id.subcategoryName.split(''))[0]+'1'+count;
+//       }
       
-      id+= (docs.product_id.brandName.split(''))[0]+'2';
-      id+= sl;
-      var obj = {
-        s_id : id,
-        sl: sl,
-        p_name: docs.product_id.model,
-        pp: docs.purchasePrice
-      }
-      if(docs.serial.includes(sl.toString())) obj.status = 'In Stock';
-      else{
-        docs.product_id.live.serial.map((srl)=>{
-          if(srl.serial.toString() === sl.toString()){
-            obj.status = 'In Live';
-          }else{
-            obj.status = 'Sold';
-          }
-        })
-      }
-      arr.push(obj);
-      count++;
-    })
-    docs.arr=arr;
-    res.render('viewStock', {lot:docs}) 
-  })
-}
+//       id+= (docs.product_id.brandName.split(''))[0]+'2';
+//       id+= sl;
+//       var obj = {
+//         s_id : id,
+//         sl: sl,
+//         p_name: docs.product_id.model,
+//         pp: docs.purchasePrice
+//       }
+//       if(docs.serial.includes(sl.toString())) obj.status = 'In Stock';
+//       else{
+//         docs.product_id.live.serial.map((srl)=>{
+//           if(srl.serial.toString() === sl.toString()){
+//             obj.status = 'In Live';
+//           }else{
+//             obj.status = 'Sold';
+//           }
+//         })
+//       }
+//       arr.push(obj);
+//       count++;
+//     })
+//     docs.arr=arr;
+//     res.render('viewStock', {lot:docs}) 
+//   })
+// }
 
-// get low quantity details
-exports.lowLiveQuantityDetails= (req, res, next) => {
-  Inventory.find().populate({path:'product_id', match:{'live.quantity':{$lt:3}}}).populate('admin').exec((err, rs)=>{ 
-    var data = [];
-    rs.map((item)=>{
-      if(item.product_id != null){ data.push(item); }
-    })
-    allFuctions.live_wise_inventory(data,(docs)=>{
-      allFuctions.get_allProduct_page(res, docs, 'Inventories')
-    })
-  })
-};
+// // get low quantity details
+// exports.lowLiveQuantityDetails= (req, res, next) => {
+//   Inventory.find().populate({path:'product_id', match:{'live.quantity':{$lt:3}}}).populate('admin').exec((err, rs)=>{ 
+//     var data = [];
+//     rs.map((item)=>{
+//       if(item.product_id != null){ data.push(item); }
+//     })
+//     allFuctions.live_wise_inventory(data,(docs)=>{
+//       allFuctions.get_allProduct_page(res, docs, 'Inventories')
+//     })
+//   })
+// };
 
-// get live stock edit page No serial
-exports.getLiveStockEditNoSerialpage = async (req, res, next) => {
-  var arr=[]
-  var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
+// // get live stock edit page No serial
+// exports.getLiveStockEditNoSerialpage = async (req, res, next) => {
+//   var arr=[]
+//   var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
 
-  rs.map((inventory)=>{ 
-    arr.push(inventory.purchasePrice); 
-  })
+//   rs.map((inventory)=>{ 
+//     arr.push(inventory.purchasePrice); 
+//   })
 
-  await arr.sort();
-  var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
+//   await arr.sort();
+//   var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
 
-  res.render('updateLiveNoSerial', {
-      title: 'Update Live',
-      inventory: docs[0],
-      highest_pp: arr[arr.length-1]
-    });
-};
+//   res.render('updateLiveNoSerial', {
+//       title: 'Update Live',
+//       inventory: docs[0],
+//       highest_pp: arr[arr.length-1]
+//     });
+// };
 
-// get live stock edit page
-exports.getLiveStockEditpage=async (req, res) => {
-  var arr=[]
-  var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
+// // get live stock edit page
+// exports.getLiveStockEditpage=async (req, res) => {
+//   var arr=[]
+//   var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
  
-  rs.map((inventory)=>{
-    arr.push(inventory.purchasePrice);
-  })
-  await arr.sort();
-  var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
+//   rs.map((inventory)=>{
+//     arr.push(inventory.purchasePrice);
+//   })
+//   await arr.sort();
+//   var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
 
-  res.render('updateLiveStock', {
-      title: 'Update Live',
-      inventory: docs[0],
-      highest_pp: arr[arr.length-1]
-    });
-};
+//   res.render('updateLiveStock', {
+//       title: 'Update Live',
+//       inventory: docs[0],
+//       highest_pp: arr[arr.length-1]
+//     });
+// };
 
-// get live stock edit page
-exports.RestoreLiveNoserialPage = async (req, res) => {
-  let docs = await allFuctions.get_live({_id:req.params.id});
-  res.render('liveToInventoryNoSerial', {
-    title: 'Restore live serial',
-    live: docs[0]
-  });
-};
+// // get live stock edit page
+// exports.RestoreLiveNoserialPage = async (req, res) => {
+//   let docs = await allFuctions.get_live({_id:req.params.id});
+//   res.render('liveToInventoryNoSerial', {
+//     title: 'Restore live serial',
+//     live: docs[0]
+//   });
+// };
 
-// get live stock edit page
-exports.getRestoreLivepage = async (req, res) => {
-  let docs = await allFuctions.get_live({_id:req.params.id});
-  res.render('liveToInventory', {
-    title: 'Restore live serial',
-    live: docs[0]
-  });
-};
+// // get live stock edit page
+// exports.getRestoreLivepage = async (req, res) => {
+//   let docs = await allFuctions.get_live({_id:req.params.id});
+//   res.render('liveToInventory', {
+//     title: 'Restore live serial',
+//     live: docs[0]
+//   });
+// };
 
-// this is to get selected serials and restore them in inventory and update the remaining live quantity 
-exports.getRestoreLive =async (req, res) => {
-  var live_serials=(req.body.serial).split(',');
-  var product_update_serial = []
-  await Product.findOne({_id:req.params.id}, async (err, docs)=>{
-    await docs.live.serial.map((obj)=>{
-      live_serials.map(async (selected)=>{
-        if(obj.serial === selected){
-          product_update_serial.push(obj);
-          await Inventory.update({_id:obj.inventory},{ $addToSet:{ serial: selected}, $inc:{'remaining': +1}},{upsert:true} )
-          await Product.findOneAndUpdate({_id: req.params.id}, { $pull: { 'live.serial': obj },
-          $inc:{'frontQuantity': -1, 'live.quantity': -1}},{upsert:true})
-        }
-      })
-    })
-  })
-  res.redirect('/products/RestoreLivepage/'+req.params.id);
-};
+// // this is to get selected serials and restore them in inventory and update the remaining live quantity 
+// exports.getRestoreLive =async (req, res) => {
+//   var live_serials=(req.body.serial).split(',');
+//   var product_update_serial = []
+//   await Product.findOne({_id:req.params.id}, async (err, docs)=>{
+//     await docs.live.serial.map((obj)=>{
+//       live_serials.map(async (selected)=>{
+//         if(obj.serial === selected){
+//           product_update_serial.push(obj);
+//           await Inventory.update({_id:obj.inventory},{ $addToSet:{ serial: selected}, $inc:{'remaining': +1}},{upsert:true} )
+//           await Product.findOneAndUpdate({_id: req.params.id}, { $pull: { 'live.serial': obj },
+//           $inc:{'frontQuantity': -1, 'live.quantity': -1}},{upsert:true})
+//         }
+//       })
+//     })
+//   })
+//   res.redirect('/products/RestoreLivepage/'+req.params.id);
+// };
 
-// get inventory list high to low
-exports.StockHighToLow = (req, res) => {
-  allFuctions.get_all_inventory_list({},{ 'remaining': -1 }, (docs)=>{
-    docs.total_stock = 0;
-    docs.map((inventory)=>{
-      if(inventory.product_id){
-        var count = 0;
-        inventory.product_id.live.serial.map((serial)=>{
-          if((inventory._id).toString() === (serial.inventory).toString()) count++;
-        })
-        inventory.count = count;
-      }
-    })
-    allFuctions.get_allProduct_page(res, docs)
-  })
-};
+// // get inventory list high to low
+// exports.StockHighToLow = (req, res) => {
+//   allFuctions.get_all_inventory_list({},{ 'remaining': -1 }, (docs)=>{
+//     docs.total_stock = 0;
+//     docs.map((inventory)=>{
+//       if(inventory.product_id){
+//         var count = 0;
+//         inventory.product_id.live.serial.map((serial)=>{
+//           if((inventory._id).toString() === (serial.inventory).toString()) count++;
+//         })
+//         inventory.count = count;
+//       }
+//     })
+//     allFuctions.get_allProduct_page(res, docs)
+//   })
+// };
 
-// get inventory list low to high
-exports.StockLowToHigh= (req, res) => {
-  allFuctions.get_all_inventory_list({},{ 'remaining': 1 }, (docs)=>{
-   allFuctions.live_wise_inventory(docs, (rs)=>{
-     allFuctions.get_allProduct_page(res, rs, 'Inventories')
-   })
-  })
-};
+// // get inventory list low to high
+// exports.StockLowToHigh= (req, res) => {
+//   allFuctions.get_all_inventory_list({},{ 'remaining': 1 }, (docs)=>{
+//    allFuctions.live_wise_inventory(docs, (rs)=>{
+//      allFuctions.get_allProduct_page(res, rs, 'Inventories')
+//    })
+//   })
+// };
 
 exports.getSearchResult = (req, res)=>{
    var search =  new RegExp(req.body.searchData, 'i')
@@ -424,6 +424,17 @@ exports.getSerials = (req, res)=>{
   .exec((err, serials)=>{
     res.render('products/allSerials', { serials })
   })
+}
+
+exports.viewLowQuantityProducts = async (req, res)=>{
+  var products = await Product.find()
+  var serials = []
+  for(var i = 0; i< products.length;i++){
+    var data = await Serial.find({ $and: [{pid: products[i]._id },{status:'In Stock' }]}).populate('pid')
+    if(data.length < 5) serials.push(...data)
+  }
+  res.render('products/allSerials', { serials })
+  
 }
 
 // make product not available

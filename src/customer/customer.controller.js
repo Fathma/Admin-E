@@ -60,14 +60,14 @@ exports.getprofile =async (req, res)=>{
 
 
 exports.getBlock = ( req, res )=>{
-    Customerr.update({ _id: req.params.id },{ $set: { isActive:false }}, ( err, customer)=>{
+    Customerr.update({ _id: req.params.id },{ $set: { status: false }}, ( err, customer)=>{
         res.redirect('/customers/RegisteredCustomer')
     })
 }
 
 
 exports.getUnblock = ( req, res )=>{
-    Customerr.update({ _id: req.params.id },{ $set: { isActive:true }}, ( err, customer)=>{
+    Customerr.update({ _id: req.params.id },{ $set: { status: true }}, ( err, customer)=>{
         res.redirect('/customers/RegisteredCustomer')
     })
 }

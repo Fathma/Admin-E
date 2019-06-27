@@ -164,7 +164,7 @@ $(document).ready(function() {
       if (data_string.quantity === 0) {
        byId("set_href").href = "#";
       } else {
-       byId("set_href").href = "/products/viewLowLive";
+       byId("set_href").href = "/products/viewLowQuantityProducts";
       }
     });
   }

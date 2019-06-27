@@ -48,7 +48,7 @@
                             <strong>{{this.contact}}</strong>
                         </div>
                         <div class="col-md-2 ">
-                            {{# if this.isActive}}
+                            {{# if this.status}}
                             <span  class="tags">Active</span>
                             {{else}}
                             <span  class="tags"  style="background: rgb(202, 111, 129)">Blocked</span>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-md-2 ">
                             <a href="/customers/profile/{{this._id}}" class="btn btn-default">View</a>
-                            {{# if this.isActive}}
+                            {{# if this.status}}
                             <a href="/customers/block/{{this._id}}" class="btn btn-default">Block</a>
                             {{else}}
                             <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
