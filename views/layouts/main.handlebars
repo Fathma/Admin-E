@@ -73,27 +73,26 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         {{#if user}}
-                         <li class="nav-items">
+                        <li class="nav-items">
                             <div id="google_translate_element"></div>
                         </li>
 
-                        <li class="nav-items">
+                        {{!-- <li class="nav-items">
                             <form class="navbar-form" action="/products/search" method="POST">
-                                {{!-- <div class="input-group add-on"> --}}
+                               
                                 <input class="form-control" placeholder="Search" name="searchData" type="text">
-                                {{!-- <div class="input-group-btn"> --}}
+                               
                                 <button class="btn btn-default" type="submit">
                                     <img src="https://img.icons8.com/cotton/17/000000/search.png">
                                 </button>
-                                {{!-- </div> --}}
-                                {{!-- </div> --}}
+                                
                             </form>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a id="dLabel" data-toggle="dropdown" data-target="hash" href="hash" aria-expanded="true">
                                 <img src="https://img.icons8.com/ios/20/ffffff/appointment-reminders-filled.png">
-                                <span id="notification"></span>
+                                <span id="notification" style="color: red"></span>
                             </a>
                             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                 <li>
