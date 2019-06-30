@@ -112,7 +112,7 @@ router.post("/saveLive/:id", product_controller.saveLive)
 // router.post("/Restore/:id", product_controller.getRestoreLive)
 
 
-router.post("/search", product_controller.getSearchResult);
+router.post("/search", product_controller.getSearchResult)
 
 
-module.exports = router;
+module.exports = router

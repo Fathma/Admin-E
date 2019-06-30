@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
 
 var SerialSchema = new Schema({
     pid: { type: Schema.Types.ObjectId, ref: 'Product' }, 
@@ -8,5 +9,7 @@ var SerialSchema = new Schema({
     lp:  { type: Schema.Types.ObjectId, ref: 'LocalPurchase' },
     invoive: { type: Schema.Types.ObjectId, ref: 'Invoice' },
     status:{ type: String }
-});
-module.exports = mongoose.model('Serial', SerialSchema, 'serials');
+})
+
+
+module.exports = mongoose.model('Serial', SerialSchema, 'serials')

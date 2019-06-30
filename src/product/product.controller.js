@@ -366,15 +366,15 @@ exports.getAllProducts = (req, res) => {
 exports.stockInfo = (req, res) => {
   Product.findOne({ _id: req.params.id },(err, docs)=>{
 
-    docs.invtry = [];
-    docs.total_stock = 0;
-    docs.total = docs.live.quantity;
+    docs.invtry = []
+    docs.total_stock = 0
+    docs.total = docs.live.quantity
 
     Inventory.find({ product_id: req.params.id }, (err2, inv)=>{
       inv.map((inven)=>{
-        docs.invtry.push(inven);
-        docs.total_stock +=inven.remaining;
-        docs.total += inven.remaining;
+        docs.invtry.push(inven)
+        docs.total_stock +=inven.remaining
+        docs.total += inven.remaining
       })
       res.render('viewSerial', {product:docs})
     })
@@ -395,27 +395,27 @@ exports.getEditpage = (req, res, next) => {
 // returns product offline stock
 exports.makeNotActive = (req, res) => {
   console.log(req.params.id)
-  var obj = { isActive: false };
+  var obj = { isActive: false }
   allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
-    res.redirect('/products/viewProducts');
-  });
-};
+    res.redirect('/products/viewProducts')
+  })
+}
 
 // makes product online
 exports.makeActive = (req, res) => {
-  var obj = { isActive: true };
+  var obj = { isActive: true }
   allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
-    res.redirect('/products/viewProducts');
-  });
-};
+    res.redirect('/products/viewProducts')
+  })
+}
 
 // make product available
 exports.makeAvailable = (req, res)=>{
   console.log(req.params.id)
-  var obj = { availablity: true };
+  var obj = { availablity: true }
   allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
-    res.redirect('/products/viewProducts');
-  });
+    res.redirect('/products/viewProducts')
+  })
 }
 
 exports.getSerials = (req, res)=>{
@@ -440,16 +440,16 @@ exports.viewLowQuantityProducts = async (req, res)=>{
 // make product not available
 exports.makeNotAvailable = (req, res)=>{
   console.log(req.params.id)
-  var obj = { availablity: false };
+  var obj = { availablity: false }
   allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
-    res.redirect('/products/viewProducts');
+    res.redirect('/products/viewProducts')
   });
 }
 
 // updateing stock quantity and price of prducts with no serial
 exports.stockEditNoSerial =(req, res) => {
-  var pre_Q = parseInt(req.body.pre_all_Q);
-  var quan = parseInt(req.body.quantity);
+  var pre_Q = parseInt(req.body.pre_all_Q)
+  var quan = parseInt(req.body.quantity)
   var obj ={
     purchasePrice:req.body.purchase_price,
     remaining: req.body.quantity,
@@ -466,12 +466,12 @@ exports.stockEditNoSerial =(req, res) => {
       if(err){
         res.send(err)
       }else{
-        res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid);
+        res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
       }
     })
   }
   if( quan < pre_Q ){
-    quantity = pre_Q-quan;
+    quantity = pre_Q-quan
     var new_s=[]
     Inventory.find({ _id: req.params.lot },(eer, rs)=>{
       for(var i=0; i<quantity; i++){
@@ -482,7 +482,7 @@ exports.stockEditNoSerial =(req, res) => {
         if(err){
           res.send(err)
         }else{
-          res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid);
+          res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
         }
       })
     })
@@ -505,22 +505,22 @@ exports.stockEditNoSerialPage =async (req, res, next) => {
 // returns Edit stock page
 exports.getEditStockPage =async (req, res, next) => {
   let docs = await allFuctions.get_inventory_list_new({ _id: req.params.lot_id }, {}, 'product_id')
-  var serial_string='';
+  var serial_string=''
   for(var i=0; i<docs[0].serial.length; i++){
-    serial_string += docs[0].serial[i];
+    serial_string += docs[0].serial[i]
     if(i != docs[0].serial.length -1){
-      serial_string += ',';
+      serial_string += ','
     }
   }
   let rs = await  allFuctions.get_inventory_list_new({product_id: req.params.pid }, {}, 'product_id') 
-  var all_serials = '';
+  var all_serials = ''
   rs.map((lot)=>{
     if(lot._id === req.params.lot_id){}
     else{
       for(var j=0; j< lot.original_serial.length; j++){
-        all_serials += lot.original_serial[j];
+        all_serials += lot.original_serial[j]
         if(j != lot.original_serial.length -1){
-          all_serials += ',';
+          all_serials += ','
         }
       }
     }
@@ -537,7 +537,7 @@ exports.getEditStockPage =async (req, res, next) => {
 exports.EditPP = (req, res, next)=>{
   Inventory.update({ _id: req.params.lot_id },{ $set:{ purchasePrice: req.body.PP } }, { upsert: true }, (err,rs)=>{
     if(err){
-      res.send(err);
+      res.send(err)
     }else{
       res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
     }
@@ -555,7 +555,7 @@ exports.EditDelete = (req, res, next)=>{
       $inc:{ remaining:-1 } 
     }, { upsert:true }, (err,rs)=>{
       if(err){
-        res.send(err);
+        res.send(err)
       }else{
         res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
       }
@@ -567,7 +567,7 @@ exports.EditReplace = (req, res, next)=>{
   if(req.body.msg_err1 === 'No'){
   Inventory.update({_id: req.params.lot_id },{$addToSet:{original_serial:req.body.replace_serial, serial:req.body.replace_serial}}, 
     {upsert:true}, (err,rs)=>{
-      if(err){ res.send(err); } 
+      if(err) res.send(err) 
       else {
         Inventory.update({_id: req.params.lot_id },{$pull:{original_serial: req.body.pre_serial, serial:req.body.pre_serial}}, 
           {upsert:true}, (err,rs)=>{
@@ -580,7 +580,7 @@ exports.EditReplace = (req, res, next)=>{
     })
   }
   else{
-    req.flash('error_msg', 'Given serial number already exists!');
+    req.flash('error_msg', 'Given serial number already exists!')
     res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
   }
 };
@@ -588,14 +588,14 @@ exports.EditReplace = (req, res, next)=>{
 // getting product models by Category
 exports.getProductByCat = (req, res, next)=>{
   allFuctions.find({category: req.params.cat},(rs)=>{
-    res.render('addNewLot', {product:rs});
+    res.render('addNewLot', {product:rs})
   })
 };
 
 // getting product models by Sub category
 exports.getProductBySubcat = (req, res, next)=>{
   allFuctions.find({subcategory: req.params.sub_cat},(rs)=>{
-    res.render('addNewLot', {product:rs});
+    res.render('addNewLot', {product:rs})
   })
 };
 
@@ -607,7 +607,7 @@ exports.getProductBySub_filter = (req, res, next)=>{
     match:{'subcategory': req.params.sub_cat}
   })
   .exec((err, rs)=>{
-    var data = [];
+    var data = []
     rs.map((inven)=>{
       if(inven.product_id != null){
         data.push(inven)
@@ -627,7 +627,7 @@ exports.getProductByCat_filter = (req, res, next)=>{
     match:{'category': req.params.cat}
   })
   .exec((err, rs)=>{
-    var data = [];
+    var data = []
     rs.map((inven)=>{
       if(inven.product_id != null){
         data.push(inven)
@@ -642,14 +642,14 @@ exports.getProductByCat_filter = (req, res, next)=>{
 // getting product models by Category
 exports.getProductByCatNoSerial = (req, res, next)=>{
   allFuctions.find({category: req.params.cat},(rs)=>{
-    res.render('addNewLotNoSerial', {product:rs});
+    res.render('addNewLotNoSerial', {product:rs})
   })
 };
 
 // getting product models by Sub category
 exports.getProductBySubcatNoSerial = (req, res, next)=>{
   allFuctions.find({subcategory: req.params.sub_cat},(rs)=>{
-    res.render('addNewLotNoSerial', {product:rs});
+    res.render('addNewLotNoSerial', {product:rs})
   })
 };
 
@@ -692,43 +692,43 @@ exports.getOfflineProductsPage =async (req, res, next) => {
   var populate_obj = {
     path:'product_id',
     match: { isActive:false }
-  };
+  }
   let docs = await allFuctions.get_inventory_list_new({},{ 'product_id': 1 },populate_obj)
   allFuctions.live_wise_inventory(docs, (rs)=>{
     allFuctions.get_allProduct_page(res, rs, 'Inventories')
   }) 
-};
+}
 
 
 
 // save live
 exports.saveLive =async (req, res, next) => {
-  var quantity = req.body.quantity;
-  var product_id = req.params.id;
-  var unitPrice = req.body.unit_price;
-  var remaining = req.body.remaining;
-  var serial_obj = (req.body.serial).split(',');
-  var live_serial = [];
+  var quantity = req.body.quantity
+  var product_id = req.params.id
+  var unitPrice = req.body.unit_price
+  var remaining = req.body.remaining
+  var serial_obj = (req.body.serial).split(',')
+  var live_serial = []
 
   serial_obj.map((serial_no)=>{
     var obj = {
       serial: serial_no,
       inventory: req.body.lot_number
     }
-    live_serial.push(obj);
+    live_serial.push(obj)
   })
-  var inc_ob = { frontQuantity: +quantity, 'live.quantity': +quantity };
-  var set_ob = { unitPrice: unitPrice, 'live.admin': req.user._id };
+  var inc_ob = { frontQuantity: +quantity, 'live.quantity': +quantity }
+  var set_ob = { unitPrice: unitPrice, 'live.admin': req.user._id }
   
   Product.update({_id: product_id}, { $addToSet: { 'live.serial': live_serial }, $inc: inc_ob, $set: set_ob}, {upsert:true},(err, docs)=>{
     Inventory.update({_id:req.body.lot_number}, {$pull: { serial: { $in: serial_obj } }, $set:{'remaining':(parseInt(remaining)-quantity)}},
     { upsert: true },function(err, docs){
       if(err){ res.send(err); }
-      req.flash('success_msg', 'Live Product Added');
-      res.redirect('/Products/liveStockEdit/'+req.body.lot_number+'/'+req.params.id);
+      req.flash('success_msg', 'Live Product Added')
+      res.redirect('/Products/liveStockEdit/'+req.body.lot_number+'/'+req.params.id)
     }) 
   })
-};
+}
 
 // check availability
 exports.check_availablity= (req, res, next) => {

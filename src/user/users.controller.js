@@ -4,16 +4,15 @@ const Validation = require('../helpers/validations')
 const Email = require('../helpers/email')
 const jwt = require('jsonwebtoken')
 const _ = require('lodash') 
-
-// Load user model
-
 const User = require('./User')
 
 // User login route
 exports.loginPage = (req, res, next) => res.render('users/login')
 
+
 // User register route
 exports.registrationPage = (req, res) => res.render('users/register')
+
 
 // Login form POST
 exports.login = (req, res, next) => {
@@ -21,12 +20,13 @@ exports.login = (req, res, next) => {
     successRedirect: '/general/showDashboard',
     failureRedirect: '/users/login',
     failureFlash: true
-  })(req, res, next);
+  })(req, res, next)
 }
+
 
 // Register form POST
 exports.userregistration = async(req, res, next) => {
-  const { name, branch, role, password, password2, email } = req.body;
+  const { name, branch, role, password, password2, email } = req.body
   var errors = await Validation.userValidation(req)
   if( !errors ) errors = []
   if ( password != password2 ) errors.push({ msg: 'Passwords do not match' })
@@ -53,13 +53,14 @@ exports.userregistration = async(req, res, next) => {
               .catch(err => {
                 console.log(err)
                 return
-              });
-          });
-        });
+              })
+          })
+        })
       }
-    });
+    })
   }
-};
+}
+
 
 // Logout user
 exports.logout = (req, res) => {
@@ -107,12 +108,14 @@ exports.changePass = (req, res)=>{
   })
 }
 
+
 exports.changePassPage = (req, res)=>{
-    const { user } = jwt.verify(req.params.token, 'sceretkey') 
-    if(user){
-      res.render('users/setPass', { id: user._id, token: req.params.token })
-    }
+  const { user } = jwt.verify(req.params.token, 'sceretkey') 
+  if(user){
+    res.render('users/setPass', { id: user._id, token: req.params.token })
+  }
 }
+
 
 exports.SaveNewPass = (req, res)=>{
   var { _id, password, password2, token } = req.body;
@@ -123,13 +126,13 @@ exports.SaveNewPass = (req, res)=>{
   }
 
   bcrypt.genSalt( 10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
+    bcrypt.hash( password, salt, (err, hash) => {
       if (err) throw err
       password = hash
       User.update({_id},{$set:{password:password}},(err, user) => {
-          req.flash( 'success_msg', 'Your Password is changed successfully')
-          res.redirect('/users/profile/'+_id)
-        })
+        req.flash( 'success_msg', 'Your Password is changed successfully')
+        res.redirect('/users/profile/'+_id)
+      })
     })
   })
 }
