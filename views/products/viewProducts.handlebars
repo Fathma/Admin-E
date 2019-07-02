@@ -8,6 +8,7 @@
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
                     <th>Model</th>
@@ -21,6 +22,9 @@
                 {{# each products}}
                 {{# if this._id}}
                 <tr>
+                    <td>
+                        <strong>{{this.count}}</strong>
+                    </td>
                     <td>
                         <strong>{{this.pid}}</strong>
                     </td>

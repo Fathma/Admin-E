@@ -27,8 +27,8 @@ moment().format();
 
 // // role
 const { ensureAuthenticated } = require("./src/helpers/auth");
-// const { Super } = require("./helpers/rolecheck");
-// const { SuperPublisher } = require("./helpers/rolecheck");
+const { Administrator, Editor, Contributor } = require("./src/helpers/rolecheck");
+
 const app = express();
 
 // // Load routes controller
@@ -153,16 +153,16 @@ app.get("/", (req, res) => {
 });
 
 // base routes
-app.use("/category", ensureAuthenticated, categoryRoutes);
+app.use("/category", ensureAuthenticated, Editor, categoryRoutes);
 app.use("/users",   usersRoutes);
-app.use("/orders", ensureAuthenticated, ordersRoutes);
-app.use("/invoice", ensureAuthenticated,  invoiceRoutes);
-app.use("/customers", ensureAuthenticated, customerRoutes);
-app.use("/products",  productsRoutes);
-app.use("/purchase", ensureAuthenticated,  purchaseRoutes);
-app.use("/supplier", ensureAuthenticated,  supplierRoutes);
+app.use("/orders", ensureAuthenticated, Contributor, ordersRoutes);
+app.use("/invoice", ensureAuthenticated, Contributor, invoiceRoutes);
+app.use("/customers", ensureAuthenticated, Administrator, customerRoutes);
+app.use("/products", Editor,  productsRoutes);
+app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
+app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
 app.use("/general", ensureAuthenticated, generalRoutes);
-app.use("/forum", ensureAuthenticated, forumRoutes);
+app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
 
 // //Port For the Application
 const port = process.env.PORT || 3000;

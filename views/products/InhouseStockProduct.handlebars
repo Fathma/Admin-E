@@ -445,6 +445,110 @@
                     </form>
                 </div>
             </div>
+
+            {{!-- <div class="col-md-6">
+                <a name="image_sec1"></a>
+                <div class="well">
+                    <div id="all_img" class="row">
+
+                    </div>
+                    <h3 class="text-center">Set Tag</h3><br>
+                    <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="img_number" id="img_number" value="5ce3a8ad87406a0424f105d8">
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="pid">Product Name
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control inp" name="pname" id="pname">
+                                <input type="hidden" name="pid" id="pid">
+                                
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="imagePath">Select Tag
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" name="tag" list="tags" class="form-control" placeholder="Tag">
+                                <datalist id="tags">
+                                    {{# each tags}}
+                                    <option value="{{this.name}}">
+                                    {{/each}}
+                                </datalist>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <center>
+                                <button type="submit" class="btn btn-default btn-md" disabled>Submit</button>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <a name="image_sec1"></a>
+                <div class="well">
+                    <div id="all_img" class="row">
+
+                    </div>
+                    <h3 class="text-center">Offer</h3><br>
+                    <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="img_number" id="img_number">
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="pid">Product Name
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control inp" name="pname" id="pname">
+                                <input type="hidden" name="pid" id="pid">
+                               
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="imagePath">Select offer
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control inp" name="pid" id="pid">
+                                    <option value="0">Select One</option>
+                                    {{# each offers}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="imagePath">Discount
+                                </label>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control inp" name="pname" id="pname">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <center>
+                                <button type="submit" id="save_img" class="btn btn-default btn-md"
+                                    disabled>Submit</button>
+                            </center>
+                        </div>
+                    </form>
+                </div>
+            </div> --}}
+
+
+
         </div>
     </div>
 </div>

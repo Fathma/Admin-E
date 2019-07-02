@@ -1,6 +1,7 @@
 module.exports = {
     database:{
-        mongoURI: "mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1"
+        mongoURI: "mongodb://jihad:abc1234@ds245647.mlab.com:45647/e-commerce_db_v12"
+        
     },
     email:{
         MAILGUN_USER: 'devtestjihad@gmail.com',

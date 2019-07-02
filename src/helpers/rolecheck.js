@@ -1,26 +1,26 @@
 module.exports = {
-    Super: function (req, res, next) {
-        if(req.user.role === "Super"){
+    Administrator: function (req, res, next) {
+        if(req.user.role === "Administrator"){
         return next();
         }else{
             req.flash('error_msg', 'Access Denied');
-            res.redirect("/users/dashboard");
+            res.redirect("/general/showDashboard");
         }
       },
-      SuperPublisher: function (req, res, next) {
-        if(req.user.role === "Publisher"|| req.user.role === "Super"){
+      Editor: function (req, res, next) {
+        if(req.user.role === "Editor"|| req.user.role === "Administrator"){
             return next();
         }else{
             req.flash('error_msg', 'Access Denied');
-            res.redirect("/users/dashboard");
+            res.redirect("/general/showDashboard");
         }
       },
-      SuperModerator: function (req, res, next) {
-        if(req.user.role === "Moderator"|| req.user.role === "Super"){
+      Contributor: function (req, res, next) {
+        if(req.user.role === "Contributor"|| req.user.role === "Administrator"){
             return next();
         }else{
             req.flash('error_msg', 'Access Denied');
-            res.redirect("/users/dashboard");
+            res.redirect("/general/showDashboard");
         }
       }
   };

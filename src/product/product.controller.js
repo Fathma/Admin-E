@@ -101,20 +101,12 @@ exports.deteteImg = (req, res)=>{
 // saves link with image filenames in database
 var savingImage = async req =>{
   await req.files.map(async image =>{
-    var link = `https://ecom-admin.herokuapp.com/products/image/${image.filename}`
+    var link = `https://ecom-admin.herokuapp.com/general/image/${image.filename}`
     await Product.update({ _id: req.body.pid },{ $addToSet: { image: link } },{ upsert: true })
   })
 }
 
-//fetching image 
-exports.getImage= (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    if(file.filename){
-      const readstream = gfs.createReadStream(file.filename)
-      readstream.pipe(res)
-    }
-  })
-}
+
 
 // In-house stock product entry page
 exports.getInhouseInventoryPage = (req, res) => res.render('products/InhouseStockProduct');
@@ -751,8 +743,10 @@ exports.check_availablity= (req, res, next) => {
 
 // viewProducts
 exports.viewProducts = (req, res)=>{
-  Product.find().sort({'created': -1}).exec((err, docs)=>{
-    res.render('products/viewProducts', {products:docs})
+  Product.find().sort({'created': -1}).exec((err, products)=>{
+    var count = 1;
+    products.map( doc=> doc.count = count++ )
+    res.render('products/viewProducts', { products })
   })
 }
 

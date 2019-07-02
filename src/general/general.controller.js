@@ -6,6 +6,19 @@ const Product = require('../product/Product')
 const Serial = require('../product/serials.model')
 const Order = require('../order/customerOrder')
 const Post = require('../forum/posts.model')
+const mongoose = require('mongoose')
+const Grid = require('gridfs-stream')
+
+mongoose.Promise = global.Promise;
+
+const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+
+const conn = mongoose.createConnection(mongoo);
+let gfs;
+conn.once('open', function () {
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('fs');
+})
 
 async function notification( cb ){
   var orders = await Order.find({currentStatus: 'New Order'})
@@ -37,7 +50,15 @@ exports.getAllNotification=async (req, res, next) => {
 exports.showDashboard =async (req, res, next) => {
   notification((quantity,new_order,newPost, count)=>{
     res.render('general/dashboard', { quantity ,  new_order, newPost, count })
-   
   })
-  
+}
+
+//fetching image 
+exports.getImage= (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    if(file.filename){
+      const readstream = gfs.createReadStream(file.filename)
+      readstream.pipe(res)
+    }
+  })
 }

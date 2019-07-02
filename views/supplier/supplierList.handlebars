@@ -7,6 +7,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>Supplier ID</th>
                 <th>Name</th>
                 <th>Address</th>
@@ -23,6 +24,7 @@
             <tbody>
           {{# each supplier}}
             <tr>
+                <td>{{this.count}}</td>
                 <td>{{this.supplier_id}}</td>
                 <td>
                     <strong class="notranslate">{{this.cname}}</strong>
