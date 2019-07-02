@@ -63,7 +63,7 @@ $(document).ready(()=>{
     }else{
       byId("save_inventory").disabled = false;
       const { shippingInfo, serial_availablity, features}= product[0].product;
-      const {quantity,purchasePrice}= product[0];
+      const {quantity,purchasePrice, sellingPrice}= product[0];
      
       byId("pname").value = productName
       byId("pid").value = _id
@@ -107,6 +107,7 @@ $(document).ready(()=>{
       byId("weight").value = weight;
       byId("warranty").value = warranty;
       byId("description").value = description;
+      byId("sellingPrice").value = sellingPrice;
       byId("shippingInfo").value = shippingInfo;
       byId("serial").value = serial_availablity;
   

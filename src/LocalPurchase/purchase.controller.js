@@ -8,7 +8,12 @@ const Serials = require('../product/serials.model');
 exports.LocalPurchasePage = (req, res) => res.render('purchase/localPurchase');
 
 // get supplier registration page
-exports.getLPList = async (req, res) => res.render('purchase/allPurchase', { lp: await LP.find().populate('supplier') })
+exports.getLPList = async (req, res) =>{
+  var lp = await LP.find().populate('supplier') 
+  var count = 1;
+  lp.map( doc=> doc.count = count++ )
+  res.render('purchase/allPurchase', { lp })
+} 
 
 // fetching products of a specific local purchase 
 exports.getProducts = (req, res) => {

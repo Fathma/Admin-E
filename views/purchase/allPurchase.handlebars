@@ -7,6 +7,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>LP Number</th>
                 <th>Date</th>
                 <th>Supplier</th>
@@ -21,7 +22,9 @@
             {{# each lp}}
            
             <tr>
-                
+                <td>
+                    <strong>{{this.count}}</strong>
+                </td>
                 <td>
                     <strong>{{this.number}}</strong>
                 </td>

@@ -161,7 +161,7 @@ app.use("/customers", ensureAuthenticated, Administrator, customerRoutes);
 app.use("/products", Editor,  productsRoutes);
 app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
 app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
-app.use("/general", ensureAuthenticated, generalRoutes);
+app.use("/general",  generalRoutes);
 app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
 
 // //Port For the Application
