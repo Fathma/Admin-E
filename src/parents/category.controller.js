@@ -85,11 +85,12 @@ exports.changeStatus_cat = async(req, res) => {
 
 // changes brands' status
 exports.changeStatus_brand = async(req, res) => {
-  await changeStatus(Cat, req.params.id, req.params.value)
+
+  await changeStatus(Brand, req.params.id, req.params.value)
   res.redirect('/category/brandList')
 };
 
-var changeStatus = ( model, _id, bool )=> model.update({ _id }, { $set: { enabled: bool} }, { upsert: true })
+var changeStatus = ( model, _id, bool )=> model.update({ _id:_id }, { $set: { enabled: bool} }, { upsert: true })
 
 // eidt category
 exports.edit_cat =async(req, res)=>{

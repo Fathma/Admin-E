@@ -144,7 +144,7 @@ app.use(async (req, res, next)=>{
 
 app.get("/", (req, res) => {
   // res.send("dskfklsdjfl")
- 
+  
   if (req.user) {
     res.redirect("/general/showDashboard");
   } else {

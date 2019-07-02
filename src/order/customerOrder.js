@@ -31,7 +31,7 @@ var CustomerOrderSchema = new Schema({
  totalAmount: { type: Number },
  currentStatus: { type: String, default: "New Order" },
  history: { type: Array },
- lastModified: { type: Date, default: Date.now }
+ lastModified: { type: Date, default: Date.now },
 });
 
 

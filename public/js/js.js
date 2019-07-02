@@ -159,6 +159,7 @@ $(document).ready(function() {
       byId("newPost").textContent = JSON.stringify(
         data_string.newPost
       );
+     
       if (data_string.new_order === 0) {
         byId("newOrder_href").href = "#";
        } else {
@@ -172,7 +173,7 @@ $(document).ready(function() {
       }
 
       if (data_string.newPost === 0) {
-        byId("set_href").href = "#";
+        byId("newPost_href").href = "#";
        } else {
         byId("newPost_href").href = "/forum/viewNewPost";
        }

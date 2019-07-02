@@ -103,6 +103,10 @@ exports.ViewInvoice = (req, res) => {
       path: 'order',
       populate: { path: 'cart.product' }
     })
+    .populate({
+      path: 'order',
+      populate: { path: 'cart.serials' }
+    })
     .exec((err, rs) => {
       var count = 1
       if(rs[0].order.cart != null ){
@@ -111,23 +115,25 @@ exports.ViewInvoice = (req, res) => {
           count++
         }
       }
-     
       res.render('orders/viewInvoice', { invoice: rs[0] })
     })
 }
 
 // view list of customers
 exports.showOrderDetails = (req, res) => {
-  allFuctions.get_orders({ _id: req.params.id }, rs => {
+  allFuctions.get_orders({ _id: req.params.id }, async rs => {
     if(rs){
-      console.log(rs)
+     
       for (var i = 0; i < rs[0].cart.length; i++) {
         rs[0].cart[i].oid = req.params.id
         rs[0].cart[i].totalAmount = rs[0].totalAmount
       }
+     
+      var invoice = await Invoice.findOne({ order:rs[0]._id })
+      rs[0].invoice = invoice;
+     
       res.render('orders/orderDetails', { order: rs[0], or_id: req.params.id })
     }
-   
   })
 }
 

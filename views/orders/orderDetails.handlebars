@@ -22,10 +22,10 @@
                                         </tr>
                                         <tr>
                                             <td>Last Invoice No:</td>
-                                            <td><a href="/orders/ViewInvoice/{{order.invoice}}">{{order.invoice}}</a>
+                                            <td><a href="/orders/ViewInvoice/{{order.invoice._id}}">{{order.invoice.invoiceId}}</a>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{!-- <tr>
                                             <td>Invoice No:</td>
                                             <td>
                                                 <a href="/orders/generateInvoice/{{order._id}}" id="button-invoice"
@@ -33,7 +33,7 @@
                                                     
                                                     <i class="fa fa-cog"></i> Generate</a>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr>
                                             <td>Customer:</td>
@@ -166,7 +166,7 @@
                                             </td>
                                             <td class="text-left">
                                                 <a href="#">{{this.product.name}}</a>
-                                                <p>SN:
+                                                <p>SN:{{this}}
                                                     {{# each this.serials}}
                                                     {{# if this.number}}
                                                     {{this.number}}

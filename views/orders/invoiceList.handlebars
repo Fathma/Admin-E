@@ -8,10 +8,8 @@
             <thead>
             <tr>
                 <th>Invoice Number </th>
-                <th>Invoice Date</th>
                 <th>Order ID</th>
                 <th>Order Date</th>
-                <th>Admin</th>
                 <th>Status</th>
                 <th>Total</th>
             </tr>
@@ -23,23 +21,15 @@
                     <a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top"
                         title="Edit" style="padding: 0%" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/ffffff/visible.png"></a>
                     
-                    <strong>{{this._id}}</strong>
+                    <strong>{{this.invoiceId}}</strong>
                 </td>
 
                 <td>
-                    <strong>{{this.created}}</strong>
+                    <strong>{{this.order.orderId}}</strong>
                 </td>
 
                 <td>
-                    <strong>{{this.order._id}}</strong>
-                </td>
-
-                <td>
-                   <strong>{{this.order.created}}</strong>
-                </td>
-
-                <td>
-                    <strong>{{this.user.name}}</strong>
+                   <strong>{{formatDate this.order.created}}</strong>
                 </td>
 
                 <td>

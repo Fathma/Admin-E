@@ -105,7 +105,9 @@
                                             src="https://img.icons8.com/ios/20/ffffff/shopping-cart-filled.png"> New
                                         Orders<span name="newOrder" id="newOrder" style="padding: 5%; color:red"></span>
                                     </a>
-                                    <a id="newPost_href"><img src="https://img.icons8.com/ultraviolet/20/000000/comment-discussion.png"> New
+                                    <a id="newPost_href"><img
+                                            src="https://img.icons8.com/ultraviolet/20/000000/comment-discussion.png">
+                                        New
                                         Posts <span name="newPost" id="newPost" style="padding: 5%; color:red"></span>
                                     </a>
                                 </li>
@@ -137,7 +139,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                       <img src="/assets/img/avatar5.png" class="img-circle" alt="User Image">
+                        <img src="/assets/img/avatar5.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p> <a href="/users/profile/{{user._id}}">{{user.name}}</a></p>
@@ -166,35 +168,53 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-truck" aria-hidden="true"></i>
-                           
-                            <span>Supplier</span>
-                            <span class="pull-right-container">
 
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/supplier/SupplierRegistrationPage"><i class="fa fa-circle-o"></i>New
-                                    Supplier</a></li>
-                            <li><a href="/supplier/SupplierList"><i class="fa fa-circle-o"></i>All Suppliers</a></li>
-                        </ul>
-                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
-                            
+
                             <span>Local Purchase</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Local Purchase</a>
+
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-truck" aria-hidden="true"></i>
+
+                                    <span>Supplier</span>
+                                    <span class="pull-right-container">
+
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/supplier/SupplierRegistrationPage"><i class="fa fa-circle-o"></i>New</a></li>
+                                    <li><a href="/supplier/SupplierList"><i class="fa fa-circle-o"></i>Lists</a></li>
+                                </ul>
                             </li>
-                            <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>Local Purchase List</a></li>
+
+                             <li class="treeview">
+                                <a href="#">
+                                   <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                    <span>Purchase</span>
+                                    <span class="pull-right-container">
+
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                   <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Purchase</a>
+                            </li>
+                                    <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>List</a></li>
+                                </ul>
+                            </li>
+
+                            {{!-- <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Local Purchase</a>
+                            </li>
+                            <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>Local Purchase List</a></li> --}}
                         </ul>
                     </li>
                     <li class="treeview">
@@ -206,8 +226,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/products/InhouseInventory"><i class="fa fa-circle-o"></i>In-house Stock Product</a></li>
-                            <li><a href="/products/DealerInventory"><i class="fa fa-circle-o"></i> Dealer Product</a></li>
+                            <li><a href="/products/InhouseInventory"><i class="fa fa-circle-o"></i>In-house Stock
+                                    Product</a></li>
+                            <li><a href="/products/DealerInventory"><i class="fa fa-circle-o"></i> Dealer Product</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -221,7 +243,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="/category/categoryList"><i class="fa fa-circle-o"></i>All Categories</a></li>
-                            <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>All Sub Categories</a></li>
+                            <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>All Sub Categories</a>
+                            </li>
                             <li><a href="/category/brandList"><i class="fa fa-circle-o"></i>All Brands</a></li>
                             <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>All Products</a></li>
                             <li><a href="/products/serials"><i class="fa fa-circle-o"></i>Product Details</a></li>
@@ -239,7 +262,6 @@
                         <ul class="treeview-menu">
                             <li><a href="/orders/orders"><i class="fa fa-circle-o"></i>Orders</a></li>
                             <li><a href="/invoice/invoiceList"><i class="fa fa-circle-o"></i>Invoice</a></li>
-                            <li><a href="/returns/returnList"><i class="fa fa-circle-o"></i>Returns</a></li>
                         </ul>
                     </li>
 
@@ -257,7 +279,6 @@
                             <li><a href="#"><i class="fa fa-circle-o"></i>Returns</a></li>
                         </ul>
                     </li>
-
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i>
@@ -289,17 +310,17 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             <span>Admin</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
+
                             <li><a href="/users/getUsers"><i class="fa fa-circle-o"></i>Registered Admins</a></li>
                         </ul>
                     </li>
-
 
                 </ul>
                 {{else}}
@@ -374,9 +395,9 @@
         //AdminLTE for demo purposes 
         <script src="assets/js/demo.js"></script>-->
         <script>
-           
+
             $(document).ready(function () {
-                 $('#ptable').DataTable();
+                $('#ptable').DataTable();
                 $('[data-toggle="tooltip"]').tooltip();
             });
         </script>
