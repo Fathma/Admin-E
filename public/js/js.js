@@ -143,6 +143,7 @@ $(document).ready(function() {
   // gets the notifications
   function notificationCheck() {
     $.get("/general/dashboard", {}, function(data_string) {
+     
       if (data_string.count != 0) {
        byId("notification").textContent = JSON.stringify(
           data_string.count

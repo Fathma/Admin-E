@@ -55,6 +55,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -63,6 +64,7 @@
             <tbody>
             {{# each category}}
             <tr>
+                 <td>{{this.count}}</td>
                 <td>{{this.name}}</td>
                 {{# if this.enabled}}
                 <td>Enabled</td>

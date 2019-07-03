@@ -71,6 +71,8 @@ exports.logout = (req, res) => {
 
 exports.getUsers = (req, res)=>{
   User.find((err, users)=>{
+    var count = 1;
+    users.map( doc=> doc.count = count++ )
     res.render('users/viewUserList',{users})
   })
 }

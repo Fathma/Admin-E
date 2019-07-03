@@ -24,6 +24,15 @@ conn.once('open', function () {
   gfs.collection('fs');
 })
 
+// viewProducts
+exports.viewProducts = (req, res)=>{
+  Product.find().sort({'created': -1}).exec((err, products)=>{
+    var count = 1;
+    products.map( doc=> doc.count = count++ )
+    res.render('products/viewProducts', { products })
+  })
+}
+
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
   let product = await Product.findOne({ _id: req.params._id })
@@ -414,6 +423,8 @@ exports.getSerials = (req, res)=>{
   Serial.find()
   .populate('pid')
   .exec((err, serials)=>{
+    var count = 1;
+    serials.map( doc=> doc.count = count++ )
     res.render('products/allSerials', { serials })
   })
 }
@@ -741,14 +752,7 @@ exports.check_availablity= (req, res, next) => {
   })
 }
 
-// viewProducts
-exports.viewProducts = (req, res)=>{
-  Product.find().sort({'created': -1}).exec((err, products)=>{
-    var count = 1;
-    products.map( doc=> doc.count = count++ )
-    res.render('products/viewProducts', { products })
-  })
-}
+
 
 
 // // get lot without serial page

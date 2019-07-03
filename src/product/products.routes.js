@@ -63,6 +63,7 @@ router.get('/Available/:id',  product_controller.makeAvailable)
 router.get('/notAvailable/:id',  product_controller.makeNotAvailable)
 router.get('/serials',  product_controller.getSerials)
 router.get('/viewLowQuantityProducts',  product_controller.viewLowQuantityProducts)
+router.get("/viewProducts", product_controller.viewProducts)
 
 
 // previous 
@@ -98,7 +99,7 @@ router.post("/getProductByCat/:cat", product_controller.getProductByCat)
 router.get("/getProductByCat_filter/:cat", product_controller.getProductByCat_filter)
 // router.get("/viewStock/:id", product_controller.viewStock)
 router.get("/stockInfo/:id", product_controller.stockInfo)
-router.get("/viewProducts", product_controller.viewProducts)
+
 // validation
 router.get("/check_availablity/:model", product_controller.check_availablity)
 

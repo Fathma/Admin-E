@@ -10,6 +10,8 @@ exports.showOrdersPage = (req, res) => {
   Order.find()
   .populate('user')
   .exec((err, orders)=>{
+    var count = 1;
+    orders.map( doc=> doc.count = count++ )
     res.render('orders/orders', { orders })
   })
 }
@@ -63,18 +65,15 @@ exports.saveEdit = (req, res) => {
 exports.addSerialToProduct = (req, res) => {
   allFuctions.get_orders({ _id: req.params.oid }, order => {
     Product.findOne({ _id: req.params.pid }, async function(err, docs) {
-     
-        let serial = await Serial.find({ pid: req.params.pid })
-        res.render('orders/setSerialInOrder', {
-          order: order[0],
-          model: req.params.pid,
-          model_name: req.params.pmodel,
-          item_id: req.params.item_id,
-          quantity: req.params.quantity,
-          serial
-          // warranted: docs[0].warranted
-        })
-      
+      let serial = await Serial.find({ $and: [{ pid: req.params.pid} , {status: 'In Stock'}] })
+      res.render('orders/setSerialInOrder', {
+        order: order[0],
+        model: req.params.pid,
+        model_name: req.params.pmodel,
+        item_id: req.params.item_id,
+        quantity: req.params.quantity,
+        serial
+      })
     })
   })
 }

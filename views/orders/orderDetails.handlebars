@@ -162,11 +162,11 @@
                                         <tr>
                                             <td>
                                                 <a href="/orders/addSerialToProduct/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this._id}}">Add
-                                                    Serial/product ID</a>
+                                                    Serial/Product ID</a>
                                             </td>
                                             <td class="text-left">
                                                 <a href="#">{{this.product.name}}</a>
-                                                <p>SN:{{this}}
+                                                <p>SN:
                                                     {{# each this.serials}}
                                                     {{# if this.number}}
                                                     {{this.number}}
@@ -178,10 +178,11 @@
                                             </td>
 
                                             <td class="text-right">
-                                                <a href="/orders/Edit/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this.unitPrice}}/{{this._id}}"
+                                                {{!-- <a href="/orders/Edit/{{this.oid}}/{{this.product._id}}/{{this.product.name}}/{{this.quantity}}/{{this.unitPrice}}/{{this._id}}"
                                                     data-toggle="tooltip" data-placement="top" title="Edit"
-                                                    style="padding: 0%" class="btn btn-primary"> <img
-                                                        src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>{{this.quantity}}
+                                                    style="padding: 0%" class="btn btn-primary"> 
+                                                    <img src="https://img.icons8.com/windows/20/ffffff/edit.png"></a> --}}
+                                                        {{this.quantity}}
                                             </td>
                                             <td class="text-right">{{ this.unitPrice }}TK</td>
                                             <td class="text-right">{{ this.price }}TK</td>
@@ -225,7 +226,7 @@
                                         <tbody>
                                             {{# each order.history}}
                                             <tr>
-                                                <td class="text-left">{{ this.date}}</td>
+                                                <td class="text-left">{{this.date}}</td>
                                                 <td class="text-left">{{this.comment}}</td>
 
                                                 <td class="text-left">{{this.status}}</td>

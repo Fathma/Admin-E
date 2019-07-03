@@ -7,6 +7,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Status</th>
@@ -16,6 +17,7 @@
              <tbody>
           {{# each subCategory}}
             <tr>
+                <td>{{this.count}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.category.name}}</td>
                 {{# if this.enabled}}
@@ -34,13 +36,9 @@
                         title="Edit info" class="btn btn-default" >Enable</a>
                     {{/if}}
                 </td>
-               
             </tr>
-           
             {{/each}}
             </tbody>
         </table>
-
     </div>
-
 </div>

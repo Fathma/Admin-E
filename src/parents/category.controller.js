@@ -98,8 +98,24 @@ exports.edit_cat =async(req, res)=>{
   res.send({})
 }
 
-exports.categoryList = async( req, res )=> res.render('parents/categoryList', { category: await Cat.find()})
-exports.subCategoryList = async( req, res )=> res.render('parents/subCategoryList', { subCategory: await subCategory.find().populate('category')})
-exports.brandList = async( req, res )=> res.render('parents/brandList', { brand: await Brand.find()})
+exports.categoryList = async( req, res )=> {
+  var category = await Cat.find()
+  var count = 1;
+  category.map( doc=> doc.count = count++ )
+  res.render('parents/categoryList', { category })
+}
+
+exports.subCategoryList = async( req, res )=>{
+  var subCategory =  await subCategory.find().populate('category')
+  var count = 1;
+  subCategory.map( doc=> doc.count = count++ )
+  res.render('parents/subCategoryList', { subCategory })
+} 
+exports.brandList = async( req, res )=>{
+  var brand = await Brand.find()
+  var count = 1;
+  brand.map( doc=> doc.count = count++ )
+  res.render('parents/brandList', { brand })
+} 
 
 

@@ -7,6 +7,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>Email</th>
                 <th>Name</th>
                 <th>Branch</th>
@@ -19,6 +20,7 @@
             <tbody>
           {{# each users}}
             <tr>
+                <td>{{this.count}}</td>
                 <td>{{this.email}}</td>
                 <td>
                     <strong class="notranslate">{{this.name}}</strong>
