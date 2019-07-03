@@ -7,7 +7,7 @@ var SerialSchema = new Schema({
     number: { type: String },
     sid: { type: String },
     lp:  { type: Schema.Types.ObjectId, ref: 'LocalPurchase' },
-    invoive: { type: Schema.Types.ObjectId, ref: 'Invoice' },
+    invoice: { type: Schema.Types.ObjectId, ref: 'Invoice' },
     status:{ type: String }
 })
 

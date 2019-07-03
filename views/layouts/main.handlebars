@@ -97,8 +97,7 @@
                             <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                 <li>
                                     <a id="set_href"><img
-                                            src="https://img.icons8.com/color/20/000000/medium-battery.png"> Low
-                                        Quantity <span name="lowLive" id="lowLive"
+                                            src="https://img.icons8.com/color/20/000000/medium-battery.png"> Low in Stock <span name="lowLive" id="lowLive"
                                             style="padding: 5%; color:red"></span>
                                     </a>
                                     <a id="newOrder_href"><img
@@ -113,11 +112,11 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        {{!-- <li class="nav-item">
                             <a href="/users/register" class="nav-link">
                                 <img src="https://img.icons8.com/ios/20/ffffff/add-user-group-man-man-filled.png">
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item"><a href="/users/logout" class="nav-link">Logout</a></li>
 
@@ -154,9 +153,10 @@
                 {{#if user}}
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    
+                     <li class="treeview">
+                       <a href="#">
+                            <i class="fa fa-dashboard"></i> Dashboard
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -172,7 +172,7 @@
                         <a href="#">
                             <i class="fa fa-plus-square" aria-hidden="true"></i>
 
-                            <span>Local Purchase</span>
+                            <span>Purchase Details</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -219,7 +219,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cubes"></i>
-                            <span>Inventory</span>
+                            <span>Product Registration</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -235,7 +235,7 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cube" aria-hidden="true"></i>
-                            <span>Product</span>
+                            <span>Inventory</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -318,6 +318,7 @@
                         <ul class="treeview-menu">
 
                             <li><a href="/users/getUsers"><i class="fa fa-circle-o"></i>Registered Admins</a></li>
+                            <li><a href="/users/register"><i class="fa fa-circle-o"></i>New Admin</a></li>
                         </ul>
                     </li>
 

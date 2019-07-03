@@ -48,7 +48,7 @@
                         <strong>Not Available</strong>
                         {{/if}}
                     </td>
-                     <td>
+                    <td>
                         <strong>{{this.dealer}}</strong>
                     </td>
                     <td>
@@ -63,11 +63,15 @@
                         <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>
                         {{/if}}
                         <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a>
-                    </td> 
-                </tr>
-                {{/if}}
-                {{/each}}
-            </tbody>
+                        
+                    </td>
+                   
         </table>
+        </tr>
+
+        {{/if}}
+        {{/each}}
+        </tbody>
+
     </div>
 </div>

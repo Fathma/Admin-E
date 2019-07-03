@@ -422,9 +422,18 @@ exports.makeAvailable = (req, res)=>{
 exports.getSerials = (req, res)=>{
   Serial.find()
   .populate('pid')
+  .populate('lp')
+  .populate('invoice')
   .exec((err, serials)=>{
+    
     var count = 1;
-    serials.map( doc=> doc.count = count++ )
+    serials.map( doc=>
+      {
+        if(doc.status == 'Delivered'){
+          console.log(doc)
+        }
+        doc.count = count++
+      }  )
     res.render('products/allSerials', { serials })
   })
 }

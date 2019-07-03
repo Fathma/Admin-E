@@ -55,12 +55,13 @@
                             {{/if}}
                         </div>
                         <div class="col-md-2 ">
-                            <a href="/customers/profile/{{this._id}}" class="btn btn-default">View</a>
+                            <a href="/customers/profile/{{this._id}}" class="btn btn-default">Details</a>
                             {{# if this.status}}
                             <a href="/customers/block/{{this._id}}" class="btn btn-default">Block</a>
                             {{else}}
                             <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
                             {{/if}}
+                            
                             
                         </div>
                     </div>

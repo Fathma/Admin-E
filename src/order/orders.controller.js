@@ -184,14 +184,15 @@ exports.updateHistory =async (req, res) => {
       $addToSet: { history: history },
       currentStatus: status,
       lastModified: new Date()
-    }, { upsert: true }, (err, rs2) => {
+    }, { upsert: true },async (err, rs2) => {
       if (err)  res.send(err)  
       else {
         
         if(status === "Delivered"){
+          var invoice = await Invoice.findOne({ order:rs2._id })
           rs2.cart.map( item=>{
             item.serials.map(async serial=>{
-              var {err, docs} = await Serial.update({ _id: serial },{$set: { status:'Delivered', invoive: rs2._id }})
+              var {err, docs} = await Serial.update({ _id: serial },{$set: { status:'Delivered', invoice: invoice._id }})
               console.log(err)
             })
           })
