@@ -5,42 +5,46 @@
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
-            <tr>
-                <th>#</th>
-                <th>Customers</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Date Added </th>
-                <th>Date Modified</th>
-            </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Customers</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Date Added </th>
+                    <th>Date Modified</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-            {{# each orders}}
-            <tr>
-                <td>{{this.count}}</td>
-                <td>
-                    <a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
-                        title="Edit" style="padding: 0%" class="btn btn-primary">
-                        <img src="https://img.icons8.com/windows/20/ffffff/edit.png">
-                    </a>
-                    <strong>{{this.user.profile.name}}</strong>
-                </td>
+                {{# each orders}}
+                <tr>
+                    <td>{{this.count}}</td>
+                    <td>
 
-                <td>
-                    <strong>{{this.currentStatus}}</strong>
-                </td>
+                        <strong>{{this.user.profile.name}}</strong>
+                    </td>
 
-                <td>
-                    <strong>{{this.totalAmount}}TK</strong>
-                </td>
-                <td>
-                   <strong>{{formatDate this.created}}</strong>
-                </td>
-                <td>
-                    <strong>{{formatDate this.lastModified }}</strong>
-                </td>
-            </tr>
-            {{/each}}
+                    <td>
+                        <strong>{{this.currentStatus}}</strong>
+                    </td>
+
+                    <td>
+                        <strong>{{this.totalAmount}}TK</strong>
+                    </td>
+                    <td>
+                        <strong>{{formatDate this.created}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{formatDate this.lastModified }}</strong>
+                    </td>
+                    <td>
+                        <a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
+                            title="Edit" style="padding: 0%" class="btn btn-primary">
+                            Show Details
+                        </a>
+                    </td>
+                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
