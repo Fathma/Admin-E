@@ -14,6 +14,8 @@ mongoose.Promise = global.Promise;
 
 const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
+
+
 const conn = mongoose.createConnection(mongoo);
 let gfs;
 conn.once('open', function () {
