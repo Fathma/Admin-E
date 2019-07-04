@@ -8,17 +8,18 @@ const Order = require('../order/customerOrder')
 const Post = require('../forum/posts.model')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
+const gfs = require('../../app')
 
 mongoose.Promise = global.Promise;
 
-const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
-const conn = mongoose.createConnection(mongoo);
-let gfs;
-conn.once('open', function () {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('fs');
-})
+// const conn = mongoose.createConnection(mongoo);
+// let gfs;
+// conn.once('open', function () {
+//   gfs = Grid(conn.db, mongoose.mongo);
+//   gfs.collection('fs');
+// })
 
 async function notification( cb ){
   var orders = await Order.find({currentStatus: 'New Order'})
