@@ -54,14 +54,14 @@ mongoose.connect( keys.database.mongoURI, err => {
   if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
   else console.log("Error in DB connection :" + JSON.stringify(err, undefined, 2));
 });
-const Grid = require('gridfs-stream')
-const conn = mongoose.createConnection(keys.database.mongoURI);
-let gfs;
-conn.once('open', function () {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('fs');
-})
-exports.gfs;
+// const Grid = require('gridfs-stream')
+// const conn = mongoose.createConnection(keys.database.mongoURI);
+// let gfs;
+// conn.once('open', function () {
+//   gfs = Grid(conn.db, mongoose.mongo);
+//   gfs.collection('fs');
+// })
+// exports.gfs;
 
 HandlebarsIntl.registerWith(Handlebars);
 
