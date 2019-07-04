@@ -42,26 +42,30 @@ const purchaseRoutes = require("./src/LocalPurchase/purchase.routes");
 const supplierRoutes = require("./src/supplier/supplier.routes");
 const generalRoutes = require("./src/general/general.routes");
 var forumRoutes = require("./src/forum/forum.routes")
+const Grid = require('gridfs-stream')
 
 // Passport config
 require("./config/passport")(passport);
 
 // Map global promise
 mongoose.Promise = global.Promise;
+// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+// //DB Connection
+// const con =  mongoose.createConnection(mongoo);
+// exports.con = con.once('open', function () {
+//   gfs = Grid(con.db, mongoose.mongo);
+//   exports.gfs = gfs.collection('fs');
+// })
+exports.con = mongoose.createConnection(keys.database.mongoURI);
 
-//DB Connection
 mongoose.connect( keys.database.mongoURI, err => {
   if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
   else console.log("Error in DB connection :" + JSON.stringify(err, undefined, 2));
 });
-// const Grid = require('gridfs-stream')
-// const conn = mongoose.createConnection(keys.database.mongoURI);
-// let gfs;
-// conn.once('open', function () {
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection('fs');
-// })
-// exports.gfs;
+
+
+
+
 
 HandlebarsIntl.registerWith(Handlebars);
 

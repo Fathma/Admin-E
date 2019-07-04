@@ -12,7 +12,7 @@ const Serial = require('./serials.model')
 const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
-// const gfs = require('../../app')
+const app = require('../../app')
 
 mongoose.Promise = global.Promise;
 
