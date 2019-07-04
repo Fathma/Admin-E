@@ -12,17 +12,38 @@ const Serial = require('./serials.model')
 const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
+const gfs = require('../../app')
 
 mongoose.Promise = global.Promise;
 
-const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
-const conn = mongoose.createConnection(mongoo);
-let gfs;
-conn.once('open', function () {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('fs');
-})
+// const conn = mongoose.createConnection(mongoo);
+// let gfs;
+// conn.once('open', function () {
+//   gfs = Grid(conn.db, mongoose.mongo);
+//   gfs.collection('fs');
+// })
+// testing
+const Order = require('../order/customerOrder')
+const Invoice = require('../invoice/invoice.model')
+
+// exports.report= (req, res)=>{
+//   var d = new Date();
+//   var n = d.getMonth()+1;
+//   Order.aggregate([{$project: {name: 1, month: {$month: '$created'}}},
+//   {$match: {month: n}}], (err, order)=>{
+//     var order_full = []
+    
+//     order.map( async orders=>{
+//       var or = await Order.findOne({_id: orders._id }).populate('cart.product')
+
+     
+//     })
+
+//   })
+  
+// }
 
 // viewProducts
 exports.viewProducts = (req, res)=>{

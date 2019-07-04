@@ -45,6 +45,7 @@ const upload = multer({ storage })
 
 
 // 23/4/2019 new
+// router.get('/test',  product_controller.report)
 router.get('/InhouseInventory',  product_controller.getInhouseInventoryPage)
 router.get('/DealerInventory',  product_controller.getDealerInventoryPage)
 router.post('/regiSave',  product_controller.SaveProductLP)
