@@ -165,7 +165,7 @@ app.use(async (req, res, next)=>{
 
 
 
-app.get("/:filename", (req, res) => {
+app.get("/image/:filename", (req, res) => {
  
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
 
