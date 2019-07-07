@@ -30,7 +30,8 @@ var ProductSchema = new Schema({
     dealer: { type: Boolean, default: false },
     status: { type: Boolean, required: false },
     admin: { type: Schema.Types.ObjectId, ref: 'users' },
-    created: { type: Date, default: Date.now }
+    created: { type: Date, default: Date.now },
+    tag: { type: String, default:'None'}
 });
 
 

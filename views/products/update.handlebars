@@ -128,11 +128,25 @@
                         </div>
                     </div>
                     <br>
-
+                    
+                    <div class="row">
+                        <div class="col-md-5 col5">
+                            <label class="lbl" for="tag">Tag<span style="color:red">*</span></label>
+                        </div>
+                        <div class="col-md-6">
+                            <select  class="form-control inp" name="tag" id="tag">
+                                <option value="None"{{# equality product.tag 'None'}}selected{{/equality}}>None</option>
+                                <option value="Hot Deals" {{# equality product.tag 'Hot Deals'}}selected{{/equality}}>Hot Deals</option>
+                                <option value="Trending" {{# equality product.tag 'Trending'}}selected{{/equality}}>Trending</option>
+                                <option value="New Product" {{# equality product.tag 'New Product'}}selected{{/equality}}>New Product</option>
+                                <option value="Exclusive Products" {{# equality product.tag 'Exclusive Products'}}selected{{/equality}}>Exclusive Products</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
                     <div class="row">
                         <center>
-                            <button id="update_product" class="btn btn-default btn-md" type="submit">Insert
-                                Image</button>
+                            <button id="update_product" class="btn btn-default btn-md" type="submit">Insert Image</button>
                         </center>
                     </div>
                     {{!-- </form> --}}

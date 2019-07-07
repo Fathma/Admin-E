@@ -463,7 +463,9 @@ exports.viewLowQuantityProducts = async (req, res)=>{
   var products = await Product.find()
   var serials = []
   for(var i = 0; i< products.length;i++){
-    var data = await Serial.find({ $and: [{pid: products[i]._id },{status:'In Stock' }]}).populate('pid')
+    var data = await Serial.find({ $and: [{pid: products[i]._id },{status:'In Stock' }]}).populate('pid').populate('lp').populate('invoice')
+    var count = 1;
+    data.map( doc=> doc.count = count++ )
     if(data.length < 5) serials.push(...data)
   }
   res.render('products/allSerials', { serials })
@@ -512,11 +514,8 @@ exports.stockEditNoSerial =(req, res) => {
       }
       
       Inventory.update({_id:req.params.lot},{ $pull: { serial: { $in: new_s }, original_serial: { $in: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
-        if(err){
-          res.send(err)
-        }else{
-          res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
-        }
+        if(err) res.send(err)
+        else res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
       })
     })
   }

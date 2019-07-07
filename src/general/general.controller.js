@@ -25,14 +25,15 @@ con.once('open', function () {
 
 async function notification( cb ){
   var orders = await Order.find({currentStatus: 'New Order'})
-  var newPost = await Post.find({ status: 'New '})
+  var newPost = await Post.find({ status: 'New'})
   var products = await Product.find()
+
   
   var count = 0
   var total_low = 0
 
   for(var i = 0; i< products.length;i++){
-    var amount = await Serial.find({ pid: products[i]._id })
+    var amount = await Serial.find({$and:[{pid: products[i]._id},{status: 'In Stock'}]  })
     if(amount.length < 5) total_low++
   }
   

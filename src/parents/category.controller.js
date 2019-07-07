@@ -13,7 +13,7 @@ exports.addCategory = (req, res) => {
 
 // Saving Sub Category
 exports.addSubCategory = (req, res) => {
-  var subcategory = {
+  let subcategory = {
     name: req.body.subCat,
     category: req.body.cate,
     brands: []
@@ -106,11 +106,14 @@ exports.categoryList = async( req, res )=> {
 }
 
 exports.subCategoryList = async( req, res )=>{
-  var subCategory =  await subCategory.find().populate('category')
+  var subcategory =  await subCategory.find().populate('category')
+  console.log(subcategory.length)
   var count = 1;
-  subCategory.map( doc=> doc.count = count++ )
-  res.render('parents/subCategoryList', { subCategory })
+  subcategory.map( doc=> doc.count = count++ )
+  res.render('parents/subCategoryList', { subcategory })
 } 
+
+
 exports.brandList = async( req, res )=>{
   var brand = await Brand.find()
   var count = 1;

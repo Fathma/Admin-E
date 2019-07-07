@@ -284,7 +284,9 @@ $(document).ready(()=>{
               warranty: byId("warranty").value,
               sellingPrice: byId("sellingPrice").value,
               description: byId("description").value,
+              tag: byId("tag").value,
               shippingInfo: byId("shippingInfo").value
+
             };
             var new_feat = parseInt(byId("new_feat").value);
             product_attribute.features = get_features(new_feat);
@@ -329,6 +331,7 @@ $(document).ready(()=>{
         warranty: byId("warranty").value,
         description: byId("description").value,
         shippingInfo: byId("shippingInfo").value,
+        tag: byId("tag").value,
         dealer: true,
         sellingPrice: parseInt(byId("sellingPrice").value)
       };
