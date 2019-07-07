@@ -8,19 +8,21 @@ const Order = require('../order/customerOrder')
 const Post = require('../forum/posts.model')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
+const keys = require('../../config/keys')
+const con = require('../../app')
 
 
 mongoose.Promise = global.Promise;
 
-const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
-const con = mongoose.createConnection(mongoo);
+// const con = mongoose.createConnection(mongoo);
 
-let gfs;
-con.once('open', function () {
-  gfs = Grid(con.db, mongoose.mongo);
-  gfs.collection('fs');
-})
+// let gfs;
+// con.once('open', function () {
+//   gfs = Grid(con.db, mongoose.mongo);
+//   gfs.collection('fs');
+// })
 
 
 async function notification( cb ){
@@ -59,7 +61,7 @@ exports.showDashboard =async (req, res, next) => {
 
 //fetching image 
 exports.getImage= (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+  con.gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if(file.filename){
       const readstream = gfs.createReadStream(file.filename)
       readstream.pipe(res)

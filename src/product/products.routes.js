@@ -14,9 +14,9 @@ mongoose.Promise = global.Promise;
 
 const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
+const keys = require('../../config/keys')
 
-
-const conn = mongoose.createConnection(mongoo);
+const conn = mongoose.createConnection(keys.database.mongoURI);
 let gfs;
 conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
@@ -27,7 +27,7 @@ var filename;
 // create storage engine
 const storage = new GridFsStorage(
   {
-    url: mongoo,
+    url: keys.database.mongoURI,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {

@@ -49,23 +49,30 @@ require("./config/passport")(passport);
 
 // Map global promise
 mongoose.Promise = global.Promise;
-// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 // //DB Connection
 // const con =  mongoose.createConnection(mongoo);
 // exports.con = con.once('open', function () {
 //   gfs = Grid(con.db, mongoose.mongo);
 //   exports.gfs = gfs.collection('fs');
 // })
-exports.con = mongoose.createConnection(keys.database.mongoURI);
+
 
 mongoose.connect( keys.database.mongoURI, err => {
   if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
   else console.log("Error in DB connection :" + JSON.stringify(err, undefined, 2));
 });
 
+var con = mongoose.connection;
+ 
 
+// var con = mongoose.createConnection(mongoo);
 
-
+let gfs;
+con.once('open', function () {
+  gfs = Grid(con.db, mongoose.mongo);
+  exports.gfs= gfs.collection('fs');
+})
 
 HandlebarsIntl.registerWith(Handlebars);
 
@@ -154,9 +161,24 @@ app.use(async (req, res, next)=>{
   next();
 });
 
-app.get("/", (req, res) => {
+
+app.get("/:filename", (req, res) => {
   // res.send("dskfklsdjfl")
-  
+  console.log(req.params.filename)
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    if(file.filename){
+      const readstream = gfs.createReadStream(file.filename)
+      readstream.pipe(res)
+    }
+  })
+  // if (req.user) {
+  //   res.redirect("/general/showDashboard");
+  // } else {
+  //   res.redirect("/users/login");
+  // }
+});
+
+app.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/general/showDashboard");
   } else {

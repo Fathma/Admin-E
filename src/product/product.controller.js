@@ -131,7 +131,7 @@ exports.deteteImg = (req, res)=>{
 // saves link with image filenames in database
 var savingImage = async req =>{
   await req.files.map(async image =>{
-    var link = `https://ecom-admin.herokuapp.com/general/image/${image.filename}`
+    var link = `https://ecom-admin.herokuapp.com/${image.filename}`
     await Product.update({ _id: req.body.pid },{ $addToSet: { image: link } },{ upsert: true })
   })
 }
