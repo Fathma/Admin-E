@@ -163,6 +163,8 @@ app.use(async (req, res, next)=>{
 });
 
 
+
+
 app.get("/:filename", (req, res) => {
   // res.send("dskfklsdjfl")
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
