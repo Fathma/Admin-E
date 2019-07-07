@@ -71,7 +71,7 @@ var con = mongoose.connection;
 let gfs;
 con.once('open', function () {
   gfs = Grid(con.db, mongoose.mongo);
-  gfs= gfs.collection('fs');
+  gfs.collection('fs');
 })
 
 HandlebarsIntl.registerWith(Handlebars);
@@ -164,7 +164,7 @@ app.use(async (req, res, next)=>{
 
 app.get("/:filename", (req, res) => {
   // res.send("dskfklsdjfl")
-  console.log(req.params.filename)
+ 
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if(file.filename){
       const readstream = gfs.createReadStream(file.filename)
