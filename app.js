@@ -71,7 +71,7 @@ var con = mongoose.connection;
 let gfs;
 con.once('open', function () {
   gfs = Grid(con.db, mongoose.mongo);
-  exports.gfs= gfs.collection('fs');
+  gfs= gfs.collection('fs');
 })
 
 HandlebarsIntl.registerWith(Handlebars);
