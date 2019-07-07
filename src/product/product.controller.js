@@ -13,12 +13,13 @@ const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
 const app = require('../../app')
+const key= require('../../config/keys')
 
 mongoose.Promise = global.Promise;
 
 const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
-const conn = mongoose.createConnection(mongoo);
+const conn = mongoose.createConnection(key.database.mongoURI);
 let gfs;
 conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
