@@ -9,7 +9,7 @@ const Post = require('../forum/posts.model')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
 const keys = require('../../config/keys')
-const con = require('../../app')
+// const con = require('../../app')
 
 
 mongoose.Promise = global.Promise;
