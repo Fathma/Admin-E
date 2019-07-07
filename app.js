@@ -64,8 +64,6 @@ mongoose.connect( keys.database.mongoURI, err => {
 });
 
 
-
-
 var con = mongoose.connection;
  
 
