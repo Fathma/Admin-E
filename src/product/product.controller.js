@@ -17,7 +17,7 @@ const key= require('../../config/keys')
 
 mongoose.Promise = global.Promise;
 
-const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
+// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
 const conn = mongoose.createConnection(key.database.mongoURI);
 let gfs;
@@ -122,6 +122,7 @@ exports.deteteImg = (req, res)=>{
   Product.updateOne({ _id: req.body.id }, { $pull: { image: req.body.img }},{ upsert: true }, ( err, docs )=>{
     if(err) console.log(err);
     else {
+      
       gfs.remove({ filename }, (err) => {
         res.redirect( `/products/Update/${req.body.id}` )
       })
@@ -132,7 +133,7 @@ exports.deteteImg = (req, res)=>{
 // saves link with image filenames in database
 var savingImage = async req =>{
   await req.files.map(async image =>{
-    var link = `https://ecom-admin.herokuapp.com/${image.filename}`
+    var link = `https://ecom-admin.herokuapp.com/image/${image.filename}`
     await Product.update({ _id: req.body.pid },{ $addToSet: { image: link } },{ upsert: true })
   })
 }
