@@ -54,7 +54,7 @@ router.get('/DealerInventory',  product_controller.getDealerInventoryPage)
 router.post('/regiSave',  product_controller.SaveProductLP)
 router.post('/regiSaveDealer',  product_controller.SaveProductDealer)
 router.post('/showfields',  product_controller.showProductRegistrationFields)
-router.post('/upload',  upload.array('imagePath'), product_controller.SaveImage)
+router.post('/upload',  upload.array('imagePath'), product_controller.SaveImage) //image save commented
 router.post('/upload/dealer',  upload.array('imagePath2'), product_controller.SaveImage2)
 router.post('/upload/update',  upload.array('imagePath3'), product_controller.SaveImage3)
 router.post('/img/detete',  product_controller.deteteImg)
@@ -67,7 +67,12 @@ router.get('/Available/:id',  product_controller.makeAvailable)
 router.get('/notAvailable/:id',  product_controller.makeNotAvailable)
 router.get('/serials',  product_controller.getSerials)
 router.get('/viewLowQuantityProducts',  product_controller.viewLowQuantityProducts)
-router.get("/viewProducts", product_controller.viewProducts)
+router.get('/viewProducts', product_controller.viewProducts)
+router.post('/relatedProducts', product_controller.relatedProducts)
+router.post('/relatedProducts1', product_controller.relatedProducts1)
+
+router.get('/relatedProducts/delete/:pid/:rid', product_controller.relatedProductsDelete)
+router.get('/relatedProducts/delete1/:pid/:rid', product_controller.relatedProductsDelete1)
 
 
 // previous 

@@ -25,26 +25,57 @@ conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('fs');
 })
-// testing
-const Order = require('../order/customerOrder')
-const Invoice = require('../invoice/invoice.model')
 
-// exports.report= (req, res)=>{
-//   var d = new Date();
-//   var n = d.getMonth()+1;
-//   Order.aggregate([{$project: {name: 1, month: {$month: '$created'}}},
-//   {$match: {month: n}}], (err, order)=>{
-//     var order_full = []
-    
-//     order.map( async orders=>{
-//       var or = await Order.findOne({_id: orders._id }).populate('cart.product')
+exports.relatedProducts =async (req, res)=>{
+  let _id = req.body.pid;
+  let prod = await Product.findOne({_id})
+  if(prod.relatedProducts.includes(req.body.relatedProducts)){
+    let product = await Product.findOne({_id}).populate('relatedProducts')
+    res.render('products/InhouseStockProduct', { product })
+  }else{
+    prod.relatedProducts.push(req.body.relatedProducts)
+    new Product(prod).save().then(async (pro)=>{
+      let product = await Product.findOne({_id}).populate('relatedProducts')
+      res.render('products/InhouseStockProduct', { product, active:true })
+    })
+  }
+}
+exports.relatedProducts1 =async (req, res)=>{
+  let _id = req.body.pid;
+  let prod = await Product.findOne({_id})
+  if(prod.relatedProducts.includes(req.body.relatedProducts)){
+    res.redirect('/products/Update/'+_id)
+  }else{
+    prod.relatedProducts.push(req.body.relatedProducts)
+    new Product(prod).save().then(async (pro)=>{
+      res.redirect('/products/Update/'+_id)
+    })
+  }
+}
 
-     
-//     })
-
-//   })
+async function delete_related (req){
+  var product = await Product.findOne({ _id: req.params.pid })
   
-// }
+  var el = product.relatedProducts.filter((ele)=>{
+    return ele != req.params.rid
+  })
+  product.relatedProducts = el
+  new Product(product).save()
+}
+
+exports.relatedProductsDelete = async(req, res)=>{
+  delete_related (req)
+  var product1 = await Product.findOne({ _id: req.params.pid }).populate('relatedProducts')
+  res.render('products/InhouseStockProduct', { product:product1, active:true })
+}
+ 
+
+exports.relatedProductsDelete1 = async(req, res)=>{
+  delete_related (req)
+    
+    res.redirect('/products/Update/'+req.params.pid)
+  
+}
 
 // viewProducts
 exports.viewProducts = (req, res)=>{
@@ -57,7 +88,7 @@ exports.viewProducts = (req, res)=>{
 
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
-  let product = await Product.findOne({ _id: req.params._id })
+  let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts')
   res.render('products/update',{ product, feature_total: product.features.length })
 }
 
@@ -100,8 +131,10 @@ exports.checkSerials = async(req, res)=>{
 
 // saves image in folder
 exports.SaveImage = async (req, res) => {
-  await savingImage(req)
-  res.redirect('/products/InhouseInventory')
+  // await savingImage(req)
+  var product = await Product.findOne({ _id:req.body.pid }).populate('relatedProducts')
+  res.render('products/InhouseStockProduct', { product })
+  // res.redirect('/products/InhouseInventory')
 }
 // saves image in folder
 exports.SaveImage2 = async (req, res) => {
@@ -194,80 +227,9 @@ exports.showProductRegistrationFields =async (req, res, next) => {
   })
 };
 
-// // view total stock information
-// exports.viewStock = (req, res) =>{
-//   var arr=[];
-//   Inventory.findOne({ _id: req.params.id }).populate('product_id').exec((err, docs)=>{
-//     docs.original_serial.map((sl)=>{
-//       var count = 0;
-//       var id='';
-//       id+=(docs.product_id.categoryName.split(''))[0]+'0';
-//       if(docs.product_id.subcategoryName === ''){
-//         id+='1'+count;
-//       }else{
-//         id+=(docs.product_id.subcategoryName.split(''))[0]+'1'+count;
-//       }
-      
-//       id+= (docs.product_id.brandName.split(''))[0]+'2';
-//       id+= sl;
-//       var obj = {
-//         s_id : id,
-//         sl: sl,
-//         p_name: docs.product_id.model,
-//         pp: docs.purchasePrice
-//       }
-//       if(docs.serial.includes(sl.toString())) obj.status = 'In Stock';
-//       else{
-//         docs.product_id.live.serial.map((srl)=>{
-//           if(srl.serial.toString() === sl.toString()){
-//             obj.status = 'In Live';
-//           }else{
-//             obj.status = 'Sold';
-//           }
-//         })
-//       }
-//       arr.push(obj);
-//       count++;
-//     })
-//     docs.arr=arr;
-//     res.render('viewStock', {lot:docs}) 
-//   })
-// }
-
-// // get low quantity details
-// exports.lowLiveQuantityDetails= (req, res, next) => {
-//   Inventory.find().populate({path:'product_id', match:{'live.quantity':{$lt:3}}}).populate('admin').exec((err, rs)=>{ 
-//     var data = [];
-//     rs.map((item)=>{
-//       if(item.product_id != null){ data.push(item); }
-//     })
-//     allFuctions.live_wise_inventory(data,(docs)=>{
-//       allFuctions.get_allProduct_page(res, docs, 'Inventories')
-//     })
-//   })
-// };
-
-// // get live stock edit page No serial
-// exports.getLiveStockEditNoSerialpage = async (req, res, next) => {
-//   var arr=[]
-//   var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
-
-//   rs.map((inventory)=>{ 
-//     arr.push(inventory.purchasePrice); 
-//   })
-
-//   await arr.sort();
-//   var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
-
-//   res.render('updateLiveNoSerial', {
-//       title: 'Update Live',
-//       inventory: docs[0],
-//       highest_pp: arr[arr.length-1]
-//     });
-// };
 
 // // get live stock edit page
-// exports.getLiveStockEditpage=async (req, res) => {
+// exports.getLiveStockEditpage = async (req, res) => {
 //   var arr=[]
 //   var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
  

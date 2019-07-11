@@ -22,8 +22,12 @@ exports.saveSerialInOrders = async (req, res) => {
   var serial_id = []
   // getting id of the
   serials.map( async serial=>{
-    var id = await Serial.findOne({$or: [{number: serial}, {sid: serial}]})
-    serial_id.push(id._id)
+    var id = await Serial.find({$or: [{number: serial}, {sid: serial}]})
+    id.map( new_id =>{
+      if(new_id.pid == req.params.model_id){
+        serial_id.push(new_id._id)
+      }
+    })
   })
   var docs = await Order.findOne({ _id: req.params.oid })
   docs.cart.map(item=>{
@@ -65,6 +69,7 @@ exports.saveEdit = (req, res) => {
 exports.addSerialToProduct = (req, res) => {
   allFuctions.get_orders({ _id: req.params.oid }, order => {
     Product.findOne({ _id: req.params.pid }, async function(err, docs) {
+
       let serial = await Serial.find({ $and: [{ pid: req.params.pid} , {status: 'In Stock'}] })
       res.render('orders/setSerialInOrder', {
         order: order[0],
@@ -190,10 +195,13 @@ exports.updateHistory =async (req, res) => {
         
         if(status === "Delivered"){
           var invoice = await Invoice.findOne({ order:rs2._id })
+         
           rs2.cart.map( item=>{
+            console.log(item)
             item.serials.map(async serial=>{
-              var {err, docs} = await Serial.update({ _id: serial },{$set: { status:'Delivered', invoice: invoice._id }})
-              console.log(err)
+              console.log(serial)
+              await Serial.update({ _id: serial },{$set: { status:'Delivered', invoice: invoice._id }})
+
             })
           })
         }

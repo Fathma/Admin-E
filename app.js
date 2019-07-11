@@ -42,6 +42,7 @@ const purchaseRoutes = require("./src/LocalPurchase/purchase.routes");
 const supplierRoutes = require("./src/supplier/supplier.routes");
 const generalRoutes = require("./src/general/general.routes");
 var forumRoutes = require("./src/forum/forum.routes")
+var offerRoutes = require("./src/offer/offer.routes")
 const Grid = require('gridfs-stream')
 
 // Passport config
@@ -162,9 +163,6 @@ app.use(async (req, res, next)=>{
   next();
 });
 
-
-
-
 app.get("/image/:filename", (req, res) => {
  
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
@@ -200,6 +198,7 @@ app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
 app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
 app.use("/general",  generalRoutes);
 app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
+app.use("/offer", ensureAuthenticated, offerRoutes);
 
 // //Port For the Application
 const port = process.env.PORT || 3000;

@@ -86,7 +86,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-5 col5">
-                            <label class="lbl" for="weight">weight
+                            <label class="lbl" for="weight">Weight
                             </label>
                         </div>
                         <div class="col-md-6">
@@ -98,7 +98,7 @@
 
                     <div class="row">
                         <div class="col-md-5 col5">
-                            <label class="lbl" for="warranty">warranty</label>
+                            <label class="lbl" for="warranty">Warranty</label>
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control inp" name="warranty" id="warranty"
@@ -128,25 +128,34 @@
                         </div>
                     </div>
                     <br>
-                    
+
                     <div class="row">
                         <div class="col-md-5 col5">
                             <label class="lbl" for="HomePagetag">HomePagetag<span style="color:red">*</span></label>
                         </div>
                         <div class="col-md-6">
-                            <select  class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                <option value="None"{{# equality product.HomePagetag 'None'}}selected{{/equality}}>None</option>
-                                <option value="Hot Deals" {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>Hot Deals</option>
-                                <option value="Trending" {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>Trending</option>
-                                <option value="New Product" {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>New Product</option>
-                                <option value="Exclusive Products" {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>Exclusive Products</option>
+                            <select class="form-control inp" name="HomePagetag" id="HomePagetag">
+                                <option value="None" {{# equality product.HomePagetag 'None'}}selected{{/equality}}>None
+                                </option>
+                                <option value="Hot Deals"
+                                    {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>Hot Deals
+                                </option>
+                                <option value="Trending"
+                                    {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>Trending</option>
+                                <option value="New Product"
+                                    {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>New Product
+                                </option>
+                                <option value="Exclusive Products"
+                                    {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
+                                    Exclusive Products</option>
                             </select>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <center>
-                            <button id="update_product" class="btn btn-default btn-md" type="submit">Insert Image</button>
+                            <button id="update_product" class="btn btn-default btn-md" type="submit">Insert
+                                Image</button>
                         </center>
                     </div>
                     {{!-- </form> --}}
@@ -371,7 +380,6 @@
 
                     </div>
                     <br>
-
                     <form action="/products/upload/update" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="img_number" id="img_number">
                         <div class="row">
@@ -383,12 +391,6 @@
                                 <input type="text" class="form-control inp" name="pname" id="pname"
                                     value="{{product.productName}}">
                                 <input type="hidden" name="pid" id="pid" value="{{product._id}}">
-                                {{!-- <select class="form-control inp" name="pid" id="pid">
-                                    <option value="0">Select One</option>
-                                    {{# each Product}}
-                                    <option value="{{this._id}}">{{this.productName}}</option>
-                                    {{/each}}
-                                </select> --}}
                             </div>
                         </div>
                         <br>
@@ -410,6 +412,81 @@
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="well">
+
+                    <h3 class="text-center">Add Related Product</h3><br>
+                    {{# if product }}
+                    <form action="/products/relatedProducts1" method="POST">
+                        <input type="hidden" name="img_number" id="img_number">
+                        <div class="row">
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="pid">Product Name
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+
+                                <input type="text" class="form-control inp" name="pname" id="pname"
+                                    value="{{ product.name }}">
+                                <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-md-5 col5">
+                                <label class="lbl" for="imagePath">Select Product
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="relatedProducts" class="form-control inp" id="relatedProducts">
+                                    {{# each Product}}
+                                    <option value="{{this._id}}">{{this.productName}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <center>
+                                <button type="submit" class="btn btn-default btn-md">Submit</button>
+                            </center>
+                        </div>
+                    </form><br>
+                    <table id="ptable" style="width:100%" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{# each product.relatedProducts}}
+
+                            <tr>
+
+                                <td>
+                                    <strong>{{this.productName}}</strong>
+                                </td>
+
+                                <td>
+                                    <a href="/products/relatedProducts/delete1/{{../product._id}}/{{this._id}}"
+                                        class="btn btn-default ">Delete</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+
+
+                    {{else}}
+                    <p>You need to complete product registration with image in specification section. </p>
+                    {{/if}}
+                </div>
+
+
             </div>
         </div>
     </div>
