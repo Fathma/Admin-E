@@ -921,16 +921,8 @@ exports.check_availablity= (req, res, next) => {
 //   res.redirect("/products/view");
 // };
 
-// // returns Sale Products Page
-// exports.getSaleProductsPage = (req, res, next) => {
-//   var obj = { onSale: true };
-//   find(obj, function(rs) {
-//     res.render("products/allProductView", {
-//       title: "Sale Product",
-//       products: rs
-//     });
-//   });
-// };
+
+
 
 
 // // delete product

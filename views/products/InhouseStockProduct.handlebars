@@ -1,17 +1,9 @@
 <div class="box">
-
     <ul class="nav nav-tabs">
-        {{# if active}}
-        <li ><a data-toggle="tab" href="#specification">SPECIFICATIONS</a></li>
-        <li class="active"><a data-toggle="tab" href="#menu1">RELATED PRODUCTS</a></li>
-        {{else}}
         <li class="active"><a data-toggle="tab" href="#specification">SPECIFICATIONS</a></li>
         <li><a data-toggle="tab" href="#menu1">RELATED PRODUCTS</a></li>
-        {{/if}}
-        
     </ul>
     <div class="tab-content">
-         
         <div id="specification" class="tab-pane fade in active">
           
             <div class="register-logo">
@@ -290,20 +282,11 @@
                 </div>
             </div>
         </div>
-        
-        <div id="menu1" class="tab-pane fade  in active">
+        <div id="menu1" class="tab-pane fade">
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <div class="well">
-                            {{!-- <div class="row">
-                                <div class="col-md-5 col5">
-                                    <h3>Related Products</h3>
-                                    {{# each product.relatedProducts}}
-                                    <p>{{this.name}}</p>
-                                    {{/each}}
-                                </div>
-                            </div> --}}
+                        <div class="well"> 
                             <h3 class="text-center">Add Related Product</h3><br>
                             {{# if product }}
                             <form action="/products/relatedProducts" method="POST">
@@ -314,7 +297,6 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                       
                                         <input type="text" class="form-control inp" name="pname" id="pname"
                                             value="{{ product.name }}">
                                         <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
@@ -322,7 +304,6 @@
                                 </div>
                                 <br>
                                 <div class="row">
-
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="imagePath">Select Product
                                         </label>
