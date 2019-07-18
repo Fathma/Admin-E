@@ -287,7 +287,7 @@ function make_tel_ext(input1, label1, input2, nums){
 
   var outc1r1c2c1 = create_div("col-md-3 md2","outc1r1c2c1", nums)
   var outc1r1c2c2 = create_div("col-md-1 ","outc1r1c2c2", nums)
-  var outc1r1c2c3 = create_div("col-md-2 md3","outc1r1c2c3", nums)
+  var outc1r1c2c3 = create_div("col-md-2 ","outc1r1c2c3", nums)
   
   outc1r1c2.appendChild(outc1r1c2c1)
   outc1r1c2.appendChild(outc1r1c2c2)
