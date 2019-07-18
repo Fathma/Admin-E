@@ -34,14 +34,14 @@ async function notification( cb ){
   var count = 0
   var total_low = 0
 
-  for(var i = 0; i< products.length;i++){
+  for( var i = 0; i< products.length; i++ ){
     var amount = await Serial.find({$and:[{pid: products[i]._id},{status: 'In Stock'}]  })
-    if(amount.length < 5) total_low++
+    if( amount.length < 5 ) total_low++
   }
   
-  if(total_low > 0) count++
-  if(orders.length > 0 )count++
-  if(newPost.length > 0 )count++
+  if( total_low > 0 ) count++
+  if( orders.length > 0 )count++
+  if( newPost.length > 0 )count++
 
   cb(total_low, orders.length, newPost.length, count)
 }

@@ -77,27 +77,23 @@ router.get('/relatedProducts/delete1/:pid/:rid', product_controller.relatedProdu
 
 // previous 
 // Edit (Inventory With Serial number)
-router.get("/stockEditPage/:lot_id/:pid", product_controller.getEditStockPage)
+
 router.get( "/Edit/:id", product_controller.getEditpage )
-router.post( "/EditAddOne/:lot_id/:pid", product_controller.editAddNew )
+
 router.post( "/EditReplace/:lot_id/:pid", product_controller.EditReplace )
 router.post( "/EditDelete/:lot_id/:pid", product_controller.EditDelete )
 router.post( "/EditPP/:lot_id/:pid", product_controller.EditPP )
 // router.get("/newLot", product_controller.newLot)
 
 // Edit (Inventory Without Serial number)
-router.get("/stockEditNoSerialPage/:lot/:pid", product_controller.stockEditNoSerialPage)
+
 router.post("/stockEditNoSerial/:lot/:pid", product_controller.stockEditNoSerial)
 
 // views
 router.get("/view", product_controller.getAllProducts)
-router.get("/Online", product_controller.getOnlineProductsPage)
-router.get("/offline", product_controller.getOfflineProductsPage)
+
 // router.get("/viewLowLive", product_controller.lowLiveQuantityDetails)
-router.post("/getProductBySubcatNoSL/:sub_cat", product_controller.getProductBySubcatNoSerial)
-router.post("/getProductByCatNoSL/:cat", product_controller.getProductByCatNoSerial)
-router.get("/getProductBySubcatNoSL/:sub_cat", product_controller.getProductBySubcatNoSerial)
-router.get("/getProductByCatNoSL/:cat", product_controller.getProductByCatNoSerial)
+
 router.get("/getProductBySubcat_filter/:sub_cat", product_controller.getProductBySub_filter)
 router.get("/getProductBySubcat/:sub_cat", product_controller.getProductBySubcat)
 router.post("/getProductBySubcat/:sub_cat", product_controller.getProductBySubcat)
@@ -112,7 +108,7 @@ router.get("/stockInfo/:id", product_controller.stockInfo)
 // validation
 router.get("/check_availablity/:model", product_controller.check_availablity)
 
-router.post("/saveLive/:id", product_controller.saveLive)
+
 // live
 // router.get("/liveStockEdit/:id/:pid", product_controller.getLiveStockEditpage)
 // router.get("/liveStockEditNoSerial/:id/:pid", product_controller.getLiveStockEditNoSerialpage)

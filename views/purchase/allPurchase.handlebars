@@ -20,7 +20,6 @@
             </thead>
             <tbody>
             {{# each lp}}
-           
             <tr>
                 <td>
                     <strong>{{this.count}}</strong>
@@ -51,10 +50,10 @@
                     {{formatNumber this.subTotal}} TK
                 </td>
                 <td>
-                    <a href="/purchase/localPurchase/{{this.number}}">Details</a>
+                    <a class="btn btn-default" href="/purchase/localPurchase/{{this.number}}">Details</a>
+                    <a class="btn btn-default" href="/purchase/productList/{{this._id}}">List</a>
                 </td>
             </tr>
-            
             {{/each}}
             </tbody>
         </table>

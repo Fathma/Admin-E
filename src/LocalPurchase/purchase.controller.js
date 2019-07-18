@@ -7,6 +7,12 @@ const Serials = require('../product/serials.model');
 // get supplier registration page
 exports.LocalPurchasePage = (req, res) => res.render('purchase/localPurchase');
 
+exports.productList = async (req, res)=>{
+  var lp = await LP.findOne({_id: req.params._id}).populate('products.product') 
+ 
+  res.render('purchase/productList', { products: lp.products })
+}
+
 // get supplier registration page
 exports.getLPList = async (req, res) =>{
   var lp = await LP.find().populate('supplier') 

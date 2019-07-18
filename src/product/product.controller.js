@@ -7,7 +7,6 @@ var mongo = require('mongodb')
 const Product = require('./Product')
 const Category = require('../parents/category.model')
 const SubCategory = require('../parents/subCategory.model')
-const Inventory = require('../../models/inventory.model')
 const Serial = require('./serials.model')
 const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
@@ -26,6 +25,7 @@ conn.once('open', function () {
   gfs.collection('fs');
 })
 
+
 exports.relatedProducts =async (req, res)=>{
   let _id = req.body.pid;
   let prod = await Product.findOne({_id})
@@ -40,6 +40,8 @@ exports.relatedProducts =async (req, res)=>{
     })
   }
 }
+
+
 exports.relatedProducts1 =async (req, res)=>{
   let _id = req.body.pid;
   let prod = await Product.findOne({_id})
@@ -53,6 +55,7 @@ exports.relatedProducts1 =async (req, res)=>{
   }
 }
 
+
 async function delete_related (req){
   var product = await Product.findOne({ _id: req.params.pid })
   
@@ -63,6 +66,7 @@ async function delete_related (req){
   new Product(product).save()
 }
 
+
 exports.relatedProductsDelete = async(req, res)=>{
   delete_related (req)
   var product1 = await Product.findOne({ _id: req.params.pid }).populate('relatedProducts')
@@ -72,9 +76,7 @@ exports.relatedProductsDelete = async(req, res)=>{
 
 exports.relatedProductsDelete1 = async(req, res)=>{
   delete_related (req)
-    
-    res.redirect('/products/Update/'+req.params.pid)
-  
+  res.redirect('/products/Update/'+req.params.pid)
 }
 
 // viewProducts
@@ -227,88 +229,6 @@ exports.showProductRegistrationFields =async (req, res, next) => {
   })
 };
 
-
-// // get live stock edit page
-// exports.getLiveStockEditpage = async (req, res) => {
-//   var arr=[]
-//   var rs = await allFuctions.get_inventory_list_new({product_id:req.params.pid},{},'product_id')
- 
-//   rs.map((inventory)=>{
-//     arr.push(inventory.purchasePrice);
-//   })
-//   await arr.sort();
-//   var docs = await allFuctions.get_inventory_list_new({_id:req.params.id},{},'product_id')
-
-//   res.render('updateLiveStock', {
-//       title: 'Update Live',
-//       inventory: docs[0],
-//       highest_pp: arr[arr.length-1]
-//     });
-// };
-
-// // get live stock edit page
-// exports.RestoreLiveNoserialPage = async (req, res) => {
-//   let docs = await allFuctions.get_live({_id:req.params.id});
-//   res.render('liveToInventoryNoSerial', {
-//     title: 'Restore live serial',
-//     live: docs[0]
-//   });
-// };
-
-// // get live stock edit page
-// exports.getRestoreLivepage = async (req, res) => {
-//   let docs = await allFuctions.get_live({_id:req.params.id});
-//   res.render('liveToInventory', {
-//     title: 'Restore live serial',
-//     live: docs[0]
-//   });
-// };
-
-// // this is to get selected serials and restore them in inventory and update the remaining live quantity 
-// exports.getRestoreLive =async (req, res) => {
-//   var live_serials=(req.body.serial).split(',');
-//   var product_update_serial = []
-//   await Product.findOne({_id:req.params.id}, async (err, docs)=>{
-//     await docs.live.serial.map((obj)=>{
-//       live_serials.map(async (selected)=>{
-//         if(obj.serial === selected){
-//           product_update_serial.push(obj);
-//           await Inventory.update({_id:obj.inventory},{ $addToSet:{ serial: selected}, $inc:{'remaining': +1}},{upsert:true} )
-//           await Product.findOneAndUpdate({_id: req.params.id}, { $pull: { 'live.serial': obj },
-//           $inc:{'frontQuantity': -1, 'live.quantity': -1}},{upsert:true})
-//         }
-//       })
-//     })
-//   })
-//   res.redirect('/products/RestoreLivepage/'+req.params.id);
-// };
-
-// // get inventory list high to low
-// exports.StockHighToLow = (req, res) => {
-//   allFuctions.get_all_inventory_list({},{ 'remaining': -1 }, (docs)=>{
-//     docs.total_stock = 0;
-//     docs.map((inventory)=>{
-//       if(inventory.product_id){
-//         var count = 0;
-//         inventory.product_id.live.serial.map((serial)=>{
-//           if((inventory._id).toString() === (serial.inventory).toString()) count++;
-//         })
-//         inventory.count = count;
-//       }
-//     })
-//     allFuctions.get_allProduct_page(res, docs)
-//   })
-// };
-
-// // get inventory list low to high
-// exports.StockLowToHigh= (req, res) => {
-//   allFuctions.get_all_inventory_list({},{ 'remaining': 1 }, (docs)=>{
-//    allFuctions.live_wise_inventory(docs, (rs)=>{
-//      allFuctions.get_allProduct_page(res, rs, 'Inventories')
-//    })
-//   })
-// };
-
 exports.getSearchResult = (req, res)=>{
    var search =  new RegExp(req.body.searchData, 'i')
    var data =[];
@@ -424,15 +344,25 @@ exports.getSerials = (req, res)=>{
 }
 
 exports.viewLowQuantityProducts = async (req, res)=>{
+ 
   var products = await Product.find()
   var serials = []
+  var count = 1;
   for(var i = 0; i< products.length;i++){
     var data = await Serial.find({ $and: [{pid: products[i]._id },{status:'In Stock' }]}).populate('pid').populate('lp').populate('invoice')
-    var count = 1;
-    data.map( doc=> doc.count = count++ )
-    if(data.length < 5) serials.push(...data)
+    
+    
+    if(data.length < 5){
+      var obj = {
+        product:products[i],
+        quantity: data.length,
+        count: count
+      }
+      serials.push(obj)
+      count++
+    } 
   }
-  res.render('products/allSerials', { serials })
+  res.render('products/LowInStock', { serials })
   
 }
 
@@ -485,49 +415,7 @@ exports.stockEditNoSerial =(req, res) => {
   }
 }
 
-// returns Edit stock page
-exports.stockEditNoSerialPage =async (req, res, next) => {
-  try {
-    let docs = await allFuctions.get_inventory_list_new({ _id: req.params.lot }, {}, 'product_id');
-    res.render('editStockInfoNoSerial', {
-      title: 'Update Stock Info',
-      product: docs[0]
-    });
-  } catch (error) {
-    res.send(error)
-  }
-};
 
-// returns Edit stock page
-exports.getEditStockPage =async (req, res, next) => {
-  let docs = await allFuctions.get_inventory_list_new({ _id: req.params.lot_id }, {}, 'product_id')
-  var serial_string=''
-  for(var i=0; i<docs[0].serial.length; i++){
-    serial_string += docs[0].serial[i]
-    if(i != docs[0].serial.length -1){
-      serial_string += ','
-    }
-  }
-  let rs = await  allFuctions.get_inventory_list_new({product_id: req.params.pid }, {}, 'product_id') 
-  var all_serials = ''
-  rs.map((lot)=>{
-    if(lot._id === req.params.lot_id){}
-    else{
-      for(var j=0; j< lot.original_serial.length; j++){
-        all_serials += lot.original_serial[j]
-        if(j != lot.original_serial.length -1){
-          all_serials += ','
-        }
-      }
-    }
-  })
-  res.render('editStockInfo', {
-    title: 'Update Stock Info',
-    product: docs[0],
-    serial_string: serial_string,
-    original_serial:all_serials,
-  });
-};
 
 // edit Purchase Price of inventory with serial
 exports.EditPP = (req, res, next)=>{
@@ -642,89 +530,14 @@ exports.getProductByCatNoSerial = (req, res, next)=>{
   })
 };
 
-// getting product models by Sub category
-exports.getProductBySubcatNoSerial = (req, res, next)=>{
-  allFuctions.find({subcategory: req.params.sub_cat},(rs)=>{
-    res.render('addNewLotNoSerial', {product:rs})
-  })
-};
-
-// adding new serial during edit lot
-exports.editAddNew = (req, res, next) => {
-  var new_serial = req.body.new_serial;
-  var lot_id = req.params.lot_id;
-  var pid = req.params.pid; 
-  var addToSet_obj = { serial: new_serial, original_serial: new_serial};
-  var inc_obj = { stockQuantity: 1, remaining: 1 };
-
-  if(req.body.msg_err === 'No'){
-    Inventory.update({ _id: lot_id },{ $addToSet: addToSet_obj, $inc: inc_obj}, { upsert:true }, (err,docs)=>{
-      if(err){ res.send(err); }
-      else{
-        res.redirect('/products/stockEditPage/'+ lot_id+'/'+pid)
-      }
-    })
-  }else{
-    req.flash('error_msg', 'Given serial number already exists!');
-    res.redirect('/products/stockEditPage/'+ lot_id+'/'+pid)
-  }
-};
-
-// returns Online Product page
-exports.getOnlineProductsPage =async (req, res, next) => {
-  var populate_obj = {
-    path:'product_id',
-    match: { isActive:true }
-  };
-
-  let docs = await allFuctions.get_inventory_list_new({},{ 'product_id': 1 },populate_obj)
-    allFuctions.live_wise_inventory(docs, (rs)=>{
-      allFuctions.get_allProduct_page(res, rs, 'Inventories')
-  })
-};
-
-// returns Offline Product page
-exports.getOfflineProductsPage =async (req, res, next) => {
-  var populate_obj = {
-    path:'product_id',
-    match: { isActive:false }
-  }
-  let docs = await allFuctions.get_inventory_list_new({},{ 'product_id': 1 },populate_obj)
-  allFuctions.live_wise_inventory(docs, (rs)=>{
-    allFuctions.get_allProduct_page(res, rs, 'Inventories')
-  }) 
-}
 
 
 
-// save live
-exports.saveLive =async (req, res, next) => {
-  var quantity = req.body.quantity
-  var product_id = req.params.id
-  var unitPrice = req.body.unit_price
-  var remaining = req.body.remaining
-  var serial_obj = (req.body.serial).split(',')
-  var live_serial = []
 
-  serial_obj.map((serial_no)=>{
-    var obj = {
-      serial: serial_no,
-      inventory: req.body.lot_number
-    }
-    live_serial.push(obj)
-  })
-  var inc_ob = { frontQuantity: +quantity, 'live.quantity': +quantity }
-  var set_ob = { unitPrice: unitPrice, 'live.admin': req.user._id }
-  
-  Product.update({_id: product_id}, { $addToSet: { 'live.serial': live_serial }, $inc: inc_ob, $set: set_ob}, {upsert:true},(err, docs)=>{
-    Inventory.update({_id:req.body.lot_number}, {$pull: { serial: { $in: serial_obj } }, $set:{'remaining':(parseInt(remaining)-quantity)}},
-    { upsert: true },function(err, docs){
-      if(err){ res.send(err); }
-      req.flash('success_msg', 'Live Product Added')
-      res.redirect('/Products/liveStockEdit/'+req.body.lot_number+'/'+req.params.id)
-    }) 
-  })
-}
+
+
+
+
 
 // check availability
 exports.check_availablity= (req, res, next) => {
@@ -853,12 +666,7 @@ exports.check_availablity= (req, res, next) => {
 //     });
 // };
 
-// // returns setDiscount page
-// exports.addDiscountpage = (req, res, next)=>{
-//   allFuctions.find({_id: req.params.id},function(rs){
-//     res.render("setDiscount", {id: req.params.id, products:rs[0]});
-//   })
-// }
+
 
 // exports.addLotPage= (req, res, next) => {
 //   res.render("addNewLot");

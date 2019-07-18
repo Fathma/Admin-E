@@ -7,5 +7,6 @@ router.get('/localPurchase/:invc', purchase.LocalPurchaseLPPage);
 router.post('/SaveLocalPurchase', purchase.SaveLocalPurchase);
 router.get('/getProducts/:invc', purchase.getProducts);
 router.get('/getLPList', purchase.getLPList);
+router.get('/productList/:_id', purchase.productList);
 
 module.exports = router;

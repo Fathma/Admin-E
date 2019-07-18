@@ -1,0 +1,36 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Product Status</a>
+    </div>
+
+    <div style="background-color: white">
+        <table id="ptable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+               
+            </tr>
+            </thead>
+            <tbody>
+            {{# each serials}}
+            <tr>
+                  <td>
+                    <strong> {{this.count}}</strong>
+                </td>
+                 <td>
+                    <strong> {{this.product.productName}}</strong>
+                </td>
+                 <td>
+                    <strong>{{this.quantity}}</strong>
+                </td>
+               
+            </tr>
+           
+            {{/each}}
+            </tbody>
+            
+        </table>
+    </div>
+</div>

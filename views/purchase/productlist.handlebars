@@ -1,0 +1,30 @@
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Product List</a>
+    </div>
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{# each products}}
+                <tr>
+                    <td>{{this.product.model}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.purchasePrice}}TK</td>
+                    <td>{{this.total}}TK</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
