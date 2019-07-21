@@ -23,8 +23,6 @@ const keys = require('../../config/keys')
 //   gfs.collection('fs');
 // })
 
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
 var filename;
 
 // create storage engine
