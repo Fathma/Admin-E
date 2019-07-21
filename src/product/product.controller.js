@@ -133,7 +133,7 @@ exports.checkSerials = async(req, res)=>{
 
 // saves image in folder
 exports.SaveImage = async (req, res) => {
-  // await savingImage(req)
+  await savingImage(req)
   var product = await Product.findOne({ _id:req.body.pid }).populate('relatedProducts')
   res.render('products/InhouseStockProduct', { product })
   // res.redirect('/products/InhouseInventory')

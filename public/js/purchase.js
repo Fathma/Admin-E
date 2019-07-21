@@ -1,5 +1,7 @@
 $(document).ready(function() {
   var byId = function( id ) { return document.getElementById( id ); };
+  
+
   $(()=>{
     $("#supplierReg").on("click", (e)=>{
       var cname = byId('cname').value
@@ -373,3 +375,10 @@ function create_div(classname,prefix, nums){
 }
 
 
+
+// want it working like this
+
+// var validator = $('#create_hotels').validate({
+//   JSON.parse(code_string)
+//     // rules:{hotel_name:{required: true, lettersonly: true}}
+// });

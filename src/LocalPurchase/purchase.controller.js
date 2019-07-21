@@ -5,7 +5,12 @@ const SubCategory = require('../parents/subCategory.model');
 const Serials = require('../product/serials.model');
 
 // get supplier registration page
-exports.LocalPurchasePage = (req, res) => res.render('purchase/localPurchase');
+exports.LocalPurchasePage = (req, res) => { 
+  var today = new Date()
+  var date =(today.getMonth()+1) +' / '+today.getDate()+' / '+ today.getFullYear();
+  console.log(date)
+  res.render('purchase/localPurchase',{ date });
+}
 
 exports.productList = async (req, res)=>{
   var lp = await LP.findOne({_id: req.params._id}).populate('products.product') 

@@ -3,6 +3,10 @@ $(document).ready(()=>{
   var products = [];
   var serial_lp = [];
   var byId = ( id )=>{ return document.getElementById( id ); };
+
+  let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#date").value = today;
+
  
   // getting invoice(local purchase) details on basis of selected invoice number
   $("#invoice").change((e)=>{

@@ -366,7 +366,7 @@
                         {{# each product.image}}
                         {{# if this}}
                         <div class="col-sm-2">
-                            <img src="{{this}}" alt="" style="width:100px; height:100px;">
+                            <img src="{{this}}" alt="" style="background-image: image(); width:100px; height:100px; box-shadow: 0 0 8px 8px black inset;">
                             <form action="/products/img/detete" method="POST">
                                 <input type="hidden" name="id" id="id" value="{{../product._id}}">
                                 <input type="hidden" name="img" id="img" value="{{this}}">
