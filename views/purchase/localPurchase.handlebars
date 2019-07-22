@@ -14,7 +14,7 @@
                     required>
                 {{else}}
                 <input type="date" class="form-control inp" style=" line-height: 19px;width: auto;" name="date"
-                    id="date"  required>
+                    id="date" required>
                 {{/if}}
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <label class="lbl" for="supplier">Supplier Name<span style="color:red">*</span> </label>
             </div>
             <div class="col-md-6">
-                <select class="form-control inp" name="supplier" id="supplier">
+                <select class="form-control inp" name="supplier" id="supplier" required>
                     <option value="0">Select One</option>
                     {{# each Supplier }}
                     <option value="{{this._id}}" {{# equality this._id ../lp.supplier._id}} selected{{/equality}}>
@@ -51,7 +51,7 @@
             </div>
             <div class="col-md-6">
                 <select class="form-control inp" name="address" id="address" required>
-                    <option value="0" selected>{{lp.address}}</option>
+                    <option value="0" >{{lp.address}}</option>
                 </select>
             </div>
         </div><br>
@@ -62,7 +62,7 @@
             </div>
             <div class="col-md-6">
                 <select class="form-control inp" name="contt" id="contt" required>
-                    <option value="0" selected>{{lp.contactPerson}}</option>
+                    <option value="0" >{{lp.contactPerson}}</option>
                 </select>
             </div>
         </div><br>
@@ -74,7 +74,7 @@
             <div class="col-md-6">
                 {{!-- <input type="text" list="cattNs" class="form-control inp" name="cattN" id="cattN"
                     placeholder="Select a Category" required> --}}
-                <select class="form-control inp" name="cattN" id="cattN">
+                <select class="form-control inp" name="cattN" id="cattN" required>
                     <option value="0">Select One</option>
                     {{# each cat }}
                     <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
@@ -85,23 +85,8 @@
                 <a data-toggle="tooltip" title="New Category" class="btn btn-success inp" href="#ex1"
                     rel="modal:open">New</a>
             </div>
-            {{!-- <div id="ex1" class="modal">
-                <div class="form-group">
-                    
-                    <label for="cat" style="color:azure">Category</label>
-                    <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control">
-                </div>
-                <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
-            </div> --}}
-            <div id="ex1" class="modal">
-                <div class="form-group">
-                    <form action="/category/addCategory" method="POST"></form>
-                    <label for="cat" style="color:azure">Category</label>
-                    <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control" required>
-                    <a type="submit" class="btn btn-primary">Submit</a>
-                </div>
-                
-            </div>
+
+
         </div>
         <br>
         <div class="row">
@@ -111,7 +96,7 @@
             <div class="col-md-6">
                 {{!-- <input type="text" list="subNns" class="form-control inp" name="subNn" id="subNn"
                     placeholder="Select a Sub Category"> --}}
-                <select class="form-control inp" name="subNn" id="subNn">
+                <select class="form-control inp" name="subNn" id="subNn" required>
                     <option value="0">Select One</option>
                     {{# each categories }}
                     <option value="{{this._id}}">{{this.name}}</option>
@@ -122,21 +107,7 @@
                 <a data-toggle="tooltip" title="New Sub Category" class="btn btn-success inp" href="#ex2"
                     rel="modal:open">New</a>
             </div>
-            <div id="ex2" class="modal">
-                <div class="form-group">
-                    <label for="cate" style="color:azure">Category<span style="color: red">*</span></label>
-                    <select class="form-control" name="cate" id="cate">
-                        {{# each cat}}
-                        <option value="{{this._id}}">{{this.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="subCat" style="color:azure">Sub Category</label>
-                    <input type="text" name="subCat" id="subCat" class="form-control">
-                </div>
-                <button id="save_sub" class="btn btn-primary">Submit</button>
-            </div>
+
         </div>
         <br>
         <div class="row">
@@ -146,7 +117,7 @@
             <div class="col-md-6">
                 {{!-- <input type="text" list="brandNs" class="form-control inp" name="brandN" id="brandN"
                     placeholder="Select a Brand" required> --}}
-                <select class="form-control inp" name="brandN" id="brandN">
+                <select class="form-control inp" name="brandN" id="brandN" required>
                     <option value="0">Select One</option>
                     {{# each brand }}
                     <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
@@ -157,13 +128,7 @@
                 <a data-toggle="tooltip" title="New Brand" class="btn btn-success inp" href="#ex3"
                     rel="modal:open">New</a>
             </div>
-            <div id="ex3" class="modal">
-                <div class="form-group">
-                    <label for="brand" style="color:azure">Brand<span style="color: red">*</span></label>
-                    <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand">
-                </div>
-                <a id="save_brand" class="btn btn-primary">Submit</a>
-            </div>
+
         </div>
         <br>
 
@@ -208,21 +173,46 @@
                 </label>
             </div>
             <div class="col-md-6">
-                <input type="checkbox" name="serial_availablity" required>
+                <input type="checkbox" name="serial_availablity" >
             </div>
         </div>
         <br>
 
-        <a class="btn btn-default" style="margin-left:50px;" type="submit">Submit</a>
-        <a class="btn btn-default" href="/purchase/localPurchase" style="float:right">New Local Purchase</a>
+        <button style="margin-left:50px;" type="submit">Submit</button>
+
     </form>
-
-
-
+    <a class="btn btn-default" href="/purchase/localPurchase" style="float:right">New Local Purchase</a>
 </div>
-
-
 <div class="col-md-1">
+    <div id="ex3" class="modal">
+        <div class="form-group">
+            <label for="brand" style="color:azure">Brand<span style="color: red">*</span></label>
+            <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand">
+        </div>
+        <a id="save_brand" class="btn btn-primary">Submit</a>
+    </div>
+    <div id="ex1" class="modal">
+        <div class="form-group">
+            <label for="cat" style="color:azure">Category</label>
+            <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control">
+        </div>
+        <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
+    </div>
+    <div id="ex2" class="modal">
+        <div class="form-group">
+            <label for="cate" style="color:azure">Category<span style="color: red">*</span></label>
+            <select class="form-control" name="cate" id="cate">
+                {{# each cat}}
+                <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="subCat" style="color:azure">Sub Category</label>
+            <input type="text" name="subCat" id="subCat" class="form-control">
+        </div>
+        <button id="save_sub" class="btn btn-primary">Submit</button>
+    </div>
 </div>
 
 <div class="register-box-body col-md-6">

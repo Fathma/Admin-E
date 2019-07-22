@@ -1,7 +1,11 @@
 <div class="box">
-    <div class="register-logo">
-    </div>
-    <div class="box-body">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#specification">SPECIFICATIONS</a></li>
+        <li><a data-toggle="tab" href="#menu1">RELATED PRODUCTS</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="specification" class="tab-pane fade in active">
+           <div class="box-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="well">
@@ -319,4 +323,82 @@
            
         </div>
     </div>
+            
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well"> 
+                            <h3 class="text-center">Add Related Product</h3><br>
+                            {{# if product }}
+                            <form action="/products/relatedProducts" method="POST">
+                                <input type="hidden" name="img_number" id="img_number">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="pid">Product Name
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="pname" id="pname"
+                                            value="{{ product.name }}">
+                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="imagePath">Select Product
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="relatedProducts" class="form-control inp" id="relatedProducts">
+                                            {{# each Product}}
+                                            <option value="{{this._id}}">{{this.productName}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form><br>
+                            <table id="ptable" style="width:100%" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{# each product.relatedProducts}}
+                                    <tr>
+                                        <td>
+                                            <strong>{{this.productName}}</strong>
+                                        </td>
+                                        <td>
+                                            <a href="/products/relatedProducts/delete/{{../product._id}}/{{this._id}}"
+                                                class="btn btn-default ">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+
+                            {{else}}
+                            <p>You need to complete product registration with image in specification section. </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="register-logo">
+    </div>
+   
 </div>

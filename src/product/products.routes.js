@@ -5,8 +5,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const app = require('../../app')
+
 
 const product_controller = require('./product.controller')
 const { ensureAuthenticated } = require("../helpers/auth");

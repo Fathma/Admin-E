@@ -8,7 +8,7 @@ const Cat = require('./category.model')
 exports.addCategory = (req, res) => {
   req.body.subCategories= []
   req.body.brands= []
-  new Cat(req.body).save().then( category => res.send({}))
+  new Cat(req.body).save().then( category => res.redirect('/purchase/localPurchase'))
 }
 
 // Saving Sub Category

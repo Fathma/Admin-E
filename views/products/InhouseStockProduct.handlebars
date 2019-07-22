@@ -232,12 +232,10 @@
                         </div>
                     </div>
 
-
                     <div class="col-md-6">
                         <a name="image_sec1"></a>
                         <div class="well">
                             <div id="all_img" class="row">
-
                             </div>
                             <h3 class="text-center">Set Image</h3><br>
                             <form action="/products/upload" method="POST" enctype="multipart/form-data">
@@ -332,13 +330,10 @@
                                 </thead>
                                 <tbody>
                                     {{# each product.relatedProducts}}
-
                                     <tr>
-
                                         <td>
                                             <strong>{{this.productName}}</strong>
                                         </td>
-
                                         <td>
                                             <a href="/products/relatedProducts/delete/{{../product._id}}/{{this._id}}"
                                                 class="btn btn-default ">Delete</a>
