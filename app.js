@@ -14,7 +14,7 @@ const Handlebars = require("handlebars");
 const moment = require("moment");
 const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
-// const dbConfig = require("./config/database");
+
 
 var Category = require("./src/models/category.model");
 var Product = require("./src/models/product.model");
@@ -23,15 +23,12 @@ var Supplier = require("./src/models/supplier.model");
 var SubCategory = require("./src/models/subCategory.model");
 var PostCategory = require('./src/models/postCategory.model')
 const keys = require('./config/keys')
-
-
-
 var Brand = require("./src/models/brand.model");
 
 
 moment().format();
 
-// // role
+// role
 const { ensureAuthenticated } = require("./src/helpers/auth");
 const { Administrator, Editor, Contributor } = require("./src/helpers/rolecheck");
 
@@ -113,7 +110,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Static Folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "static")));
 
 
 // Express session middleware
