@@ -1,6 +1,6 @@
-const Product = require("../product/Product");
+const Product = require("../models/product.model");
 // const Inventory = require("../models/inventory.model");
-const Order = require("../order/customerOrder");
+const Order = require("../models/customerOrder");
 
 // // get inventory list by filter
 // exports.get_inventory_list_new = async (condition, sort_obj, populate_obj) => {
