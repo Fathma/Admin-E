@@ -1,396 +1,278 @@
-<div class="box">
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#specification">SPECIFICATIONS</a></li>
-        <li><a data-toggle="tab" href="#menu1">RELATED PRODUCTS</a></li>
-    </ul>
-    <div class="tab-content">
-        <div id="specification" class="tab-pane fade in active">
-           <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="well">
-                    <h3 class="text-center">Add New Product/ Model</h3>
-                    <div class="well">
-                        <form action="/products/showfields" method="POST">
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="categg">Category<span style="color: red">*</span></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control inp" name="categg" id="categg">
-                                        <option value="null" selected>Select One</option>
-                                        {{# each cat}}
-                                        <option value="{{this._id}},{{this.name}}"{{# equality this._id ../product.category}} selected{{/equality}}>{{this.name}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <p><a data-toggle="tooltip" style="padding: 2px 12px" title="New Category"
-                                            class="btn btn-success" href="#ex1" rel="modal:open">+</a></p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="subCategg">Sub Category(optional)</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control inp" name="subCategg" id="subCategg">
-                                        <option value="null">select one</option>
-                                        {{# each categories}}
-                                        <option value="{{this._id}},{{this.name}}" {{# equality this._id ../product.subcategory}} selected{{/equality}}>{{this.name}} </option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <p><a data-toggle="tooltip" style="padding: 2px 12px" title="New Sub Category"
-                                            class="btn btn-success" href="#ex2" rel="modal:open">+</a></p>
-                                </div>
-                            </div>
-                            <br>
-
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="brandg">Brand<span style="color: red">*</span></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control inp" name="brandg" id="brandg">
-                                        <option value="null" selected>select one</option>
-                                        {{# each brand}}
-                                        <option value="{{this._id}},{{this.name}}" {{# equality this._id ../product.brand}} selected{{/equality}}>{{this.name}} </option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <p><a data-toggle="tooltip" title="New Brand" style="padding: 2px 12px"
-                                            class="btn btn-success" href="#ex3" rel="modal:open">+</a></p>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="model">Model<span style="color: red">*</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" value="{{product.model}}" name="model" id="model">
-                                </div>
-                            </div>
-                            <br>
-                            <center>
-                                <button type="submit" class="btn btn-default ">Next</button> <br>
-                            </center>
-                           
-                        </form>
-                    </div>
-                    <div id="ex1" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="cat" style="color:azure">Category</label>
-                                <input type="text" name="cat" id="cat" placeholder="Enter New Category"
-                                    class="form-control">
-                            </div>
-                            <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
-                        </form>
-                    </div>
-                    <div id="ex2" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="cate" style="color:azure">Category<span style="color: red">*</span></label>
-                                <select class="form-control" name="cate" id="cate">
-                                    {{# each cat}}
-                                    <option value="{{this._id}}">{{this.name}}</option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="subCat" style="color:azure" >Sub Category</label>
-                                <input type="text" name="subCat" id="subCat" class="form-control">
-                            </div>
-                            <button id="save_sub" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                    <div id="ex3" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="brand" style="color:azure">Brand<span style="color: red">*</span></label>
-                                <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand">
-                            </div>
-                            <a id="save_brand" class="btn btn-primary">Submit</a>
-                        </form>
-                    </div>
-
-                    {{# if product}}
-                    {{!-- <form action="/products/regiSave" method="POST" > --}}
-                    <input type="hidden" name="_id" id="_id" value="{{product._id}}">
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="products_invoice">Product Name:<span style="color:red">*</span>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="productName" id="productName"
-                                value="{{product.productName}}">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="pid">PID:
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="pid" id="pid" value="{{product.pid}}">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="name">Title:
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="name" id="name">
-                        </div>
-                    </div>
-                    <br>
-                     <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="sellingPrice">Selling Price:
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice">
-                        </div>
-                    </div>
-                    <br>
-                    {{# each features}}
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="v{{@index}}">{{this}}</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="hidden" name="new_feat_{{@index}}" id="new_feat_{{@index}}" value="{{this}}">
-                            <input type="text" name="v{{@index}}" id="v{{@index}}" class="form-control inp"
-                                placeholder="" required>
-                        </div>
-                    </div>
-                    <br>
-                    {{/each}}
-
-                    <div id="add">
-                        {{!-- adds previous features --}}
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="new_feat_label">New Feature:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="hidden" id="new_feat" name="new_feat"
-                                value="{{feature_total}}">{{!-- counts the total newly added features --}}
-                            <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
-                                placeholder="write a new feature name">
-                        </div>
-                        <div class="col-md-1">
-                            <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="weight">weight:
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="weight" id="weight">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="warranty">warranty:
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="warranty" id="warranty">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="description">description:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea type="text" class="form-control inp" name="description"
-                                id="description"></textarea>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="shippingInfo">shippingInfo:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea type="text" class="form-control inp" name="shippingInfo"
-                                id="shippingInfo"></textarea>
-                        </div>
-                    </div>
-                    <br>
-                     
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
-                        </div>
-                        <div class="col-md-6">
-                            <select  class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                <option value="None">None</option>
-                                <option value="Hot Deals">Hot Deals</option>
-                                <option value="Trending">Trending</option>
-                                <option value="New Product">New Product</option>
-                                <option value="Exclusive Products ">Exclusive Products </option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-                    <button id="save_inventory_dealer" class="btn btn-primary">Next Step</button>
-                    {{!-- </form> --}}
-                    {{/if}}
-                </div>
-            </div>
-           
-            <div class="col-md-6" >
-                 <a name="image_sec"></a>
-                <div class="well">
-                    <h3 class="text-center">Set Image</h3><br>
-                    <form action="/products/upload/dealer" method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="pid">Product Name:</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="pname" id="pname" value="{{product.productName}}">
-                                <input type="hidden" name="pid" id="pid" value="{{product._id}}">
-                                {{!-- <select class="form-control inp" name="pid" id="pid">
-                                    <option value="0">Select One</option>
-                                    {{# each Product}}
-                                    <option value="{{this._id}}">{{this.productName}}</option>
-                                    {{/each}}
-                                </select> --}}
-                            </div>
-                        </div>
-                        <br>
-                        {{!-- <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="pid">Product Name:
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <select class="form-control inp" name="pid" id="pid">
-                                    <option value="0">Select One</option>
-                                    {{# each Product}}
-                                    <option value="{{this._id}}">{{this.productName}}</option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                        </div>
-                        <br> --}}
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="imagePath2">Select Image:</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="file" name="imagePath2" id="imagePath2" accept="image/png, image/jpeg"
-                                    multiple>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <center>
-                                <button  type="submit" class="btn btn-default btn-md">Submit</button>
-                            </center>
-                        </div>
-
-                    </form>
-
-                </div>
-            </div>
-           
-        </div>
-    </div>
-            
-        </div>
-        <div id="menu1" class="tab-pane fade">
+<div class="container-fluid">
+    <div class="box">
+        <button class="collapsible active"><span style="float:left ">SPECIFICATIONS</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <div class="well"> 
-                            <h3 class="text-center">Add Related Product</h3><br>
-                            {{# if product }}
-                            <form action="/products/relatedProducts" method="POST">
-                                <input type="hidden" name="img_number" id="img_number">
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="pid">Product Name
-                                        </label>
+                        <div class="well">
+                            <h3 class="text-center">Add New Product/ Model</h3>
+                            <div class="well">
+                                <form action="/products/showfields" method="POST">
+                                    <div class="row">
+                                        <div class="col-md-5 col5">
+                                            <label class="lbl" for="categg">Category<span
+                                                    style="color: red">*</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control inp" name="categg" id="categg">
+                                                <option value="null" selected>Select One</option>
+                                                {{# each cat}}
+                                                <option value="{{this._id}},{{this.name}}"
+                                                    {{# equality this._id ../product.category}} selected{{/equality}}>
+                                                    {{this.name}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <p><a data-toggle="tooltip" style="padding: 2px 12px" title="New Category"
+                                                    class="btn btn-success" href="#ex1" rel="modal:open">+</a></p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="pname" id="pname"
-                                            value="{{ product.name }}">
-                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+
+                                    <div class="row">
+                                        <div class="col-md-5 col5">
+                                            <label class="lbl" for="subCategg">Sub Category(optional)</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control inp" name="subCategg" id="subCategg">
+                                                <option value="null">select one</option>
+                                                {{# each categories}}
+                                                <option value="{{this._id}},{{this.name}}"
+                                                    {{# equality this._id ../product.subcategory}}
+                                                    selected{{/equality}}>{{this.name}} </option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <p><a data-toggle="tooltip" style="padding: 2px 12px"
+                                                    title="New Sub Category" class="btn btn-success" href="#ex2"
+                                                    rel="modal:open">+</a></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="imagePath">Select Product
-                                        </label>
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col-md-5 col5">
+                                            <label class="lbl" for="brandg">Brand<span
+                                                    style="color: red">*</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control inp" name="brandg" id="brandg">
+                                                <option value="null" selected>select one</option>
+                                                {{# each brand}}
+                                                <option value="{{this._id}},{{this.name}}"
+                                                    {{# equality this._id ../product.brand}} selected{{/equality}}>
+                                                    {{this.name}} </option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <p><a data-toggle="tooltip" title="New Brand" style="padding: 2px 12px"
+                                                    class="btn btn-success" href="#ex3" rel="modal:open">+</a></p>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <select name="relatedProducts" class="form-control inp" id="relatedProducts">
-                                            {{# each Product}}
-                                            <option value="{{this._id}}">{{this.productName}}</option>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-5 col5">
+                                            <label class="lbl" for="model">Model<span style="color: red">*</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control inp" value="{{product.model}}"
+                                                name="model" id="model">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <center>
+                                        <button type="submit" class="btn btn-default ">Next</button> <br>
+                                    </center>
+                                </form>
+                            </div>
+                            <div id="ex1" class="modal">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="cat" style="color:azure">Category</label>
+                                        <input type="text" name="cat" id="cat" placeholder="Enter New Category"
+                                            class="form-control">
+                                    </div>
+                                    <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
+                                </form>
+                            </div>
+                            <div id="ex2" class="modal">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="cate" style="color:azure">Category<span
+                                                style="color: red">*</span></label>
+                                        <select class="form-control" name="cate" id="cate">
+                                            {{# each cat}}
+                                            <option value="{{this._id}}">{{this.name}}</option>
                                             {{/each}}
                                         </select>
                                     </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <center>
-                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
-                                    </center>
-                                </div>
-                            </form><br>
-                            <table id="ptable" style="width:100%" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{# each product.relatedProducts}}
-                                    <tr>
-                                        <td>
-                                            <strong>{{this.productName}}</strong>
-                                        </td>
-                                        <td>
-                                            <a href="/products/relatedProducts/delete/{{../product._id}}/{{this._id}}"
-                                                class="btn btn-default ">Delete</a>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
+                                    <div class="form-group">
+                                        <label for="subCat" style="color:azure">Sub Category</label>
+                                        <input type="text" name="subCat" id="subCat" class="form-control">
+                                    </div>
+                                    <button id="save_sub" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
 
+                            <div id="ex3" class="modal">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="brand" style="color:azure">Brand<span
+                                                style="color: red">*</span></label>
+                                        <input type="text" name="brand" id="brand" class="form-control"
+                                            placeholder="Enter New Brand">
+                                    </div>
+                                    <a id="save_brand" class="btn btn-primary">Submit</a>
+                                </form>
+                            </div>
 
-                            {{else}}
-                            <p>You need to complete product registration with image in specification section. </p>
+                            {{# if product}}
+                            {{!-- <form action="/products/regiSave" method="POST" > --}}
+                            <input type="hidden" name="_id" id="_id" value="{{product._id}}">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="products_invoice">Product Name:<span
+                                            style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="productName" id="productName"
+                                        value="{{product.productName}}">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="pid">PID:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="pid" id="pid"
+                                        value="{{product.pid}}">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="name">Title:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="name" id="name">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="sellingPrice">Selling Price:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice">
+                                </div>
+                            </div>
+                            <br>
+                            {{# each features}}
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="v{{@index}}">{{this}}</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="new_feat_{{@index}}" id="new_feat_{{@index}}"
+                                        value="{{this}}">
+                                    <input type="text" name="v{{@index}}" id="v{{@index}}" class="form-control inp"
+                                        placeholder="" required>
+                                </div>
+                            </div>
+                            <br>
+                            {{/each}}
+
+                            <div id="add">
+                                {{!-- adds previous features --}}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="new_feat_label">New Feature:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" id="new_feat" name="new_feat"
+                                        value="{{feature_total}}">{{!-- counts the total newly added features --}}
+                                    <input type="text" id="new_feat_label" name="new_feat_label"
+                                        class="form-control inp" placeholder="write a new feature name">
+                                </div>
+                                <div class="col-md-1">
+                                    <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="weight">weight:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="weight" id="weight">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="warranty">warranty:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="warranty" id="warranty">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="description">description:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="description"
+                                        id="description"></textarea>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="shippingInfo">shippingInfo:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="shippingInfo"
+                                        id="shippingInfo"></textarea>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control inp" name="HomePagetag" id="HomePagetag">
+                                        <option value="None">None</option>
+                                        <option value="Hot Deals">Hot Deals</option>
+                                        <option value="Trending">Trending</option>
+                                        <option value="New Product">New Product</option>
+                                        <option value="Exclusive Products ">Exclusive Products </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <button id="save_inventory_dealer" class="btn btn-primary">Next Step</button>
+                            {{!-- </form> --}}
                             {{/if}}
                         </div>
                     </div>
@@ -398,7 +280,125 @@
             </div>
         </div>
     </div>
-    <div class="register-logo">
+
+    <div class="box">
+        <button class="collapsible">
+            <li class="fa fa-picture-o panel-icon" style="padding: 5px"></li><span>IMAGES</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <h4>You need to save the product info first!</h4>
+                            {{!-- <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="img_number" id="img_number">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="pid">Product Name
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="pname" id="pname">
+                                    <input type="hidden" name="pid" id="pid">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="imagePath">Select Image
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg"
+                                        multiple>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
+                                </center>
+                            </div>
+                        </form> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-   
+
+    <div class="box">
+        <button class="collapsible">
+            <li class="fa fa-object-group panel-icon" style="padding: 5px"></li><span>RELATED PRODUCT</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+        <div class="content" style="background-color: white;min-height: 100px; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <h4>You need to save the product info first!</h4>
+                            {{!-- <form action="/products/relatedProducts" method="POST">
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="pname_related">Product Name
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="pname_related" id="pname_related">
+                                    <input type="hidden" name="pid_related" id="pid_related">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="imagePath">Select Product
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="relatedProducts" class="form-control inp" id="relatedProducts">
+                                        {{# each Product}}
+                                        <option value="{{this._id}}">{{this.productName}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                </center>
+                            </div>
+                        </form><br>
+                        <table id="ptable" style="width:100%" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{# each product.relatedProducts}}
+                                <tr>
+                                    <td>
+                                        <strong>{{this.productName}}</strong>
+                                    </td>
+                                    <td>
+                                        <a href="/products/relatedProducts/delete/{{../product._id}}/{{this._id}}"
+                                            class="btn btn-default ">Delete</a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

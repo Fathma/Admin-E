@@ -298,7 +298,7 @@ $(document).ready(()=>{
   
             $.post("/products/regiSave",{ data: product_attribute, serials: serials }, (data)=>{
               // alert("Now Submit image")
-              window.location.href="http://localhost:3000/products/Update/"+ pid;
+              window.location.href="http://ecom-admin.herokuapp.com/products/Update/"+ pid;
               // byId('msg_img').innerHTML = ''
               // byId("save_img").disabled = false;
             });
@@ -323,12 +323,12 @@ $(document).ready(()=>{
   $("#save_inventory_dealer").click((e)=>{
     // alert("Now Submit the image")
     //     window.location.href="#image_sec";
-    if( $("#imagePath2")[0].files.length === 0) {
-      alert("please select image!")
-      window.location.href="#image_sec";
-      document.getElementsByName("image_sec").style.border = "red solid"
-    }
-    else{
+    // if( $("#imagePath2")[0].files.length === 0) {
+    //   alert("please select image!")
+    //   window.location.href="#image_sec";
+    //   document.getElementsByName("image_sec").style.border = "red solid"
+    // }
+    // else{
       var product_attribute = {
         _id: byId("_id").value,
         sellingPrice: byId("sellingPrice").value,
@@ -346,10 +346,10 @@ $(document).ready(()=>{
       product_attribute.features = get_features(new_feat);
 
       $.post("/products/regiSaveDealer", { data: product_attribute }, (data)=> {
-        alert("Now Submit the image")
-        window.location.href="#image_sec";
+        alert("Successful")
+        window.location.href="http://ecom-admin.herokuapp.com/products/Update/"+ byId("_id").value;;
       });
-    }
+    // }
   });
 
   function get_features(new_feat) {
@@ -391,7 +391,7 @@ $(document).ready(()=>{
 
       $.post("/products/regiSaveDealer", { data: product_attribute }, (data)=> {
         alert("Now Submit the image")
-        window.location.href="#image_sec";
+        window.location.href="http://ecom-admin.herokuapp.com/products/Update/"+ byId("_id").value;
       });
     // }
   });
