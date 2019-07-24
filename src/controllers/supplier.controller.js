@@ -21,7 +21,7 @@ exports.supplierSave = (req, res) => {
 
 // get all registered suppliers
 exports.supplierList = async(req, res) => {
-  var supplier = await Supplier.find()
+  var supplier = await Supplier.find().sort({ "created": -1 })
   var count = 1;
   supplier.map( doc=> doc.count = count++ )
   res.render('supplier/supplierList', { supplier }) 

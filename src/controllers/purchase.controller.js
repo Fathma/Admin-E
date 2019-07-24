@@ -13,14 +13,14 @@ exports.LocalPurchasePage = (req, res) => {
 }
 
 exports.productList = async (req, res)=>{
-  var lp = await LP.findOne({_id: req.params._id}).populate('products.product') 
+  var lp = await LP.findOne({_id: req.params._id}).populate('products.product')
  
   res.render('purchase/productList', { products: lp.products })
 }
 
 // get supplier registration page
 exports.getLPList = async (req, res) =>{
-  var lp = await LP.find().populate('supplier') 
+  var lp = await LP.find().populate('supplier').sort({ "date": -1 })
   var count = 1;
   lp.map( doc=> doc.count = count++ )
   res.render('purchase/allPurchase', { lp })

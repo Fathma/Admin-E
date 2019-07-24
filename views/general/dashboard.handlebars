@@ -1,27 +1,131 @@
-<div style="margin-left: 5%;margin-right: 5%;">
-    <div class="row">
-        <a href="/products/viewLowQuantityProducts" style="color: white ">
-            <div class="well col-sm-4" style="background-color:#6c6a79; height: 200px; ">
-                <h2>Low in Stock {{quantity}}<span class="pull-right"><img
-                            src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
-                            <p>Shows the products that are low in stock, i.e. less than 5. It would also notify in the notification bar. Immediately place an order with the supplier of the products which are low in stock.</p>
+{{!-- <div style="margin-left: 5%;margin-right: 5%;">
+  <div class="row">
+    <a href="/products/viewLowQuantityProducts" style="color: white ">
+      <div class="well col-sm-4" style="background-color:#00c0eff3; height: 200px; ">
+        <h2>Low Stock Products {{quantity}}<span class="pull-right"><img
+              src="https://img.icons8.com/color/48/000000/low-battery.png"></span></h2>
+        <p>Shows the products that are low in stock, i.e. less than 5. It would also notify in the notification bar.
+          Immediately place an order with the supplier of the products which are low in stock.</p>
+      </div>
+    </a>
+    <a href="/orders/newOrders" style="color: white ">
+      <div class="well col-sm-4" style="background-color: #f39c12; height: 200px;  ">
+        <h2>
+          New Orders {{new_order}}
+          <span class="pull-right">
+            <img src="https://img.icons8.com/bubbles/48/000000/violet-shopping-basket.png"></span>
+        </h2>
+        <p>Shows the number of newly placed orders by the customer. A notification will pop-up in the notification bar.
+          Proceed the orders immediately after receiving.</p>
+      </div>
+    </a>
+    <a href="/forum/viewNewPost" style="color: white ">
+      <div class="well col-sm-4" style="background-color: #dd4b39; height: 200px;  ">
+        <h2>New Posts {{newPost}}<span class="pull-right"><img
+              src="https://img.icons8.com/office/48/000000/chat.png"></span></h2>
+        <p>Shows the number of new posts in the Forum. A notification in the notification bar will alert about new
+          posts. Approve or block posts soon after it is made.</p>
+      </div>
+    </a>
+  </div>
+</div> --}}
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-info " id="nopcommerce-common-statistics-box">
+      <div class="box-header with-border clearfix">
+        <div class="box-title">
+          <i class="fa ion-stats-bars"></i>
+          Common statistics
+        </div>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse">
+            <i class="fa fa-minus"></i> </button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{new_order}}</h3>
+              <h4> New Orders</h4>
+              <p>Shows the number of newly placed orders by the customer. A notification will pop-up in the notification
+                bar.
+                Proceed the orders immediately after receiving.</p>
             </div>
-        </a>
-        <a href="/orders/newOrders" style="color: white ">
-            <div class="well col-sm-4" style="background-color: #63768d; height: 200px;  ">
-                <h2>
-                    New Orders {{new_order}}
-                    <span class="pull-right">
-                        <img src="https://img.icons8.com/bubbles/48/000000/violet-shopping-basket.png"></span>
-                </h2>
-                <p>Shows the number of newly placed orders by the customer. A notification will pop-up in the notification bar. Proceed the orders immediately after receiving.</p>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
             </div>
-        </a>
-        <a href="/forum/viewNewPost" style="color: white ">
-            <div class="well col-sm-4" style="background-color: #3c709a; height: 200px;  ">
-                <h2>New Posts {{newPost}}<span class="pull-right"><img src="https://img.icons8.com/office/48/000000/chat.png"></span></h2>
-            <p>Shows the number of new posts in the Forum. A notification in the notification bar will alert about new posts. Approve or block posts soon after it is made.</p>
+            <a class="small-box-footer" href="/orders/newOrders">
+              More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{newPost}}</h3>
+              <h4>New Posts</h4>
+              <p>Shows the number of new posts in the Forum. A notification in the notification bar will alert about new
+                posts. Approve or block posts soon after it is made.</p>
             </div>
-        </a>
+            <div class="icon">
+              <i class="ion ion-refresh"></i>
+            </div>
+            <a class="small-box-footer" href="/forum/viewNewPost">
+              More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>6</h3>
+              <h4>Registered customers</h4>
+              <p>Shows the number of newly registered customer. A notification will pop-up in the notification
+                bar.
+                For details click more to see the list.</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a class="small-box-footer" href="/Admin/Customer/List">
+              More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{quantity}}</h3>
+              <h4>Low Stock Products</h4>
+              <p>Shows the products that are low in stock. It would also notify in the notification
+                bar.
+                Immediately place an order with the supplier of the products which are low in stock.</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer" href="/products/viewLowQuantityProducts">
+              More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <script>
+          $(document).ready(function () {
+            $('#nopcommerce-common-statistics-box').on('click', 'button[data-widget="collapse"]', function () {
+              var collapsed = !$('#nopcommerce-common-statistics-box').hasClass('collapsed-box');
+              saveUserPreferences('/Admin/Preferences/SavePreference', 'HideCommonStatisticsPanel', collapsed);
+            });
+          });
+        </script>
+      
+      </div>
     </div>
+  </div>
 </div>
