@@ -59,12 +59,12 @@ exports.showDashboard =async (req, res, next) => {
   })
 }
 
-//fetching image 
-exports.getImage= (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    if(file.filename){
-      const readstream = gfs.createReadStream(file.filename)
-      readstream.pipe(res)
-    }
-  })
-}
+// //fetching image 
+// exports.getImage= (req, res) => {
+//   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+//     if(file.filename){
+//       const readstream = gfs.createReadStream(file.filename)
+//       readstream.pipe(res)
+//     }
+//   })
+// }

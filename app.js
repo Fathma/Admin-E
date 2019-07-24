@@ -53,14 +53,6 @@ require("./config/passport")(passport);
 
 // Map global promise
 mongoose.Promise = global.Promise;
-const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
-// //DB Connection
-// const con =  mongoose.createConnection(mongoo);
-// exports.con = con.once('open', function () {
-//   gfs = Grid(con.db, mongoose.mongo);
-//   exports.gfs = gfs.collection('fs');
-// })
-
 
 mongoose.connect( keys.database.mongoURI, err => {
   if (!err) console.log("MongoDB connection Established, " + keys.database.mongoURI);
@@ -70,8 +62,6 @@ mongoose.connect( keys.database.mongoURI, err => {
 
 var con = mongoose.connection;
  
-
-// var con = mongoose.createConnection(mongoo);
 
 let gfs;
 con.once('open', function () {
@@ -169,7 +159,6 @@ app.use(async (req, res, next)=>{
 app.get("/image/:filename", (req, res) => {
  
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-
     if(file != null ){
       const readstream = gfs.createReadStream(file.filename)
       readstream.pipe(res)

@@ -1,3 +1,23 @@
+// collapsible
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      byId('sp').innerHTML = '+'
+      content.style.display = "none";
+    } else {
+      byId('sp').innerHTML = '-'
+      content.style.display = "block";
+    }
+  });
+}
+// collapsible
+
+
 var byId = function( id ) { return document.getElementById( id ); };
 // saving as pdf
 function myFunction() {
@@ -74,6 +94,8 @@ function addnew() {
 
 function set_var() {
  byId("check").value = "0";
+ let today = new Date().toISOString().substr(0, 10);
+  document.querySelector("#date").value = today;
 }
 
 function check_all_purchase_price() {

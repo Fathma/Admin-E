@@ -1,494 +1,349 @@
-<div class="box">
-    <div class="register-logo">
-    </div>
-    <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="well">
-                    <h3 class="text-center">Update Product/ Model</h3><br>
-                    <input type="hidden" class="form-control inp" name="serial" id="serial">
-                    <input type="hidden" class="form-control inp" name="_id" id="_id" value="{{product._id}}">
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="products_invoice">Product Name<span style="color:red">*</span>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="products_invoice" id="products_invoice"
-                                value="{{product.productName}}">
-                        </div>
-                    </div>
-                    <br>
 
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="model">Model
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="model" id="model"
-                                value="{{product.model}}">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="name">Title
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="name" id="name" value="{{product.name}}">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="sellingPrice">Selling Price
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice"
-                                value="{{product.sellingPrice}}">
-                        </div>
-                    </div>
-                    <br>
-                    {{# each product.features}}
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="v{{@index}}">{{this.label}}</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="hidden" name="new_feat_{{@index}}" id="new_feat_{{@index}}"
-                                value="{{this.label}}">
-                            <input type="text" class="form-control inp" name="v{{@index}}" id="v{{@index}}"
-                                class="form-control" value="{{this.value}}">
-                        </div>
-                    </div>
-                    <br>
-                    {{/each}}
-                    <div id="add">
-                        {{!-- adds previous features --}}
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="new_feat_label">New Feature</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="hidden" id="new_feat" name="new_feat"
-                                value="{{feature_total}}">{{!-- counts the total newly added features --}}
-                            <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
-                                placeholder="write a new feature name">
-                        </div>
-                        <div class="col-md-1">
-                            <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="weight">Weight
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="weight" id="weight"
-                                value="{{product.weight}}">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="warranty">Warranty</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control inp" name="warranty" id="warranty"
-                                value="{{product.warranty}}">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="description">description</label>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea type="text" class="form-control inp" name="description"
-                                id="description">{{product.description}}</textarea>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="shippingInfo">shippingInfo</label>
-                        </div>
-                        <div class="col-md-6">
-                            <textarea type="text" class="form-control inp" name="shippingInfo"
-                                id="shippingInfo">{{product.shippingInfo}}</textarea>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md-5 col5">
-                            <label class="lbl" for="HomePagetag">HomePagetag<span style="color:red">*</span></label>
-                        </div>
-                        <div class="col-md-6">
-                            <select class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                <option value="None" {{# equality product.HomePagetag 'None'}}selected{{/equality}}>None
-                                </option>
-                                <option value="Hot Deals"
-                                    {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>Hot Deals
-                                </option>
-                                <option value="Trending"
-                                    {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>Trending</option>
-                                <option value="New Product"
-                                    {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>New Product
-                                </option>
-                                <option value="Exclusive Products"
-                                    {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
-                                    Exclusive Products</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <center>
-                            <button id="update_product" class="btn btn-default btn-md" type="submit">Insert
-                                Image</button>
-                        </center>
-                    </div>
-                    {{!-- </form> --}}
-                </div>
+<div class="container-fluid">
+    <div class="box">
+        <button class="collapsible"><li class="fa fa-info panel-icon" style="padding: 5px"></li><span>PRODUCT INFO</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white; border-top: 1px; display:block">
+            <div class="register-logo">
             </div>
-            {{!-- <div class="col-md-1"></div> --}}
-            {{!-- <div class="col-md-6">
-                <div class="well">
-                    <h3 class="text-center">Add New Product/ Model</h3>
-                    <div class="well">
-                        <form action="/products/showfields" method="POST">
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <label for="categg">Category<span style="color: red">*</span></label>
-                                    <select class="form-control" name="categg" id="categg" >
-                                        <option value="null" selected>Select One</option>
-                                        {{# each cat}}
-                                        <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
-                                        {{/each}}
-                                    </select>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well">
+                            <input type="hidden" class="form-control inp" name="serial" id="serial">
+                            <input type="hidden" class="form-control inp" name="_id" id="_id" value="{{product._id}}">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="products_invoice">Product Name<span
+                                            style="color:red">*</span>
+                                    </label>
                                 </div>
-                                <div class="col-sm-1"><br>
-                                    <p><a data-toggle="tooltip" title="New Category" class="btn btn-success" href="#ex1" rel="modal:open">+</a></p>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="products_invoice"
+                                        id="products_invoice" value="{{product.productName}}">
                                 </div>
                             </div>
+                            <br>
 
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <label for="subCategg">Sub Category(optional)</label>
-                                    <select class="form-control" name="subCategg" id="subCategg">
-                                        <option value="null">select one</option>
-                                        {{# each categories}}
-                                        <option value="{{this._id}},{{this.name}}">{{this.name}} </option>
-                                        {{/each}}
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="model">Model
+                                    </label>
                                 </div>
-                                <div class="col-sm-1"><br>
-                                    <p><a data-toggle="tooltip" title="New Sub Category" class="btn btn-success" href="#ex2" rel="modal:open">+</a></p>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="model" id="model"
+                                        value="{{product.model}}">
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <label for="brandg">Brand<span style="color: red">*</span></label>
-                                    <select class="form-control" name="brandg" id="brandg" >
-                                        <option value="null" selected>select one</option>
-                                        {{# each brand}}
-                                        <option value="{{this._id}},{{this.name}}">{{this.name}} </option>
-                                        {{/each}}
-                                    </select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="name">Title
+                                    </label>
                                 </div>
-                                <div class="col-sm-1"><br>
-                                    <p><a data-toggle="tooltip" title="New Brand" class="btn btn-success" href="#ex3" rel="modal:open">+</a></p>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="name" id="name"
+                                        value="{{product.name}}">
                                 </div>
                             </div>
-
-                            {{# if catt}}
-                            <button type="submit" class="btn btn-default ">Submit</button> <br>
-                            <p style="color:red; float:left"> The form has submitted! </p>
-                            {{else}}
-                            <button type="submit" class="btn btn-danger ">Submit</button> <br>
-                            <p style="color:red; float:left"> Submit the form before filling up the product Information
-                            </p>
-                            {{/if}}
-                        </form>
-                    </div>
-                    <div id="ex1" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="cat">Category</label>
-                                <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control" >
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="sellingPrice">Selling Price
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice"
+                                        value="{{product.sellingPrice}}">
+                                </div>
                             </div>
-                            <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
-                        </form>
-                    
-                    </div>
-                    <div id="ex2" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="cate">Category<span style="color: red">*</span></label>
-                                <select class="form-control" name="cate" id="cate" >
-                                    {{# each cat}}
-                                    <option value="{{this._id}}">{{this.name}}</option>
-                                    {{/each}}
-                                </select>
+                            <br>
+                            {{# each product.features}}
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="v{{@index}}">{{this.label}}</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="new_feat_{{@index}}" id="new_feat_{{@index}}"
+                                        value="{{this.label}}">
+                                    <input type="text" class="form-control inp" name="v{{@index}}" id="v{{@index}}"
+                                        class="form-control" value="{{this.value}}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="subCat">Sub Category</label>
-                                <input type="text" name="subCat" id="subCat" class="form-control" >
-                            </div>
-                            <button id="save_sub" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                    <div id="ex3" class="modal">
-                        <form>
-                            <div class="form-group">
-                                <label for="brand">Brand<span style="color: red">*</span></label>
-                                <input type="text" name="brand" id="brand" class="form-control"
-                                    placeholder="Enter New Brand" >
-                            </div>
-                            <a id="save_brand" class="btn btn-primary">Submit</a>
-                        </form>
-                    </div>
-
-                    {{# if cattN}}
-                    <form action="/products/regiSave" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="num" value="{{num}}">
-                        <input type="hidden" name="brand" value="{{brands}}">
-                        <input type="hidden" name="catt" value="{{catt}}">
-                        <input type="hidden" name="sub" value="{{sub}}">
-                        <input type="hidden" name="status" value="{{status}}">
-                        <input type="hidden" name="subN" value="{{subN}}">
-
-                        <div class="form-group">
-                            <label for="cattN">Category</label>
-                            <input type="text" name="cattN" class="form-control" value="{{cattN}}" readonly>
-                        </div>
-
-                        {{# if subN}}
-                        <div class="form-group">
-                            <label for="subNn">Sub Category</label>
-                            <input type="text" name="subNn" class="form-control" value="{{subN}}" readonly>
-                        </div>
-                        {{/if}}
-                        <div class="form-group">
-                            <label for="brandN">Brand</label>
-                            <input type="text" class="form-control" name="brandN" value="{{brandN}}" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" placeholder="Enter Title" >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="model">Model</label>
-                            <input type="text" name="model" class="form-control" placeholder="Enter Model" >
-                        </div>
-
-                        {{# each features}}
-                        <div class="form-group">
-                            <input type="hidden" name="feature{{@index}}_label" value="{{this}}">
-                            <label for="feature{{@index}}_value">{{this}}</label>
-                            <input type="text" name="feature{{@index}}_value" class="form-control" placeholder="">
-                        </div>
-                        {{/each}}
-
-                        <div id="add">
-                        </div><br>
-
-                        <div class="row">
-
-                            <div class="col-sm-9">
-                                <input type="hidden" id="new_feat" name="new_feat" value="0">
-                                <input type="text" id="new_feat_label" name="new_feat_label" class="form-control"
-                                    placeholder="write a new feature name">
-                            </div>
-
-                            <div class="col-sm-2">
-                                <a onclick="setvisible()" class="btn btn-success">Add New Feature</a>
-                            </div>
-
-                        </div><br>
-
-                        <div class="form-group">
-                            <label for="weight">Weight(kg)</label>
-                            <input type="text" name="weight" class="form-control" placeholder="Enter weight" >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="warranty">Warranty</label>
-                            <input type="text" name="warranty" class="form-control" placeholder="Enter Warranty" >
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea type="text" name="description" class="form-control" ></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="shippingInfo">Shipping Info</label>
-                            <textarea type="text" name="shippingInfo" class="form-control" > </textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="imagePath">Image<span style="color: red">*</span></label>
-                            <input type="file" name="imagePath" accept="image/png, image/jpeg" >
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    {{/if}}
-                </div>
-
-            </div> --}}
-
-            <div class="col-md-6">
-
-                <a name="image_sec1"></a>
-                <div class="well">
-                    <div id="all_img" class="row">
-
-                    </div>
-                    <h3 class="text-center">Set Image</h3><br>
-
-                    <div class="row">
-                        {{# each product.image}}
-                        {{# if this}}
-                        <div class="col-sm-2">
-                            <img src="{{this}}" alt="" style="background-image: image(); width:100px; height:100px; box-shadow: 0 0 8px 8px black inset;">
-                            <form action="/products/img/detete" method="POST">
-                                <input type="hidden" name="id" id="id" value="{{../product._id}}">
-                                <input type="hidden" name="img" id="img" value="{{this}}">
-                                <button type="submit">delete</button>
-                            </form>
-                        </div>
-                        {{/if}}
-                        {{/each}}
-                    </div>
-                    <div class="row">
-
-                    </div>
-                    <br>
-                    <form action="/products/upload/update" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="img_number" id="img_number">
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="pid">Product Name
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="pname" id="pname"
-                                    value="{{product.productName}}">
-                                <input type="hidden" name="pid" id="pid" value="{{product._id}}">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="imagePath3">Select Image
-                                </label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="file" name="imagePath3" id="imagePath3" accept="image/png, image/jpeg"
-                                    multiple>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <center>
-                                <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
-                            </center>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="well">
-
-                    <h3 class="text-center">Add Related Product</h3><br>
-                    {{# if product }}
-                    <form action="/products/relatedProducts1" method="POST">
-                        <input type="hidden" name="img_number" id="img_number">
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="pid">Product Name
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-
-                                <input type="text" class="form-control inp" name="pname" id="pname"
-                                    value="{{ product.name }}">
-                                <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="imagePath">Select Product
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <select name="relatedProducts" class="form-control inp" id="relatedProducts">
-                                    {{# each Product}}
-                                    <option value="{{this._id}}">{{this.productName}}</option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <center>
-                                <button type="submit" class="btn btn-default btn-md">Submit</button>
-                            </center>
-                        </div>
-                    </form><br>
-                    <table id="ptable" style="width:100%" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{# each product.relatedProducts}}
-
-                            <tr>
-
-                                <td>
-                                    <strong>{{this.productName}}</strong>
-                                </td>
-
-                                <td>
-                                    <a href="/products/relatedProducts/delete1/{{../product._id}}/{{this._id}}"
-                                        class="btn btn-default ">Delete</a>
-                                </td>
-                            </tr>
+                            <br>
                             {{/each}}
-                        </tbody>
-                    </table>
+                            <div id="add">
+                                {{!-- adds previous features --}}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="new_feat_label">New Feature</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" id="new_feat" name="new_feat"
+                                        value="{{feature_total}}">{{!-- counts the total newly added features --}}
+                                    <input type="text" id="new_feat_label" name="new_feat_label"
+                                        class="form-control inp" placeholder="write a new feature name">
+                                </div>
+                                <div class="col-md-1">
+                                    <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="weight">Weight
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="weight" id="weight"
+                                        value="{{product.weight}}">
+                                </div>
+                            </div>
+                            <br>
 
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="warranty">Warranty</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="warranty" id="warranty"
+                                        value="{{product.warranty}}">
+                                </div>
+                            </div>
+                            <br>
 
-                    {{else}}
-                    <p>You need to complete product registration with image in specification section. </p>
-                    {{/if}}
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="description">description</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="description"
+                                        id="description">{{product.description}}</textarea>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="shippingInfo">shippingInfo</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="shippingInfo"
+                                        id="shippingInfo">{{product.shippingInfo}}</textarea>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="HomePagetag">HomePagetag<span
+                                            style="color:red">*</span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control inp" name="HomePagetag" id="HomePagetag">
+                                        <option value="None"
+                                            {{# equality product.HomePagetag 'None'}}selected{{/equality}}>None
+                                        </option>
+                                        <option value="Hot Deals"
+                                            {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>
+                                            Hot Deals
+                                        </option>
+                                        <option value="Trending"
+                                            {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>
+                                            Trending</option>
+                                        <option value="New Product"
+                                            {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>
+                                            New Product
+                                        </option>
+                                        <option value="Exclusive Products"
+                                            {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
+                                            Exclusive Products</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button id="update_product" class="btn btn-default btn-md" type="submit">Insert
+                                        Image</button>
+                                </center>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-</div>
+
+    <div class="box">
+        <button class="collapsible"><li class="fa fa-picture-o panel-icon" style="padding: 5px"></li><span>IMAGES</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <a name="image_sec1"></a>
+                        <div class="well">
+                            <div id="all_img" class="row">
+
+                            </div>
+                            <h3 class="text-center">Set Image</h3><br>
+
+                            <div class="row">
+                                {{# each product.image}}
+                                {{# if this}}
+                                <div class="col-sm-3">
+                                    <img src="{{this}}" alt=""
+                                        style="background-image: image(); width:100px; height:100px; box-shadow: 0 0 8px 8px black inset;">
+                                    <form action="/products/img/detete" method="POST">
+                                        <input type="hidden" name="id" id="id" value="{{../product._id}}">
+                                        <input type="hidden" name="img" id="img" value="{{this}}">
+                                        <button type="submit">delete</button>
+                                    </form>
+                                </div>
+                                {{/if}}
+                                {{/each}}
+                            </div>
+                            <div class="row">
+
+                            </div>
+                            <br>
+                            <form action="/products/upload/update" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="img_number" id="img_number">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="pid">Product Name
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="pname" id="pname"
+                                            value="{{product.productName}}">
+                                        <input type="hidden" name="pid" id="pid" value="{{product._id}}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="imagePath3">Select Image
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="file" name="imagePath3" id="imagePath3"
+                                            accept="image/png, image/jpeg" multiple>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" id="save_img"
+                                            class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="box">
+        <button class="collapsible"><li class="fa fa-object-group panel-icon" style="padding: 5px"></li><span>RELATED PRODUCT</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+
+                            <h3 class="text-center">Add Related Product</h3><br>
+                            {{# if product }}
+                            <form action="/products/relatedProducts1" method="POST">
+                                <input type="hidden" name="img_number" id="img_number">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="pid">Product Name
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <input type="text" class="form-control inp" name="pname" id="pname"
+                                            value="{{ product.name }}">
+                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="imagePath">Select Product
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="relatedProducts" class="form-control inp" id="relatedProducts">
+                                            {{# each Product}}
+                                            <option value="{{this._id}}">{{this.productName}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form><br>
+                            <table id="ptable" style="width:100%" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{# each product.relatedProducts}}
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>{{this.productName}}</strong>
+                                        </td>
+
+                                        <td>
+                                            <a href="/products/relatedProducts/delete1/{{../product._id}}/{{this._id}}"
+                                                class="btn btn-default ">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{else}}
+                            <p>You need to complete product registration with image in specification section.
+                            </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <div class="box">
+        <button class="collapsible"><span style="float:left ">SPECIFICATIONS</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white">
+        </div>
+    </div>
+    <div class="box">
+        <button class="collapsible"><span style="float:left ">RELATED PRODUCT</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white">
+        </div>
+    </div> --}}
+
+
 </div>

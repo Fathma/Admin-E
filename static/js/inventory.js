@@ -4,19 +4,18 @@ $(document).ready(()=>{
   var serial_lp = [];
   var byId = ( id )=>{ return document.getElementById( id ); };
 
-  let today = new Date().toISOString().substr(0, 10);
-document.querySelector("#date").value = today;
+  
 
  
   // getting invoice(local purchase) details on basis of selected invoice number
   $("#invoice").change((e)=>{
 
-    byId("img_number").value = "0"
+    // byId("img_number").value = "0"
     var invoice = byId("invoice");
 
     if (invoice.value != "0") {
       $.get("/purchase/getProducts/" + invoice.value, {}, (data)=>{
-        console.log(data)
+        
         var date = data.lp.date.split("T");
         byId("supplier").value = data.lp.supplier.cname;
         byId("date").value = date[0];
@@ -55,6 +54,7 @@ document.querySelector("#date").value = today;
   // gets product info on the basis of selected product
   $("#products_invoice").change((e)=>{
     var id = byId("products_invoice").value;
+   
     byId("subcategory").value = "";
     
     // creating label and input fields for previous features
@@ -68,14 +68,18 @@ document.querySelector("#date").value = today;
       byId("save_inventory").disabled = false;
       const { shippingInfo, serial_availablity, features}= product[0].product;
       const {quantity,purchasePrice, sellingPrice}= product[0];
-     
-      byId("pname").value = productName
-      byId("pid").value = _id
-      byId("img_number").value = image.length
+    
+
+
+      // byId("pname").value = productName
+      // byId("pid").value = _id
+      // byId("pname_related").value = productName
+      // byId("pid_related").value = _id
+      // byId("img_number").value = image.length
   
-      if(image.length >= 5)  byId("save_img").disabled = true;
+      // if(image.length >= 5)  byId("save_img").disabled = true;
       // create space for image
-      remove_child(byId("all_img"))
+      // remove_child(byId("all_img"))
       // image.map(image=>{
       //   var col = create_div("col-md-2", "outc1r1c1", 1);
       //   var img = document.createElement("img");
@@ -241,16 +245,16 @@ document.querySelector("#date").value = today;
   }
 
   $("#save_inventory").click(function(e) {
-    var pre = parseInt(byId("img_number").value);
-    if(pre === 0 && $("#imagePath")[0].files.length === 0) {
-      alert("you have to select the image first!")
-      window.location.href="#image_sec1";
-    }
-    else{
+    // var pre = parseInt(byId("img_number").value);
+    // if(pre === 0 && $("#imagePath")[0].files.length === 0) {
+    //   alert("you have to select the image first!")
+    //   window.location.href="#image_sec1";
+    // }
+    // else{
     // not form
     // var a = $('input:not(form input)');
     // form_data = get_json(a);
-   
+    // window.location.href="http://localhost:3000/products/Update/5d1b2b63e9ad1500a4c2aa80";
     console.log(byId("invoice").value)
     // for getting serial numbers
     var pid = byId("products_invoice").value
@@ -264,15 +268,12 @@ document.querySelector("#date").value = today;
         pid,
         status: "In Stock"
       };
-     
-      console.log(obj)
       if(byId("serial").value === "true"){
         serial_array.push(byId("s" + i).value)
         obj.number= byId("s" + i).value
       }
       serials.push(obj);
     }
-    console.log(serials)
 
     if (ArrNoDupe(serial_array).length != serial_array.length) alert("serial numbers has to be unique!"); 
     else {
@@ -296,15 +297,16 @@ document.querySelector("#date").value = today;
             product_attribute.features = get_features(new_feat);
   
             $.post("/products/regiSave",{ data: product_attribute, serials: serials }, (data)=>{
-              alert("Now Submit image")
-              window.location.href="#image_sec1";
-              byId("save_img").disabled = false;
+              // alert("Now Submit image")
+              window.location.href="http://localhost:3000/products/Update/"+ pid;
+              // byId('msg_img').innerHTML = ''
+              // byId("save_img").disabled = false;
             });
           }
         }
       );
     }
-  }
+  // }
   });
 
   // makes an array unique
@@ -364,6 +366,7 @@ document.querySelector("#date").value = today;
 
   // update product info
   $("#update_product").click(function(e) {
+
     // alert("Now Submit the image")
     //     window.location.href="#image_sec";
     // if( $("#imagePath")[0].files.length === 0) {
