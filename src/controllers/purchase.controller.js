@@ -117,7 +117,8 @@ exports.SaveLocalPurchase = async (req, res) => {
     var pro_obj = {
       model: model1,
       category: cat[0],
-      brand: brand[0]
+      brand: brand[0],
+      
     };
     if (serial_availablity === 'on') {
       pro_obj.serial_availablity = true

@@ -42,6 +42,33 @@ exports.relatedProducts =async (req, res)=>{
 }
 
 
+exports.SaveAttribute = async (req, res)=>{
+  let prod = await Product.findOne({ _id: req.body.pid })
+  let attribute = {
+    label: req.body.label,
+    value: req.body.value
+  }
+  
+  prod.features.push(attribute)
+
+  new Product(prod).save().then(()=>{
+    res.redirect('/products/Update/'+ req.body.pid)
+  })
+}
+
+exports.deleteAttribute = async (req, res)=>{
+ 
+  let prod = await Product.findOne({ _id: req.params._id })
+  prod.features = prod.features.filter(function(feature, index, arr){
+    return feature.label !== req.params.label;
+  });
+  new Product(prod).save().then(()=>{
+    res.redirect('/products/Update/'+ req.params._id)
+  })
+
+}
+
+
 exports.relatedProducts1 =async (req, res)=>{
   let _id = req.body.pid;
   let prod = await Product.findOne({_id})
@@ -50,7 +77,7 @@ exports.relatedProducts1 =async (req, res)=>{
   }else{
     prod.relatedProducts.push(req.body.relatedProducts)
     new Product(prod).save().then(async (pro)=>{
-      res.redirect('/products/Update/'+_id)
+      res.redirect('/products/Update/'+_id+"#RELATED")
     })
   }
 }
@@ -148,7 +175,7 @@ exports.SaveImage2 = async (req, res) => {
 // saves image in folder
 exports.SaveImage3 = async (req, res) => {
   await savingImage(req)
-  res.redirect(`/products/Update/${req.body.pid}`)
+  res.redirect(`/products/Update/${req.body.pid}#IMAGES1`)
 }
 
 // delete image url from product 

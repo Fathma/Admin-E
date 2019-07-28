@@ -168,6 +168,7 @@ app.get("/image/:filename", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  
   if (req.user) {
     res.redirect("/general/showDashboard");
   } else {

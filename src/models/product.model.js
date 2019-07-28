@@ -25,7 +25,7 @@ var ProductSchema = new Schema({
     },
     availablity: { type:Boolean, default:false },
     warranted: { type: Boolean},
-    sellingPrice: { type: Number , default:0},
+    sellingPrice: { type: Number , default: 0 },
     isActive:{ type: Boolean, default: false },
     dealer: { type: Boolean, default: false },
     status: { type: Boolean, required: false },

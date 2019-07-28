@@ -70,6 +70,8 @@ router.get('/viewLowQuantityProducts',  product_controller.viewLowQuantityProduc
 router.get('/viewProducts', product_controller.viewProducts)
 router.post('/relatedProducts', product_controller.relatedProducts)
 router.post('/relatedProducts1', product_controller.relatedProducts1)
+router.post('/attribute/save', product_controller.SaveAttribute)
+router.get('/attributes/delete1/:_id/:label', product_controller.deleteAttribute)
 
 router.get('/relatedProducts/delete/:pid/:rid', product_controller.relatedProductsDelete)
 router.get('/relatedProducts/delete1/:pid/:rid', product_controller.relatedProductsDelete1)
