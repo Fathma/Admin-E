@@ -61,25 +61,32 @@ $(document).ready(()=>{
       byId("save_inventory").disabled = true;
     }else{
       byId("save_inventory").disabled = false;
-      const { shippingInfo, serial_availablity,sellingPrice}= product[0].product;
+      const { shippingInfo, serial_availablity}= product[0].product;
       const {quantity,purchasePrice}= product[0];
   
       byId( 'unitPrice' ).value = purchasePrice;
-      byId( 'unitPrice' ).readonly = false
+      byId( 'unitPrice' ).readOnly = true
       byId("category").value = category.name;
-  
+      byId("category").readOnly = true
       if (subcategory) {
         byId("subcategory").value = subcategory.name;
+        byId("subcategory").readOnly = true
+      }
+      else{
+        byId("subcategory").readOnly = true
       }
       byId("brand").value = brand.name;
-      byId("name").value = name;
+      byId("brand").readOnly = true
       byId("model").value = model;
+      byId("model").readOnly = true
       byId("quantity").value =quantity;
+      byId("quantity").readOnly = true
       byId("weight").value = weight;
       byId("warranty").value = warranty;
       byId("description").value = description;
       byId("shippingInfo").value = shippingInfo;
       byId("serial").value = serial_availablity;
+      // byId("serial").readOnly = true
   
       // var nums = features.length;
       // byId("new_feat").value = nums;
@@ -108,6 +115,7 @@ $(document).ready(()=>{
       for (var i = 0; i < quantity; i++) {
         var label1 = createLabel("pid", i, "PID" + (i + 1));
         var input1 = createInputfield("text", "pid", i, `${pid}-${today}-${randomString(4)}`);
+        input1.readOnly = true;
         create_row(i, label1, input1);
   
         if (serial_availablity) {
@@ -207,7 +215,9 @@ $(document).ready(()=>{
     return(JSON.parse(obj))
   }
 
-  $("#save_inventory").submit(function(e) {
+  $("#save_inventory").click((e)=>{
+    e.preventDefault();
+    alert('sdjfhkhsf')
     // var pre = parseInt(byId("img_number").value);
     // if(pre === 0 && $("#imagePath")[0].files.length === 0) {
     //   alert("you have to select the image first!")
@@ -252,7 +262,6 @@ $(document).ready(()=>{
               warranty: byId("warranty").value,
               sellingPrice: byId("sellingPrice").value,
               description: byId("description").value,
-              HomePagetag: byId("HomePagetag").value,
               shippingInfo: byId("shippingInfo").value
             };
             // var new_feat = parseInt(byId("new_feat").value);

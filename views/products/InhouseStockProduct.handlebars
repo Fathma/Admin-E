@@ -8,229 +8,223 @@
     <div class="content" style="background-color: white; min-height: 100px; display:block">
         <div class="register-logo">
         </div>
-        <div class="container">
+        <div class="box-body">
             <div class="row">
-                <div class="col-md-10">
-                    <form id="save_inventory" action="">
-                    <div class="well">
-                        
-                        <input type="hidden" class="form-control inp" name="serial" id="serial">
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="invoice">LP Invoice<span style="color:red">*</span>
-                                </label>
+                 <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well" style="background-color: white; ">
+                            
+                            <input type="hidden" class="form-control inp" name="serial" id="serial">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="invoice">LP Invoice<span style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control inp" name="invoice" id="invoice" required>
+                                        <option value="">select One</option>
+                                        {{# each LocalPurchase}}
+                                        <option value="{{this._id}}">{{this.number}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-5 col5" style="width:16.667%">
+                                    <label class="lbl" for="date">Date</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control inp" name="date" id="date">
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <select class="form-control inp" name="invoice" id="invoice" required>
-                                    <option value="">select One</option>
-                                    {{# each LocalPurchase}}
-                                    <option value="{{this._id}}">{{this.number}}</option>
-                                    {{/each}}
-                                </select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="supplier">Supplier
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="supplier" id="supplier">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="products_invoice">Product<span style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control inp" name="products_invoice" id="products_invoice" required>
+                                    </select >
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="category">Category
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="category" id="category">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="subcategory">Sub Category
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="subcategory" id="subcategory">
+                                </div>
                             </div>
 
-                            <div class="col-md-5 col5" style="width:16.667%">
-                                <label class="lbl" for="date">Date</label>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="brand">Brand
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="brand" id="brand">
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <input type="text" class="form-control inp" name="date" id="date">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="quantity">Quantity
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="quantity" id="quantity">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="supplier">Supplier
-                                </label>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="unitPrice">Unit Price
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="unitPrice" id="unitPrice">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="supplier" id="supplier">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="sellingPrice">Selling Price<span style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" required>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="products_invoice">Product<span style="color:red">*</span>
-                                </label>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="model">Model
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="model" id="model">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <select class="form-control inp" name="products_invoice" id="products_invoice" required>
-                                </select >
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="name">Title<span style="color:red">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="name" id="name" required>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="category">Category
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="category" id="category">
-                            </div>
-                        </div>
-                        <br>
+                            <br>
 
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="subcategory">Sub Category
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="subcategory" id="subcategory">
-                            </div>
-                        </div>
+                            {{!-- <div id="add"> --}}
+                                {{!-- adds previous features --}}
+                            {{!-- </div> --}}
 
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="brand">Brand
-                                </label>
+                            {{!-- <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="new_feat_label">New Feature:</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="hidden" id="new_feat" name="new_feat"
+                                        value="0">--}}{{!-- counts the total newly added features --}}
+                                    {{!-- <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
+                                        placeholder="write a new feature name">
+                                </div>
+                                <div class="col-md-1">
+                                    <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="brand" id="brand">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="quantity">Quantity
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="quantity" id="quantity">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="unitPrice">Unit Price
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="unitPrice" id="unitPrice">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="sellingPrice">Selling Price<span style="color:red">*</span>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" required>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="model">Model
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="model" id="model">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="name">Title<span style="color:red">*</span>
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="name" id="name" required>
-                            </div>
-                        </div>
-                        <br>
+                            <br>  --}}
 
-                        {{!-- <div id="add"> --}}
-                            {{!-- adds previous features --}}
-                        {{!-- </div> --}}
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="weight">Weight:
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="weight" id="weight">
+                                </div>
+                            </div>
+                            <br>
 
-                        {{!-- <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="new_feat_label">New Feature:</label>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="warranty">Warranty<span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="warranty" id="warranty" required>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="hidden" id="new_feat" name="new_feat"
-                                    value="0">--}}{{!-- counts the total newly added features --}}
-                                {{!-- <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
-                                    placeholder="write a new feature name">
-                            </div>
-                            <div class="col-md-1">
-                                <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
-                            </div>
-                        </div>
-                        <br>  --}}
+                            <br>
 
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="weight">Weight:
-                                </label>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="description">Description</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="description"
+                                        id="description"></textarea>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="weight" id="weight">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="shippingInfo">Shipping Info</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea type="text" class="form-control inp" name="shippingInfo"
+                                        id="shippingInfo"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="warranty">Warranty<span style="color:red">*</span></label>
+                            <br>
+                            {{!-- <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control inp" name="HomePagetag" id="HomePagetag">
+                                        <option value="None">None</option>
+                                        <option value="Hot Deals">Hot Deals</option>
+                                        <option value="Trending">Trending</option>
+                                        <option value="New Product">New Product</option>
+                                        <option value="Exclusive Products ">Exclusive Products </option>
+                                    </select>
+                                </div>
+                            </div> --}}
+                            <br>
+                            <div id="space">
+                                {{!-- place for serials --}}
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control inp" name="warranty" id="warranty" required>
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="description">Description</label>
-                            </div>
-                            <div class="col-md-6">
-                                <textarea type="text" class="form-control inp" name="description"
-                                    id="description"></textarea>
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="shippingInfo">Shipping Info</label>
-                            </div>
-                            <div class="col-md-6">
-                                <textarea type="text" class="form-control inp" name="shippingInfo"
-                                    id="shippingInfo"></textarea>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-5 col5">
-                                <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
-                            </div>
-                            <div class="col-md-6">
-                                <select class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                    <option value="None">None</option>
-                                    <option value="Hot Deals">Hot Deals</option>
-                                    <option value="Trending">Trending</option>
-                                    <option value="New Product">New Product</option>
-                                    <option value="Exclusive Products ">Exclusive Products </option>
-                                </select>
+                            <div class="row">
+                                <center>
+                                    <button id="save_inventory" class="btn btn-default btn-md" >Save</button>
+                                </center>
                             </div>
                         </div>
-                        <br>
-                        <div id="space">
-                            {{!-- place for serials --}}
-                        </div>
-
-
-                        <div class="row">
-                            <center>
-                                <button  class="btn btn-default btn-md" type="submit">Save</button>
-                            </center>
-                        </div>
-                        
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
