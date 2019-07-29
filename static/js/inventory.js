@@ -216,8 +216,6 @@ $(document).ready(()=>{
   }
 
   $("#save_inventory").click((e)=>{
-    e.preventDefault();
-    alert('sdjfhkhsf')
     // var pre = parseInt(byId("img_number").value);
     // if(pre === 0 && $("#imagePath")[0].files.length === 0) {
     //   alert("you have to select the image first!")
@@ -308,7 +306,6 @@ $(document).ready(()=>{
         warranty: byId("warranty").value,
         description: byId("description").value,
         shippingInfo: byId("shippingInfo").value,
-        HomePagetag: byId("HomePagetag").value,
         dealer: true,
         sellingPrice: parseInt(byId("sellingPrice").value)
       };
@@ -361,7 +358,7 @@ $(document).ready(()=>{
       // product_attribute.features = get_features(new_feat);
 
       $.post("/products/regiSaveDealer", { data: product_attribute }, (data)=> {
-        alert("Now Submit the image")
+        alert("Successful!")
         window.location.href="http://ecom-admin.herokuapp.com/products/Update/"+ byId("_id").value+"#PRODUCT1";
       });
     // }

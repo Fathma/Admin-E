@@ -206,8 +206,10 @@ var savingImage = async req =>{
 // In-house stock product entry page
 exports.getInhouseInventoryPage = (req, res) => res.render('products/InhouseStockProduct');
 
+
 // dealer stock product entry page
 exports.getDealerInventoryPage = (req, res) => res.render('products/dealerProduct');
+
 
 // shows the number of fields user wants
 exports.showProductRegistrationFields =async (req, res, next) => {
@@ -228,19 +230,19 @@ exports.showProductRegistrationFields =async (req, res, next) => {
   if(req.body.subCategg != '0'){
     var subcategory= req.body.subCategg.split(',');
     await SubCategory.updateOne({_id: subcategory[0]}, { $addToSet:{ brands: brand[0]} },{ upsert: true })
-    product.subcategory= subcategory[0],
+    product.subcategory = subcategory[0],
     product.productName = category[1]+'-'+subcategory[1]+'-'+brand[1]+'-'+model
-    product.pid= category[1].substr(0,3)+subcategory[1].substr(0,3)+brand[1].substr(0,3)+model
-    obj.subcategory=subcategory[0]
+    product.pid = category[1].substr(0,2)+subcategory[1].substr(0,2)+brand[1].substr(0,2)+ model
+    obj.subcategory = subcategory[0]
   }else{
-    product.productName = category[1]+'-'+brand[1]+'-'+model
-    product.pid = category[1].substr(0,3)+brand[1].substr(0,3)+model
+    product.productName = category[1]+'-'+ brand[1]+'-'+ model
+    product.pid = category[1].substr(0,2)+ brand[1].substr(0,2)+ model
   }
   
   // get all the features of cat sub and brand
   Product.find(obj, function(err, pros){
       var features = []
-      if(pros != null){
+      if(!pros){
         pros.map( (product)=>{
           product.features.map((feature)=>{
             features.push(feature.label);
@@ -249,13 +251,16 @@ exports.showProductRegistrationFields =async (req, res, next) => {
       }
     // checks whether the model already exists or not
     Product.findOne({ model: model }, ( err, result )=>{
-      if( result === null ){
+      if( !result ){
         new Product( product ).save().then( product => res.render('products/dealerProduct',{ product, features, feature_total: features.length }))
       }
-      else res.render('products/dealerProduct',{ product: result, features, feature_total: features.length })
+      else { 
+        req.flash('error_msg', 'The product already exists!')
+        res.render('products/dealerProduct') }
     })
   })
 };
+
 
 exports.getSearchResult = (req, res)=>{
    var search =  new RegExp(req.body.searchData, 'i')
@@ -379,7 +384,6 @@ exports.viewLowQuantityProducts = async (req, res)=>{
   for(var i = 0; i< products.length;i++){
     var data = await Serial.find({ $and: [{pid: products[i]._id },{status:'In Stock' }]}).populate('pid').populate('lp').populate('invoice')
     
-    
     if(data.length < 5){
       var obj = {
         product:products[i],
@@ -391,7 +395,6 @@ exports.viewLowQuantityProducts = async (req, res)=>{
     } 
   }
   res.render('products/LowInStock', { serials })
-  
 }
 
 // make product not available

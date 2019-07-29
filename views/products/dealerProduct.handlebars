@@ -1,13 +1,11 @@
 <div class="container-fluid">
     <div class="box">
-        <button class="collapsible active"><span style="float:left ">SPECIFICATIONS</span><span style="float:right"
-                id="sp">+</span></button>
+        <button class="collapsible active"><span style="float:left ">SPECIFICATIONS</span><span style="float:right" id="sp">+</span></button>
         <div class="content" style="background-color: white; min-height: 100px; display:block">
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
-                            <h3 class="text-center">Add New Product/ Model</h3>
                             <div class="well">
                                 <form action="/products/showfields" method="POST">
                                     <div class="row">
@@ -37,7 +35,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <select class="form-control inp" name="subCategg" id="subCategg">
-                                                <option value="null">select one</option>
+                                                <option value="0">select one</option>
                                                 {{# each categories}}
                                                 <option value="{{this._id}},{{this.name}}"
                                                     {{# equality this._id ../product.subcategory}}
@@ -202,8 +200,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="hidden" id="new_feat" name="new_feat"
-                                        value="{{feature_total}}">{{!-- counts the total newly added features --}}
-                                    <input type="text" id="new_feat_label" name="new_feat_label"
+                                        value="{{feature_total}}">--}}{{!-- counts the total newly added features --}}
+                                   {{!-- <input type="text" id="new_feat_label" name="new_feat_label"
                                         class="form-control inp" placeholder="write a new feature name">
                                 </div>
                                 <div class="col-md-1">
@@ -214,7 +212,7 @@
 
                             <div class="row">
                                 <div class="col-md-5 col5">
-                                    <label class="lbl" for="weight">weight:
+                                    <label class="lbl" for="weight">Weight:
                                     </label>
                                 </div>
                                 <div class="col-md-6">
@@ -225,7 +223,7 @@
 
                             <div class="row">
                                 <div class="col-md-5 col5">
-                                    <label class="lbl" for="warranty">warranty:
+                                    <label class="lbl" for="warranty">Warranty:
                                     </label>
                                 </div>
                                 <div class="col-md-6">
@@ -236,7 +234,7 @@
 
                             <div class="row">
                                 <div class="col-md-5 col5">
-                                    <label class="lbl" for="description">description:</label>
+                                    <label class="lbl" for="description">Description:</label>
                                 </div>
                                 <div class="col-md-6">
                                     <textarea type="text" class="form-control inp" name="description"
@@ -247,7 +245,7 @@
 
                             <div class="row">
                                 <div class="col-md-5 col5">
-                                    <label class="lbl" for="shippingInfo">shippingInfo:</label>
+                                    <label class="lbl" for="shippingInfo">ShippingInfo:</label>
                                 </div>
                                 <div class="col-md-6">
                                     <textarea type="text" class="form-control inp" name="shippingInfo"
@@ -256,7 +254,7 @@
                             </div>
                             <br>
 
-                            <div class="row">
+                            {{!-- <div class="row">
                                 <div class="col-md-5 col5">
                                     <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
                                 </div>
@@ -270,8 +268,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <br>
-                            <button id="save_inventory_dealer" class="btn btn-primary">Next Step</button>
+                            <br> --}}
+                            <div class="row">
+                                <center>
+                                    <button id="save_inventory_dealer" class="btn btn-primary">Save</button>
+                                </center>
+                            </div>
+                           
                             {{!-- </form> --}}
                             {{/if}}
                         </div>
@@ -395,6 +398,94 @@
                                 {{/each}}
                             </tbody>
                         </table> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div id="SPECIFICATIONS1"></div>
+        <button class="collapsible"><span style="float:left "><li class="fa fa-cog panel-icon"></li> SPECIFICATIONS</span><span style="float:right"
+                id="sp">+</span></button>
+        <div class="content" style="background-color: white; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            
+                            {{# if product }}
+                            <form action="/products/attribute/save" method="POST">
+                               
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="pid">Product Name
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <input type="text" class="form-control inp" name="pname" id="pname"
+                                            value="{{ product.name }}">
+                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="label">Product Attribute
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="label" id="label" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="value">Value
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="value" id="value" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form><br>
+                            <table id="ptable" style="width:100%" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product Attributes</th>
+                                        <th>Values</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{# each product.features}}
+                                    <tr>
+                                        <td>
+                                            <strong>{{this.label}}</strong>
+                                        </td>
+                                         <td>
+                                            <strong>{{this.value}}</strong>
+                                        </td>
+                                        <td>
+                                            <a href="/products/attributes/delete1/{{../product._id}}/{{this.label}}"
+                                                class="btn btn-default ">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            {{else}}
+                            <p>You need to complete product registration with image in specification section.
+                            </p>
+                            {{/if}}
                         </div>
                     </div>
                 </div>

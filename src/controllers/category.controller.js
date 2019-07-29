@@ -51,6 +51,7 @@ exports.getSub2 = ( req, res ) => {
 
 // getting sub categories on the basis of category
 exports.getSub = (req, res) => {
+ 
   Cat.find({ _id: req.params.cat })
     .populate('subCategories')
     .populate('brands')
