@@ -215,7 +215,7 @@ $(document).ready(()=>{
     return(JSON.parse(obj))
   }
 
-  $("#save_inventory").click((e)=>{
+  $("#save_inventory").submit((e)=>{
     // var pre = parseInt(byId("img_number").value);
     // if(pre === 0 && $("#imagePath")[0].files.length === 0) {
     //   alert("you have to select the image first!")
@@ -228,7 +228,8 @@ $(document).ready(()=>{
     // window.location.href="http://localhost:3000/products/Update/5d1b2b63e9ad1500a4c2aa80";
 
     // for getting serial numbers
-    
+    e.preventDefault();
+   alert('fgdl')
     var pid = byId("products_invoice").value
     var serials = [];
     var serial_array = [];

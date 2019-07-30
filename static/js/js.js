@@ -255,89 +255,89 @@ function set_disableNoSerial(id) {
 }
 
 
-// saving Inventory with serial numbers
-$("form").submit(function(e) {
-  // this is to prevent double submit
-  if (document.getElementById("val").value === "0") {
-    var check = parseInt(document.getElementById("check").value);
-    var data_string = "";
-    for (var i = 1; i <= check; i++) {
-      if (document.getElementById("v" + i).value != "") {
-        data_string +=byId("v" + i).value;
-        if (check != i) {
-          data_string += ",";
-        }
-      }
-    }
+// // saving Inventory with serial numbers
+// $("form").submit(function(e) {
+//   // this is to prevent double submit
+//   if (document.getElementById("val").value === "0") {
+//     var check = parseInt(document.getElementById("check").value);
+//     var data_string = "";
+//     for (var i = 1; i <= check; i++) {
+//       if (document.getElementById("v" + i).value != "") {
+//         data_string +=byId("v" + i).value;
+//         if (check != i) {
+//           data_string += ",";
+//         }
+//       }
+//     }
 
-    if (
-     byId("check").value === "0" ||
-     byId("check").value !=
-     byId("quantity").value
-    ) {
-      createtextfields();
-      e.preventDefault();
-    } else {
-      if (data_string === "") {
-      } else {
-        if (
-          data_string.split(",").length !=
-          ArrNoDupe(data_string.split(",")).length
-        ) {
-          alert("Serial numbers have to be unique!");
-          e.preventDefault();
-        } else {
-          var string_data =byId("pre_serial").value;
-          var per = string_data.split(",");
+//     if (
+//      byId("check").value === "0" ||
+//      byId("check").value !=
+//      byId("quantity").value
+//     ) {
+//       createtextfields();
+//       e.preventDefault();
+//     } else {
+//       if (data_string === "") {
+//       } else {
+//         if (
+//           data_string.split(",").length !=
+//           ArrNoDupe(data_string.split(",")).length
+//         ) {
+//           alert("Serial numbers have to be unique!");
+//           e.preventDefault();
+//         } else {
+//           var string_data =byId("pre_serial").value;
+//           var per = string_data.split(",");
 
-          // the first value as "123... here removing the "
-          var fi = "";
-          for (var j = 1; j < per[0].length; j++) {
-            fi += per[0][j];
-          }
+//           // the first value as "123... here removing the "
+//           var fi = "";
+//           for (var j = 1; j < per[0].length; j++) {
+//             fi += per[0][j];
+//           }
 
-          // the first value as 123"... here removing the "
-          var la = "";
-          for (var j = 0; j < per[per.length - 1].length - 1; j++) {
-            la += per[per.length - 1][j];
-          }
-          per.push(la);
-          per.push(fi);
+//           // the first value as 123"... here removing the "
+//           var la = "";
+//           for (var j = 0; j < per[per.length - 1].length - 1; j++) {
+//             la += per[per.length - 1][j];
+//           }
+//           per.push(la);
+//           per.push(fi);
 
-          var new_arr = data_string.split(",");
-          var exists = "";
+//           var new_arr = data_string.split(",");
+//           var exists = "";
 
-          for (var i = 0; i < new_arr.length + 1; i++) {
-            if (per.includes(new_arr[i])) {
-              exists += new_arr[i] + " ";
-            }
-          }
+//           for (var i = 0; i < new_arr.length + 1; i++) {
+//             if (per.includes(new_arr[i])) {
+//               exists += new_arr[i] + " ";
+//             }
+//           }
 
-          if (exists.length === 0) {
-            $.post( "/products/SaveInventory",
-              {
-                serial: data_string,
-                model:byId("model").value,
-                purchase_price: parseInt(
-                 byId("purchase_price").value
-                ),
-                quantity:byId("quantity").value
-              },
-              function(data_string) {
-                alert(JSON.stringify(data_string));
-              }
-            );
-            alert("successful");
-           byId("val").value = "1";
-          } else {
-            alert(exists + "already exists!");
-            e.preventDefault();
-          }
-        }
-      }
-    }
-  }
-});
+//           if (exists.length === 0) {
+//             $.post( "/products/SaveInventory",
+//               {
+//                 serial: data_string,
+//                 model:byId("model").value,
+//                 purchase_price: parseInt(
+//                  byId("purchase_price").value
+//                 ),
+//                 quantity:byId("quantity").value
+//               },
+//               function(data_string) {
+//                 alert(JSON.stringify(data_string));
+//               }
+//             );
+//             alert("successful");
+//            byId("val").value = "1";
+//           } else {
+//             alert(exists + "already exists!");
+//             e.preventDefault();
+//           }
+//         }
+//       }
+//     }
+//   }
+// });
 });
 
 
