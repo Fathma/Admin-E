@@ -26,6 +26,8 @@ var Specification  = require('./src/models/specification.model')
 const keys = require('./config/keys')
 var Brand = require("./src/models/brand.model");
 
+var vlaues = require('./config/values')
+
 
 moment().format();
 
@@ -155,6 +157,7 @@ app.use(async (req, res, next)=>{
   res.locals.Product = await Product.find()
   res.locals.Supplier = await Supplier.find()
   res.locals.LocalPurchase = await LocalPurchase.find()
+  res.locals.productentry_msg = vlaues.msg.productentry;
   next();
 });
 

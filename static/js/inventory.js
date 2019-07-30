@@ -229,7 +229,7 @@ $(document).ready(()=>{
 
     // for getting serial numbers
     e.preventDefault();
-   alert('fgdl')
+
     var pid = byId("products_invoice").value
     var serials = [];
     var serial_array = [];
@@ -290,7 +290,8 @@ $(document).ready(()=>{
     return r;
   }
 
-  $("#save_inventory_dealer").click((e)=>{
+  $("#save_inventory_dealer").submit((e)=>{
+    e.preventDefault();
     // alert("Now Submit the image")
     //     window.location.href="#image_sec";
     // if( $("#imagePath2")[0].files.length === 0) {
@@ -334,7 +335,8 @@ $(document).ready(()=>{
   // }
 
   // update product info
-  $("#update_product").click(function(e) {
+  $("#update_product").submit(function(e) {
+    e.preventDefault();
 
     // alert("Now Submit the image")
     //     window.location.href="#image_sec";
