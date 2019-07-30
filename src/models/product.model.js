@@ -9,7 +9,10 @@ var ProductSchema = new Schema({
     name: { type: String, default:""},
     productName:{ type: String },
     model: { type: String, required: false },
-    features: { type: Array, required: false },
+    features: [{ 
+        label: { type: Schema.Types.ObjectId, ref: 'Specification' }, 
+        value: { type: String } 
+    }],
     warranty: { type: String, default:"" },
     description: { type: String, default: 'None'},
     shippingInfo: {type:String, default:'None'},

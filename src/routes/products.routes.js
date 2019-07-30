@@ -68,11 +68,17 @@ router.get('/notAvailable/:id',  product_controller.makeNotAvailable)
 router.get('/serials',  product_controller.getSerials)
 router.get('/viewLowQuantityProducts',  product_controller.viewLowQuantityProducts)
 router.get('/viewProducts', product_controller.viewProducts)
-router.post('/relatedProducts', product_controller.relatedProducts)
-router.post('/relatedProducts1', product_controller.relatedProducts1)
+
+// product attribute/ specifications
 router.post('/attribute/save', product_controller.SaveAttribute)
 router.get('/attributes/delete1/:_id/:label', product_controller.deleteAttribute)
+router.get('/Specifications', product_controller.Specifications)
+router.get('/specifications/new', product_controller.SpecificationsNew)
+router.post('/specifications/save', product_controller.SpecificationsSave)
 
+// related products
+router.post('/relatedProducts', product_controller.relatedProducts)
+router.post('/relatedProducts1', product_controller.relatedProducts1)
 router.get('/relatedProducts/delete/:pid/:rid', product_controller.relatedProductsDelete)
 router.get('/relatedProducts/delete1/:pid/:rid', product_controller.relatedProductsDelete1)
 
@@ -81,7 +87,6 @@ router.get('/relatedProducts/delete1/:pid/:rid', product_controller.relatedProdu
 // Edit (Inventory With Serial number)
 
 router.get( "/Edit/:id", product_controller.getEditpage )
-
 router.post( "/EditReplace/:lot_id/:pid", product_controller.EditReplace )
 router.post( "/EditDelete/:lot_id/:pid", product_controller.EditDelete )
 router.post( "/EditPP/:lot_id/:pid", product_controller.EditPP )

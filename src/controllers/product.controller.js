@@ -7,6 +7,7 @@ var mongo = require('mongodb')
 const Product = require('../models/product.model')
 const Category = require('../models/category.model')
 const SubCategory = require('../models/subCategory.model')
+const Specification = require('../models/specification.model')
 const Serial = require('../models/serials.model')
 const allFuctions = require('../helpers/allFuctions')
 const mongoose = require('mongoose')
@@ -24,6 +25,36 @@ conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('fs');
 })
+
+
+exports.SpecificationsNew = (req, res)=> res.render('products/newSpecification')
+ 
+exports.SpecificationsSave = (req, res)=>{
+  Specification.find({ _id: req.body.specification}, (err, specifications)=>{
+    if(!specifications){
+      let obj = {
+        name: req.body.specification,
+        createdBy: req.user._id
+      }
+     
+      new Specification(obj).save().then(()=>{
+        res.redirect('/products/specifications/new')
+      })
+    }
+    else{
+      req.flash('error_msg', 'Already exists!')
+      res.redirect('/products/specifications/new')
+    }
+  })
+}
+
+exports.Specifications =async (req, res)=>{
+  var specifications = await Specification.find().populate('createdBy')
+  var count = 1;
+  specifications.map( doc=> doc.count = count++ )
+  res.render('products/specifications',{ specifications })
+  
+}
 
 
 exports.relatedProducts =async (req, res)=>{
@@ -52,21 +83,24 @@ exports.SaveAttribute = async (req, res)=>{
   prod.features.push(attribute)
 
   new Product(prod).save().then(()=>{
-    res.redirect('/products/Update/'+ req.body.pid)
+    res.redirect('/products/Update/'+ req.body.pid+'#SPECIFICATIONS1')
   })
 }
 
 exports.deleteAttribute = async (req, res)=>{
- 
   let prod = await Product.findOne({ _id: req.params._id })
+
   prod.features = prod.features.filter(function(feature, index, arr){
-    return feature.label !== req.params.label;
+    return feature.label.toString() !== req.params.label;
   });
+
   new Product(prod).save().then(()=>{
-    res.redirect('/products/Update/'+ req.params._id)
+    res.redirect('/products/Update/'+ req.params._id+'#SPECIFICATIONS1')
   })
 
 }
+
+
 
 
 exports.relatedProducts1 =async (req, res)=>{
@@ -117,7 +151,7 @@ exports.viewProducts = (req, res)=>{
 
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
-  let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts')
+  let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label')
   res.render('products/update',{ product, feature_total: product.features.length })
 }
 
@@ -192,6 +226,7 @@ exports.deteteImg = (req, res)=>{
     }
   })
 }
+
 
 // saves link with image filenames in database
 var savingImage = async req =>{

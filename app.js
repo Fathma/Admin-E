@@ -22,6 +22,7 @@ var LocalPurchase = require("./src/models/localPurchase.model");
 var Supplier = require("./src/models/supplier.model");
 var SubCategory = require("./src/models/subCategory.model");
 var PostCategory = require('./src/models/postCategory.model')
+var Specification  = require('./src/models/specification.model')
 const keys = require('./config/keys')
 var Brand = require("./src/models/brand.model");
 
@@ -147,6 +148,7 @@ app.use(function(req, res, next) {
 
 // middleware
 app.use(async (req, res, next)=>{
+  res.locals.specifications = await Specification.find()
   res.locals.cat = await Category.find()
   res.locals.categories = await SubCategory.find()
   res.locals.brand = await Brand.find()
@@ -168,7 +170,7 @@ app.get("/image/:filename", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  
+  // await Product.update({},{$set:{features : []}})
   if (req.user) {
     res.redirect("/general/showDashboard");
   } else {
@@ -182,7 +184,7 @@ app.use("/users",   usersRoutes);
 app.use("/orders", ensureAuthenticated, Contributor, ordersRoutes);
 app.use("/invoice", ensureAuthenticated, Contributor, invoiceRoutes);
 app.use("/customers", ensureAuthenticated, Administrator, customerRoutes);
-app.use("/products", Editor,  productsRoutes);
+app.use("/products", Editor,ensureAuthenticated,  productsRoutes);
 app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
 app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
 app.use("/general",  generalRoutes);

@@ -1,0 +1,54 @@
+<div class="row">
+    <a class="btn bg-purple" href="/products/specifications/new" style="float: right;margin: 10px 28px;">
+        <li class="fa fa-plus-square" style="padding: 5px"></li>New Specification
+    </a>
+
+</div><br>
+<div class="container-fluid">
+
+
+
+    <div style="background-color: white">
+
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Specifications</th>
+                    <th>Creation Date</th>
+                    <th>Created By</th>
+                    <th>Enabled</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{# each specifications}}
+                {{# if this._id}}
+                <tr>
+                    <td>
+                        <strong>{{this.count}}</strong>
+                    </td>
+                    
+                    <td>
+                        <strong>{{this.name}}</strong>
+                    </td>
+
+                    <td>
+                        <strong>{{formatDate this.created}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{this.createdBy.name}}</strong>
+                    </td>
+                    <td>
+                        {{# if this.enabled}}
+                        <strong>Enabled</strong>
+                        {{else}}
+                        <strong>Disabled</strong>
+                        {{/if}}
+                    </td>
+                </tr>
+                {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
