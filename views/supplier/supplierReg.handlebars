@@ -1,3 +1,4 @@
+
 <div class="register-box " style="width:70%" onload="set_vari()">
     <div class="register-logo">
         <a href="index.html"><b>Supplier</b>Registration</a>
@@ -14,9 +15,10 @@
                             <label class="lbl" for="cname">Date<span style="color:red">*</span></label>
                         </div>
                         <div class="col-md-6">
-                           
-                            <input type="text" class="form-control inp  " name="date" id="date"
-                                value="{{formatDate date}}" required>
+                            <input type="date" class="form-control inp" style=" line-height: 19px;width: auto;" name="date11"
+                    id="date11" required>
+                            {{!-- <input type="text" class="form-control inp  " name="date" id="date"
+                                value="{{formatDate date}}" required> --}}
                         </div>
                     </div>
                 </div>
@@ -497,3 +499,8 @@
             </div>
         </div>
     </div>
+    <script>
+        let today = new Date().toISOString().substr(0, 10);
+        document.querySelector("#date11").value = today;
+        document.querySelector("#time11").value = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();;
+    </script>

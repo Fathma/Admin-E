@@ -87,6 +87,11 @@ exports.SaveAttribute = async (req, res)=>{
   })
 }
 
+exports.SaveHomePageTag = async (req, res)=>{
+  await Product.update({_id: req.body.pid},{ $set:{HomePagetag: req.body.HomePagetag} })
+  res.redirect('/products/Update/'+ req.body.pid+'#tag1')
+}
+
 exports.deleteAttribute = async (req, res)=>{
   let prod = await Product.findOne({ _id: req.params._id })
 

@@ -11,7 +11,7 @@ var ProductSchema = new Schema({
     model: { type: String, required: false },
     features: [{ 
         label: { type: Schema.Types.ObjectId, ref: 'Specification' }, 
-        value: { type: String } 
+        value: { type: String }
     }],
     warranty: { type: String, default:"" },
     description: { type: String, default: 'None'},

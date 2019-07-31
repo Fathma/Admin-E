@@ -291,8 +291,8 @@
 
     <div class="box">
         <button class="collapsible">
-            <li class="fa fa-picture-o panel-icon" style="padding: 5px"></li><span>IMAGES</span><span
-                style="float:right" id="sp">+</span>
+            <li class="fa fa-picture-o panel-icon" style="padding: 5px"></li><span>IMAGES</span>
+            <span style="float:right" id="sp">+</span>
         </button>
         <div class="content" style="background-color: white; min-height: 100px; display:block">
             <div class="box-body">
@@ -340,8 +340,8 @@
 
     <div class="box">
         <button class="collapsible">
-            <li class="fa fa-object-group panel-icon" style="padding: 5px"></li><span>RELATED PRODUCT</span><span
-                style="float:right" id="sp">+</span>
+            <li class="fa fa-object-group panel-icon" style="padding: 5px"></li><span>RELATED PRODUCT</span>
+            <span style="float:right" id="sp">+</span>
         </button>
         <div class="content" style="background-color: white;min-height: 100px; display:block">
             <div class="box-body">
@@ -412,10 +412,9 @@
 
     <div class="box">
         <div id="SPECIFICATIONS1"></div>
-        <button class="collapsible"><span style="float:left ">
-                <li class="fa fa-cog panel-icon"></li> SPECIFICATIONS
-            </span><span style="float:right" id="sp">+</span></button>
-        <div class="content" style="background-color: white; display:block">
+        <button class="collapsible"><span style="float:left "><li class="fa fa-cog panel-icon"></li> SPECIFICATIONS</span>
+        <span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white;min-height: 100px; display:block">
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -492,6 +491,54 @@
                             <p>You need to complete product registration with image in specification section.
                             </p>
                             {{/if}} --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="box">
+        <div id="tag1"></div>
+        <button class="collapsible"><span style="float:left ">
+               <i class="fa fa-tag" aria-hidden="true"></i>
+                </li>Product Tag
+            </span><span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white;min-height: 100px; display:block">
+           <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <h4>{{productentry_msg}}</h4>
+                            {{!-- <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="img_number" id="img_number">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="pid">Product Name
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="pname" id="pname">
+                                    <input type="hidden" name="pid" id="pid">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="imagePath">Select Image
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg"
+                                        multiple>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
+                                </center>
+                            </div>
+                        </form> --}}
                         </div>
                     </div>
                 </div>

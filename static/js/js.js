@@ -95,9 +95,6 @@ function addnew() {
 
 function set_var() {
  byId("check").value = "0";
- let today = new Date().toISOString().substr(0, 10);
-  document.querySelector("#date11").value = today;
- 
 }
 
 function check_all_purchase_price() {

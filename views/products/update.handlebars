@@ -13,53 +13,54 @@
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
                             <form action="" id="update_product">
-                            <input type="hidden" class="form-control inp" name="serial" id="serial">
-                            <input type="hidden" class="form-control inp" name="_id" id="_id" value="{{product._id}}">
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="products_invoice">Product Name</label>
+                                <input type="hidden" class="form-control inp" name="serial" id="serial">
+                                <input type="hidden" class="form-control inp" name="_id" id="_id"
+                                    value="{{product._id}}">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="products_invoice">Product Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="products_invoice"
+                                            id="products_invoice" value="{{product.productName}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="products_invoice"
-                                        id="products_invoice" value="{{product.productName}}">
-                                </div>
-                            </div>
-                            <br>
+                                <br>
 
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="model">Model
-                                    </label>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="model">Model
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="model" id="model"
+                                            value="{{product.model}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="model" id="model"
-                                        value="{{product.model}}">
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="name">Title
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="name" id="name"
+                                            value="{{product.name}}">
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="name">Title
-                                    </label>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="sellingPrice">Selling Price
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="sellingPrice"
+                                            id="sellingPrice" value="{{product.sellingPrice}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="name" id="name"
-                                        value="{{product.name}}">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="sellingPrice">Selling Price
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice"
-                                        value="{{product.sellingPrice}}">
-                                </div>
-                            </div>
-                            <br>
-                            {{!-- {{# each product.features}}
+                                <br>
+                                {{!-- {{# each product.features}}
                             <div class="row">
                                 <div class="col-md-5 col5">
                                     <label class="lbl" for="v{{@index}}">{{this.label}}</label>
@@ -73,18 +74,18 @@
                             </div>
                             <br>
                             {{/each}} --}}
-                            {{!-- <div id="add"> --}}
-                            {{!-- adds previous features --}}
-                            {{!-- </div> --}}
+                                {{!-- <div id="add"> --}}
+                                {{!-- adds previous features --}}
+                                {{!-- </div> --}}
 
-                            {{!-- <div class="row">
+                                {{!-- <div class="row">
                                 <div class="col-md-5 col5">
                                     <label class="lbl" for="new_feat_label">New Feature</label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="hidden" id="new_feat" name="new_feat"
                                         value="{{feature_total}}">--}}{{!-- counts the total newly added features --}}
-                            {{!--  <input type="text" id="new_feat_label" name="new_feat_label"
+                                {{!--  <input type="text" id="new_feat_label" name="new_feat_label"
                                         class="form-control inp" placeholder="write a new feature name">
                                 </div>
                                 <div class="col-md-1">
@@ -92,51 +93,51 @@
                                 </div>
                             </div>
                             <br> --}}
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="weight">Weight
-                                    </label>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="weight">Weight
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="weight" id="weight"
+                                            value="{{product.weight}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="weight" id="weight"
-                                        value="{{product.weight}}">
-                                </div>
-                            </div>
-                            <br>
+                                <br>
 
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="warranty">Warranty</label>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="warranty">Warranty</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="warranty" id="warranty"
+                                            value="{{product.warranty}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="warranty" id="warranty"
-                                        value="{{product.warranty}}">
-                                </div>
-                            </div>
-                            <br>
+                                <br>
 
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="description">Description</label>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="description">Description</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control inp" name="description"
+                                            id="description">{{product.description}}</textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <textarea type="text" class="form-control inp" name="description"
-                                        id="description">{{product.description}}</textarea>
-                                </div>
-                            </div>
-                            <br>
+                                <br>
 
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="shippingInfo">ShippingInfo</label>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="shippingInfo">ShippingInfo</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea type="text" class="form-control inp" name="shippingInfo"
+                                            id="shippingInfo">{{product.shippingInfo}}</textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <textarea type="text" class="form-control inp" name="shippingInfo"
-                                        id="shippingInfo">{{product.shippingInfo}}</textarea>
-                                </div>
-                            </div>
-                            <br>
-                            {{!-- 
+                                <br>
+                                {{!-- 
                             <div class="row">
                                 <div class="col-md-5 col5">
                                     <label class="lbl" for="HomePagetag">HomePagetag<span
@@ -164,14 +165,13 @@
                                     </select>
                                 </div>
                             </div> --}}
-                            <br>
-                            <div class="row">
-                                <center>
-                                    <button  class="btn btn-default btn-md"
-                                        type="submit">Save</button>
-                                </center>
-                            </div>
-</form>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button class="btn btn-default btn-md" type="submit">Save</button>
+                                    </center>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -368,7 +368,7 @@
                                         <label class="lbl" for="label">Product Attribute
                                         </label>
                                     </div>
-                                      <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <select class="form-control inp" name="label" id="label" required>
                                             <option value="">Select One</option>
                                             {{# each specifications }}
@@ -386,7 +386,7 @@
                                         <label class="lbl" for="value">Value
                                         </label>
                                     </div>
-                                  
+
                                     <div class="col-md-6">
                                         <input type="text" class="form-control inp" name="value" id="value" required>
                                     </div>
@@ -423,6 +423,65 @@
                                     {{/each}}
                                 </tbody>
                             </table>
+                            {{else}}
+                            <p>You need to complete product registration with image in specification section.
+                            </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div id="tag1"></div>
+        <button class="collapsible"><span style="float:left ">
+               <i class="fa fa-tag" aria-hidden="true"></i>
+                </li>Product Tag
+            </span><span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+
+                            {{# if product }}
+                            <form action="/products/HomePageTag/save" method="POST">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="HomePagetag">HomePagetag<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                        <select class="form-control inp" name="HomePagetag" id="HomePagetag">
+                                            <option value="None"
+                                                {{# equality product.HomePagetag 'None'}}selected{{/equality}}>None
+                                            </option>
+                                            <option value="Hot Deals"
+                                                {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>
+                                                Hot Deals
+                                            </option>
+                                            <option value="Trending"
+                                                {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>
+                                                Trending</option>
+                                            <option value="New Product"
+                                                {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>
+                                                New Product
+                                            </option>
+                                            <option value="Exclusive Products"
+                                                {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
+                                                Exclusive Products</option>
+                                        </select>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form><br>
                             {{else}}
                             <p>You need to complete product registration with image in specification section.
                             </p>

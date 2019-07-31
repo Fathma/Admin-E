@@ -11,7 +11,7 @@ var SupplierSchema = new Schema({
     address: { type: Array },
     productType: { type: String },
     industry: { type: String },
-    registration_no: { type: Number },
+    registration_no: { type: String },
     contactPerson:{ type: Array },
     additionalInfo: { type: String },
     created: { type: Date, default: Date.now },
