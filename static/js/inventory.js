@@ -14,8 +14,9 @@ $(document).ready(()=>{
         
         var date = data.lp.date.split("T");
         byId("supplier").value = data.lp.supplier.cname;
-        byId("date").value = date[0];
+        // byId("date").value = date[0];
         configureDropDownL4( byId("products_invoice"), data.lp.products );
+      
         products = data.lp.products;
         serial_lp = data.serials;
       });
@@ -260,8 +261,7 @@ $(document).ready(()=>{
               weight: byId("weight").value, 
               warranty: byId("warranty").value,
               sellingPrice: byId("sellingPrice").value,
-              description: byId("description").value,
-              shippingInfo: byId("shippingInfo").value
+              description: byId("description").value
             };
             // var new_feat = parseInt(byId("new_feat").value);
             // product_attribute.features = get_features(new_feat);
@@ -353,8 +353,7 @@ $(document).ready(()=>{
         weight: byId("weight").value,
         warranty: byId("warranty").value,
         sellingPrice: byId("sellingPrice").value,
-        description: byId("description").value,
-        shippingInfo: byId("shippingInfo").value
+        description: byId("description").value
       };
 
       // var new_feat = parseInt(byId("new_feat").value);

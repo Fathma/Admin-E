@@ -4,41 +4,75 @@ const Brand = require('../models/brand.model')
 const subCategory = require('../models/subCategory.model')
 const Cat = require('../models/category.model')
 
+
+
+exports.newCategory=(req, res)=> res.render('parents/newCategory')
+exports.newBrand=(req, res)=> res.render('parents/newBrand')
+exports.newSubCategory=(req, res)=> res.render('parents/newSubCategory')
+
 // saving category
 exports.addCategory = (req, res) => {
-  req.body.subCategories= []
-  req.body.brands= []
-  new Cat(req.body).save().then( category => res.redirect('/purchase/localPurchase'))
-}
-
-// Saving Sub Category
-exports.addSubCategory = (req, res) => {
-  let subcategory = {
-    name: req.body.subCat,
-    category: req.body.cate,
-    brands: []
-  }
-  new subCategory( subcategory ).save().then( subcategory => {
-    if ( req.body.cate != 'null') {
-      Cat.findOneAndUpdate(
-        { _id: req.body.cate },
-        { $addToSet: { subCategories: subcategory._id } },
-        { upsert: true },
-        ( err, docs )=> {
-          if ( err ) res.send( err ) 
-          res.send({})
-        }
-      )
-    } else {
-      res.send({})
+ 
+  Cat.findOne({ name: req.body.name },(err, category)=>{
+    if(!category){
+      req.body.subCategories= []
+      req.body.brands= []
+      new Cat(req.body).save().then( category => {
+        req.flash( 'success_msg', 'Category added successfully!')
+        res.redirect('/category/newCategory')
+      })
+    }else{
+      req.flash('error_msg', 'Already exists!')
+      res.redirect('/category/newCategory')
     }
   })
 }
 
+// Saving Sub Category
+exports.addSubCategory = (req, res) => {
+  subCategory.findOne({name:req.body.subCat}, (err, sub)=>{
+    if(!sub){
+      let subcategory = {
+        name: req.body.subCat,
+        category: req.body.cate,
+        brands: []
+      }
+      new subCategory( subcategory ).save().then( subcategory => {
+       
+        Cat.findOneAndUpdate(
+          { _id: req.body.cate },
+          { $addToSet: { subCategories: subcategory._id } },
+          { upsert: true },
+          ( err, docs )=> {
+            if ( err ) res.send( err ) 
+            req.flash( 'success_msg', 'Category added successfully!')
+            res.redirect('/category/newSubCategory')
+          }
+        )
+      })
+    }else{
+      req.flash('error_msg', 'Already exists!')
+      res.redirect('/category/newSubCategory')
+    }
+  })
+  
+}
+
 // Saving Brand
 exports.addBrand = ( req, res ) => {
-  var brand = { name: req.body.brand }
-  new Brand( brand ).save().then( brand => res.send({}))
+  Brand.findOne({ name: req.body.brand }, (err, br)=>{
+    if(!br){
+      let brand = { name: req.body.brand }
+      new Brand( brand ).save().then( brand =>{
+        req.flash( 'success_msg', 'Category added successfully!')
+        res.redirect('/category/newBrand')
+      })
+    }else{
+      req.flash('error_msg', 'Already exists!')
+      res.redirect('/category/newBrand')
+    }
+  })
+  
 }
 
 // getting sub categories on the basis of category

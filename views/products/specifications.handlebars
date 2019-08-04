@@ -18,6 +18,8 @@
                     <th>Creation Date</th>
                     <th>Created By</th>
                     <th>Enabled</th>
+                    <th>Filtering</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +45,26 @@
                         <strong>Enabled</strong>
                         {{else}}
                         <strong>Disabled</strong>
+                        {{/if}}
+                    </td>
+                     <td>
+                        {{# if this.filtering}}
+                        <strong>Added</strong>
+                        {{else}}
+                        <strong>Removed</strong>
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{# if this.enabled}}
+                        <a href="/products/specifications/makeDisabled/{{this._id}}" class="btn btn-default">Disable</a>
+                        {{else}}
+                        <a href="/products/specifications/makeEnabled/{{this._id}}" class="btn btn-default">Enable</a>
+                        {{/if}}
+
+                        {{# if this.filtering}}
+                        <a href="/products/specifications/makeFalse/{{this._id}}" class="btn btn-default">Remove from Filtering </a>
+                        {{else}}
+                        <a href="/products/specifications/makeTrue/{{this._id}}" class="btn btn-default">Add to Filtering</a>
                         {{/if}}
                     </td>
                 </tr>

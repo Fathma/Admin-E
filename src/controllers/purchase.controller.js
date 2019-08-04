@@ -57,6 +57,7 @@ exports.getProducts = (req, res) => {
           // doc_serial.serials.push(docs)
         
       }
+      console.log(doc)
       res.send(doc_serial)
     })
 };
@@ -142,7 +143,9 @@ exports.SaveLocalPurchase = async (req, res) => {
   // if localpurchase doesn't exist then insert 
   // else insert newly added product and update subtotal 
   if (lp === null) {
+    
     var obj = req.body;
+    obj.date = req.body.date11
     obj.contactPerson= contact[0]
     obj.mobile= contact[1]
     obj.products= [ product ], 

@@ -4,6 +4,10 @@ const router = express.Router()
 const category = require('../controllers/category.controller')
 
 router.post('/addCategory', category.addCategory)
+router.get('/newCategory', category.newCategory)
+router.get('/newSubCategory', category.newSubCategory)
+router.get('/newBrand', category.newBrand)
+
 router.post('/addSubCategory', category.addSubCategory)
 router.post('/addBrand', category.addBrand)
 router.get('/getSub/:cat', category.getSub)

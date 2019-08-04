@@ -75,7 +75,14 @@ router.get('/attributes/delete1/:_id/:label', product_controller.deleteAttribute
 router.get('/Specifications', product_controller.Specifications)
 router.get('/specifications/new', product_controller.SpecificationsNew)
 router.post('/specifications/save', product_controller.SpecificationsSave)
+router.get('/specifications/makeDisabled/:sid', product_controller.makeDisabled)
+router.get('/specifications/makeEnabled/:sid', product_controller.makeEnabled)
+router.get('/specifications/makeFalse/:sid', product_controller.makeFalse)
+router.get('/specifications/makeTrue/:sid', product_controller.makeTrue)
+router.post('/shipping/save', product_controller.shippingSave)
+
 router.post('/HomePageTag/save', product_controller.SaveHomePageTag)
+
 // related products
 router.post('/relatedProducts', product_controller.relatedProducts)
 router.post('/relatedProducts1', product_controller.relatedProducts1)

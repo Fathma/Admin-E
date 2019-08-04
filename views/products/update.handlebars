@@ -127,7 +127,7 @@
                                 </div>
                                 <br>
 
-                                <div class="row">
+                                {{!-- <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="shippingInfo">ShippingInfo</label>
                                     </div>
@@ -136,7 +136,7 @@
                                             id="shippingInfo">{{product.shippingInfo}}</textarea>
                                     </div>
                                 </div>
-                                <br>
+                                <br> --}}
                                 {{!-- 
                             <div class="row">
                                 <div class="col-md-5 col5">
@@ -435,7 +435,7 @@
     </div>
 
     <div class="box">
-        <div id="tag1"></div>
+        <div id="ProductTag1"></div>
         <button class="collapsible"><span style="float:left ">
                <i class="fa fa-tag" aria-hidden="true"></i>
                 </li>Product Tag
@@ -474,6 +474,102 @@
                                                 {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
                                                 Exclusive Products</option>
                                         </select>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
+                                    </center>
+                                </div>
+                            </form><br>
+                            {{else}}
+                            <p>You need to complete product registration with image in specification section.
+                            </p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div id="Shipping1"></div>
+        <button class="collapsible"><span style="float:left ">
+               <i class="fa fa-truck panel-icon" aria-hidden="true"></i>
+                </li>Shipping
+            </span><span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+
+                            {{# if product }}
+                            <form action="/products/shipping/save" method="POST">
+                            <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="weight">Weight<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="weight" id="weight" value="{{ product.shippingInfo.weight }}" required>
+                                       
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="length">Length<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="length" id="length"  value="{{ product.shippingInfo.length }}" required>
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="width">Width<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="width" id="width" value="{{ product.shippingInfo.width }}" required>
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="height">Height<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="height" id="height" value="{{ product.shippingInfo.height }}" required>
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="freeShipping">Free shipping<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="checkbox"  name="freeShipping" id="freeShipping" >
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="additionalCharge">Additional shipping charge<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="additionalCharge" id="additionalCharge" value="{{ product.shippingInfo.additionalCharge }}" required>
+                                    </div>
+                                </div><br>
+                                 <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="deliveryDate">Delivery date<span
+                                                style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="deliveryDate" id="deliveryDate" value="{{ product.shippingInfo.deliveryDate }}" required>
                                     </div>
                                 </div><br>
                                 <div class="row">

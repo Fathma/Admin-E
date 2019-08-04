@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let BrandSchema = new Schema({
-    name: { type: String, unique: true },
+    name: { type: String },
     created: { type: Date, default: Date.now },
     enabled: { type: Boolean, default: false }
 })

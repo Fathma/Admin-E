@@ -1,5 +1,5 @@
 // author : fathma Siddique
-// lastmodified : 11/6/2019
+// lastmodified : 31/7/2019
 // description : all the product related controllers/funtions are written in here 
 
 //Imports
@@ -28,6 +28,28 @@ conn.once('open', function () {
 
 
 exports.SpecificationsNew = (req, res)=> res.render('products/newSpecification')
+
+exports.makeDisabled =async (req, res)=>{
+  await Specification.update({ _id: req.params.sid }, {$set: { enabled: false } })
+  res.redirect('/products/Specifications')
+}
+
+
+exports.makeEnabled =async (req, res)=>{
+  await Specification.update({ _id: req.params.sid }, {$set: { enabled: true } })
+  res.redirect('/products/Specifications')
+}
+
+exports.makeFalse =async (req, res)=>{
+  await Specification.update({ _id: req.params.sid }, {$set: { filtering: false } })
+  res.redirect('/products/Specifications')
+}
+
+
+exports.makeTrue =async (req, res)=>{
+  await Specification.update({ _id: req.params.sid }, {$set: { filtering: true } })
+  res.redirect('/products/Specifications')
+}
  
 exports.SpecificationsSave = (req, res)=>{
   Specification.find({ _id: req.body.specification}, (err, specifications)=>{
@@ -73,7 +95,28 @@ exports.relatedProducts =async (req, res)=>{
 }
 
 
+exports.shippingSave = async(req, res)=>{
+  console.log(req.body.pid)
+  let prod = await Product.findOne({ _id: req.body.pid })
+  let shippingInfo = {
+    weight: req.body.weight,
+    height: req.body.height,
+    width: req.body.width,
+    length: req.body.length,
+    freeShipping: req.body.freeShipping,
+    additionalCharge: req.body.additionalCharge,
+    deliveryDate: req.body.deliveryDate,
+  }
+  
+  prod.shippingInfo=shippingInfo
+
+  new Product(prod).save().then(()=>{
+    res.redirect('/products/Update/'+ req.body.pid+'#Shipping1')
+  })
+}
+
 exports.SaveAttribute = async (req, res)=>{
+ 
   let prod = await Product.findOne({ _id: req.body.pid })
   let attribute = {
     label: req.body.label,
@@ -89,7 +132,7 @@ exports.SaveAttribute = async (req, res)=>{
 
 exports.SaveHomePageTag = async (req, res)=>{
   await Product.update({_id: req.body.pid},{ $set:{HomePagetag: req.body.HomePagetag} })
-  res.redirect('/products/Update/'+ req.body.pid+'#tag1')
+  res.redirect('/products/Update/'+ req.body.pid+'#ProductTag1')
 }
 
 exports.deleteAttribute = async (req, res)=>{
