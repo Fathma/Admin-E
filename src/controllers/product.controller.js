@@ -28,6 +28,9 @@ conn.once('open', function () {
 
 
 exports.SpecificationsNew = (req, res)=> res.render('products/newSpecification')
+exports.SpecificationsNewId = (req, res)=> {
+  res.render('products/newSpecification', { id: req.params.id})
+}
 
 exports.makeDisabled =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { enabled: false } })
@@ -58,16 +61,25 @@ exports.SpecificationsSave = (req, res)=>{
         name: req.body.specification,
         createdBy: req.user._id
       }
+      
+      if(req.body.id){
+        new Specification(obj).save().then(()=>{
+          res.redirect('/products/Update/'+req.body.id+'#SPECIFICATIONS1')
+        })
+      }else{
+        new Specification(obj).save().then(()=>{
+          res.redirect('/products/specifications/new')
+        })
+      }
      
-      new Specification(obj).save().then(()=>{
-        res.redirect('/products/specifications/new')
-      })
     }
     else{
       req.flash('error_msg', 'Already exists!')
       res.redirect('/products/specifications/new')
     }
   })
+  
+
 }
 
 exports.Specifications =async (req, res)=>{
