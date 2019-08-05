@@ -75,7 +75,7 @@
                 {{!-- <input type="text" list="cattNs" class="form-control inp" name="cattN" id="cattN"
                     placeholder="Select a Category" required> --}}
                 <select class="form-control inp" name="cattN" id="cattN" required>
-                    <option value="0">Select One</option>
+                    <option value="">Select One</option>
                     {{# each cat }}
                     <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
                     {{/each}}
@@ -96,8 +96,8 @@
             <div class="col-md-6">
                 {{!-- <input type="text" list="subNns" class="form-control inp" name="subNn" id="subNn"
                     placeholder="Select a Sub Category"> --}}
-                <select class="form-control inp" name="subNn" id="subNn" required>
-                    <option value="0">Select One</option>
+                <select class="form-control inp" name="subNn" id="subNn" >
+                    <option value="">Select One</option>
                     {{# each categories }}
                     <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
@@ -118,7 +118,7 @@
                 {{!-- <input type="text" list="brandNs" class="form-control inp" name="brandN" id="brandN"
                     placeholder="Select a Brand" required> --}}
                 <select class="form-control inp" name="brandN" id="brandN" required>
-                    <option value="0">Select One</option>
+                    <option value="">Select One</option>
                     {{# each brand }}
                     <option value="{{this._id}},{{this.name}}">{{this.name}}</option>
                     {{/each}}
@@ -187,21 +187,22 @@
     <div id="ex3" class="modal">
         <div class="form-group">
             <label for="brand" style="color:azure">Brand<span style="color: red">*</span></label>
-            <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand">
+            <input type="text" name="brand" id="brand" class="form-control" placeholder="Enter New Brand" required>
         </div>
         <a id="save_brand" class="btn btn-primary">Submit</a>
     </div>
     <div id="ex1" class="modal">
         <div class="form-group">
             <label for="cat" style="color:azure">Category</label>
-            <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control">
+            <input type="text" name="cat" id="cat" placeholder="Enter New Category" class="form-control" required>
         </div>
         <a id="myForm1" href="/category/entry" class="btn btn-primary">Submit</a>
     </div>
     <div id="ex2" class="modal">
         <div class="form-group">
             <label for="cate" style="color:azure">Category<span style="color: red">*</span></label>
-            <select class="form-control" name="cate" id="cate">
+            <select class="form-control" name="cate" id="cate" required>
+                 <option value="">Select One</option>
                 {{# each cat}}
                 <option value="{{this._id}}">{{this.name}}</option>
                 {{/each}}

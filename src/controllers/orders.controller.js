@@ -197,9 +197,7 @@ exports.updateHistory =async (req, res) => {
           var invoice = await Invoice.findOne({ order:rs2._id })
          
           rs2.cart.map( item=>{
-            console.log(item)
             item.serials.map(async serial=>{
-              console.log(serial)
               await Serial.update({ _id: serial },{$set: { status:'Delivered', invoice: invoice._id }})
 
             })
