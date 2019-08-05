@@ -62,7 +62,7 @@ $(document).ready(()=>{
       byId("save_inventory").disabled = true;
     }else{
       byId("save_inventory").disabled = false;
-      const { shippingInfo, serial_availablity}= product[0].product;
+      const {serial_availablity}= product[0].product;
       const {quantity,purchasePrice}= product[0];
   
       byId( 'unitPrice' ).value = purchasePrice;
@@ -85,7 +85,6 @@ $(document).ready(()=>{
       byId("weight").value = weight;
       byId("warranty").value = warranty;
       byId("description").value = description;
-      byId("shippingInfo").value = shippingInfo;
       byId("serial").value = serial_availablity;
       // byId("serial").readOnly = true
   
@@ -308,7 +307,7 @@ $(document).ready(()=>{
         weight: byId("weight").value,
         warranty: byId("warranty").value,
         description: byId("description").value,
-        shippingInfo: byId("shippingInfo").value,
+        
         dealer: true,
         sellingPrice: parseInt(byId("sellingPrice").value)
       };
