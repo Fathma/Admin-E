@@ -244,7 +244,7 @@
                                 <br>
                                 <div class="row">
                                     <center>
-                                        <button type="submit" class="btn btn-primary btn-md">Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-md" >Submit</button>
                                     </center>
                                 </div>
                             </form><br>
@@ -268,7 +268,7 @@
                                         </td>
                                         <td>
                                             <a href="/products/attributes/delete1/{{../product._id}}/{{this.label._id}}"
-                                                class="btn btn-danger ">Delete</a>
+                                                class="btn btn-danger btn-sm " style="margin: 0%">Delete</a>
                                         </td>
                                     </tr>
                                     {{/each}}
@@ -305,7 +305,7 @@
                                     <form action="/products/img/detete" method="POST">
                                         <input type="hidden" name="id" id="id" value="{{../product._id}}">
                                         <input type="hidden" name="img" id="img" value="{{this}}">
-                                        <button type="submit" class="btn btn-danger">delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </div>
                                 {{/if}}
@@ -480,7 +480,7 @@
 
                                         <td>
                                             <a href="/products/relatedProducts/delete1/{{../product._id}}/{{this._id}}"
-                                                class="btn btn-danger ">Delete</a>
+                                                class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                     {{/each}}
