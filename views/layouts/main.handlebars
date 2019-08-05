@@ -39,8 +39,8 @@
 
     <script src="/js/js.js"></script>
     <script src="/js/inventory.js"></script>
-    {{!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script> --}}
-    {{!-- <script>
+    {{!-- <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+    <script>
         tinymce.init({
             selector: 'textarea'
         });
@@ -224,7 +224,7 @@
                             <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>Product List</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    {{!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-tags" aria-hidden="true"></i>
 
@@ -238,7 +238,7 @@
                             <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>Bundle Product</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
 
                     <li class="treeview">
                         <a href="#">
@@ -254,7 +254,7 @@
                         </ul>
                     </li>
 
-                    <li class="treeview">
+                    {{!-- <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>Reports</span>
@@ -267,7 +267,7 @@
                             <li><a href="#"><i class="fa fa-circle-o"></i>Invoice</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i>Returns</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i>
@@ -389,6 +389,7 @@
 
             $(document).ready(function () {
                 $('#ptable').DataTable();
+                $('#ptable1').DataTable();
                 $('[data-toggle="tooltip"]').tooltip();
             });
         </script>

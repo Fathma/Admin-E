@@ -180,6 +180,7 @@ $(document).ready(()=>{
   function createLabel(pre, num, text) {
     var label = document.createElement("label");
     label.htmlFor = pre + num;
+    label.font = 'inherit';
     label.className = "lbl";
     label.innerText = text;
     return label;

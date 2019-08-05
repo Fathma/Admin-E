@@ -215,6 +215,8 @@ exports.newOrders = (req, res)=>{
   Order.find({ currentStatus: 'New Order'})
   .populate('user')
   .exec((err, orders)=>{
+    var count = 1;
+    orders.map( doc=> doc.count = count++ )
     res.render('orders/orders', { orders })
   })
 }
