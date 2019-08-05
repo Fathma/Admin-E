@@ -52,7 +52,7 @@ exports.makeTrue =async (req, res)=>{
 }
  
 exports.SpecificationsSave = (req, res)=>{
-  Specification.find({ _id: req.body.specification}, (err, specifications)=>{
+  Specification.findOne({ _id: req.body.specification}, (err, specifications)=>{
     if(!specifications){
       let obj = {
         name: req.body.specification,
