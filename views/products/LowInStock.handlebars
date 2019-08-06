@@ -1,36 +1,34 @@
-<div class="container-fluid" style="width:100%;min-height: 700px">
+
     <div class="register-logo">
-        <a href="#"><b>Product Status</a>
+        <a href="#"><b>Low Stock Products</a>
+    </div>
+    <div class="row">
+        <button class="btn bg-green" style="float: right;margin: 10px 30px;" id="btnExport"
+            onclick="javascript:xport.toXLS('ptable');">
+            <li class="fa fa-download" style="padding: 5px"></li>Export as Excel
+        </button>
     </div>
 
-    <div style="background-color: white">
+ <div class="container-fluid" >
+     <div style="background-color: white">
         <table id="ptable" class="table table-striped table-bordered" style="width:100%">
             <thead>
-            <tr>
-                <th>#</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-               
-            </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                </tr>
             </thead>
             <tbody>
-            {{# each serials}}
-            <tr>
-                  <td>
-                    <strong> {{this.count}}</strong>
-                </td>
-                 <td>
-                    <strong> {{this.product.productName}}</strong>
-                </td>
-                 <td>
-                    <strong>{{this.quantity}}</strong>
-                </td>
-               
-            </tr>
-           
-            {{/each}}
+                {{# each serials}}
+                <tr>
+                    <td>{{this.count}}</td>
+                    <td>{{this.product.productName}}</td>
+                    <td>{{this.quantity}}</td>
+                </tr>
+                {{/each}}
             </tbody>
-            
+
         </table>
     </div>
 </div>

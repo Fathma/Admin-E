@@ -1,6 +1,11 @@
 
+
+<div class="register-logo">
+        <a href="#"><b>Products</a>
+    </div>
 <div class="row">
-    <a  class="btn bg-purple" href="/products/DealerInventory" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Dealer Product</a>
+   <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+    <a  class="btn bg-purple" href="/products/DealerInventory" style="float: right;margin: 10px;margin-right: 0px"><li class="fa fa-plus-square" style="padding: 5px"></li>New Dealer Product</a>
     <a  class="btn bg-blue" href="/products/InhouseInventory"  style="float: right;margin: 10px ;"><li class="fa fa-plus-square"  style="padding: 5px"></li>New Supplier Product</a>
     </div><br>
 <div class="container-fluid" >
@@ -9,7 +14,7 @@
 
     <div style="background-color: white">
 
-        <table id="ptable" style="width:100%" class="table table-striped">
+        <table id="ptable" class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -26,48 +31,14 @@
                 {{# each products}}
                 {{# if this._id}}
                 <tr>
-                    <td>
-                        <strong>{{this.count}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{this.pid}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{this.productName}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{this.model}}</strong>
-                    </td>
-                    <td>
-                        {{# if this.isActive}}
-                        <strong>Enabled</strong>
-                        {{else}}
-                        <strong>Disabled</strong>
-                        {{/if}}
-                    </td>
-                    <td>
-                        {{# if this.availablity}}
-                        <strong>Available</strong>
-                        {{else}}
-                        <strong>Not Available</strong>
-                        {{/if}}
-                    </td>
-                    <td>
-                        <strong>{{this.dealer}}</strong>
-                    </td>
-                    <td>
-                        {{# if this.availablity}}
-                        <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
-                        {{else}}
-                        <a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>
-                        {{/if}}
-                        {{# if this.isActive}}
-                        <a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>
-                        {{else}}
-                        <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>
-                        {{/if}}
-                        <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a>
-                    </td>
+                    <td>{{this.count}}</td>
+                    <td>{{this.pid}}</td>
+                    <td>{{this.productName}}</td>
+                    <td>{{this.model}}</td>
+                    <td>{{# if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
+                    <td>{{# if this.availablity}}Available{{else}}Not Available{{/if}}</td>
+                    <td>{{this.dealer}}</td>
+                    <td>{{# if this.availablity}}<a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>{{else}}<a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>{{/if}}{{# if this.isActive}}<a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>{{else}}<a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>{{/if}}<a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a></td>
                 </tr>
         {{/if}}
         {{/each}}
@@ -76,3 +47,10 @@
 
     </div>
 </div>
+
+
+
+
+
+
+

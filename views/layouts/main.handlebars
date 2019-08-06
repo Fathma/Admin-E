@@ -7,9 +7,9 @@
     <title>{{title}}</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-   <script type="text/javascript" src='/JavaScriptSpellCheck/include.js' ></script>
-   <script type='text/javascript'>$Spelling.SpellCheckAsYouType('textarea')</script> 
-   <script type='text/javascript'>$Spelling.BinSpellCheckFields('input')</script> 
+   {{!-- <script type="text/javascript" src='/JavaScriptSpellCheck/include.js' ></script> --}}
+   {{!-- <script type='text/javascript'>$Spelling.SpellCheckAsYouType(textarea)</script> 
+   <script type='text/javascript'>$Spelling.BinSpellCheckFields(input)</script>  --}}
     {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
     {{!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> --}}
     <!-- Bootstrap 3.3.7 -->
@@ -224,7 +224,7 @@
                             <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>Product List</a></li>
                         </ul>
                     </li>
-                    {{!-- <li class="treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-tags" aria-hidden="true"></i>
 
@@ -238,7 +238,7 @@
                             <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>Bundle Product</a>
                             </li>
                         </ul>
-                    </li> --}}
+                    </li>
 
                     <li class="treeview">
                         <a href="#">
@@ -254,7 +254,7 @@
                         </ul>
                     </li>
 
-                    {{!-- <li class="treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
                             <span>Reports</span>
@@ -263,11 +263,11 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Orders</a></li>
+                            <li><a href="/products/viewLowQuantityProducts"><i class="fa fa-circle-o"></i>Low Stock</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i>Invoice</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i>Returns</a></li>
                         </ul>
-                    </li> --}}
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-users"></i>
