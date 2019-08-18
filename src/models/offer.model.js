@@ -1,3 +1,7 @@
+
+//  Author: Fathma siddique
+//  last modified: 07/23/19
+//  Description: Offer model schema 
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

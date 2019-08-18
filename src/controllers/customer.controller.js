@@ -6,18 +6,19 @@ const Order = require('../models/customerOrder')
 const Post = require('../models/posts.model') 
 const Wishlist = require('../models/wishlist.model')
 const Email = require('../../config/email')
-var convert = require('object-array-converter');
+var convert = require('object-array-converter')
 
+// fires emailall page 
 exports.emailAllPage = ( req, res )=> res.render('customer/emailAll')
 
 // view list of customers
 exports.viewListOfCustomers =async (req, res) => {
     let customers = await Customerr.find()
     var new_cus = []
+    // getting all customers wishlist
     for(var i=0; i<customers.length; i++){
         var data = customers[i]
-        console.log( customers[i]._id)
-        let wishlist =await Wishlist.findOne({ owner: customers[i]._id }).populate('items.product')
+        let wishlist = await Wishlist.findOne({ owner: customers[i]._id }).populate('items.product')
         if(wishlist){
             data.items = wishlist.items
         }
@@ -25,12 +26,6 @@ exports.viewListOfCustomers =async (req, res) => {
     }
     res.render('customer/customerlist',{ customer: new_cus }) 
 };
-
-
-exports.singleView = (req, res) => {
-    Customerr.find({ _id: req.params.id },( err, docs )=> res.render('customer/singleCustomer',{ customer: docs }) )
-};
-
 
 // email all customer at once
 exports.emailAll = ( req, res )=>{
@@ -44,6 +39,7 @@ exports.emailAll = ( req, res )=>{
 }
 
 
+// shows all info of a customer
 exports.getprofile =async (req, res)=>{
     var customer = await Customerr.findOne({ _id: req.params.id })
     var posts = await Post.find({ user: req.params.id })
@@ -58,23 +54,25 @@ exports.getprofile =async (req, res)=>{
 }
 
 
-
-exports.getBlock = ( req, res )=>{
+// blocks a customer
+exports.Block = ( req, res )=>{
     Customerr.update({ _id: req.params.id },{ $set: { status: false }}, ( err, customer)=>{
         res.redirect('/customers/RegisteredCustomer')
     })
 }
 
-
-exports.getUnblock = ( req, res )=>{
+// unblocks a customer
+exports.Unblock = ( req, res )=>{
     Customerr.update({ _id: req.params.id },{ $set: { status: true }}, ( err, customer)=>{
         res.redirect('/customers/RegisteredCustomer')
     })
 }
-exports.getWishlist = ( req, res )=>{
-    Wishlist.find({ owner: req.params.id })
-    .populate('items.product')
-    .exec (( err, wishlists )=>{
+
+
+// exports.getWishlist = ( req, res )=>{
+//     Wishlist.find({ owner: req.params.id })
+//     .populate('items.product')
+//     .exec (( err, wishlists )=>{
         
-    })
-}
+//     })
+// }

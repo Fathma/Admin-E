@@ -4,20 +4,18 @@
 
 //Imports
 var mongo = require('mongodb')
+const mongoose = require('mongoose')
+const Grid = require('gridfs-stream')
+const key= require('../../config/keys')
+
+// loads all the requires models
 const Product = require('../models/product.model')
 const Category = require('../models/category.model')
 const SubCategory = require('../models/subCategory.model')
 const Specification = require('../models/specification.model')
 const Serial = require('../models/serials.model')
-const allFuctions = require('../helpers/allFuctions')
-const mongoose = require('mongoose')
-const Grid = require('gridfs-stream')
-
-const key= require('../../config/keys')
 
 mongoose.Promise = global.Promise;
-
-// const mongoo = 'mongodb://jihad:abc1234@ds343985.mlab.com:43985/e-commerce_db_v1';
 
 const conn = mongoose.createConnection(key.database.mongoURI);
 let gfs;
@@ -26,35 +24,45 @@ conn.once('open', function () {
   gfs.collection('fs');
 })
 
-
+// fires the page to create new product specification 
 exports.SpecificationsNew = (req, res)=> res.render('products/newSpecification')
+
+
+// fires the page if new specification need while registering a product. 
+// that id is to go back that specific product after adding new specification
 exports.SpecificationsNewId = (req, res)=> {
   res.render('products/newSpecification', { id: req.params.id})
 }
 
+// making a product disable
 exports.makeDisabled =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { enabled: false } })
   res.redirect('/products/Specifications')
 }
 
-
+// making a product enable
 exports.makeEnabled =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { enabled: true } })
   res.redirect('/products/Specifications')
 }
 
-exports.makeFalse =async (req, res)=>{
+
+// making filtering false of a specification
+exports.specificationMakeFalse =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { filtering: false } })
   res.redirect('/products/Specifications')
 }
 
 
-exports.makeTrue =async (req, res)=>{
+// making filtering false of a specification
+exports.specificationMakeTrue =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { filtering: true } })
   res.redirect('/products/Specifications')
 }
- 
+
+// save new specification
 exports.SpecificationsSave = (req, res)=>{
+  // check whether it is already exists or not 
   Specification.findOne({ name: req.body.specification}, (err, specifications)=>{
     if(!specifications){
       let obj = {
@@ -62,6 +70,7 @@ exports.SpecificationsSave = (req, res)=>{
         createdBy: req.user._id
       }
       
+      //  if product id exist then it will redirect to that product update page
       if(req.body.id){
         new Specification(obj).save().then(()=>{
           res.redirect('/products/Update/'+req.body.id+'#SPECIFICATIONS1')
@@ -78,10 +87,9 @@ exports.SpecificationsSave = (req, res)=>{
       res.redirect('/products/specifications/new')
     }
   })
-  
-
 }
 
+//  shows list od specification
 exports.Specifications =async (req, res)=>{
   var specifications = await Specification.find().populate('createdBy')
   var count = 1;
@@ -90,23 +98,7 @@ exports.Specifications =async (req, res)=>{
   
 }
 
-
-exports.relatedProducts =async (req, res)=>{
-  let _id = req.body.pid;
-  let prod = await Product.findOne({_id})
-  if(prod.relatedProducts.includes(req.body.relatedProducts)){
-    let product = await Product.findOne({_id}).populate('relatedProducts')
-    res.render('products/InhouseStockProduct', { product })
-  }else{
-    prod.relatedProducts.push(req.body.relatedProducts)
-    new Product(prod).save().then(async (pro)=>{
-      let product = await Product.findOne({_id}).populate('relatedProducts')
-      res.render('products/InhouseStockProduct', { product, active:true })
-    })
-  }
-}
-
-
+// save shipping in fo of a product
 exports.shippingSave = async(req, res)=>{
   console.log(req.body.pid)
   let prod = await Product.findOne({ _id: req.body.pid })
@@ -127,8 +119,8 @@ exports.shippingSave = async(req, res)=>{
   })
 }
 
+// added attribute to a product
 exports.SaveAttribute = async (req, res)=>{
- 
   let prod = await Product.findOne({ _id: req.body.pid })
   let attribute = {
     label: req.body.label,
@@ -141,12 +133,13 @@ exports.SaveAttribute = async (req, res)=>{
     res.redirect('/products/Update/'+ req.body.pid+'#SPECIFICATIONS1')
   })
 }
-
+// saves homePage tags
 exports.SaveHomePageTag = async (req, res)=>{
   await Product.update({_id: req.body.pid},{ $set:{HomePagetag: req.body.HomePagetag} })
   res.redirect('/products/Update/'+ req.body.pid+'#ProductTag1')
 }
 
+// deletes an attribute from a product
 exports.deleteAttribute = async (req, res)=>{
   let prod = await Product.findOne({ _id: req.params._id })
 
@@ -161,8 +154,7 @@ exports.deleteAttribute = async (req, res)=>{
 }
 
 
-
-
+// saves related products to a product
 exports.relatedProducts1 =async (req, res)=>{
   let _id = req.body.pid;
   let prod = await Product.findOne({_id})
@@ -175,29 +167,21 @@ exports.relatedProducts1 =async (req, res)=>{
     })
   }
 }
+ 
 
-
-async function delete_related (req){
+// deletes a related product
+exports.relatedProductsDelete1 = async(req, res)=>{
+  // delete_related (req)
   let product = await Product.findOne({ _id: req.params.pid })
   
   let el = product.relatedProducts.filter((ele)=>{
     return ele != req.params.rid
   })
   product.relatedProducts = el
-  new Product(product).save()
-}
-
-
-exports.relatedProductsDelete = async(req, res)=>{
-  delete_related (req)
-  let product1 = await Product.findOne({ _id: req.params.pid }).populate('relatedProducts')
-  res.render('products/InhouseStockProduct', { product:product1, active:true })
-}
- 
-
-exports.relatedProductsDelete1 = async(req, res)=>{
-  delete_related (req)
-  res.redirect('/products/Update/'+req.params.pid)
+  new Product(product).save().then(()=>{
+    res.redirect('/products/Update/'+req.params.pid+"#RELATED1")
+  })
+  
 }
 
 // viewProducts
@@ -211,8 +195,24 @@ exports.viewProducts = (req, res)=>{
 
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
-  let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label')
-  res.render('products/update',{ product, feature_total: product.features.length })
+  let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label').populate('category').populate('subcategory')
+  let specifications = await Specification.find()
+  let cat = product.category
+  let sub = product.subcategory
+  let motherboard = false
+  let ram = false
+  if(cat.name === 'DESKTOP COMPONENT' || cat.name === 'Desktop Component' || cat.name === 'Desktop component'){
+    if(sub.name === 'Motherboard' || sub.name === 'motherboard' || sub.name === 'MOTHERBOARD' ){
+      motherboard = true
+    }
+    if(sub.name === 'RAM' || sub.name === 'ram' || sub.name === 'Desktop RAM' || sub.name === 'DESKTOP RAM' ){
+      ram = true
+    }
+  }
+  res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram})
+  
+
+  
 }
 
 // saving product for dealer products
@@ -252,23 +252,14 @@ exports.checkSerials = async(req, res)=>{
   res.send({ exists })
 }
 
-// saves image in folder
-exports.SaveImage = async (req, res) => {
-  
-  await savingImage(req)
-  var product = await Product.findOne({ _id:req.body.pid }).populate('relatedProducts')
-  res.render('products/InhouseStockProduct', { product })
-  // res.redirect('/products/InhouseInventory')
-}
-// saves image in folder
-exports.SaveImage2 = async (req, res) => {
-  await savingImage(req)
-  res.redirect('/products/DealerInventory')
-}
 
 // saves image in folder
 exports.SaveImage3 = async (req, res) => {
-  await savingImage(req)
+
+  await req.files.map(async image =>{
+    var link = `https://ecom-admin.herokuapp.com/image/${image.filename}`
+    await Product.update({ _id: req.body.pid },{ $addToSet: { image: link } },{ upsert: true })
+  })
   res.redirect(`/products/Update/${req.body.pid}#IMAGES1`)
 }
 
@@ -279,23 +270,12 @@ exports.deteteImg = (req, res)=>{
   Product.updateOne({ _id: req.body.id }, { $pull: { image: req.body.img }},{ upsert: true }, ( err, docs )=>{
     if(err) console.log(err);
     else {
-      
       gfs.remove({ filename }, (err) => {
-        res.redirect( `/products/Update/${req.body.id}` )
+        res.redirect( `/products/Update/${req.body.id}#IMAGES1` )
       })
     }
   })
 }
-
-
-// saves link with image filenames in database
-var savingImage = async req =>{
-  await req.files.map(async image =>{
-    var link = `https://ecom-admin.herokuapp.com/image/${image.filename}`
-    await Product.update({ _id: req.body.pid },{ $addToSet: { image: link } },{ upsert: true })
-  })
-}
-
 
 
 // In-house stock product entry page
@@ -327,11 +307,11 @@ exports.showProductRegistrationFields =async (req, res, next) => {
     await SubCategory.updateOne({_id: subcategory[0]}, { $addToSet:{ brands: brand[0]} },{ upsert: true })
     product.subcategory = subcategory[0],
     product.productName = category[1]+'-'+subcategory[1]+'-'+brand[1]+'-'+model
-    product.pid = category[1].substr(0,2)+subcategory[1].substr(0,2)+brand[1].substr(0,2)+ model
+    product.pid = category[1].substr(0,2)+brand[1].substr(0,2)
     obj.subcategory = subcategory[0]
   }else{
     product.productName = category[1]+'-'+ brand[1]+'-'+ model
-    product.pid = category[1].substr(0,2)+ brand[1].substr(0,2)+ model
+    product.pid = category[1].substr(0,2)+ brand[1].substr(0,2)
   }
   
   // get all the features of cat sub and brand
@@ -356,68 +336,22 @@ exports.showProductRegistrationFields =async (req, res, next) => {
   })
 };
 
+var changeStatus = (condition,  object, res, cb) => {
+    Product.update(condition,{ $set: object },{ upsert: true }, function(err, docs) {
+        if (err) console.log(err)
+        cb(docs)
+      }
+    )
+  }
 
-exports.getSearchResult = (req, res)=>{
-   var search =  new RegExp(req.body.searchData, 'i')
-   var data =[];
-   Inventory.find()
-  .populate({
-    path:'product_id',
-    match: { 
-      $or:[
-      {'title': { $regex: search }} ,
-      {'model': { $regex: search }} ,
-      {'description': { $regex: search }},
-      {'warranty': { $regex: search }},
-      {'weight': { $regex: search }},
-      {'features.value': { $regex: search }}
-    ]
-  }})
-  .exec((err, docs)=>{
-    if(docs){
-      docs.map((items)=>{
-        if(items.product_id != null){
-          data.push(items);
-        }
-      })
-      allFuctions.live_wise_inventory(data, (rs)=>{
-      allFuctions.get_allProduct_page(res, rs, 'Inventories')
-      })
-    }
-  })
-}
-
-// returns allproduct page
-exports.getAllProducts = (req, res) => {
-  allFuctions.get_all_inventory_list({},{'product_id': 1 }, (docs)=>{
-    allFuctions.live_wise_inventory(docs, (rs)=>{
-      allFuctions.get_allProduct_page(res, rs, 'Inventories')
-    })
-  })
-};
-
-// Total stock and live info of a product
-exports.stockInfo = (req, res) => {
-  Product.findOne({ _id: req.params.id },(err, docs)=>{
-
-    docs.invtry = []
-    docs.total_stock = 0
-    docs.total = docs.live.quantity
-
-    Inventory.find({ product_id: req.params.id }, (err2, inv)=>{
-      inv.map((inven)=>{
-        docs.invtry.push(inven)
-        docs.total_stock +=inven.remaining
-        docs.total += inven.remaining
-      })
-      res.render('viewSerial', {product:docs})
-    })
-  })
+//find fuction from product collection
+var find = (obj, cb) => {
+  Product.find(obj).populate("brand").populate("admin").populate("subcategory").populate("category").exec(function(err, docs) { cb(docs); });
 };
 
 // returns Edit page from product info
 exports.getEditpage = (req, res, next) => {
-  allFuctions.find({ _id: mongo.ObjectID(req.params.id) }, (docs)=>{
+  find({ _id: mongo.ObjectID(req.params.id) }, (docs)=>{
     res.render('products/update', {
       title: 'Update Product',
       product: docs[0],
@@ -430,7 +364,7 @@ exports.getEditpage = (req, res, next) => {
 exports.makeNotActive = (req, res) => {
   console.log(req.params.id)
   var obj = { isActive: false }
-  allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
+  changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
     res.redirect('/products/viewProducts')
   })
 }
@@ -438,7 +372,7 @@ exports.makeNotActive = (req, res) => {
 // makes product online
 exports.makeActive = (req, res) => {
   var obj = { isActive: true }
-  allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
+  changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
     res.redirect('/products/viewProducts')
   })
 }
@@ -447,7 +381,7 @@ exports.makeActive = (req, res) => {
 exports.makeAvailable = (req, res)=>{
   console.log(req.params.id)
   var obj = { availablity: true }
-  allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
+  changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
     res.redirect('/products/viewProducts')
   })
 }
@@ -471,6 +405,7 @@ exports.getSerials = (req, res)=>{
   })
 }
 
+// show all the products and their quantity with low stock
 exports.viewLowQuantityProducts = async (req, res)=>{
  
   var products = await Product.find()
@@ -496,179 +431,20 @@ exports.viewLowQuantityProducts = async (req, res)=>{
 exports.makeNotAvailable = (req, res)=>{
   console.log(req.params.id)
   var obj = { availablity: false }
-  allFuctions.changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
+  changeStatus({ _id: req.params.id }, obj, res, (docs)=>{
     res.redirect('/products/viewProducts')
   });
 }
 
-// updateing stock quantity and price of prducts with no serial
-exports.stockEditNoSerial =(req, res) => {
-  var pre_Q = parseInt(req.body.pre_all_Q)
-  var quan = parseInt(req.body.quantity)
-  var obj ={
-    purchasePrice:req.body.purchase_price,
-    remaining: req.body.quantity,
-    stockQuantity :req.body.quantity
-  }
-  if( quan > pre_Q ){
-    quantity = quan-pre_Q;
-    var new_s=[]
-    for( var i=0; i<quantity; i++ ){
-      new_s.push((mongoose.Types.ObjectId()).toString())
-    }
-    
-    Inventory.update({ _id: req.params.lot },{ $addToSet: { serial: { $each: new_s }, original_serial: { $each: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
-      if(err){
-        res.send(err)
-      }else{
-        res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
-      }
-    })
-  }
-  if( quan < pre_Q ){
-    quantity = pre_Q-quan
-    var new_s=[]
-    Inventory.find({ _id: req.params.lot },(eer, rs)=>{
-      for(var i=0; i<quantity; i++){
-        new_s.push((rs[0].serial[i]).toString());
-      }
-      
-      Inventory.update({_id:req.params.lot},{ $pull: { serial: { $in: new_s }, original_serial: { $in: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
-        if(err) res.send(err)
-        else res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
-      })
-    })
-  }
-}
-
-
-
-// edit Purchase Price of inventory with serial
-exports.EditPP = (req, res, next)=>{
-  Inventory.update({ _id: req.params.lot_id },{ $set:{ purchasePrice: req.body.PP } }, { upsert: true }, (err,rs)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-    }
-  })
-}
-
-// Delete One serial
-exports.EditDelete = (req, res, next)=>{
-  Inventory.update({_id: req.params.lot_id },
-    {
-      $pull:{
-        original_serial: req.body.pre_serial_del, 
-        serial:req.body.pre_serial_del
-      },
-      $inc:{ remaining:-1 } 
-    }, { upsert:true }, (err,rs)=>{
-      if(err){
-        res.send(err)
-      }else{
-        res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-      }
-  })
-}
-
-// replace one serial number from inventory
-exports.EditReplace = (req, res, next)=>{
-  if(req.body.msg_err1 === 'No'){
-  Inventory.update({_id: req.params.lot_id },{$addToSet:{original_serial:req.body.replace_serial, serial:req.body.replace_serial}}, 
-    {upsert:true}, (err,rs)=>{
-      if(err) res.send(err) 
-      else {
-        Inventory.update({_id: req.params.lot_id },{$pull:{original_serial: req.body.pre_serial, serial:req.body.pre_serial}}, 
-          {upsert:true}, (err,rs)=>{
-          if(err){ res.send(err); }
-          else{
-            res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-          }
-        })
-      }
-    })
-  }
-  else{
-    req.flash('error_msg', 'Given serial number already exists!')
-    res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-  }
+// get inventory list by filter
+var get_all_inventory_list = (condition, sort_obj, cb) => {
+  Inventory.find(condition).sort(sort_obj).populate("product_id").populate("admin").exec((err, rs)=>{ cb(rs); });
 };
-
-// getting product models by Category
-exports.getProductByCat = (req, res, next)=>{
-  allFuctions.find({category: req.params.cat},(rs)=>{
-    res.render('addNewLot', {product:rs})
-  })
-};
-
-// getting product models by Sub category
-exports.getProductBySubcat = (req, res, next)=>{
-  allFuctions.find({subcategory: req.params.sub_cat},(rs)=>{
-    res.render('addNewLot', {product:rs})
-  })
-};
-
-// getting product models by Sub category
-exports.getProductBySub_filter = (req, res, next)=>{
-  Inventory.find({})
-  .populate({
-    path:'product_id',
-    match:{'subcategory': req.params.sub_cat}
-  })
-  .exec((err, rs)=>{
-    var data = []
-    rs.map((inven)=>{
-      if(inven.product_id != null){
-        data.push(inven)
-      } 
-    })
-    allFuctions.live_wise_inventory(data, (docs)=>{
-      allFuctions.get_allProduct_page(res, docs, 'Sub Category')
-    })
-  })
-};
-
-// getting product models by Sub category
-exports.getProductByCat_filter = (req, res, next)=>{
-  Inventory.find({})
-  .populate({
-    path:'product_id',
-    match:{'category': req.params.cat}
-  })
-  .exec((err, rs)=>{
-    var data = []
-    rs.map((inven)=>{
-      if(inven.product_id != null){
-        data.push(inven)
-      } 
-    })
-    allFuctions.live_wise_inventory(data, (docs)=>{
-      allFuctions.get_allProduct_page(res, docs, 'Category')
-    })
-  })
-};
-
-// getting product models by Category
-exports.getProductByCatNoSerial = (req, res, next)=>{
-  allFuctions.find({category: req.params.cat},(rs)=>{
-    res.render('addNewLotNoSerial', {product:rs})
-  })
-};
-
-
-
-
-
-
-
-
-
 
 // check availability
 exports.check_availablity= (req, res, next) => {
   var pre_arr='';
-  allFuctions.get_all_inventory_list({product_id:req.params.model},{},(rs)=>{
+  get_all_inventory_list({product_id:req.params.model},{},(rs)=>{
     if(rs !=null){
       rs.map((inventory)=>{
         var ser=inventory.serial;
@@ -683,6 +459,220 @@ exports.check_availablity= (req, res, next) => {
     }
   })
 }
+
+
+
+// exports.getSearchResult = (req, res)=>{
+//    var search =  new RegExp(req.body.searchData, 'i')
+//    var data =[];
+//    Inventory.find()
+//   .populate({
+//     path:'product_id',
+//     match: { 
+//       $or:[
+//       {'title': { $regex: search }} ,
+//       {'model': { $regex: search }} ,
+//       {'description': { $regex: search }},
+//       {'warranty': { $regex: search }},
+//       {'weight': { $regex: search }},
+//       {'features.value': { $regex: search }}
+//     ]
+//   }})
+//   .exec((err, docs)=>{
+//     if(docs){
+//       docs.map((items)=>{
+//         if(items.product_id != null){
+//           data.push(items);
+//         }
+//       })
+//       allFuctions.live_wise_inventory(data, (rs)=>{
+//       allFuctions.get_allProduct_page(res, rs, 'Inventories')
+//       })
+//     }
+//   })
+// }
+
+
+
+// // Total stock and live info of a product
+// exports.stockInfo = (req, res) => {
+//   Product.findOne({ _id: req.params.id },(err, docs)=>{
+
+//     docs.invtry = []
+//     docs.total_stock = 0
+//     docs.total = docs.live.quantity
+
+//     Inventory.find({ product_id: req.params.id }, (err2, inv)=>{
+//       inv.map((inven)=>{
+//         docs.invtry.push(inven)
+//         docs.total_stock +=inven.remaining
+//         docs.total += inven.remaining
+//       })
+//       res.render('viewSerial', {product:docs})
+//     })
+//   })
+// };
+
+// // updateing stock quantity and price of prducts with no serial
+// exports.stockEditNoSerial =(req, res) => {
+//   var pre_Q = parseInt(req.body.pre_all_Q)
+//   var quan = parseInt(req.body.quantity)
+//   var obj ={
+//     purchasePrice:req.body.purchase_price,
+//     remaining: req.body.quantity,
+//     stockQuantity :req.body.quantity
+//   }
+//   if( quan > pre_Q ){
+//     quantity = quan-pre_Q;
+//     var new_s=[]
+//     for( var i=0; i<quantity; i++ ){
+//       new_s.push((mongoose.Types.ObjectId()).toString())
+//     }
+    
+//     Inventory.update({ _id: req.params.lot },{ $addToSet: { serial: { $each: new_s }, original_serial: { $each: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
+//       if(err){
+//         res.send(err)
+//       }else{
+//         res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
+//       }
+//     })
+//   }
+//   if( quan < pre_Q ){
+//     quantity = pre_Q-quan
+//     var new_s=[]
+//     Inventory.find({ _id: req.params.lot },(eer, rs)=>{
+//       for(var i=0; i<quantity; i++){
+//         new_s.push((rs[0].serial[i]).toString());
+//       }
+      
+//       Inventory.update({_id:req.params.lot},{ $pull: { serial: { $in: new_s }, original_serial: { $in: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
+//         if(err) res.send(err)
+//         else res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
+//       })
+//     })
+//   }
+// }
+
+
+// // getting product models by Category
+// exports.getProductByCat = (req, res, next)=>{
+//   find({category: req.params.cat},(rs)=>{
+//     res.render('addNewLot', {product:rs})
+//   })
+// };
+
+// // getting product models by Sub category
+// exports.getProductBySubcat = (req, res, next)=>{
+//   find({subcategory: req.params.sub_cat},(rs)=>{
+//     res.render('addNewLot', {product:rs})
+//   })
+// }
+
+
+
+
+// // edit Purchase Price of inventory with serial
+// exports.EditPP = (req, res, next)=>{
+//   Inventory.update({ _id: req.params.lot_id },{ $set:{ purchasePrice: req.body.PP } }, { upsert: true }, (err,rs)=>{
+//     if(err){
+//       res.send(err)
+//     }else{
+//       res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
+//     }
+//   })
+// }
+
+// // Delete One serial
+// exports.EditDelete = (req, res, next)=>{
+//   Inventory.update({_id: req.params.lot_id },
+//     {
+//       $pull:{
+//         original_serial: req.body.pre_serial_del, 
+//         serial:req.body.pre_serial_del
+//       },
+//       $inc:{ remaining:-1 } 
+//     }, { upsert:true }, (err,rs)=>{
+//       if(err){
+//         res.send(err)
+//       }else{
+//         res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
+//       }
+//   })
+// }
+
+// // replace one serial number from inventory
+// exports.EditReplace = (req, res, next)=>{
+//   if(req.body.msg_err1 === 'No'){
+//   Inventory.update({_id: req.params.lot_id },{$addToSet:{original_serial:req.body.replace_serial, serial:req.body.replace_serial}}, 
+//     {upsert:true}, (err,rs)=>{
+//       if(err) res.send(err) 
+//       else {
+//         Inventory.update({_id: req.params.lot_id },{$pull:{original_serial: req.body.pre_serial, serial:req.body.pre_serial}}, 
+//           {upsert:true}, (err,rs)=>{
+//           if(err){ res.send(err); }
+//           else{
+//             res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
+//           }
+//         })
+//       }
+//     })
+//   }
+//   else{
+//     req.flash('error_msg', 'Given serial number already exists!')
+//     res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
+//   }
+// };
+
+// // getting product models by Sub category
+// exports.getProductBySub_filter = (req, res, next)=>{
+//   Inventory.find({})
+//   .populate({
+//     path:'product_id',
+//     match:{'subcategory': req.params.sub_cat}
+//   })
+//   .exec((err, rs)=>{
+//     var data = []
+//     rs.map((inven)=>{
+//       if(inven.product_id != null){
+//         data.push(inven)
+//       } 
+//     })
+//     allFuctions.live_wise_inventory(data, (docs)=>{
+//       allFuctions.get_allProduct_page(res, docs, 'Sub Category')
+//     })
+//   })
+// };
+
+// // getting product models by Sub category
+// exports.getProductByCat_filter = (req, res, next)=>{
+//   Inventory.find({})
+//   .populate({
+//     path:'product_id',
+//     match:{'category': req.params.cat}
+//   })
+//   .exec((err, rs)=>{
+//     var data = []
+//     rs.map((inven)=>{
+//       if(inven.product_id != null){
+//         data.push(inven)
+//       } 
+//     })
+//     allFuctions.live_wise_inventory(data, (docs)=>{
+//       allFuctions.get_allProduct_page(res, docs, 'Category')
+//     })
+//   })
+// };
+
+// // getting product models by Category
+// exports.getProductByCatNoSerial = (req, res, next)=>{
+//   find({category: req.params.cat},(rs)=>{
+//     res.render('addNewLotNoSerial', {product:rs})
+//   })
+// };
+
+
+
+
 
 
 

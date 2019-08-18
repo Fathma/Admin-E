@@ -93,6 +93,7 @@
                                 </div>
                             </div>
                             <br> --}}
+
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="weight">Weight
@@ -165,6 +166,7 @@
                                     </select>
                                 </div>
                             </div> --}}
+                           
 
                                 <div class="row">
                                     <center>
@@ -189,7 +191,26 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
-
+                            {{# if ram}}
+                          
+                            <div class="row">
+                                <center>
+                                    <div class="col-md-12  ">
+                                        <span style="color: red">You have to add value for min bus speed, max bus speed </span>
+                                    </div>
+                                </center>
+                             </div>   <br>   
+                            {{/if}}
+                            {{# if motherboard}}
+                            <div class="row">
+                                <center>
+                                    <div class="col-md-12">
+                                        <span style="color: red">you have toadd value for Max RAM size, Ram Slot, Graphics Support, PCI Bus</span>
+                                    </div>
+                                </center>
+                            </div> <br>
+                           
+                            {{/if}}
 
                             <form action="/products/attribute/save" method="POST">
 

@@ -1,3 +1,6 @@
+// author : fathma Siddique
+// lastmodified : 31/7/2019
+// description : all the supplier related controllers/funtions are written in here 
 const Supplier = require('../models/supplier.model')
 var randomstring = require('randomstring')
 

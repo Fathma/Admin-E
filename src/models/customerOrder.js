@@ -1,4 +1,7 @@
 
+//  Author: Fathma siddique
+//  last modified: 07/23/19
+//  Description: CustomerOrder model schema 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 var CustomerOrderSchema = new Schema({

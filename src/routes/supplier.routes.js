@@ -1,3 +1,7 @@
+// author: Fathma siddique
+// lastmodified: 23/7/2019
+// description: the file has all the supplier routes
+
 const express = require('express');
 const router = express.Router();
 const supplier_controller = require('../controllers/supplier.controller');

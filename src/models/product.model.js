@@ -1,3 +1,6 @@
+//  Author: Fathma siddique
+//  last modified: 04/8/19
+//  Description: Product model schema 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -5,6 +8,7 @@ var ProductSchema = new Schema({
     subcategory: { type: Schema.Types.ObjectId, ref: 'SubCategory' },
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
     brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
+    
     pid: { type: String },
     name: { type: String, default:""},
     productName:{ type: String },

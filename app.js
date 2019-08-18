@@ -15,7 +15,9 @@ const moment = require("moment");
 const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
 
+ 
 
+// Loads models
 var Category = require("./src/models/category.model");
 var Product = require("./src/models/product.model");
 var LocalPurchase = require("./src/models/localPurchase.model");
@@ -23,9 +25,9 @@ var Supplier = require("./src/models/supplier.model");
 var SubCategory = require("./src/models/subCategory.model");
 var PostCategory = require('./src/models/postCategory.model')
 var Specification  = require('./src/models/specification.model')
-const keys = require('./config/keys')
 var Brand = require("./src/models/brand.model");
 
+const keys = require('./config/keys')
 var vlaues = require('./config/values')
 
 
@@ -37,7 +39,7 @@ const { Administrator, Editor, Contributor } = require("./src/helpers/rolecheck"
 
 const app = express();
 
-// // Load routes controller
+// Load routes controller
 const ordersRoutes = require("./src/routes/orders.routes");
 const categoryRoutes = require("./src/routes/category.routes");
 const usersRoutes = require("./src/routes/users.routes");
@@ -48,7 +50,7 @@ const purchaseRoutes = require("./src/routes/purchase.routes");
 const supplierRoutes = require("./src/routes/supplier.routes");
 const generalRoutes = require("./src/routes/general.routes");
 var forumRoutes = require("./src/routes/forum.routes")
-var offerRoutes = require("./src/routes/offer.routes")
+
 
 
 // Passport config
@@ -120,6 +122,7 @@ app.use( session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// middleware for flash msg
 app.use(flash());
 
 Handlebars.registerHelper("formatTime", function(date, format) {
@@ -128,15 +131,15 @@ Handlebars.registerHelper("formatTime", function(date, format) {
 });
 
 // middleware
-app.use(function(req, res, next) {
-  Category.find()
-    .populate("subCategories")
-    .exec(function(err, categories) {
-      if (err) return next(err);
-      res.locals.S_categories = categories;
-      next();
-    });
-});
+// app.use(function(req, res, next) {
+//   Category.find()
+//     .populate("subCategories")
+//     .exec(function(err, categories) {
+//       if (err) return next(err);
+//       res.locals.S_categories = categories;
+//       next();
+//     });
+// });
 
 // Gloabl variables
 app.use(function(req, res, next) {
@@ -145,35 +148,34 @@ app.use(function(req, res, next) {
   res.locals.error = req.flash("error"); 
   res.locals.user = req.user || null;
   res.locals.session = req.session;
+  res.locals.productentry_msg = vlaues.msg.productentry;
   next();
 });
 
 // middleware
 app.use(async (req, res, next)=>{
-  res.locals.specifications = await Specification.find()
+  // res.locals.specifications = await Specification.find()
   res.locals.cat = await Category.find()
   res.locals.categories = await SubCategory.find()
   res.locals.brand = await Brand.find()
   res.locals.Product = await Product.find()
   res.locals.Supplier = await Supplier.find()
   res.locals.LocalPurchase = await LocalPurchase.find()
-  res.locals.productentry_msg = vlaues.msg.productentry;
   next();
 });
 
+// route for fetching image
 app.get("/image/:filename", (req, res) => {
- 
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if(file != null ){
       const readstream = gfs.createReadStream(file.filename)
       readstream.pipe(res)
     }
   })
-  
 });
 
+
 app.get("/", (req, res) => {
-  // await Product.update({},{$set:{features : []}})
   if (req.user) {
     res.redirect("/general/showDashboard");
   } else {
@@ -192,7 +194,7 @@ app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
 app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
 app.use("/general",  generalRoutes);
 app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
-app.use("/offer", ensureAuthenticated, offerRoutes);
+
 
 // //Port For the Application
 const port = process.env.PORT || 3000;

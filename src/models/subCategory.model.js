@@ -1,3 +1,6 @@
+//  Author: Fathma siddique
+//  last modified: 07/23/19
+//  Description: SubCategory model schema 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Text = require('text/lib/text')

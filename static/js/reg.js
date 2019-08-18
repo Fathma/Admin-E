@@ -134,14 +134,14 @@ $(document).ready(function() {
     ddl2.innerHTML = options;
   }
 
-  // creates dropdown
-  function configureDropDownL2(ddl2, data) {
-    var options="";
-    for (i = 0; i < data[0].brands.length; i++) {
-      options += "<option value=\"" +
-        data[0].brands[i].name +
-        '">' ;
-    }
-    ddl2.innerHTML = options;
-  }
+  // // creates dropdown
+  // function configureDropDownL2(ddl2, data) {
+  //   var options="";
+  //   for (i = 0; i < data[0].brands.length; i++) {
+  //     options += "<option value=\"" +
+  //       data[0].brands[i].name +
+  //       '">' ;
+  //   }
+  //   ddl2.innerHTML = options;
+  // }
 });

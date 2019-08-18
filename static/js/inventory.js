@@ -114,7 +114,7 @@ $(document).ready(()=>{
     
       for (var i = 0; i < quantity; i++) {
         var label1 = createLabel("pid", i, "PID" + (i + 1));
-        var input1 = createInputfield("text", "pid", i, `${pid}-${today}-${randomString(4)}`);
+        var input1 = createInputfield("text", "pid", i, `${pid}${randomString(3)}`);
         input1.readOnly = true;
         create_row(i, label1, input1);
   

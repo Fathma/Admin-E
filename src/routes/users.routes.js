@@ -1,3 +1,6 @@
+// author: Fathma siddique
+// lastmodified: 23/7/2019
+// description: the file has all the user  routes
 const express = require('express')
 const router = express.Router()
 const { ensureAuthenticated } = require("../helpers/auth")

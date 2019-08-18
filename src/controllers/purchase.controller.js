@@ -1,3 +1,6 @@
+// author : fathma Siddique
+// lastmodified : 31/7/2019
+// description : all the purchase related controllers/funtions are written in here 
 const LP = require('../models/localPurchase.model');
 const Product = require('../models/product.model');
 const Category = require('../models/category.model');
@@ -12,13 +15,14 @@ exports.LocalPurchasePage = (req, res) => {
   res.render('purchase/localPurchase',{ date });
 }
 
+// product list a purchase
 exports.productList = async (req, res)=>{
   var lp = await LP.findOne({_id: req.params._id}).populate('products.product')
  
   res.render('purchase/productList', { products: lp.products })
 }
 
-// get supplier registration page
+// list of local purchase
 exports.getLPList = async (req, res) =>{
   var lp = await LP.find().populate('supplier').sort({ "date": -1 })
   var count = 1;
@@ -44,7 +48,6 @@ exports.getProducts = (req, res) => {
       populate: { path: 'subcategory' },
     })
     .populate('supplier')
-    // .exec((err, doc) => res.send(doc))
     .exec(async (err, doc) => 
     {
      
@@ -57,12 +60,11 @@ exports.getProducts = (req, res) => {
           // doc_serial.serials.push(docs)
         
       }
-      console.log(doc)
       res.send(doc_serial)
     })
 };
 
-// get supplier registration page
+// fires local purchase page for a specific local purchase
 exports.LocalPurchaseLPPage = (req, res) => {
 
   LP.findOne({ number: req.params.invc })
@@ -129,11 +131,11 @@ exports.SaveLocalPurchase = async (req, res) => {
     if (subNn != '0') {
       pro_obj.subcategory = sub[0]; 
       pro_obj.productName = `${cat[1]}-${sub[1]}-${brand[1]}-${model1}`;
-      pro_obj.pid = cat[1].slice(0,3)+ sub[1].slice(0,3)+ brand[1].slice(0,3)+ model1
+      pro_obj.pid = cat[1].slice(0,2)+ brand[1].slice(0,2)
     }
     else{
       pro_obj.productName = `${cat[1]}-${brand[1]}-${model1}`
-      pro_obj.pid = cat[1].slice(0,3)+ brand[1].slice(0,3)+ model1
+      pro_obj.pid = cat[1].slice(0,2)+ brand[1].slice(0,2)
     }
     pro = await new Product(pro_obj).save();
   }

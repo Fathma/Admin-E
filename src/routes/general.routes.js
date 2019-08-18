@@ -1,3 +1,7 @@
+// author: Fathma siddique
+// lastmodified: 7/23/2019
+// description: the file has all the general  routes 
+
 const express = require('express')
 const router = express.Router()
 const general = require('../controllers/general.controller')

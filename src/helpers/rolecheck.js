@@ -1,3 +1,4 @@
+// check role to give access
 module.exports = {
     Administrator: function (req, res, next) {
         if(req.user){

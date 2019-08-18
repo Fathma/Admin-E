@@ -1,3 +1,6 @@
+// author : fathma Siddique
+// lastmodified : 31/7/2019
+// description : all the user related controllers/funtions are written in here 
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const Validation = require('../helpers/validations')
@@ -69,6 +72,7 @@ exports.logout = (req, res) => {
 };
 
 
+// shows all user
 exports.getUsers = (req, res)=>{
   User.find((err, users)=>{
     var count = 1;
@@ -77,12 +81,12 @@ exports.getUsers = (req, res)=>{
   })
 }
 
-
+// edit user update page
 exports.edit = (req, res)=>{
   User.findOne({ _id: req.params.id }, (err, user)=> res.render('users/updateUser',{ user }))
 }
 
-
+// save edit
 exports.saveEdit = (req, res)=>{
   User.update({ _id: req.body._id}, { $set: req.body },(err, user)=>{
     req.flash('success_msg','Info has updated')
@@ -90,14 +94,14 @@ exports.saveEdit = (req, res)=>{
   })
 }
 
-
+// show user profile
 exports.profile = (req, res)=>{
   User.findOne({ _id: req.params.id }, (err, user)=>{
     res.render('users/profile', { user })
   })
 }
 
-
+// changing user password by sending a temporary link to the use email
 exports.changePass = (req, res)=>{
 
   User.findOne({_id: req.params.id}, (err, user)=>{
@@ -111,7 +115,7 @@ exports.changePass = (req, res)=>{
   })
 }
 
-
+// redirects to a temporary page
 exports.changePassPage = (req, res)=>{
   const { user } = jwt.verify(req.params.token, 'sceretkey') 
   if(user){
@@ -120,7 +124,9 @@ exports.changePassPage = (req, res)=>{
 }
 
 
+// saves the ne pass
 exports.SaveNewPass = (req, res)=>{
+
   var { _id, password, password2, token } = req.body;
   
   if ( password != password2 ) {

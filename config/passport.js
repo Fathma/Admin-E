@@ -1,3 +1,8 @@
+//  Author: Fathma Siddique
+//  Create Date: 02/05/2019
+//  Modify Date: 02/05/2019
+//  Description: this file is to configuring passport js for authentication 
+
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -5,17 +10,17 @@ const bcrypt = require("bcryptjs");
 // Load user model
 const User = mongoose.model("users");
 
+// user authentication by passport.js localstrategy. 
 module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-      User.findOne({
-      email: email
-      }).then(user => {
+      // checks whether user already exists or not
+      User.findOne({ email: email }).then(user => {
         if (!user) {
           return done(null, false, { message: "No user found" });
         }
 
-        // Match password
+        // matches the given password with the encrypted password 
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
@@ -28,12 +33,16 @@ module.exports = function(passport) {
     })
   );
 
-  passport.serializeUser(function(user, done) {
+
+  // serializes the user id in the session
+  passport.serializeUser( (user, done)=>{
     done(null, user.id);
   });
+  
 
+  // gets the user id form session and get user info by that id
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    User.findById(id, (err, user)=> {
       done(err, user);
     });
   });
