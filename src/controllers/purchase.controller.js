@@ -6,13 +6,19 @@ const Product = require('../models/product.model');
 const Category = require('../models/category.model');
 const SubCategory = require('../models/subCategory.model');
 const Serials = require('../models/serials.model');
+const Supplier = require('../models/supplier.model');
+const Brand = require('../models/brand.model');
 
 // get supplier registration page
-exports.LocalPurchasePage = (req, res) => { 
-  var today = new Date()
-  var date =(today.getMonth()+1) +' / '+today.getDate()+' / '+ today.getFullYear();
-  console.log(date)
-  res.render('purchase/localPurchase',{ date });
+exports.LocalPurchasePage =async (req, res) => { 
+  let today = new Date()
+  let date =(today.getMonth()+1) +' / '+today.getDate()+' / '+ today.getFullYear()
+  let supplier =  await Supplier.find()
+  let cat = await Category.find()
+  let categories = await SubCategory.find()
+  let brand = await Brand.find()
+
+  res.render('purchase/localPurchase',{ date, Supplier: supplier, cat, categories, brand })
 }
 
 // product list a purchase
@@ -82,7 +88,7 @@ exports.LocalPurchaseLPPage = (req, res) => {
       populate: { path: 'subcategory' }
     })
     .populate('supplier')
-    .exec((err, doc) => {
+    .exec(async (err, doc) => {
 
       var count = 1;
 
@@ -90,8 +96,11 @@ exports.LocalPurchaseLPPage = (req, res) => {
         doc.products[i].num = count;
         count++;
       }
+      let cat = await Category.find()
+      let categories = await SubCategory.find()
+      let brand = await Brand.find()
 
-      res.render('purchase/localPurchase', { lp: doc });
+      res.render('purchase/localPurchase', { lp: doc, cat, categories, brand });
     });
 };
 
@@ -161,5 +170,6 @@ exports.SaveLocalPurchase = async (req, res) => {
         $inc: { subTotal: +total }
       }, { upsert: true });
   }
+
   res.redirect(`/purchase/localPurchase/${number}`);
 };

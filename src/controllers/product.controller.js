@@ -14,6 +14,8 @@ const Category = require('../models/category.model')
 const SubCategory = require('../models/subCategory.model')
 const Specification = require('../models/specification.model')
 const Serial = require('../models/serials.model')
+const LocalPurchase = require('../models/localPurchase.model')
+const Brand = require('../models/brand.model')
 
 mongoose.Promise = global.Promise;
 
@@ -284,18 +286,25 @@ exports.deteteImg = (req, res)=>{
 
 
 // In-house stock product entry page
-exports.getInhouseInventoryPage = (req, res) => res.render('products/InhouseStockProduct');
-
+exports.getInhouseInventoryPage =async (req, res) => {
+  let localPurchase = await LocalPurchase.find()
+  res.render('products/InhouseStockProduct',{ LocalPurchase: localPurchase });
+}
 
 // dealer stock product entry page
-exports.getDealerInventoryPage = (req, res) => res.render('products/dealerProduct');
+exports.getDealerInventoryPage =async (req, res) =>{
+  let cat = await Category.find()
+  let categories = await SubCategory.find()
+  let brand = await Brand.find()
+  res.render('products/dealerProduct',{cat, categories, brand})
+} 
 
 
 // shows the number of fields user wants
 exports.showProductRegistrationFields =async (req, res, next) => {
-  var category= req.body.categg.split(',');
-  var brand= req.body.brandg.split(',');
-  var model= req.body.model;
+  var category= req.body.categg.split(',')
+  var brand= req.body.brandg.split(',')
+  var model= req.body.model
   await Category.updateOne({_id: category[0]}, {$addToSet:{ brands: brand[0]} },{ upsert: true })
   var product = {
     category: category[0],

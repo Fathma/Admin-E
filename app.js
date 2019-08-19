@@ -18,14 +18,14 @@ const Grid = require('gridfs-stream')
  
 
 // Loads models
-var Category = require("./src/models/category.model");
+// var Category = require("./src/models/category.model");
 var Product = require("./src/models/product.model");
-var LocalPurchase = require("./src/models/localPurchase.model");
-var Supplier = require("./src/models/supplier.model");
-var SubCategory = require("./src/models/subCategory.model");
-var PostCategory = require('./src/models/postCategory.model')
-var Specification  = require('./src/models/specification.model')
-var Brand = require("./src/models/brand.model");
+// var LocalPurchase = require("./src/models/localPurchase.model");
+// var Supplier = require("./src/models/supplier.model");
+// var SubCategory = require("./src/models/subCategory.model");
+// var PostCategory = require('./src/models/postCategory.model')
+// var Specification  = require('./src/models/specification.model')
+// var Brand = require("./src/models/brand.model");
 
 const keys = require('./config/keys')
 var vlaues = require('./config/values')
@@ -131,19 +131,8 @@ Handlebars.registerHelper("formatTime", function(date, format) {
   return mmnt.format(format);
 });
 
-// middleware
-// app.use(function(req, res, next) {
-//   Category.find()
-//     .populate("subCategories")
-//     .exec(function(err, categories) {
-//       if (err) return next(err);
-//       res.locals.S_categories = categories;
-//       next();
-//     });
-// });
-
 // Gloabl variables
-app.use(function(req, res, next) {
+app.use((req, res, next)=>{
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error"); 
@@ -156,12 +145,12 @@ app.use(function(req, res, next) {
 // middleware
 app.use(async (req, res, next)=>{
   // res.locals.specifications = await Specification.find()
-  res.locals.cat = await Category.find()
-  res.locals.categories = await SubCategory.find()
-  res.locals.brand = await Brand.find()
+  // res.locals.cat = await Category.find()
+  // res.locals.categories = await SubCategory.find()
+  // res.locals.brand = await Brand.find()
   res.locals.Product = await Product.find()
-  res.locals.Supplier = await Supplier.find()
-  res.locals.LocalPurchase = await LocalPurchase.find()
+  // res.locals.Supplier = await Supplier.find()
+  // res.locals.LocalPurchase = await LocalPurchase.find()
   next();
 });
 
