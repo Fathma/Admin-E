@@ -45,11 +45,12 @@ const categoryRoutes = require("./src/routes/category.routes");
 const usersRoutes = require("./src/routes/users.routes");
 const productsRoutes = require("./src/routes/products.routes");
 const customerRoutes = require("./src/routes/customer.routes");
-const invoiceRoutes = require("./src/routes/invoice.routes");
-const purchaseRoutes = require("./src/routes/purchase.routes");
-const supplierRoutes = require("./src/routes/supplier.routes");
-const generalRoutes = require("./src/routes/general.routes");
+const invoiceRoutes = require("./src/routes/invoice.routes")
+const purchaseRoutes = require("./src/routes/purchase.routes")
+const supplierRoutes = require("./src/routes/supplier.routes")
+const generalRoutes = require("./src/routes/general.routes")
 var forumRoutes = require("./src/routes/forum.routes")
+var promotionsRoutes = require("./src/routes/promotions.routes")
 
 
 
@@ -194,6 +195,7 @@ app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
 app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
 app.use("/general",  generalRoutes);
 app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
+app.use("/promotions", ensureAuthenticated, Contributor, promotionsRoutes);
 
 
 // //Port For the Application

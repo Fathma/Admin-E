@@ -1,0 +1,50 @@
+<div class="row">
+    <a  class="btn bg-purple" href="/promotions/NewDiscount" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Discount</a>
+</div><br>
+
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped" >
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Discount Type</th>
+                <th>Created</th>
+                <th>enabled</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{# each discount}}
+            <tr>
+                 <td>{{this.count}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.type}}</td>
+                <td>{{formatDate this.created}}</td>
+                {{# if this.enabled}}
+                <td>Enabled</td>
+                {{else}}
+                <td>Disabled</td>
+                {{/if}}
+                <td>
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateDiscount/{{this._id}}"
+                        >Edit</a>
+                    {{# if this.enabled}}
+                    <a href="/promotions/change/{{this._id}}/false" data-toggle="tooltip" title="Disable the discount"
+                        class="btn btn-default">Disable</a>
+                    {{else}}
+                    <a href="/promotions/change/{{this._id}}/true" data-toggle="tooltip" title="enable the discount"
+                        class="btn btn-default">Enable</a>
+                    {{/if}}
+                </td>
+            </tr>
+
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</div>

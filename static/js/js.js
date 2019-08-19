@@ -131,7 +131,29 @@ $(document).ready(function() {
     "#editor": function(element, renderer) {
       return true;
     }
-  };
+  };  
+
+  $("#couponrequired").change(function() {
+    if(this.checked) {
+      document.getElementById("coupon-required").style.display = "block";
+    }
+    if(!this.checked) {
+      document.getElementById("coupon-required").style.display = "none";
+    }
+  });
+
+  $("#usePercentage").change(function() {
+    if(this.checked) {
+      document.getElementById("discount_percentage").style.display = "block";
+      document.getElementById("discount_amount").style.display = "none";
+    }
+    if(!this.checked) {
+      document.getElementById("discount_percentage").style.display = "none";
+      document.getElementById("discount_amount").style.display = "block";
+    }
+  });
+
+
   // saving the pdf
   $("#cmd").click(function() {
     doc.fromHTML($("#content").html(), 15, 15, {

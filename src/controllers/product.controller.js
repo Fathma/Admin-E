@@ -215,12 +215,14 @@ exports.getProductUpdatePage = async(req, res)=>{
   
 }
 
+
 // saving product for dealer products
 exports.SaveProductDealer = async(req, res)=>{
   var data = req.body.data
   await Product.update({ _id: data._id },{ $set: data },{ upsert: true })
   res.send({})
 }
+
 
 // saving product for local purchase products
 exports.SaveProductLP = async(req, res)=>{
@@ -229,12 +231,15 @@ exports.SaveProductLP = async(req, res)=>{
   await Serial.insertMany(req.body.serials)
   res.send({})
 }
+
+
 // updating product for local purchase products
 exports.updateProduct = async(req, res)=>{
   var data = req.body.data
   await Product.update({ _id: data._id },{ $set: data },{ upsert: true })
   res.send({})
 }
+
 
 // checks whether any of the given serials already exists or not
 exports.checkSerials = async(req, res)=>{
