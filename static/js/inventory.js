@@ -260,7 +260,6 @@ $(document).ready(()=>{
               name: byId("name").value, 
               weight: byId("weight").value, 
               warranty: byId("warranty").value,
-              sellingPrice: byId("sellingPrice").value,
               description: byId("description").value
             };
             // var new_feat = parseInt(byId("new_feat").value);

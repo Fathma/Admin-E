@@ -19,6 +19,24 @@ exports.showOrdersPage = (req, res) => {
   })
 }
 
+exports.OrdersByMonthPage = async(req, res) => {
+  let month =parseInt(req.body.startDate.split('/')[0], 10)
+  let year =parseInt(req.body.startDate.split('/')[1], 10)
+  
+  
+  let orders =await Order.find();
+
+  let orderlist = orders.filter((data)=>{
+    if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
+      return data
+    }
+  })
+  console.log(orderlist.length)
+  var count = 1;
+  orderlist.map( doc=> doc.count = count++ )
+  res.render('orders/orders', { orders: orderlist })
+}
+
 // saving serial for order
 exports.saveSerialInOrders = async (req, res) => {
   var serials = req.body.Serial.split(',')

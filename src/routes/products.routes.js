@@ -74,6 +74,8 @@ router.get('/serials',  product_controller.getSerials)
 router.get('/viewLowQuantityProducts',  product_controller.viewLowQuantityProducts)
 router.get('/viewProducts', product_controller.viewProducts)
 
+router.post('/price/save', product_controller.SavePrice)
+
 // product attribute/ specifications
 router.post('/attribute/save', product_controller.SaveAttribute)
 router.get('/attributes/delete1/:_id/:label', product_controller.deleteAttribute)

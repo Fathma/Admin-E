@@ -12,9 +12,9 @@ const Post = require('../models/posts.model')
 
 // get all the data for notification and dashboard
 async function notification( cb ){
-  var orders = await Order.find({currentStatus: 'New Order'})
-  var newPost = await Post.find({ status: 'New'})
-  var products = await Product.find()
+  let orders = await Order.find({ currentStatus: 'New Order'})
+  let newPost = await Post.find({ status: 'New'})
+  let products = await Product.find()
 
   var count = 0
   var total_low = 0

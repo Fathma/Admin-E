@@ -1,7 +1,15 @@
+    
+
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
         <a href="#"><b>Orders</a>
     </div>
+    <form action="/orders/ordersByMonth" method="POST">
+        <label for="startDate">Select Month :</label>
+        <input name="startDate"  id="startDate" class="date-picker" />
+        <button type="submit" >submit</button>
+    </form>
+
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
@@ -49,3 +57,18 @@
         </table>
     </div>
 </div>
+
+<script>
+  $(function () {
+    $('.date-picker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'm/yy',
+            onClose: function(dateText, inst) { 
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+            });
+    });
+
+</script>

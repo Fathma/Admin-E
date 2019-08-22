@@ -19,6 +19,7 @@ var LocalPurchaseSchema = new Schema({
         purchasePrice:{ type: Number},
         total:{ type: Number}
     }],
-    subTotal:{ type: Number}
+    subTotal:{ type: Number},
+    created: { type: Date,default: Date.now }
 });
 module.exports = mongoose.model('LocalPurchase', LocalPurchaseSchema, 'LocalPurchases');

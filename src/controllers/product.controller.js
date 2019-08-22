@@ -16,6 +16,7 @@ const Specification = require('../models/specification.model')
 const Serial = require('../models/serials.model')
 const LocalPurchase = require('../models/localPurchase.model')
 const Brand = require('../models/brand.model')
+const Discount = require('../models/discount.model')
 
 mongoose.Promise = global.Promise;
 
@@ -102,7 +103,7 @@ exports.Specifications =async (req, res)=>{
 
 // save shipping in fo of a product
 exports.shippingSave = async(req, res)=>{
-  console.log(req.body.pid)
+  
   let prod = await Product.findOne({ _id: req.body.pid })
   let shippingInfo = {
     weight: req.body.weight,
@@ -119,6 +120,12 @@ exports.shippingSave = async(req, res)=>{
   new Product(prod).save().then(()=>{
     res.redirect('/products/Update/'+ req.body.pid+'#Shipping1')
   })
+}
+
+exports.SavePrice =async (req, res)=>{
+  console.log(req.body.discount)
+  await Product.update({ _id: req.body.pid }, {$set:req.body})
+  res.redirect('/products/Update/'+ req.body.pid+'#PRICE')
 }
 
 // added attribute to a product
@@ -199,6 +206,7 @@ exports.viewProducts = (req, res)=>{
 exports.getProductUpdatePage = async(req, res)=>{
   let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label').populate('category').populate('subcategory')
   let specifications = await Specification.find()
+  let discount = await Discount.find({type:"product"})
   let cat = product.category
   let sub = product.subcategory
   let motherboard = false
@@ -211,7 +219,9 @@ exports.getProductUpdatePage = async(req, res)=>{
       ram = true
     }
   }
-  res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram})
+
+
+  res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram, discount})
   
 
   

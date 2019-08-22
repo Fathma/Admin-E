@@ -20,6 +20,8 @@ const Grid = require('gridfs-stream')
 // Loads models
 // var Category = require("./src/models/category.model");
 var Product = require("./src/models/product.model");
+var LP = require("./src/models/localPurchase.model");
+var Order = require("./src/models/customerOrder");
 // var LocalPurchase = require("./src/models/localPurchase.model");
 // var Supplier = require("./src/models/supplier.model");
 // var SubCategory = require("./src/models/subCategory.model");
@@ -143,16 +145,16 @@ app.use((req, res, next)=>{
 });
 
 // middleware
-app.use(async (req, res, next)=>{
+// app.use(async (req, res, next)=>{
   // res.locals.specifications = await Specification.find()
   // res.locals.cat = await Category.find()
   // res.locals.categories = await SubCategory.find()
   // res.locals.brand = await Brand.find()
-  res.locals.Product = await Product.find()
+  // res.locals.Product = await Product.find()
   // res.locals.Supplier = await Supplier.find()
   // res.locals.LocalPurchase = await LocalPurchase.find()
-  next();
-});
+  // next();
+// });
 
 // route for fetching image
 app.get("/image/:filename", (req, res) => {
@@ -163,6 +165,52 @@ app.get("/image/:filename", (req, res) => {
     }
   })
 });
+
+// testing
+app.get("/abc", async(req, res) => {
+  let month = 8
+  let year = 2019
+  let orders =await Order.find({currentStatus:'Delivered'}).populate("cart.serials");
+  var p = orders[0].cart.serials
+  
+  orders[0].cart.map(cart=>{
+   
+    cart.serials.map(async serials=>{
+      var lp = await LP.findOne({_id: serials.lp})
+      var count=0
+      lp.products.filter(p=>{
+        if( JSON.stringify(cart.product) === JSON.stringify(p.product)){
+          count = count + p.purchasePrice
+        }
+      })
+      
+    })
+  
+  })
+
+  
+  // p.map((P)=>{
+  //   P.populate('invoice')
+  // })
+ 
+  // console.log(p)
+  // let lp =await LP.find();
+  // let orderlist = orders.filter((data)=>{
+  //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
+  //     return data
+  //   }
+  // })
+  // let lp = lp.filter((data)=>{
+  //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
+  //     return data
+  //   }
+  // })
+  // console.log(orderlist.length)
+  // var count = 1;
+  // orderlist.map( doc=> doc.count = count++ )
+  // res.render('orders/orders', { orders: orderlist })
+})
+
 
 
 app.get("/", (req, res) => {

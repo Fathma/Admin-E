@@ -11,12 +11,12 @@
                   
                     <form action="/orders/setSerials/{{order._id}}/{{model}}/{{item_id}}" method="POST">
                         
-                       <input type="text" name="quantity" id="quantity" value="{{quantity}}">
+                       <input type="hidden" name="quantity" id="quantity" value="{{quantity}}">
                         <div class="form-group">
                             <label for="Order_ID">Order ID:</label>
                             <input type="text" name="orderId" id="orderId" value="{{order.orderId}}" class="form-control"
                                 required>
-                            <input type="text" name="Order_ID" id="Order_ID" value="{{order._id}}" class="form-control"
+                            <input type="hidden" name="Order_ID" id="Order_ID" value="{{order._id}}" class="form-control"
                                 required>
                         </div>
                          <div class="form-group">

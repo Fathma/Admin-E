@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
+                                {{!-- <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="sellingPrice">Selling Price:
                                         </label>
@@ -178,7 +178,7 @@
                                             id="sellingPrice" required>
                                     </div>
                                 </div>
-                                <br>
+                                <br> --}}
                                 {{!-- {{# each features}}
                             <div class="row">
                                 <div class="col-md-5 col5">
@@ -288,6 +288,24 @@
             </div>
         </div>
     </div>
+    <div class="box">
+        <button class="collapsible active"><span style="float:left ">
+                <li class="fa fa-cog panel-icon"></li>
+                PRICE
+            </span><span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <h4>{{productentry_msg}}</h4>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box">
         <div id="SPECIFICATIONS1"></div>
@@ -301,77 +319,7 @@
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
                             <h4>{{ productentry_msg }}</h4>
-                            {{!-- {{# if product }}
-                            <form action="/products/attribute/save" method="POST">
-
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="pid">Product Name
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-
-                                        <input type="text" class="form-control inp" name="pname" id="pname"
-                                            value="{{ product.name }}">
-                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="label">Product Attribute
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="label" id="label" required>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="value">Value
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="value" id="value" required>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <center>
-                                        <button type="submit" class="btn btn-default btn-md">Submit</button>
-                                    </center>
-                                </div>
-                            </form><br>
-                            <table id="ptable" style="width:100%" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Product Attributes</th>
-                                        <th>Values</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{# each product.features}}
-                                    <tr>
-                                        <td>
-                                            <strong>{{this.label}}</strong>
-                                        </td>
-                                        <td>
-                                            <strong>{{this.value}}</strong>
-                                        </td>
-                                        <td>
-                                            <a href="/products/attributes/delete1/{{../product._id}}/{{this.label}}"
-                                                class="btn btn-default ">Delete</a>
-                                        </td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                            {{else}}
-                            <p>You need to complete product registration with image in specification section.
-                            </p>
-                            {{/if}} --}}
+                            
                         </div>
                     </div>
                 </div>

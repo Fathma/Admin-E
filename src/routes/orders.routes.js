@@ -15,5 +15,6 @@ router.post('/setSerials/:oid/:model_id/:item_id', orders.saveSerialInOrders)
 router.get('/ViewInvoice/:id', orders.ViewInvoice)
 // router.post('/saveEdit/:oid/:model_id/:item_id', orders.saveEdit)
 router.get('/newOrders', orders.newOrders)
+router.post('/ordersByMonth',orders.OrdersByMonthPage)
 
 module.exports = router

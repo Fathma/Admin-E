@@ -49,7 +49,8 @@ var ProductSchema = new Schema({
     HomePagetag: { type: String, default:'None'},
     relatedProducts: [
         { type: Schema.Types.ObjectId, ref: 'Product' },
-    ]
+    ],
+    discount:{ type: Schema.Types.ObjectId, ref: 'Discount', default:null }
 });
 
 
