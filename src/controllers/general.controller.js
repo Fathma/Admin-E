@@ -44,3 +44,89 @@ exports.showDashboard =async (req, res, next) => {
     res.render('general/dashboard', { quantity ,  new_order, newPost, count })
   })
 }
+
+var find_duplicate_in_array = (arra1, cb)=> {
+  var object = {};
+  var result = [];
+
+  arra1.forEach(function (item) {
+    if(!object[item])
+        object[item] = 0;
+      object[item] += 1;
+  })
+
+  for (var prop in object) {
+     if(object[prop] >= 2) {
+         result.push(prop);
+     }
+  }
+
+  cb(result);
+
+}
+
+var orderedProducts =async (cb)=>{
+  var orders = await Order.find().populate('cart.product')
+  let cart=[]
+  orders.map(order=>{
+    order.cart.map(item=>{
+      cart.push(item)
+    })
+  })
+  let pros = []
+  cart.map(item=>{
+    pros.push(item.product._id)
+  })
+  
+  find_duplicate_in_array(pros, duplicated=>{
+    
+    let unique=[]
+    let multi = null
+    cart.map(item=>{
+     
+      duplicated.map(dup=>{
+        if(item.product._id == dup){
+          if(multi == null){
+            multi=item
+          }else{
+            multi.quantity = multi.quantity + item.quantity
+            multi.price = multi.price +item.price
+          }
+        }else{
+          unique.push(item)
+        }
+      })
+     
+    })
+    
+    unique.push(multi)
+    var count = 1;
+    unique.map( doc=> doc.count = count++ )
+
+    cb(unique)
+  })
+}
+exports.bestSellers= async(req, res) => {
+  orderedProducts(unique=>{
+    res.render('reports/productbyOrder',{ products: unique })
+  })
+}
+
+// exports.productNeverSold = async(req, res) => {
+//   orderedProducts(async unique=>{
+//     let products = await Product.find()
+//     products.filter(product=>{
+     
+     
+//       unique.map(un=>{
+       
+        
+//       })
+      
+     
+     
+//     })
+//     // console.log(products)
+//     res.render('reports/neverSold',{ products })
+//   })
+// }

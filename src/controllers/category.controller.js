@@ -13,6 +13,8 @@ exports.newCategory=(req, res)=> res.render('parents/newCategory')
 exports.newBrand=(req, res)=> res.render('parents/newBrand')
 exports.newSubCategory=(req, res)=> res.render('parents/newSubCategory')
 
+
+
 exports.updateCategory =async (req, res)=>{
   let category = await Cat.findOne({ _id: req.params.id })
   let discount = await Discount.find({type:"category"})

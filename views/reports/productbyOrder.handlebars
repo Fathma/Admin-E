@@ -1,0 +1,56 @@
+    
+
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Best Sellers</a>
+    </div>
+  
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Products</th>
+                     <th>Quantity</th>
+                    <th>Total</th>
+                    {{!--<th>Date Added </th>
+                    <th>Date Modified</th>
+                    <th>Action</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                {{# each products}}
+                <tr>
+                    <td>{{this.count}}</td>
+                    <td> 
+
+                        <strong>{{this.product.productName}}</strong>
+                    </td>
+
+                     <td>
+                        <strong>{{this.quantity}}</strong>
+                    </td>
+
+                    <td>
+                        <strong>{{this.price}}TK</strong>
+                    </td>
+                    {{!--<td>
+                        <strong>{{formatDate this.created}}</strong>
+                    </td>
+                    <td>
+                        <strong>{{formatDate this.lastModified }}</strong>
+                    </td>
+                    <td>
+                        <a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
+                            title="Edit" style="padding: 0%" class="btn btn-primary">
+                            Show Details
+                        </a>
+                    </td>--}}
+                </tr> 
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+

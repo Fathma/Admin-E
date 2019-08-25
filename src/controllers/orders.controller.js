@@ -41,26 +41,47 @@ exports.OrdersByMonthPage = async(req, res) => {
 exports.saveSerialInOrders = async (req, res) => {
   var serials = req.body.Serial.split(',')
   var serial_id = []
-  
   serials.map( async serial=>{
     // getting id of the serial
-    var id = await Serial.find({$or: [{number: serial}, {sid: serial}]})
-    id.map( new_id =>{
-      if(new_id.pid == req.params.model_id){
-        serial_id.push(new_id._id)
-      }
-    })
+    var id = await Serial.findOne({$or: [{number: serial}, {sid: serial}]})
+    if(id.pid == req.params.model_id){
+      serial_id.push(id._id) 
+    }
   })
   // setting serials in order
   var docs = await Order.findOne({ _id: req.params.oid })
+  
   docs.cart.map(item=>{
     if(item._id == req.params.item_id){
       item.serials = serial_id
-      new Order(docs).save().then(()=>{
-      res.redirect('/orders/orderDetails/' + req.params.oid)
-      })
     }
   })
+  new Order(docs).save().then(()=>{
+    res.redirect('/orders/orderDetails/' + req.params.oid)
+    })
+
+  // var serials = req.body.Serial.split(',')
+  // var serial_id = []
+  
+  // serials.map( async serial=>{
+  //   // getting id of the serial
+  //   var id = await Serial.find({$or: [{number: serial}, {sid: serial}]})
+  //   id.map( new_id =>{
+  //     if(new_id.pid == req.params.model_id){
+  //       serial_id.push(new_id._id)
+  //     }
+  //   })
+  // })
+  // // setting serials in order
+  // var docs = await Order.findOne({ _id: req.params.oid })
+  // docs.cart.map(item=>{
+  //   if(item._id == req.params.item_id){
+  //     item.serials = serial_id
+  //     new Order(docs).save().then(()=>{
+  //     res.redirect('/orders/orderDetails/' + req.params.oid)
+  //     })
+  //   }
+  // })
 }
 
 // // edit ordered products' quantity

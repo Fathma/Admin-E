@@ -165,51 +165,111 @@ app.get("/image/:filename", (req, res) => {
     }
   })
 });
+// var find_duplicate_in_array = (arra1, cb)=> {
+//   var object = {};
+//   var result = [];
 
-// testing
-app.get("/abc", async(req, res) => {
-  let month = 8
-  let year = 2019
-  let orders =await Order.find({currentStatus:'Delivered'}).populate("cart.serials");
-  var p = orders[0].cart.serials
-  
-  orders[0].cart.map(cart=>{
-   
-    cart.serials.map(async serials=>{
-      var lp = await LP.findOne({_id: serials.lp})
-      var count=0
-      lp.products.filter(p=>{
-        if( JSON.stringify(cart.product) === JSON.stringify(p.product)){
-          count = count + p.purchasePrice
-        }
-      })
-      
-    })
-  
-  })
+//   arra1.forEach(function (item) {
+//     if(!object[item])
+//         object[item] = 0;
+//       object[item] += 1;
+//   })
 
+//   for (var prop in object) {
+//      if(object[prop] >= 2) {
+//          result.push(prop);
+//      }
+//   }
+
+//   cb(result);
+
+// }
+
+
+// // testing
+// app.get("/abc", async(req, res) => {
+//   var orders = await Order.find().populate('cart.product')
+//   let cart=[]
+//   orders.map(order=>{
+//     order.cart.map(item=>{
+//       cart.push(item)
+//     })
+//   })
+//   let pros = []
+//   cart.map(item=>{
+//     pros.push(item.product._id)
+//   })
   
-  // p.map((P)=>{
-  //   P.populate('invoice')
-  // })
+//   find_duplicate_in_array(pros, duplicated=>{
+    
+//     let unique=[]
+//     let multi = null
+//     cart.map(item=>{
+     
+//       duplicated.map(dup=>{
+//         if(item.product._id == dup){
+//           if(multi == null){
+//             multi=item
+//           }else{
+//             multi.quantity = multi.quantity + item.quantity
+//             multi.price = multi.price +item.price
+//           }
+//         }else{
+//           unique.push(item)
+//         }
+//       })
+     
+//     })
+    
+//     unique.push(multi)
+//     var count = 1;
+//     unique.map( doc=> doc.count = count++ )
+//     res.render('reports/productbyOrder',{ products: unique })
+    
+//   })
  
-  // console.log(p)
-  // let lp =await LP.find();
-  // let orderlist = orders.filter((data)=>{
-  //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
-  //     return data
-  //   }
-  // })
-  // let lp = lp.filter((data)=>{
-  //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
-  //     return data
-  //   }
-  // })
-  // console.log(orderlist.length)
-  // var count = 1;
-  // orderlist.map( doc=> doc.count = count++ )
-  // res.render('orders/orders', { orders: orderlist })
-})
+//   // let month = 8
+//   // let year = 2019
+//   // let orders =await Order.find({currentStatus:'Delivered'}).populate("cart.serials");
+//   // var p = orders[0].cart.serials
+  
+//   // orders[0].cart.map(cart=>{
+   
+//   //   cart.serials.map(async serials=>{
+//   //     var lp = await LP.findOne({_id: serials.lp})
+//   //     var count=0
+//   //     lp.products.filter(p=>{
+//   //       if( JSON.stringify(cart.product) === JSON.stringify(p.product)){
+//   //         count = count + p.purchasePrice
+//   //       }
+//   //     })
+      
+//   //   })
+  
+//   // })
+
+  
+//   // p.map((P)=>{
+//   //   P.populate('invoice')
+//   // })
+ 
+//   // console.log(p)
+//   // let lp =await LP.find();
+//   // let orderlist = orders.filter((data)=>{
+//   //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
+//   //     return data
+//   //   }
+//   // })
+//   // let lp = lp.filter((data)=>{
+//   //   if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
+//   //     return data
+//   //   }
+//   // })
+//   // console.log(orderlist.length)
+//   // var count = 1;
+//   // orderlist.map( doc=> doc.count = count++ )
+//   // res.render('orders/orders', { orders: orderlist })
+// })
 
 
 
