@@ -96,9 +96,7 @@ var orderedProducts =async (cb)=>{
           unique.push(item)
         }
       })
-     
     })
-    
     unique.push(multi)
     var count = 1;
     unique.map( doc=> doc.count = count++ )
@@ -112,21 +110,18 @@ exports.bestSellers= async(req, res) => {
   })
 }
 
-// exports.productNeverSold = async(req, res) => {
-//   orderedProducts(async unique=>{
-//     let products = await Product.find()
-//     products.filter(product=>{
-     
-     
-//       unique.map(un=>{
-       
-        
-//       })
-      
-     
-     
-//     })
-//     // console.log(products)
-//     res.render('reports/neverSold',{ products })
-//   })
-// }
+exports.productNeverSold = async(req, res) => {
+  orderedProducts(async unique=>{
+    let products = await Product.find()
+    let productleft = products.filter(product=>{
+      var bool = false
+      unique.map(un=>{
+        if(JSON.stringify(un.product._id) ==JSON.stringify(product._id)) bool=true
+      })
+      if(bool === false) return product
+    })
+    var count = 1;
+    productleft.map( doc=> doc.count = count++ )
+    res.render('reports/neverSold',{ products:productleft })
+  })
+}

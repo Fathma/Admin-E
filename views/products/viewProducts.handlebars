@@ -38,7 +38,12 @@
                     <td>{{# if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
                     <td>{{# if this.availablity}}Available{{else}}Not Available{{/if}}</td>
                     <td>{{this.dealer}}</td>
-                    <td>{{# if this.availablity}}<a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>{{else}}<a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>{{/if}}{{# if this.isActive}}<a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>{{else}}<a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>{{/if}}<a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a></td>
+                    <td>{{# if this.availablity}}
+                        <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
+                        {{else}}<a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>
+                        {{/if}}{{# if this.isActive}}<a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>{{else}}
+                        <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>{{/if}}
+                        <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a></td>
                 </tr>
         {{/if}}
         {{/each}}
