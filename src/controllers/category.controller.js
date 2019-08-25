@@ -1,14 +1,76 @@
 // author: Fathma siddique
+// last updated:25/08/2019
 // description: the file has all the category related controllers/ functions
 const Brand = require('../models/brand.model')
 const subCategory = require('../models/subCategory.model')
 const Cat = require('../models/category.model')
+const Discount = require('../models/discount.model')
+const value= require('../../config/values')
 
 
 // simply fires a page
 exports.newCategory=(req, res)=> res.render('parents/newCategory')
 exports.newBrand=(req, res)=> res.render('parents/newBrand')
 exports.newSubCategory=(req, res)=> res.render('parents/newSubCategory')
+
+exports.updateCategory =async (req, res)=>{
+  let category = await Cat.findOne({ _id: req.params.id })
+  let discount = await Discount.find({type:"category"})
+  req.flash( 'success_msg', value.update.succ)
+  res.render('parents/updateCategory', { category, discount })
+}
+
+exports.updateSubCategory =async (req, res)=>{
+  let subcategory = await subCategory.findOne({ _id: req.params.id })
+  let discount = await Discount.find({type:"subcategory"})
+  let cat = await Cat.find()
+  req.flash( 'success_msg', value.update.succ)
+  res.render('parents/updateSubCategory', { subcategory, discount, cat })
+}
+
+exports.updateBrand =async (req, res)=>{
+  let brand = await Brand.findOne({ _id: req.params.id })
+  let discount = await Discount.find({type:"brand"})
+  res.render('parents/updateBrand', { brand, discount })
+}
+
+exports.updateBrandSave = async (req, res)=>{
+  await Brand.update({ _id: req.body.id }, { $set: { name: req.body.name} })
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateBrand/'+req.body.id)
+}
+
+exports.updateSubCategorySave = async (req, res)=>{
+  await subCategory.update({ _id: req.body.id }, { $set: req.body})
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateSubCategory/'+ req.body.id)
+}
+
+exports.updateCategorySave = async (req, res)=>{
+  await Cat.update({ _id: req.body.id }, { $set: { name: req.body.name} })
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateCategory/'+req.body.id)
+}
+
+exports.SaveDiscountCategory = async (req, res)=>{
+  await Cat.update({ _id: req.body.id }, { $set: { discount: req.body.discount} })
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateCategory/'+req.body.id)
+}
+
+exports.SaveDiscountBrand = async (req, res)=>{
+  await Brand.update({ _id: req.body.id }, { $set: { discount: req.body.discount} })
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateBrand/'+req.body.id)
+}
+
+exports.SaveDiscountSubCategory = async (req, res)=>{
+  await subCategory.update({ _id: req.body.id }, { $set: { discount: req.body.discount} })
+  req.flash( 'success_msg', value.update.succ)
+  res.redirect('/category/updateSubCategory/'+req.body.id)
+}
+
+
 
 // saving category
 exports.addCategory = (req, res) => {
@@ -19,7 +81,7 @@ exports.addCategory = (req, res) => {
       req.body.brands= []
       new Cat(req.body).save().then( category => {
         req.flash( 'success_msg', 'Category added successfully!')
-        res.redirect('/category/newCategory')
+        res.redirect('/category/updateCategory/'+category._id)
       })
     }else{
       req.flash('error_msg', 'Already exists!')
@@ -47,10 +109,10 @@ exports.addSubCategory = (req, res) => {
           { _id: req.body.cate },
           { $addToSet: { subCategories: subcategory._id } },
           { upsert: true },
-          ( err, docs )=> {
+          ( err, cat )=> {
             if ( err ) res.send( err ) 
             req.flash( 'success_msg', 'Category added successfully!')
-            res.redirect('/category/newSubCategory')
+            res.redirect('/category/updateSubCategory/'+cat._id)
           }
         )
       })
@@ -71,7 +133,7 @@ exports.addBrand = ( req, res ) => {
       let brand = { name: req.body.brand }
       new Brand( brand ).save().then( brand =>{
         req.flash( 'success_msg', 'Category added successfully!')
-        res.redirect('/category/newBrand')
+        res.redirect('/category/updateBrand/'+brand._id)
       })
     }else{
       req.flash('error_msg', 'Already exists!')

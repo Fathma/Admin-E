@@ -13,7 +13,8 @@ var SubCategorySchema = new Schema({
     brands:[{
         type: Schema.Types.ObjectId, ref: 'Brand'
     }],
-    enabled: { type: Boolean, default: false }
+    enabled: { type: Boolean, default: false },
+    discount:{ type: Schema.Types.ObjectId, ref: 'Discount', default:null }
 })
 
 module.exports = mongoose.model('SubCategory', SubCategorySchema, 'subCategories')

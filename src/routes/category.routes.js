@@ -10,16 +10,27 @@ const category = require('../controllers/category.controller')
 router.post('/addCategory', category.addCategory)
 router.get('/categoryList', category.categoryList)
 router.get('/newCategory', category.newCategory)
+router.get('/updateCategory/:id', category.updateCategory)
+router.post('/updateCategory', category.updateCategorySave)
+router.post('/SaveDiscountCategory', category.SaveDiscountCategory)
+
 
 router.get('/newSubCategory', category.newSubCategory)
 router.post('/addSubCategory', category.addSubCategory)
 router.get('/getSub/:cat', category.getSubById)
 router.get('/subCategoryList', category.subCategoryList)
+router.get('/updateSubCategory/:id', category.updateSubCategory)
+router.post('/updateSubCategory', category.updateSubCategorySave)
+router.post('/SaveDiscountSubCategory', category.SaveDiscountSubCategory)
+
 
 router.get('/newBrand', category.newBrand)
 router.post('/addBrand', category.addBrand)
 router.get('/getBrands/:subcat', category.getBrand)
 router.get('/brandList', category.brandList)
+router.get('/updateBrand/:id', category.updateBrand)
+router.post('/updateBrand', category.updateBrandSave)
+router.post('/SaveDiscountBrand', category.SaveDiscountBrand)
 
 
 router.get('/subcategory/changeStatus/:id/:value', category.changeStatus_Subcat)

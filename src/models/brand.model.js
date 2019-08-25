@@ -7,7 +7,8 @@ const Schema = mongoose.Schema
 let BrandSchema = new Schema({
     name: { type: String },
     created: { type: Date, default: Date.now },
-    enabled: { type: Boolean, default: false }
+    enabled: { type: Boolean, default: false },
+    discount:{ type: Schema.Types.ObjectId, ref: 'Discount', default:null }
 })
 
 module.exports = mongoose.model('Brand', BrandSchema, 'brands')

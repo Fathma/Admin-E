@@ -1,0 +1,84 @@
+<div class="container-fluid">
+
+    <div class="box">
+        <div id="#PRODUCT"></div>
+        <button class="collapsible">
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>SPECIFICATION INFO</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="register-logo">
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <form action="/category/updateCategory" method="POST">
+                                <input type="hidden" name="id" id="id" value="{{category._id}}">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="name">Category</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="name"
+                                            id="name" value="{{category.name}}" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Update</button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div id="#PRODUCT"></div>
+        <button class="collapsible">
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>DISCOUNT</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="register-logo">
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <form action="/category/SaveDiscountCategory" method="POST">
+                                <input type="hidden" name="id" id="id" value="{{category._id}}">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="discount">Discount</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="discount" id="discount" class="form-control inp">
+                                            <option value="">Select One</option>
+                                             {{# each discount}}
+                                                <option value="{{this._id}}" {{# equality this._id ../category.discount }}selected{{/equality}}>{{this.name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Update</button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
