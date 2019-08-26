@@ -12,5 +12,7 @@ router.post('/SaveUpdateDiscount', promotions.SaveUpdateDiscount)
 router.get('/DiscountList', promotions.DiscountList)
 router.get('/change/:id/:value', promotions.enableDisable)
 
+router.get('/newPromotion', promotions.newBundleOffer)
+
 
 module.exports = router

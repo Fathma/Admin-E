@@ -3,6 +3,15 @@ $(document).ready(function() {
   
 
   $(()=>{
+    $("#type").on("click", (e)=>{
+      if(byId('type').value == "totalOrder"){
+        document.getElementById("couponR").style.display = "block";
+        // document.getElementById("ccoupon").style.display = "block";
+      }else{
+        document.getElementById("couponR").style.display = "none";
+        // document.getElementById("ccoupon").style.display = "none";
+      }
+    })
     $("#supplierReg").on("click", (e)=>{
       var cname = byId('cname').value
       var cemail= byId('cemail').value
@@ -24,6 +33,7 @@ $(document).ready(function() {
           address_array.push(addresss)
         }
       }
+      
 
       // getting all addresses in an array
       var contacts_array = [];
