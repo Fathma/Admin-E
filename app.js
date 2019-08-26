@@ -19,9 +19,9 @@ const Grid = require('gridfs-stream')
 
 // Loads models
 // var Category = require("./src/models/category.model");
-var Product = require("./src/models/product.model");
-var LP = require("./src/models/localPurchase.model");
-var Order = require("./src/models/customerOrder");
+// var Product = require("./src/models/product.model");
+// var LP = require("./src/models/localPurchase.model");
+// var Order = require("./src/models/customerOrder");
 // var LocalPurchase = require("./src/models/localPurchase.model");
 // var Supplier = require("./src/models/supplier.model");
 // var SubCategory = require("./src/models/subCategory.model");
@@ -271,31 +271,29 @@ app.get("/image/:filename", (req, res) => {
 //   // res.render('orders/orders', { orders: orderlist })
 // })
 
-
-
 app.get("/", (req, res) => {
   if (req.user) {
-    res.redirect("/general/showDashboard");
+    res.redirect("/general/showDashboard")
   } else {
-    res.redirect("/users/login");
+    res.redirect("/users/login")
   }
-});
+})
 
 // base routes
-app.use("/category", ensureAuthenticated, Editor, categoryRoutes);
+app.use("/category", ensureAuthenticated, Editor, categoryRoutes)
 app.use("/users",   usersRoutes);
-app.use("/orders", ensureAuthenticated, Contributor, ordersRoutes);
-app.use("/invoice", ensureAuthenticated, Contributor, invoiceRoutes);
-app.use("/customers", ensureAuthenticated, Administrator, customerRoutes);
-app.use("/products", Editor,ensureAuthenticated,  productsRoutes);
-app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes);
-app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes);
+app.use("/orders", ensureAuthenticated, Contributor, ordersRoutes)
+app.use("/invoice", ensureAuthenticated, Contributor, invoiceRoutes)
+app.use("/customers", ensureAuthenticated, Administrator, customerRoutes)
+app.use("/products", Editor,ensureAuthenticated,  productsRoutes)
+app.use("/purchase", ensureAuthenticated, Editor, purchaseRoutes)
+app.use("/supplier", ensureAuthenticated, Editor,  supplierRoutes)
 app.use("/general",  generalRoutes);
-app.use("/forum", ensureAuthenticated, Contributor, forumRoutes);
-app.use("/promotions", ensureAuthenticated, Contributor, promotionsRoutes);
+app.use("/forum", ensureAuthenticated, Contributor, forumRoutes)
+app.use("/promotions", ensureAuthenticated, Contributor, promotionsRoutes)
 
 
 // //Port For the Application
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log("The server is live on http://127.0.0.1:3000/"));
+app.listen(port, () => console.log("The server is live on http://127.0.0.1:3000/"))

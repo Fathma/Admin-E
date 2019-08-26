@@ -2,9 +2,11 @@
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Best Sellers</a>
+        <a href="#"><b>Bestsellers</a>
     </div>
-  
+  <div class="row">
+   <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+    </div><br>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
@@ -12,41 +14,17 @@
                 <tr>
                     <th>#</th>
                     <th>Products</th>
-                     <th>Quantity</th>
+                    <th>Quantity</th>
                     <th>Total</th>
-                    {{!--<th>Date Added </th>
-                    <th>Date Modified</th>
-                    <th>Action</th> --}}
                 </tr>
             </thead>
             <tbody>
                 {{# each products}}
                 <tr>
                     <td>{{this.count}}</td>
-                    <td> 
-
-                        <strong>{{this.product.productName}}</strong>
-                    </td>
-
-                     <td>
-                        <strong>{{this.quantity}}</strong>
-                    </td>
-
-                    <td>
-                        <strong>{{this.price}}TK</strong>
-                    </td>
-                    {{!--<td>
-                        <strong>{{formatDate this.created}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{formatDate this.lastModified }}</strong>
-                    </td>
-                    <td>
-                        <a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
-                            title="Edit" style="padding: 0%" class="btn btn-primary">
-                            Show Details
-                        </a>
-                    </td>--}}
+                    <td>{{this.product.model}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.price}}TK</td>
                 </tr> 
                 {{/each}}
             </tbody>

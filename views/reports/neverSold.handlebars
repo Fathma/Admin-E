@@ -4,7 +4,10 @@
     <div class="register-logo">
         <a href="#"><b>Products Never Purchased</a>
     </div>
-  
+  <div class="row">
+   <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+   
+    </div><br>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
@@ -20,9 +23,7 @@
               
                 <tr>
                     <td>{{this.count}}</td>
-                    <td> 
-                        <strong>{{this.productName}}</strong>
-                    </td>
+                    <td>{{this.model}}</td>
                     <td>
                         <a href="/products/Update/{{this._id}}" class="btn btn-default ">View</a></td>
                     </td>

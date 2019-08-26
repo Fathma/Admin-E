@@ -40,27 +40,27 @@ exports.SpecificationsNewId = (req, res)=> {
 // making a product disable
 exports.makeDisabled =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { enabled: false } })
-  res.redirect('/products/Specifications')
+  res.redirect('/products/Specifications#'+req.params.sid)
 }
 
 // making a product enable
 exports.makeEnabled =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { enabled: true } })
-  res.redirect('/products/Specifications')
+  res.redirect('/products/Specifications#'+req.params.sid)
 }
 
 
 // making filtering false of a specification
 exports.specificationMakeFalse =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { filtering: false } })
-  res.redirect('/products/Specifications')
+  res.redirect('/products/Specifications#'+req.params.sid)
 }
 
 
 // making filtering false of a specification
 exports.specificationMakeTrue =async (req, res)=>{
   await Specification.update({ _id: req.params.sid }, {$set: { filtering: true } })
-  res.redirect('/products/Specifications')
+  res.redirect('/products/Specifications#'+req.params.sid)
 }
 
 // save new specification
@@ -205,7 +205,7 @@ exports.viewProducts = (req, res)=>{
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
   let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label').populate('category').populate('subcategory')
-  let specifications = await Specification.find()
+  let specifications = await Specification.find({enabled:true})
   let discount = await Discount.find({type:"product"})
   let cat = product.category
   let sub = product.subcategory

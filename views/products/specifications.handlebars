@@ -10,7 +10,7 @@
 
     <div style="background-color: white">
 
-        <table id="ptable" style="width:100%" class="table table-striped">
+        <table  style="width:100%" class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -55,6 +55,7 @@
                         {{/if}}
                     </td>
                     <td>
+                        <div id="{{this._id}}"> </div>
                         {{# if this.enabled}}
                         <a href="/products/specifications/makeDisabled/{{this._id}}" class="btn btn-default">Disable</a>
                         {{else}}

@@ -32,7 +32,7 @@ async function notification( cb ){
 }
 
 // gets all the notifications
-exports.getAllNotification=async (req, res, next) => {
+exports.getAllNotification=async(req, res, next) => {
   notification((quantity,new_order,newPost, count)=>{
     res.json({ quantity, new_order, newPost, count })
   })
