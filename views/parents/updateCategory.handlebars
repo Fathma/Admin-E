@@ -63,7 +63,7 @@
                                         <select name="discount" id="discount" class="form-control inp">
                                             <option value="">Select One</option>
                                              {{# each discount}}
-                                                <option value="{{this._id}}" {{# equality this._id ../category.discount }}selected{{/equality}}>{{this.name}}</option>
+                                                <option value="{{this._id}}" {{# equality this._id ../category.discount }}selected{{/equality}}>{{this.name}}:{{# if this.usePercentage}}{{this.discountPercent}}%{{else}}{{this.discountAmount}}TK{{/if}}Off</option>
                                             {{/each}}
                                         </select>
                                     </div>

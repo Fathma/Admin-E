@@ -12,17 +12,19 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Discount Type</th>
+                <th>Discount</th>
                 <th>Created</th>
-                <th>enabled</th>
+                <th>Enabled</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             {{# each discount}}
             <tr>
-                 <td>{{this.count}}</td>
+                <td>{{this.count}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.type}}</td>
+                <td>{{# if this.usePercentage}}{{this.discountPercent}}%{{else}}{{this.discountAmount}}TK{{/if}} </td>
                 <td>{{formatDate this.created}}</td>
                 {{# if this.enabled}}
                 <td>Enabled</td>

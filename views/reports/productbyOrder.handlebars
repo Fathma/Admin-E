@@ -12,19 +12,19 @@
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Products</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <th style="text-align: right;">#</th>
+                    <th style="text-align: right;">Products</th>
+                    <th style="text-align: right;">Quantity</th>
+                    <th style="text-align: right;">Total</th>
                 </tr>
             </thead>
             <tbody>
                 {{# each products}}
                 <tr>
-                    <td>{{this.count}}</td>
-                    <td>{{this.product.model}}</td>
-                    <td>{{this.quantity}}</td>
-                    <td>{{this.price}}TK</td>
+                    <td style="text-align: right;">{{this.count}}</td>
+                    <td style="text-align: right;">{{this.product.model}}</td>
+                    <td style="text-align: right;">{{this.quantity}}</td>
+                    <td style="text-align: right;">{{this.price}}TK</td>
                 </tr> 
                 {{/each}}
             </tbody>
