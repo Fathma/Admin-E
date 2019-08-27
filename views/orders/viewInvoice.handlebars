@@ -53,6 +53,8 @@
                         <tr>
                             <td><b>Payment Method:</b></td>
                             <td>{{invoice.order.paymentMethod}}</td>
+                            <td><b>Payment Method:</b></td>
+                            <td>{{formatDate invoice.created}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -60,7 +62,7 @@
             <div class="panel-body">
                 <div class="product">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" >
                             <thead>
                                 <tr>
                                     <td class="text-left">S/L N</td>

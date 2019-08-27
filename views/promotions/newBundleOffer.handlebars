@@ -2,7 +2,7 @@
     <div class="box">
         <div id="#PRODUCT"></div>
         <button class="collapsible">
-            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>DISCOUNT INFO</span><span style="float:right" id="sp">+</span>
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>BUNDLE INFO</span><span style="float:right" id="sp">+</span>
         </button>
 
         <div class="content" style="background-color: white; min-height: 100px; display:block">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well" style="background-color: white; ">
-                            <form action="/promotions/SaveDiscount" method="POST" >
+                            <form action="/promotions/newBundleOfferSave" method="POST" enctype="multipart/form-data" >
                                 <input type="hidden" class="form-control inp" name="serial" id="serial">
                                 <div class="row">
                                     <div class="col-md-5 col5">
@@ -20,107 +20,42 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="name" id="name">
+                                        <input type="text" class="form-control inp" name="name" id="name" required>
                                     </div>
                                 </div>
                                 <br>
-                                {{!-- <div class="row">
-                                    <div class="col-md-5 col5" >
-                                        <label class="lbl" for="type">Discount Type</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-control inp" name="type" id="type" required>
-                                            <option value="">select One</option>
-                                            <option value="category">Assigned to Category</option>
-                                            <option value="subcategory">Assigned to Sub Category</option>
-                                            <option value="brand">Assigned to Brand</option>
-                                            <option value="product">Assigned to Product</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br> --}}
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="usePercentage">Use Percentage
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="checkbox" name="usePercentage" id="usePercentage">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row" id="discount_percentage">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="discountPercent">Discount Percentage<span
-                                                style="color:red">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                         <input type="text" class="form-control inp" name="discountPercent" id="discountPercent">
-                                    </div> 
-                                </div>
-                               
                                 
                                 <div class="row" id="discount_amount">
                                     <div class="col-md-5 col5">
-                                        <label class="lbl" for="discountAmount">Discount Amount
+                                        <label class="lbl" for="sellingPrice">SellingPrice<span style="color:red">*</span>
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="discountAmount" id="discountAmount">
+                                        <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="days">Days <span style="color:red">*</span></label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="days" id="days" required> 
                                     </div>
                                 </div>
                                 <br>
 
-                                {{!-- <div class="row">
+                               <div class="row">
                                     <div class="col-md-5 col5">
-                                        <label class="lbl" for="maximunDiscountAmount">Maximun Discount Amount
+                                        <label class="lbl" for="image">Select Image<span style="color:red">*</span>
                                         </label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="maximunDiscountAmount" id="maximunDiscountAmount">
-                                    </div>
-                                </div>
-
-                                <br> --}}
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="couponrequired">Coupon Required</label>
-                                    </div>
-                                    <div class="col-md-6"  >
-                                        <input type="checkbox" name="couponrequired" id="couponrequired">
+                                    <div class="col-md-2">
+                                        <input type="file" name="image" id="image"
+                                            accept="image/png, image/jpeg" required>
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row" id="coupon-required">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="coupon">Coupon</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="coupon" id="coupon">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="days">Days</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="days" id="days">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="maxNumber">Maximun Number
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="maxNumber" id="maxNumber">
-                                    </div>
-                                </div>
-                                <br>
-                
                                 <div class="row">
                                     <center>
                                         <button type="submit" class="btn btn-default btn-md">Save</button>

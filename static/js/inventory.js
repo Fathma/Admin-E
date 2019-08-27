@@ -12,11 +12,12 @@ $(document).ready(()=>{
     if (invoice.value != "0") {
       $.get("/purchase/getProducts/" + invoice.value, {}, (data)=>{
         
-        var date = data.lp.date.split("T");
+        // var date = data.lp.date.split("T");
         byId("supplier").value = data.lp.supplier.cname;
         // byId("date").value = date[0];
         configureDropDownL4( byId("products_invoice"), data.lp.products );
-      
+        var date = data.lp.date.split('T')[0]
+        byId('date').value = date
         products = data.lp.products;
         serial_lp = data.serials;
       });

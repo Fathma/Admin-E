@@ -18,7 +18,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Product ID</th>
                     <th>Product Name</th>
                     <th>Model</th>
                     <th>Status</th>
@@ -32,11 +31,10 @@
                 {{# if this._id}}
                 <tr>
                     <td>{{this.count}}</td>
-                    <td>{{this.pid}}</td>
                     <td>{{this.productName}}</td>
                     <td>{{this.model}}</td>
-                    <td>{{# if this.isActive}}Enabled{{else}}Disabled{{/if}}</td>
-                    <td>{{# if this.availablity}}Available{{else}}Not Available{{/if}}</td>
+                    <td>{{# if this.isActive}} <span style="color: #01873b">Enabled</span>{{else}}<span style="color:#eb483f">Disabled</span>{{/if}}</td>
+                    <td>{{# if this.availablity}}<span style="color: #01873b">Available</span>{{else}}<span style="color:#eb483f">Not Available</span>{{/if}}</td>
                     <td>{{this.dealer}}</td>
                     <td>{{# if this.availablity}}
                         <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>

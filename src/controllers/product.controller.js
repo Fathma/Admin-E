@@ -219,9 +219,10 @@ exports.getProductUpdatePage = async(req, res)=>{
       ram = true
     }
   }
+  let pro = await Product.find()
 
 
-  res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram, discount})
+  res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram, discount, Product:pro})
   
 
   

@@ -10,7 +10,6 @@
             <tr>
                 <th>#</th>
                 <th>Product Name</th>
-                <th>Product ID</th>
                 <th>Serial Number</th>
                 <th>LP number</th>
                 <th>Invoice Number</th>
@@ -23,25 +22,23 @@
           
             <tr>
                  <td>
-                    <strong>{{this.count}}</strong>
+                   {{this.count}}
                 </td>
                  <td>
-                    <strong>{{this.pid.name}}</strong>
+                   {{this.pid.name}}
+                </td>
+                
+                <td>
+                   {{this.number}}
                 </td>
                 <td>
-                    <strong>{{this.sid}}</strong>
+                   <a href="/purchase/localPurchase/{{this.lp.number}}">{{this.lp.number}}</a>
                 </td>
                 <td>
-                    <strong>{{this.number}}</strong>
+                  <a href="/orders/ViewInvoice/{{this.invoice._id}}">{{this.invoice.invoiceId}}</a> 
                 </td>
                 <td>
-                    <strong>{{this.lp.number}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.invoice.invoiceId}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.status}}</strong>
+                   {{this.status}}
                 </td>
                 
                 {{!-- <td> --}}

@@ -10,7 +10,7 @@
 
     <div style="background-color: white">
 
-        <table  style="width:100%" class="table table-striped">
+        <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -26,32 +26,24 @@
                 {{# each specifications}}
                 {{# if this._id}}
                 <tr>
-                    <td>
-                        <strong>{{this.count}}</strong>
-                    </td>
+                    <td>{{this.count}}</td>
                     
-                    <td>
-                        <strong>{{this.name}}</strong>
-                    </td>
+                    <td>{{this.name}}</td>
 
-                    <td>
-                        <strong>{{formatDate this.created}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{this.createdBy.name}}</strong>
-                    </td>
+                    <td>{{formatDate this.created}}</td>
+                    <td>{{this.createdBy.name}}</td>
                     <td>
                         {{# if this.enabled}}
-                        <strong>Enabled</strong>
+                        <span style="color: #01873b">Enabled</span>
                         {{else}}
-                        <strong>Disabled</strong>
+                        <span style="color:#eb483f">Disabled</span>
                         {{/if}}
                     </td>
-                     <td>
+                    <td>
                         {{# if this.filtering}}
-                        <strong>Added</strong>
+                        <span style="color: #01873b">Added</span>
                         {{else}}
-                        <strong>Removed</strong>
+                        <span style="color:#eb483f">Removed</span>
                         {{/if}}
                     </td>
                     <td>

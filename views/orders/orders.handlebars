@@ -27,26 +27,12 @@
                 {{# each orders}}
                 <tr>
                     <td>{{this.count}}</td>
-                    <td>
-
-                        <strong>{{this.user.profile.name}}</strong>
-                    </td>
-
-                    <td>
-                        <strong>{{this.currentStatus}}</strong>
-                    </td>
-
-                    <td>
-                        <strong>{{this.totalAmount}}TK</strong>
-                    </td>
-                    <td>
-                        <strong>{{formatDate this.created}}</strong>
-                    </td>
-                    <td>
-                        <strong>{{formatDate this.lastModified }}</strong>
-                    </td>
-                    <td>
-                        <a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
+                    <td>{{this.user.profile.name}}</td>
+                    <td>{{this.currentStatus}}</td>
+                    <td>{{this.totalAmount}}TK</td>
+                    <td>{{formatDate this.created}}</td>
+                    <td>{{formatDate this.lastModified }}</td>
+                    <td><a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
                             title="Edit" style="padding: 0%" class="btn btn-primary">
                             Show Details
                         </a>

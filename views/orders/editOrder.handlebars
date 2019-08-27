@@ -3,14 +3,10 @@
         <a href="#"><b>Edit</b>Order</a>
     </div>
     <div class="box-body">
-
         <div class="row">
-            
             <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                 <div class="well">
-                  
                     <form action="/orders/saveEdit/{{oid}}/{{model}}/{{item_id}}" method="POST">
-                        
                        <input type="hidden" name="pid" id="pid" value="{{model}}">
                        <input type="hidden" name="totalAmount" id="totalAmount" value="{{totalAmount}}">
                         <div class="form-group">
@@ -26,15 +22,13 @@
                       
                          <div class="form-group">
                             <label for="quantity">Quantity</label>
-                            <input type="number" name="quantity" id="quantity" value="{{quantity}}" class="form-control" value="">
+                            <input type="number" name="quantity" id="quantity" value="{{quantity}}" class="form-control" >
                             
                         </div>
                         <div class="form-group">
                             <label for="unitprice">unitprice</label>
-                            <input type="text" name="unitprice" id="unitprice" value="{{unitprice}}"  class="form-control" value="" readonly>
-                            
+                            <input type="text" name="unitprice" id="unitprice" value="{{unitprice}}" class="form-control" readonly>
                         </div>
-                       
 
                         <button  type="submit" class="btn btn-primary">Submit</button>
 
