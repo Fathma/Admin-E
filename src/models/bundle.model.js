@@ -11,7 +11,7 @@ let BundleSchema = new Schema({
     name: { type: String },
     created: { type: Date, default: Date.now },
     enabled: { type: Boolean, default: false },
-    price: { type: Number },
+    sellingPrice: { type: Number },
     days: { type: Number },
     products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
    
