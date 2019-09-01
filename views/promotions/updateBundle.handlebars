@@ -1,6 +1,5 @@
 <div class="container-fluid">
 
-
     <div class="box">
         <div id="#PRODUCT"></div>
         <button class="collapsible">
@@ -30,7 +29,7 @@
                                 </div>
                                 <br>   
 
-                                <div class="row" id="discount_amount">
+                                {{!-- <div class="row" id="discount_amount">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="sellingPrice">Discount Amount
                                         </label>
@@ -40,7 +39,7 @@
                                             id="sellingPrice" value="{{bundle.price}}">
                                     </div>
                                 </div>
-                                <br>
+                                <br> --}}
             
                                 <div class="row">
                                     <div class="col-md-5 col5">
@@ -196,6 +195,55 @@
                             <p>You need to complete product registration with image in specification section.
                             </p>
                             {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <div class="box">
+        <div id="#price"></div>
+        <button class="collapsible">
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>Price</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="register-logo">
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+
+                        <div class="well" style="background-color: white; ">
+                            <form action="/promotions/SaveUpdateBundlePrice" method="POST">
+                                <input type="hidden" class="form-control inp" name="id" id="id" value="{{bundle._id}}">
+                                    <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="total">Total Selling price</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="total" id="total" value="{{bundle.total}}">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row" id="discount_amount">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="sellingPrice">Bundle Selling Price
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" value="{{bundle.sellingPrice}}" required>
+                                    </div>
+                                </div>
+                                <br>
+                                
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-primary btn-md">Update Info</button>
+                                    </center>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

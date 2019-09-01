@@ -12,34 +12,18 @@
                 <th>Order Date</th>
                 <th>Status</th>
                 <th>Total</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
           {{# each invoices}}
             <tr>
-                <td>
-                    <a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top"
-                        title="Edit" style="padding: 0%" class="btn btn-primary"><img src="https://img.icons8.com/ios/20/ffffff/visible.png"></a>
-                    
-                    <strong>{{this.invoiceId}}</strong>
-                </td>
-
-                <td>
-                    <strong>{{this.order.orderId}}</strong>
-                </td>
-
-                <td>
-                   <strong>{{formatDate this.order.created}}</strong>
-                </td>
-
-                <td>
-                    <strong>{{this.order.currentStatus}}</strong>
-                </td>
-                
-                <td>
-                    <strong>{{this.order.totalAmount}}TK</strong>
-                </td>
-               
+                <td>{{this.invoiceId}}</td>
+                <td>{{this.order.orderId}}</td>
+                <td>{{formatDate this.order.created}}</td>
+                <td>{{this.order.currentStatus}}</td>
+                <td>{{this.order.totalAmount}}TK</td>
+                <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"  class="btn btn-primary">View</a></td>
             </tr>
            
             {{/each}}

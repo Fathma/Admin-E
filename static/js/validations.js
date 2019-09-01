@@ -1,4 +1,4 @@
- 
+var validator = require('validator');
 //  user validation
 exports.userValidation = (req)=>{
     req.checkBody("name", "name is required").notEmpty();
@@ -8,3 +8,22 @@ exports.userValidation = (req)=>{
     req.checkBody("branch", "branch is required").notEmpty();
     return(req.validationErrors())
 }
+
+function testing1 (ob){
+    validator.isEmail(ob.email)
+    if(validator.validationErrors){
+        return true
+    }else{
+        return false
+    }
+}
+function testing (ob){
+    return testing1(ob)
+}
+
+exports.checkb= (req, res, next)=>{
+    req.body.email = "jdflksjfls"
+    console.log(testing1(req.body))
+}
+
+

@@ -1,8 +1,11 @@
 <div class="container-fluid">
+
+
     <div class="box">
         <div id="#PRODUCT"></div>
         <button class="collapsible">
-            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>BUNDLE INFO</span><span style="float:right" id="sp">+</span>
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>DISCOUNT INFO</span><span
+                style="float:right" id="sp">+</span>
         </button>
 
         <div class="content" style="background-color: white; min-height: 100px; display:block">
@@ -11,51 +14,21 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+
                         <div class="well" style="background-color: white; ">
-                            <form action="/promotions/newBundleOfferSave" method="POST" enctype="multipart/form-data" >
+                            <form action="/promotions/SaveCoupon" method="POST" >
                                 <input type="hidden" class="form-control inp" name="serial" id="serial">
                                 <div class="row">
                                     <div class="col-md-5 col5">
-                                        <label class="lbl" for="name">Bundle Name<span style="color:red">*</span>
+                                        <label class="lbl" for="name">Coupon Name<span style="color:red">*</span>
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="name" id="name" required>
+                                        <input type="text" class="form-control inp" name="name" id="name">
                                     </div>
                                 </div>
                                 <br>
-                                
-                                {{!-- <div class="row" id="discount_amount">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="sellingPrice">SellingPrice<span style="color:red">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="sellingPrice" id="sellingPrice" required>
-                                    </div>
-                                </div>
-                                <br> --}}
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="days">Days <span style="color:red">*</span></label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="days" id="days" required> 
-                                    </div>
-                                </div>
-                                <br>
-
-                               <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="image">Select Image<span style="color:red">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <input type="file" name="image" id="image"
-                                            accept="image/png, image/jpeg" required>
-                                    </div>
-                                </div>
-                                <br>
+                
                                 <div class="row">
                                     <center>
                                         <button type="submit" class="btn btn-default btn-md">Save</button>
@@ -118,10 +91,7 @@
         </div>
     </div> --}}
 
-  <script>
-      document.getElementById("discount_percentage").style.display = "none";
-      document.getElementById("coupon-required").style.display = "none";
-  </script>
+  
   
   
 </div>

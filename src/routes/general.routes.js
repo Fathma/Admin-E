@@ -8,9 +8,10 @@ const general = require('../controllers/general.controller')
 const { ensureAuthenticated } = require("../helpers/auth");
 
 
+
 router.get('/dashboard', general.getAllNotification)
-router.get('/showDashboard',ensureAuthenticated, general.showDashboard)
-router.get('/bestSellers',ensureAuthenticated, general.bestSellers)
+router.get('/showDashboard',  ensureAuthenticated , general.showDashboard)
+router.get('/bestSellers', ensureAuthenticated, general.bestSellers)
 router.get('/productNeverSold',ensureAuthenticated, general.productNeverSold)
 
 // router.get('/image/:filename',ensureAuthenticated, general.getImage)

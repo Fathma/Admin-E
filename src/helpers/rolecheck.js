@@ -35,7 +35,15 @@ module.exports = {
       }else{
         return next();
       }
-    }
+    },
+  //   testing: (object)=>{
+  //     validator.isEmail(object.isEmail)
+  //     if(validator.validationErrors){
+  //         return 'avfdfgfd'
+  //     }else{
+  //       return 'false'
+  //     }
+  // }
   };
 
   

@@ -1,5 +1,9 @@
 
+
 $(document).ready(()=>{
+
+ 
+
   var products = [];
   var serial_lp = [];
   var byId = ( id )=>{ return document.getElementById( id ); };

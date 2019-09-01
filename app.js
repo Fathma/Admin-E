@@ -165,6 +165,8 @@ app.get("/image/:filename", (req, res) => {
     }
   })
 });
+
+
 // var find_duplicate_in_array = (arra1, cb)=> {
 //   var object = {};
 //   var result = [];
@@ -270,8 +272,9 @@ app.get("/image/:filename", (req, res) => {
 //   // orderlist.map( doc=> doc.count = count++ )
 //   // res.render('orders/orders', { orders: orderlist })
 // })
+// const che = require('./static/js/validations')
 
-app.get("/", (req, res) => {
+app.get("/",async (req, res) => {
   if (req.user) {
     res.redirect("/general/showDashboard")
   } else {

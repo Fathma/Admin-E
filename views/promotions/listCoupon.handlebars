@@ -1,21 +1,23 @@
 <div class="row">
-    <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
+    <a  class="btn bg-purple" href="/promotions/NewCoupon" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New coupon</a>
 </div><br>
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
+    
+
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
+                <th>Coupon</th>
                 <th>Created</th>
                 <th>Enabled</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            {{# each bundle}}
+            {{# each coupon}}
             <tr>
                 <td>{{this.count}}</td>
                 <td>{{this.name}}</td>
@@ -25,12 +27,14 @@
                 {{else}}
                 <td>Disabled</td>
                 {{/if}}
-                <td><a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateBundle/{{this._id}}">Edit</a>
+                <td>
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateDiscount/{{this._id}}"
+                        >Edit</a>
                     {{# if this.enabled}}
-                    <a href="/promotions/changeBundle/{{this._id}}/false" data-toggle="tooltip" title="Disable the Bundle"
+                    <a href="/promotions/change/{{this._id}}/false" data-toggle="tooltip" title="Disable the discount"
                         class="btn btn-default">Disable</a>
                     {{else}}
-                    <a href="/promotions/changeBundle/{{this._id}}/true" data-toggle="tooltip" title="Enable the Bundle"
+                    <a href="/promotions/change/{{this._id}}/true" data-toggle="tooltip" title="enable the discount"
                         class="btn btn-default">Enable</a>
                     {{/if}}
                 </td>

@@ -6,6 +6,7 @@
 const Discount = require('../models/discount.model')
 const Bundle = require('../models/bundle.model')
 const Product = require('../models/product.model')
+const Coupon = require('../models/coupon.model')
 
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
@@ -21,6 +22,12 @@ conn.once('open', function () {
 // returns page for discount registration
 exports.NewDiscountPage = ( req, res )=> res.render('promotions/newDiscount') 
 
+exports.NewCouponPage = ( req, res )=> res.render('promotions/newCoupon')
+
+exports.SaveCoupon =async (req, res) =>{
+    await new Coupon(req.body).save()
+
+}
 
 exports.updateDiscountPage = async (req, res)=>{
     let discount = await Discount.findOne({ _id: req.params.id })
@@ -29,6 +36,13 @@ exports.updateDiscountPage = async (req, res)=>{
 
 exports.updateBundlePage=async (req, res)=>{
     let bundle = await Bundle.findOne({ _id: req.params.id }).populate('products')
+    if(bundle.products){
+        var total = 0;
+        bundle.products.map(product=>{
+            total += product.sellingPrice
+        })
+    }
+    bundle.total = total
     let product = await Product.find()
     res.render('promotions/updateBundle',{ bundle, product })
 }
@@ -127,6 +141,14 @@ exports.BundleList = async (req, res)=>{
     bundle.map( doc=> doc.count = count++ )
     res.render('promotions/listBundle', { bundle })
 }
+exports.CouponList = async (req, res)=>{
+    let coupon =await Coupon.find()
+    var count = 1;
+    coupon.map( doc=> doc.count = count++ )
+    res.render('promotions/listCoupon', { coupon })
+}
+
+
 
 exports.newBundleOfferSave =async (req, res)=>{
     if( req.body.usePercentage === "on" ){
@@ -142,6 +164,10 @@ exports.newBundleOfferSave =async (req, res)=>{
         res.redirect('/promotions/BundleList')
     })
     
+}
+exports.SaveUpdateBundlePrice =async (req, res)=>{
+    await Bundle.update({_id:req.body.id},{ $set: { sellingPrice:req.body.sellingPrice }})
+    res.redirect('/promotions/updateBundle/'+req.body.id+"#price")
 }
 exports.bundleImage =async (req, res)=>{
     let filename =req.file.filename

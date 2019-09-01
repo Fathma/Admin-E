@@ -3,7 +3,7 @@
 // description : all the user related controllers/funtions are written in here 
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-const Validation = require('../helpers/validations')
+const Validation = require('../../static/js/validations')
 const Email = require('../../config/email')
 const jwt = require('jsonwebtoken')
 const _ = require('lodash') 
