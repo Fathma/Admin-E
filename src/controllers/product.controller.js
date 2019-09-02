@@ -196,7 +196,7 @@ exports.relatedProductsDelete1 = async(req, res)=>{
 // viewProducts
 exports.viewProducts = (req, res)=>{
   Product.find().sort({'created': -1}).exec((err, products)=>{
-    var count = 0;
+    var count = 1;
     products.map( doc=> doc.count = count++ )
     res.render('products/viewProducts', { products })
   })

@@ -2,7 +2,7 @@
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Bestsellers</a>
+        <a href="#"><b>Best</b>sellers</a>
     </div>
   <div class="row">
    <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
@@ -12,23 +12,24 @@
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
                 <tr>
-                    <th style="text-align: right;">#</th>
-                    <th style="text-align: right;">Products</th>
-                    <th style="text-align: right;">Quantity</th>
-                    <th style="text-align: right;">Total</th>
+                    <th>#</th>
+                    <th>PRODUCTS</th>
+                    <th>QUANTITY</th>
+                    <th>TOTAL</th>
                 </tr>
             </thead>
             <tbody>
                 {{# each products}}
                 <tr>
-                    <td style="text-align: right;">{{this.count}}</td>
-                    <td style="text-align: right;">{{this.product.model}}</td>
-                    <td style="text-align: right;">{{this.quantity}}</td>
-                    <td style="text-align: right;">{{this.price}}TK</td>
+                    <td>{{this.count}}</td>
+                    <td>{{this.product.model}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.price}}TK</td>
                 </tr> 
                 {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+<br>
 

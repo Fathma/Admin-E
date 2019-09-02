@@ -1,6 +1,6 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Suppliers</a>
+        <a href="#"><b>Supplier</b>List</a>
     </div>
 
     <div style="background-color: white">
@@ -8,16 +8,15 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Supplier ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Contact Person</th>
-                <th>Registration Number</th>
-                <th>Country</th>
-                <th>Industry</th>
-                <th>Date</th>
-                <th>Action</th>
+                <th>SUPPLIER ID</th>
+                <th>NAME</th>
+                <th>ADDRESS</th>
+                <th>EMAIL</th>
+                <th>CONTACT PERSON</th>
+                <th>COUNTRY</th>
+                <th>INDUSTRY</th>
+                <th>DATE</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -25,22 +24,16 @@
             <tr>
                 <td>{{this.count}}</td>
                 <td>{{this.supplier_id}}</td>
+                <td class="notranslate">{{this.cname}}</td>
                 <td>
-                    <strong class="notranslate">{{this.cname}}</strong>
-                </td>
-                <td>
-                    <strong class="notranslate">
-                        {{# each this.address}}
-                            address:{{this.address}} <br>
-                            Zip:{{this.zip}} <br> 
-                            Telephone Number :{{this.contact}} <br><br>
-                        {{/each}}
-                    </strong>
+                    {{# each this.address}}
+                        <Strong>Address:</Strong>{{this.address}} <br>
+                        <Strong>Zip:</Strong>{{this.zip}} <br> 
+                        <Strong>Telephone Number:</Strong>{{this.contact}} <br><br>
+                    {{/each}}
                 </td>
 
-                <td>
-                   <strong class="notranslate">{{this.cemail}}</strong>
-                </td>
+                <td>{{this.cemail}}</td>
                 <td class="notranslate">
                     {{# each this.contactPerson}}
                         <Strong>Name:</Strong> {{this.contactName}} <br>
@@ -53,28 +46,17 @@
                     {{/each}}
                     
                 </td>
-                <td>
-                    <strong class="notranslate">{{this.registration_no}}</strong>
-                </td>
-                <td>
-                    <strong class="notranslate">{{this.country}}</strong>
-                </td>
-                <td>
-                    <strong class="notranslate">{{this.industry}}</strong>
-                </td>
                
-                 <td>
-                    <strong class="notranslate">{{formatDate this.created}}</strong>
-                </td>
+                <td>{{this.country}}</td>
+                <td>{{this.industry}}</td>
+                <td>{{formatDate this.created}}</td>
                 <td>
                     <a href="/supplier/Edit/{{this._id}}" data-toggle="tooltip" 
                         title="Edit info" class="btn btn-success" style="padding:0%"> <img src="https://img.icons8.com/windows/20/ffffff/edit.png"></a>
                     <a href="/supplier/delete/{{this._id}}" data-toggle="tooltip" 
                         title="Delete Supplier" class="btn btn-danger" style="padding:0%"><img src="https://img.icons8.com/ios/20/ffffff/x.png"></a>
                 </td>
-               
             </tr>
-           
             {{/each}}
             </tbody>
         </table>

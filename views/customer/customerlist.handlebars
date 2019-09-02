@@ -2,7 +2,7 @@
 
     <div class="register-logo">
         <a href="#"><b>Registered</b>Customers</a><br>
-        <a class="btn btn-default"  href="/customers/email/page">Email All</a>
+        <a class="btn btn-primary btn-sm"  href="/customers/email/page">Email All</a>
     </div>
    
     {{# if customer}}
@@ -12,11 +12,11 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>EMAIL</th>
+                <th>NAME</th>
+                <th>CONTACT</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -28,11 +28,11 @@
                 <td>{{this.contact}}</td>
                 <td>{{# if this.status}}<span  class="tags">Active</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Blocked</span>{{/if}}</td>
                 <td>
-                     <a href="/customers/profile/{{this._id}}" class="btn btn-default">Details</a>
+                     <a href="/customers/profile/{{this._id}}" class="btn btn-primary btn-sm">Details</a>
                             {{# if this.status}}
-                            <a href="/customers/block/{{this._id}}" class="btn btn-default">Block</a>
+                            <a href="/customers/block/{{this._id}}" class="btn btn-primary btn-sm">Block</a>
                             {{else}}
-                            <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
+                            <a href="/customers/unblock/{{this._id}}" class="btn btn-primary btn-sm">Unblock</a>
                             {{/if}}
                 </td>
             </tr>

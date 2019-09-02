@@ -9,6 +9,10 @@ exports.showInvoiceList = (req, res)=>{
     .sort({ 'created': -1 })
     .populate('user')
     .populate('order')
-    .exec((err, rs)=> res.render('orders/invoiceList',{ invoices: rs }))
+    .exec((err, invoices)=>{
+        var count = 1;
+        invoices.map( doc=> doc.count = count++ )
+        res.render('orders/invoiceList',{ invoices })
+    })
 }
 

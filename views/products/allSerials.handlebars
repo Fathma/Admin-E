@@ -1,36 +1,42 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
-    <div class="register-logo">
-        <a href="#"><b>Product Details</a>
-    </div>
+<div class="register-logo">
+            <a href="#"><b>Product</b>Details</a>
+        </div>
+        <div class="row">
+            <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport"
+                onclick="javascript:xport.toXLS('ptable');">
+                <li class="fa fa-download" style="padding: 5px"></li>Export as Excel
+            </button>
+            
+        </div><br>
 
-    {{!-- {{# if products}} --}}
+    
     <div style="background-color: white">
+        
         <table id="ptable" class="table table-striped" style="width:100%">
             <thead>
-            <tr>
-                <th>#</th>
-                <th>Product ID</th>
-                <th>Product Name</th>
-                <th>Serial Number</th>
-                <th>LP number</th>
-                <th>Invoice Number</th>
-                <th>Status</th>
-            </tr>
+                <tr>
+                    <th>#</th>
+                    <th>PRODUCT ID</th>
+                    <th>PRODUCT NAME</th>
+                    <th>SERIAL NO</th>
+                    <th>LP NO</th>
+                    <th>INVOICE NO</th>
+                    <th>STATUS</th>
+                </tr>
             </thead>
             <tbody>
-            {{# each serials}}
-          
-            <tr>
-                <td>{{this.count}}</td>
-                <td>{{this.sid}}</td>
-                <td>{{this.pid.name}}</td>
-                <td>{{this.number}}</td>
-                <td><a href="/purchase/localPurchase/{{this.lp.number}}">{{this.lp.number}}</a></td>
-                <td><a href="/orders/ViewInvoice/{{this.invoice._id}}">{{this.invoice.invoiceId}}</a></td>
-                <td>{{this.status}}</td>
-            </tr>
-           
-            {{/each}}
+                {{# each serials}}
+                <tr>
+                    <td>{{this.count}}</td>
+                    <td>{{this.sid}}</td>
+                    <td>{{this.pid.name}}</td>
+                    <td>{{this.number}}</td>
+                    <td><a href="/purchase/localPurchase/{{this.lp.number}}">{{this.lp.number}}</a></td>
+                    <td><a href="/orders/ViewInvoice/{{this.invoice._id}}">{{this.invoice.invoiceId}}</a></td>
+                    <td>{{this.status}}</td>
+                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>

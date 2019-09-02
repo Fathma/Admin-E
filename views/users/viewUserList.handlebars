@@ -1,6 +1,6 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Registered Admins</a>
+        <a href="#"><b>Registered</b>Admins</a>
     </div>
 
     <div style="background-color: white">
@@ -8,13 +8,12 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Branch</th>
-                <th>Role</th>
-                <th>Date</th>
-              
-                <th>Action</th>
+                <th>EMAIL</th>
+                <th>NAME</th>
+                <th>BRANCH</th>
+                <th>ROLE</th>
+                <th>DATE</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -28,7 +27,7 @@
                 <td >{{formatDate this.date}}</td>
                 <td>
                     <a href="/users/Edit/{{this._id}}" data-toggle="tooltip" 
-                        title="Edit info" class="btn btn-default" > Edit</a>
+                        title="Edit info" class="btn btn-primary btn-sm" > Edit</a>
                     
                 </td>
             </tr>
@@ -40,3 +39,4 @@
     </div>
 
 </div>
+<br>

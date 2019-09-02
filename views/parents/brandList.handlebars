@@ -1,20 +1,21 @@
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Brands</a>
+        <a href="#"><b>Brand</b>lIST</a>
     </div>
     <div class="row">
-    <a  class="btn bg-purple" href="/category/newBrand" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Brand</a>
-</div><br>
+        <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+        <a  class="btn bg-purple" href="/category/newBrand" style="float: right;margin: 10px 5px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Brand</a>
+    </div><br>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>NAME</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -29,13 +30,13 @@
                 {{/if}}
                 <td>
                     <a href="/category/updateBrand/{{this._id}}" data-toggle="tooltip" 
-                        title="Edit info" class="btn btn-default" >Edit</a>
+                        title="Edit info" class="btn btn-primary btn-sm" >Edit</a>
                     {{# if this.enabled}}
                     <a href="/category/brand/changeStatus/{{this._id}}/false" data-toggle="tooltip" 
-                        title="Disable the brand" class="btn btn-default" >Disable</a>
+                        title="Disable the brand" class="btn btn-primary btn-sm" >Disable</a>
                     {{else}}
                         <a href="/category/brand/changeStatus/{{this._id}}/true" data-toggle="tooltip" 
-                        title="Enable the brand" class="btn btn-default" >Enable</a>
+                        title="Enable the brand" class="btn btn-primary btn-sm" >Enable</a>
                     {{/if}}
                 </td>
             </tr>

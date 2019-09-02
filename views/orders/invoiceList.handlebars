@@ -1,19 +1,25 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Invoices</a>
+        <a href="#"><b>Invoice</b>List</a>
     </div>
-
+ <div class="row">
+        <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport"
+            onclick="javascript:xport.toXLS('ptable');">
+            <li class="fa fa-download" style="padding: 5px"></li>Export as Excel
+        </button>
+        
+    </div><br>
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
                 <th>#</th>
-                <th>Invoice Number </th>
-                <th>Order ID</th>
-                <th>Order Date</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Action</th>
+                <th>INVOICE NUMBER </th>
+                <th>ORDER ID</th>
+                <th>ORDER DATE</th>
+                <th>STATUS</th>
+                <th>TOTAL</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +31,7 @@
                 <td>{{formatDate this.order.created}}</td>
                 <td>{{this.order.currentStatus}}</td>
                 <td>{{formatNumber this.order.totalAmount}}TK</td>
-                <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="View details"  class="btn btn-primary">View</a></td>
+                <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="View details"  class="btn btn-primary btn-sm">View</a></td>
             </tr>
            
             {{/each}}

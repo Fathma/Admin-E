@@ -1,25 +1,27 @@
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Posts</a>
+        <a href="#"><b>Post</b>List</a>
     </div>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
             <tr>
-                <th>User</th>
-                <th>Post Category</th>
-                <th>Title</th>
-                <th>Likes</th>
-                <th>Comments</th>
-                <th>Text</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>#</th>
+                <th>USER</th>
+                <th>POST CATEGORY</th>
+                <th>TITLE</th>
+                <th>LIKES</th>
+                <th>COMMENTS</th>
+                <th>TEXT</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
             {{# each posts}}
             <tr>
+                <td>{{this.count}}</td>
                 <td>{{this.user.name}}</td>
                 <td>{{this.postCategory.name}}</td>
                 <td>{{this.name}}</td>
@@ -39,16 +41,16 @@
                 </td>
                 <td>
                     {{# equality this.status "Active"}}
-                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-default ">Block {{this._id}}</a>
+                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-primary btn-sm ">Block {{this._id}}</a>
                     {{/equality}}
 
                     {{# equality this.status "Blocked"}}
-                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-default">Active</a>
+                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-primary btn-sm">Active</a>
                     {{/equality}}
 
                     {{# equality this.status "new"}}
-                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-default">Active</a>
-                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-default ">Block</a>
+                    <a href="/forum/posts/active/{{../this._id}}" class="btn btn-primary btn-sm">Active</a>
+                    <a href="/forum/posts/block/{{../this._id}}" class="btn btn-primary btn-sm ">Block</a>
                     {{/equality}}
                 </td>
             </tr>

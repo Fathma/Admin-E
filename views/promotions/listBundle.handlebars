@@ -5,17 +5,21 @@
         <a href="#"><b>Bundle</b>List</a>
     </div>
     <div class="row">
-    <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
+        <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport"
+            onclick="javascript:xport.toXLS('ptable');">
+            <li class="fa fa-download" style="padding: 5px"></li>Export as Excel
+        </button>
+    <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 5px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
 </div><br>
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Created</th>
-                <th>Enabled</th>
-                <th>Action</th>
+                <th>NAME</th>
+                <th>CREATED</th>
+                <th>ENABLED</th>
+                <th>ACTION</th>
             </tr>
             </thead>
             <tbody>
@@ -29,13 +33,13 @@
                 {{else}}
                 <td><span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span></td>
                 {{/if}}
-                <td><a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateBundle/{{this._id}}">Edit</a>
+                <td><a data-toggle="tooltip" title="Edit info" class="btn btn-primary btn-sm" href="/promotions/updateBundle/{{this._id}}">Edit</a>
                     {{# if this.enabled}}
                     <a href="/promotions/changeBundle/{{this._id}}/false" data-toggle="tooltip" title="Disable the Bundle"
-                        class="btn btn-default">Disable</a>
+                        class="btn btn-primary btn-sm">Disable</a>
                     {{else}}
                     <a href="/promotions/changeBundle/{{this._id}}/true" data-toggle="tooltip" title="Enable the Bundle"
-                        class="btn btn-default">Enable</a>
+                        class="btn btn-primary btn-sm">Enable</a>
                     {{/if}}
                 </td>
             </tr>

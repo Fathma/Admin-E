@@ -152,6 +152,7 @@ exports.ViewInvoice = (req, res) => {
           count++
         }
       }
+     
       res.render('orders/viewInvoice', { invoice: rs[0] })
     })
 }

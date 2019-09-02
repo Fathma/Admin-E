@@ -1,7 +1,7 @@
 
 
 
-<div class="container-fluid" >
+<div class="container-fluid" id="p_list">
     
    <div class="register-logo">
         <a href="#"><b>Product</b>List</a>
@@ -18,13 +18,13 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Product Name</th>
-                    <th>Model</th>
-                    <th>Selling Price</th>
-                    <th>Status</th>
-                    <th>Availablity</th>
-                    <th>Dealers' Product</th>
-                    <th>Action</th>
+                    <th>PRODUCT NAME</th>
+                    <th>MODEL</th>
+                    <th>SELLING PRICE</th>
+                    <th>STATUS</th>
+                    <th>AVAILABILITY</th>
+                    <th>DEALER'S</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,11 +39,11 @@
                     <td>{{# if this.availablity}}<span class="tags">Available</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Not Available</span>{{/if}}</td>
                     <td>{{this.dealer}}</td>
                     <td>{{# if this.availablity}}
-                        <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
-                        {{else}}<a href="/products/Available/{{this._id}}" class="btn btn-default">Available</a>
-                        {{/if}}{{# if this.isActive}}<a href="/products/unactive/{{this._id}}" class="btn btn-default ">Disable</a>{{else}}
-                        <a href="/products/active/{{this._id}}" class="btn btn-default">Enable</a>{{/if}}
-                        <a href="/products/Update/{{this._id}}" class="btn btn-default ">Update</a></td>
+                        <a href="/products/notAvailable/{{this._id}}" class="btn btn-primary btn-sm" >Not Available</a>
+                        {{else}}<a href="/products/Available/{{this._id}}" class="btn btn-primary btn-sm" >Available</a>
+                        {{/if}}{{# if this.isActive}}<a href="/products/unactive/{{this._id}}" class="btn btn-primary btn-sm ">Disable</a>{{else}}
+                        <a href="/products/active/{{this._id}}" class="btn btn-primary btn-sm">Enable</a>{{/if}}
+                        <a href="/products/Update/{{this._id}}" class="btn btn-primary btn-sm ">Update</a></td>
                 </tr>
         {{/if}}
         {{/each}}
@@ -52,6 +52,7 @@
     </div>
 </div>
 <br>
+
 
 
 

@@ -24,6 +24,8 @@ exports.viewListOfCustomers =async (req, res) => {
         }
         new_cus.push(data)
     }
+    var count = 1;
+    new_cus.map( doc=> doc.count = count++ )
     res.render('customer/customerlist',{ customer: new_cus }) 
 };
 

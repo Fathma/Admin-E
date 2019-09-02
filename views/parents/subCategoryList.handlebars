@@ -1,20 +1,21 @@
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Sub</b>Categories</a>
+        <a href="#"><b>SubCategory</b>List</a>
     </div>
-<div class="row">
-    <a  class="btn bg-purple" href="/category/newSubCategory" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Sub Category</a>
-</div><br>
+    <div class="row">
+        <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+        <a  class="btn bg-purple" href="/category/newSubCategory" style="float: right;margin: 10px 5px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Sub Category</a>
+    </div><br>
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>NAME</th>
+                <th>CATEGORY</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
             </tr>
              </thead>
              <tbody>
@@ -30,13 +31,13 @@
                 {{/if}}
                 <td>
                     <a data-toggle="tooltip" 
-                        title="Edit info" class="btn btn-default" href="/category/updateSubCategory/{{this._id}}" >Edit</a>
+                        title="Edit info" class="btn btn-primary btn-sm" href="/category/updateSubCategory/{{this._id}}" >Edit</a>
                     {{# if this.enabled}}
                     <a href="/category/subcategory/changeStatus/{{this._id}}/false" data-toggle="tooltip" 
-                        title="Disable the sub category" class="btn btn-default" >Disable</a>
+                        title="Disable the sub category" class="btn btn-primary btn-sm" >Disable</a>
                     {{else}}
                          <a href="/category/subcategory/changeStatus/{{this._id}}/true" data-toggle="tooltip" 
-                        title="Enable the sub category" class="btn btn-default" >Enable</a>
+                        title="Enable the sub category" class="btn btn-primary btn-sm" >Enable</a>
                     {{/if}}
                 </td>
             </tr>

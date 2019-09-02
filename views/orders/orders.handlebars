@@ -2,25 +2,33 @@
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
     <div class="register-logo">
-        <a href="#"><b>Orders</a>
+        <a href="#"><b>Order</b>List</a>
     </div>
+
     <form action="/orders/ordersByMonth" method="POST">
         <label for="startDate">Select Month :</label>
         <input name="startDate"  id="startDate" class="date-picker" />
         <button type="submit" >submit</button>
     </form>
+    <div class="row">
+        <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport"
+            onclick="javascript:xport.toXLS('ptable');">
+            <li class="fa fa-download" style="padding: 5px"></li>Export as Excel
+        </button>
+        
+    </div><br>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Customers</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                    <th>Date Added </th>
-                    <th>Date Modified</th>
-                    <th>Action</th>
+                    <th>CUSTOMERS</th>
+                    <th>STATUS</th>
+                    <th>TOTAL</th>
+                    <th>DATE ADDED </th>
+                    <th>DATE MODIFIED</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +41,7 @@
                     <td>{{formatDate this.created}}</td>
                     <td>{{formatDate this.lastModified }}</td>
                     <td><a href="/orders/orderDetails/{{this._id}}" data-toggle="tooltip" data-placement="top"
-                            title="Edit" style="padding: 0%" class="btn btn-primary">
+                            title="Edit" style="padding: 0%" class="btn btn-primary btn-sm">
                             Show Details
                         </a>
                     </td>
