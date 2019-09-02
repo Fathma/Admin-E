@@ -4,7 +4,7 @@
 <div class="container-fluid" >
     
    <div class="register-logo">
-        <a href="#"><b>Products</a>
+        <a href="#"><b>Product</b>List</a>
     </div>
 <div class="row">
    <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
@@ -35,8 +35,8 @@
                     <td>{{this.productName}}</td>
                     <td>{{this.model}}</td>
                     <td>{{this.sellingPrice}}TK</td>
-                    <td>{{# if this.isActive}} <span style="color: #01873b">Enabled</span>{{else}}<span style="color:#eb483f">Disabled</span>{{/if}}</td>
-                    <td>{{# if this.availablity}}<span style="color: #01873b">Available</span>{{else}}<span style="color:#eb483f">Not Available</span>{{/if}}</td>
+                    <td>{{# if this.isActive}} <span class="tags">Enabled</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span>{{/if}}</td>
+                    <td>{{# if this.availablity}}<span class="tags">Available</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Not Available</span>{{/if}}</td>
                     <td>{{this.dealer}}</td>
                     <td>{{# if this.availablity}}
                         <a href="/products/notAvailable/{{this._id}}" class="btn btn-default ">Not Available</a>
@@ -49,7 +49,6 @@
         {{/each}}
         </tbody>
         </table>
-
     </div>
 </div>
 <br>

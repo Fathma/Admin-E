@@ -6,7 +6,41 @@
     </div>
    
     {{# if customer}}
-    <div class="row">
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{# each customer}}
+            <tr>
+                <td>{{this.count}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.profile.name}}</td>
+                <td>{{this.contact}}</td>
+                <td>{{# if this.status}}<span  class="tags">Active</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Blocked</span>{{/if}}</td>
+                <td>
+                     <a href="/customers/profile/{{this._id}}" class="btn btn-default">Details</a>
+                            {{# if this.status}}
+                            <a href="/customers/block/{{this._id}}" class="btn btn-default">Block</a>
+                            {{else}}
+                            <a href="/customers/unblock/{{this._id}}" class="btn btn-default">Unblock</a>
+                            {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{!-- <div class="row">
          
         <div class="col-sm-12 col-md-10 col-md-offset-1 col-sm-offset-1">
             <ul class="list-group">
@@ -38,14 +72,14 @@
 
                     <div class="row">
                         <div class="col-md-2 ">
-                            <strong>{{this.email}}</strong>
+                           {{this.email}}
                         </div>
 
                         <div class="col-md-2 ">
-                            <strong>{{this.profile.name}}</strong>
+                           {{this.profile.name}}
                         </div>
                         <div class="col-md-2 ">
-                            <strong>{{this.contact}}</strong>
+                           {{this.contact}}
                         </div>
                         <div class="col-md-2 ">
                             {{# if this.status}}
@@ -69,7 +103,7 @@
                 {{/each }}
             </ul>
         </div>
-    </div>
+    </div> --}}
     {{ else }}
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -78,3 +112,4 @@
     </div>
     {{/if}}
 </div>
+<br>

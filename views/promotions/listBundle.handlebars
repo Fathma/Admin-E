@@ -1,8 +1,12 @@
-<div class="row">
-    <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
-</div><br>
+
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Bundle</b>List</a>
+    </div>
+    <div class="row">
+    <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
+</div><br>
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
@@ -21,9 +25,9 @@
                 <td>{{this.name}}</td>
                 <td>{{formatDate this.created}}</td>
                 {{# if this.enabled}}
-                <td>Enabled</td>
+                <td><span class="tags">Enabled</span></td>
                 {{else}}
-                <td>Disabled</td>
+                <td><span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span></td>
                 {{/if}}
                 <td><a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateBundle/{{this._id}}">Edit</a>
                     {{# if this.enabled}}

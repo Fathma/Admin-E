@@ -20,24 +20,12 @@
             <tbody>
             {{# each posts}}
             <tr>
-                <td>
-                    <strong>{{this.user.name}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.postCategory.name}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.name}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.total_likes}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.total_comments}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.text}}</strong>
-                </td>
+                <td>{{this.user.name}}</td>
+                <td>{{this.postCategory.name}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.total_likes}}</td>
+                <td>{{this.total_comments}}</td>
+                <td>{{this.text}}</td>
                 <td>
                     {{# equality this.status "Active"}}
                     <span class="tags">Active</span>

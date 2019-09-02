@@ -27,9 +27,9 @@
                 <td>{{# if this.usePercentage}}{{this.discountPercent}}%{{else}}{{this.discountAmount}}TK{{/if}} </td>
                 <td>{{formatDate this.created}}</td>
                 {{# if this.enabled}}
-                <td>Enabled</td>
+                <td><span class="tags">Enabled</span></td>
                 {{else}}
-                <td>Disabled</td>
+                <td><span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span></td>
                 {{/if}}
                 <td>
                     <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateDiscount/{{this._id}}"

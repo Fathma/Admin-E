@@ -22,25 +22,15 @@
             <tr>
                 <td>{{this.count}}</td>
                 <td>{{this.email}}</td>
-                <td>
-                    <strong class="notranslate">{{this.name}}</strong>
-                </td>
-                <td>
-                    <strong class="notranslate">{{this.branch}}</strong>
-                </td>
-
-                <td>
-                   <strong class="notranslate">{{this.role}}</strong>
-                </td>
-                <td>
-                   <strong class="notranslate">{{this.date}}</strong>
-                </td>
+                <td class="notranslate">{{this.name}}</td>
+                <td class="notranslate">{{this.branch}}</td>
+                <td class="notranslate">{{this.role}}</td>
+                <td >{{formatDate this.date}}</td>
                 <td>
                     <a href="/users/Edit/{{this._id}}" data-toggle="tooltip" 
                         title="Edit info" class="btn btn-default" > Edit</a>
                     
                 </td>
-               
             </tr>
            
             {{/each}}

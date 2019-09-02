@@ -21,34 +21,14 @@
             <tbody>
             {{# each lp}}
             <tr>
-                <td>
-                    <strong>{{this.count}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.number}}</strong>
-                </td>
-                
-                <td>
-                    <strong>{{formatDate this.date}}</strong>
-                </td>
-                <td>
-                    <strong>{{this.supplier.cname}}</strong>
-                </td>
-
-                <td>
-                    <strong>{{this.address}}</strong>
-                </td>
-
-                <td>
-                   {{this.contactPerson}}
-                </td>
-
-                <td>
-                    {{this.mobile}}
-                </td>
-                <td>
-                    {{formatNumber this.subTotal}} TK
-                </td>
+                <td>{{this.count}}
+                <td>{{this.number}}</td>
+                <td>{{formatDate this.date}}</td>
+                <td>{{this.supplier.cname}}</td>
+                <td>{{this.address}}</td>
+                <td>{{this.contactPerson}}</td>
+                <td>{{this.mobile}}</td>
+                <td>{{formatNumber this.subTotal}} TK</td>
                 <td>
                     <a class="btn btn-default" href="/purchase/localPurchase/{{this.number}}">Details</a>
                     <a class="btn btn-default" href="/purchase/productList/{{this._id}}">List</a>

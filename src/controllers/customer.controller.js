@@ -1,5 +1,5 @@
 // author: Fathma siddique
-// lastmodified: 16/6/2019
+// lastmodified: 2/9/2019
 // description: the file has all the Customer related controllers/ functions
 const Customerr = require('../models/userCustomer.model')
 const Order = require('../models/customerOrder')

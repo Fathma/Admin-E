@@ -18,8 +18,8 @@
                 <tr>
                     <td>{{this.product.model}}</td>
                     <td>{{this.quantity}}</td>
-                    <td>{{this.purchasePrice}}TK</td>
-                    <td>{{this.total}}TK</td>
+                    <td>{{formatNumber this.purchasePrice}}TK</td>
+                    <td>{{formatNumber this.total}}TK</td>
                 </tr>
                 {{/each}}
             </tbody>

@@ -7,6 +7,7 @@
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
+                <th>#</th>
                 <th>Invoice Number </th>
                 <th>Order ID</th>
                 <th>Order Date</th>
@@ -18,12 +19,13 @@
             <tbody>
           {{# each invoices}}
             <tr>
+                <td>{{this.count}}</td>
                 <td>{{this.invoiceId}}</td>
                 <td>{{this.order.orderId}}</td>
                 <td>{{formatDate this.order.created}}</td>
                 <td>{{this.order.currentStatus}}</td>
-                <td>{{this.order.totalAmount}}TK</td>
-                <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="Edit"  class="btn btn-primary">View</a></td>
+                <td>{{formatNumber this.order.totalAmount}}TK</td>
+                <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="View details"  class="btn btn-primary">View</a></td>
             </tr>
            
             {{/each}}

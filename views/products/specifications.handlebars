@@ -30,23 +30,21 @@
                 {{# if this._id}}
                 <tr>
                     <td>{{this.count}}</td>
-                    
                     <td>{{this.name}}</td>
-
                     <td>{{formatDate this.created}}</td>
                     <td>{{this.createdBy.name}}</td>
                     <td>
                         {{# if this.enabled}}
-                        <span style="color: #01873b">Enabled</span>
+                        <span class="tags">Enabled</span>
                         {{else}}
-                        <span style="color:#eb483f">Disabled</span>
+                        <span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span>
                         {{/if}}
                     </td>
                     <td>
                         {{# if this.filtering}}
-                        <span style="color: #01873b">Added</span>
+                        <span class="tags">Added</span>
                         {{else}}
-                        <span style="color:#eb483f">Removed</span>
+                        <span  class="tags"  style="background: rgb(202, 111, 129)">Removed</span>
                         {{/if}}
                     </td>
                     <td>
