@@ -1,3 +1,4 @@
+
 .ui-datepicker-calendar {
     display: none;
     }
@@ -22,6 +23,9 @@
   .active, .collapsible:hover {
     background-color: #f5f5f5;
 
+  }
+  td{
+      font-weight: 400;
   }
   
   .content {
