@@ -21,6 +21,7 @@ for (i = 0; i < coll.length; i++) {
 var byId = function( id ) { return document.getElementById( id ); };
 // saving as pdf
 function myFunction() {
+  
  byId("buttonID").style.display = "none";
  byId("footer").style.display = "none";
 //  document.getElementBy('ptable').print();

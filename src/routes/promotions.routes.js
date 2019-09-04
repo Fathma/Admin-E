@@ -9,6 +9,7 @@ const router = require('express').Router()
 const promotions = require('../controllers/promotions.controller')
 const crypto = require('crypto')
 const path = require('path')
+const validation = require('../helpers/validation')
 var filename;
 
 // create storage engine
@@ -35,7 +36,7 @@ const upload = multer({ storage })
 
 router.get('/NewDiscount', promotions.NewDiscountPage)
 router.get('/updateDiscount/:id', promotions.updateDiscountPage)
-router.post('/SaveDiscount', promotions.SaveDiscount)
+router.post('/SaveDiscount',  promotions.SaveDiscount)
 router.post('/SaveUpdateDiscount', promotions.SaveUpdateDiscount)
 
 router.get('/DiscountList', promotions.DiscountList)

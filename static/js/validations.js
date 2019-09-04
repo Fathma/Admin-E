@@ -6,6 +6,7 @@ exports.userValidation = (req)=>{
     req.checkBody("email", "email must be an Email").isEmail();
     req.checkBody("role", "role is required").notEmpty();
     req.checkBody("branch", "branch is required").notEmpty();
+
     return(req.validationErrors())
 }
 

@@ -1,0 +1,97 @@
+<div class="container-fluid">
+
+
+    <div class="box">
+        <div id="#PRODUCT"></div>
+        <button class="collapsible">
+            <li class="fa fa-info panel-icon" style="padding: 5px;"></li><span>COUPON INFO</span><span
+                style="float:right" id="sp">+</span>
+        </button>
+
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="register-logo">
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+
+                        <div class="well" style="background-color: white; ">
+                            <form action="/promotions/SaveCoupon" method="POST" >
+                                <input type="hidden" class="form-control inp" name="serial" id="serial">
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="name">Coupon Name<span style="color:red">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="name" id="name" value="{{this.name}}">
+                                    </div>
+                                </div>
+                                <br>
+                
+                                <div class="row">
+                                    <center>
+                                        <button type="submit" class="btn btn-default btn-md">Save</button>
+                                    </center>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <div class="box">
+
+        <button class="collapsible active"><span style="float:left ">
+                <li class="fa fa-cog panel-icon"></li>
+                SPECIFICATIONS
+            </span><span style="float:right" id="sp">+</span></button>
+        <div class="content" style="background-color: white; min-height: 100px; display:block">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <div class="well">
+                            <h4>{{productentry_msg}}</h4>
+                            {{!-- <form action="/products/upload" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="img_number" id="img_number">
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="pid">Product Name
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control inp" name="pname" id="pname">
+                                    <input type="hidden" name="pid" id="pid">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col5">
+                                    <label class="lbl" for="imagePath">Select Image
+                                    </label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg"
+                                        multiple>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
+                                </center>
+                            </div>
+                        </form> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+  
+  
+  
+</div>

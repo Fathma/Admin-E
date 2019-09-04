@@ -16,7 +16,7 @@
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
 
                         <div class="well" style="background-color: white; ">
-                            <form action="/promotions/SaveDiscount" method="POST" >
+                            <form action="/promotions/SaveDiscount" id="dis" method="POST" >
                                 <input type="hidden" class="form-control inp" name="serial" id="serial">
                                 <div class="row">
                                     <div class="col-md-5 col5">
@@ -24,7 +24,8 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="name" id="name">
+                                        <input type="text" class="form-control inp" name="name" id="name" value="{{discount.name}}">
+                                       
                                     </div>
                                 </div>
                                 <br>
@@ -51,7 +52,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="checkbox" name="usePercentage" id="usePercentage">
+                                        <input type="checkbox" name="usePercentage" id="usePercentage" {{# equality discount.usePercentage "on"}} checked{{/equality}}>
                                     </div>
                                 </div>
                                 <br>
@@ -62,7 +63,8 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                         <input type="text" class="form-control inp" name="discountPercent" id="discountPercent">
+                                         <input type="text" class="form-control inp" name="discountPercent" id="discountPercent"  value="{{discount.discountPercent}}">
+                                        
                                     </div>
                                      
                                     
@@ -75,7 +77,9 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="discountAmount" id="discountAmount">
+                                        <input type="text" class="form-control inp" name="discountAmount" id="discountAmount"value="{{discount.discountAmount}}">
+                                         
+                                        
                                     </div>
                                 </div>
                                 <br>
@@ -86,36 +90,19 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="maximunDiscountAmount" id="maximunDiscountAmount">
+                                        <input type="text" class="form-control inp" name="maximunDiscountAmount" id="maximunDiscountAmount" value="{{discount.maximunDiscountAmount}}">
                                     </div>
                                 </div>
 
                                 <br>
-                                <div class="row" id="couponR">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="couponrequired">Coupon Required
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6"  >
-                                        <input type="checkbox" name="couponrequired" id="couponrequired">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row" id="coupon-required">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="coupon">Coupon</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="coupon" id="coupon">
-                                    </div>
-                                </div>
-                                <br>
+                               
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="days">Days</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="days" id="days">
+                                        <input type="text" class="form-control inp" name="days" id="days" value="{{discount.days}}">
+                                        
                                     </div>
                                 </div>
                                 <br>
@@ -125,7 +112,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="maxNumber" id="maxNumber">
+                                        <input type="text" class="form-control inp" name="maxNumber" id="maxNumber"value="{{discount.maxNumber}}">
                                     </div>
                                 </div>
                                 <br>
@@ -143,60 +130,52 @@
         </div>
     </div>
 
-    {{!-- <div class="box">
-
-        <button class="collapsible active"><span style="float:left ">
-                <li class="fa fa-cog panel-icon"></li>
-                SPECIFICATIONS
-            </span><span style="float:right" id="sp">+</span></button>
-        <div class="content" style="background-color: white; min-height: 100px; display:block">
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <div class="well">
-                            <h4>{{productentry_msg}}</h4>
-                            {{!-- <form action="/products/upload" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="img_number" id="img_number">
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="pid">Product Name
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="pname" id="pname">
-                                    <input type="hidden" name="pid" id="pid">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="imagePath">Select Image
-                                    </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg"
-                                        multiple>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <center>
-                                    <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
-                                </center>
-                            </div>
-                        </form> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
   <script>
       document.getElementById("discount_percentage").style.display = "none";
-      document.getElementById("coupon-required").style.display = "none";
-        document.getElementById("couponR").style.display = "none";
+     
   </script>
   
-  
 </div>
+
+{{!-- <script>
+    $(document).ready(function () {
+
+    $('#dis').validate({ // initialize the plugin
+        rules: {
+            name: {
+                alphanumeric:true,
+                required: true,
+                maxlength:30
+            },
+             discountPercent:{
+                required: false,
+                digits:true,
+                max:100,
+                min:1
+            },
+            discountAmount:{
+                required: false,
+                digits:true
+            },
+            maximunDiscountAmount:{
+                required: false,
+                digits:true
+            },
+            days: {
+                required: false,
+                digits: true
+            },
+            maxNumber: {
+                required: false,
+                digits: true
+            }
+        },
+        submitHandler: function (form) { // for demo
+            alert('valid form submitted'); // for demo
+            return false; // for demo
+        }
+    });
+
+});
+</script> --}}

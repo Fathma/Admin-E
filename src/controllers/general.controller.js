@@ -98,14 +98,16 @@ var orderedProducts =async (cb)=>{
       })
     })
     unique.push(multi)
-    var count = 1;
-    unique.map( doc=> doc.count = count++ )
+    // var count = 1;
+    // unique.map( doc=> doc.count = count++ )
 
     cb(unique)
   })
 }
 exports.bestSellers= async(req, res) => {
   orderedProducts(unique=>{
+    var count = 1;
+    unique.map( doc=> doc.count = count++ )
     res.render('reports/productbyOrder',{ products: unique })
   })
 }
