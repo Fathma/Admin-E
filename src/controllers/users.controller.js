@@ -109,8 +109,11 @@ exports.changePass = (req, res)=>{
     jwt.sign({ user: _.pick(user, '_id') }, 'sceretkey', { expiresIn:'1h' }, async (err, token)=> {
       let url = `http://localhost:3000/users/changePassPage/${token}`
       await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
-      req.flash('success_msg', 'A token has been sent to your email.')
-      res.redirect(`/users/profile/${user._id}`)
+      
+        req.flash('success_msg', 'A token has been sent to your email.')
+        res.redirect(`/users/profile/${user._id}`)
+      
+      
     })
   })
 }
