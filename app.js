@@ -119,6 +119,7 @@ Handlebars.registerHelper("formatTime", function(date, format) {
   return mmnt.format(format);
 });
 
+
 // Gloabl variables
 app.use((req, res, next)=>{
   res.locals.success_msg = req.flash("success_msg");
@@ -141,10 +142,8 @@ app.get("/image/:filename", (req, res) => {
   })
 });
 
-const val = require('./src/helpers/validation')
+
 app.get("/",async (req, res) => {
-   
-  
   if (req.user) {
     res.redirect("/general/showDashboard")
   } else {

@@ -60,7 +60,7 @@ exports.getProducts = (req, res) => {
       var doc_serial = { lp: doc, serials: [] }
       
       for(var i=0; i< doc.products.length; i++){
-        var docs = await Serials.find({ pid: doc.products[i].product._id })
+        var docs = await Serials.find({$and:[{pid: doc.products[i].product._id},{lp:req.params.invc} ] })
         doc_serial.serials.splice(doc_serial.serials.length-1, 0, ...docs)
        
           // doc_serial.serials.push(docs)

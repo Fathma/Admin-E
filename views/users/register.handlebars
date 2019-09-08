@@ -6,26 +6,30 @@
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
 
-    <form action="/users/register" method="POST">
+    <form action="/users/register" id="admin" method="POST">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="name" value="{{name}}" required  placeholder="Full Name">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <input type="text" class="form-control" name="name" value="{{name}}" required placeholder="Full Name">
+       
       </div>
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control" value="{{email}}" required placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+       
       </div>
-       <div class="form-group has-feedback">
+      <div class="form-group has-feedback">
         <input type="text" name="branch" class="form-control" value="{{branch}}" required placeholder="Branch">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" value="{{password}}" required placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <input type="password" name="password" id="password" class="form-control" value="{{password}}" required
+          placeholder="Password">
+          {{!-- <span  id="message" style="font-size: 14px"></span> --}}
+        
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password2" class="form-control" value="{{password2}}" required placeholder="Confirm Password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <input type="password" name="password2" id="password2" class="form-control" value="{{password2}}" required
+          placeholder="Confirm Password">
+          <span  id="message" style="font-size: 10px; font-weight: 700"></span>
+       
       </div>
 
       {{!-- role --}}
@@ -37,16 +41,19 @@
           <option value="Editor">
           <option value="Contributor">
           <option value="SEO Manager">
-            <option value="SEO Editor">
+          <option value="SEO Editor">
         </datalist>
 
       </div>
-      
+
       <div class="row">
 
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          <center>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>  
+          </center>
+          
         </div>
         <!-- /.col -->
       </div>
@@ -54,3 +61,45 @@
   </div>
   <!-- /.form-box -->
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#password, #password2').on('keyup', function () {
+      if ($('#password').val() == $('#password2').val()) {
+        $('#message').html('Matching').css('color', 'green');
+      } else
+        $('#message').html('Not Matching').css('color', 'red');
+    });
+
+    $('#admin').validate({ // initialize the plugin
+      rules: {
+        name: {
+          alphanumeric: true,
+          required: true,
+          maxlength: 30
+        },
+        email: {
+          required: true,
+          email: true
+
+        },
+        branch: {
+          required: true,
+          alphanumeric: true
+        },
+        password: {
+          password: true,
+          required: true
+        },
+        password2: {
+          password: true,
+          required: true
+        }
+      },
+      submitHandler: function (form) { // for demo
+        alert('valid form submitted'); // for demo
+        return false; // for demo
+      }
+    });
+  });
+</script>

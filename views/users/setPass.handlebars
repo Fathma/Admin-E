@@ -11,12 +11,13 @@
         <input type="hidden" name="token" class="form-control" value="{{token}}" required >
         <input type="hidden" name="_id" class="form-control" value="{{id}}" required >
         <label for="password">Enter New Password:</label>
-         <input type="password" name="password" class="form-control"  required >
+         <input type="password" name="password"  id="password" class="form-control"  required >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
          <label for="password">Re-enter New Password:</label>
-        <input type="password" name="password2" class="form-control"  required >
+        <input type="password" name="password2" id="password2" class="form-control"  required >
+         <span  id="message" style="font-size: 10px; font-weight: 700"></span>
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       
@@ -32,3 +33,13 @@
   </div>
   <!-- /.form-box -->
 </div>
+<script>
+   $(document).ready(function () {
+    $('#password, #password2').on('keyup', function () {
+      if ($('#password').val() == $('#password2').val()) {
+        $('#message').html('Matching').css('color', 'green');
+      } else
+        $('#message').html('Not Matching').css('color', 'red');
+    });
+    })
+</script>

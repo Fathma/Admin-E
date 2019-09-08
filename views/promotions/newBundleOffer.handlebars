@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well" style="background-color: white; ">
-                            <form action="/promotions/newBundleOfferSave" method="POST" enctype="multipart/form-data" >
+                            <form id="bundle" action="/promotions/newBundleOfferSave" method="POST" enctype="multipart/form-data" >
                                 <input type="hidden" class="form-control inp" name="serial" id="serial">
                                 <div class="row">
                                     <div class="col-md-5 col5">
@@ -20,7 +20,7 @@
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="name" id="name" required>
+                                        <input type="text" class="form-control inp" name="name" id="name" >
                                     </div>
                                 </div>
                                 <br>
@@ -40,7 +40,7 @@
                                         <label class="lbl" for="days">Days <span style="color:red">*</span></label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="days" id="days" required> 
+                                        <input type="text" class="form-control inp" name="days" id="days" > 
                                     </div>
                                 </div>
                                 <br>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <input type="file" name="image" id="image"
-                                            accept="image/png, image/jpeg" required>
+                                            accept="image/png, image/jpeg" >
                                     </div>
                                 </div>
                                 <br>
@@ -69,58 +69,36 @@
         </div>
     </div>
 
-    {{!-- <div class="box">
-
-        <button class="collapsible active"><span style="float:left ">
-                <li class="fa fa-cog panel-icon"></li>
-                SPECIFICATIONS
-            </span><span style="float:right" id="sp">+</span></button>
-        <div class="content" style="background-color: white; min-height: 100px; display:block">
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <div class="well">
-                            <h4>{{productentry_msg}}</h4>
-                            {{!-- <form action="/products/upload" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="img_number" id="img_number">
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="pid">Product Name
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="pname" id="pname">
-                                    <input type="hidden" name="pid" id="pid">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="imagePath">Select Image
-                                    </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="file" name="imagePath" id="imagePath" accept="image/png, image/jpeg"
-                                        multiple>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <center>
-                                    <button type="submit" id="save_img" class="btn btn-default btn-md">Submit</button>
-                                </center>
-                            </div>
-                        </form> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+  
 
   <script>
-      document.getElementById("discount_percentage").style.display = "none";
-      document.getElementById("coupon-required").style.display = "none";
+     
+  
+    $(document).ready(function () {
+
+    $('#bundle').validate({ // initialize the plugin
+        rules: {
+            name: {
+                alphanumeric:true,
+                required: true,
+                maxlength:30
+            },
+            days: {
+                required: true,
+                digits: true
+            },
+            image: {
+                required: true,
+            }
+        },
+        submitHandler: function (form) { // for demo
+            alert('valid form submitted'); // for demo
+            return false; // for demo
+        }
+    });
+
+    });
+
   </script>
   
   

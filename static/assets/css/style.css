@@ -1,4 +1,8 @@
 
+.error{
+    font-size: 10px;
+    color: red
+}
 .ui-datepicker-calendar {
     display: none;
     }

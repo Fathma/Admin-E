@@ -23,7 +23,9 @@ $(document).ready(()=>{
         var date = data.lp.date.split('T')[0]
         byId('date').value = date
         products = data.lp.products;
+       
         serial_lp = data.serials;
+        console.log(serial_lp)
       });
     }
   });
@@ -62,10 +64,12 @@ $(document).ready(()=>{
     var product = products.filter(product=> product.product._id == id)
     const { _id, name, productName, pid, category,subcategory,brand, model, weight, warranty, description, image }= product[0].product
     var serial = serial_lp.filter(serial=> serial.pid ==_id)
+    console.log(serial)
     if(serial.length > 0){
       alert("This product is already defined for the given lp number!")
       byId("save_inventory").disabled = true;
     }else{
+      console.log('in')
       byId("save_inventory").disabled = false;
       const {serial_availablity}= product[0].product;
       const {quantity,purchasePrice}= product[0];
@@ -85,9 +89,8 @@ $(document).ready(()=>{
       byId("brand").readOnly = true
       byId("model").value = model;
       byId("model").readOnly = true
-      byId("quantity").value =quantity;
+      byId("quantity").value = quantity;
       byId("quantity").readOnly = true
-      byId("weight").value = weight;
       byId("warranty").value = warranty;
       byId("description").value = description;
       byId("serial").value = serial_availablity;
@@ -263,7 +266,6 @@ $(document).ready(()=>{
           else {
             var product_attribute = { _id: pid, 
               name: byId("name").value, 
-              weight: byId("weight").value, 
               warranty: byId("warranty").value,
               description: byId("description").value
             };
@@ -370,3 +372,5 @@ $(document).ready(()=>{
     // }
   });
 });
+
+

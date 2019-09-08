@@ -30,9 +30,7 @@ module.exports = {
             }else{
                 next()
             }
-            
-        }
-       
+        } 
     }
 }
 

@@ -115,18 +115,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                {{!-- <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="sellingPrice">Selling Price<span
-                                                style="color:red">*</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="sellingPrice"
-                                            id="sellingPrice" required>
-                                    </div>
-                                </div>
-                                <br> --}}
+                               
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="model">Model
@@ -148,45 +137,13 @@
                                 </div>
                                 <br>
 
-                                {{!-- <div id="add"> --}}
-                                {{!-- adds previous features --}}
-                                {{!-- </div> --}}
-
-                                {{!-- <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="new_feat_label">New Feature:</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="hidden" id="new_feat" name="new_feat"
-                                        value="0">--}}{{!-- counts the total newly added features --}}
-                                {{!-- <input type="text" id="new_feat_label" name="new_feat_label" class="form-control inp"
-                                        placeholder="write a new feature name">
-                                </div>
-                                <div class="col-md-1">
-                                    <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
-                                </div>
-                            </div>
-                            <br>  --}}
-
                                 <div class="row">
                                     <div class="col-md-5 col5">
-                                        <label class="lbl" for="weight">Weight:
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="weight" id="weight">
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="warranty">Warranty<span
-                                                style="color:red">*</span></label>
+                                        <label class="lbl" for="warranty">Warranty(In days)</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control inp" name="warranty" id="warranty"
-                                            required>
+                                             required>
                                     </div>
                                 </div>
                                 <br>
@@ -201,33 +158,10 @@
                                     </div>
                                 </div>
                                 <br>
-                                {{!-- <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="shippingInfo">Shipping Info</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <textarea type="text" class="form-control inp" name="shippingInfo"
-                                            id="shippingInfo"></textarea>
-                                    </div>
-                                </div>
-                                <br> --}}
-                                {{!-- <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="HomePagetag">Tag<span style="color:red">*</span></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                        <option value="None">None</option>
-                                        <option value="Hot Deals">Hot Deals</option>
-                                        <option value="Trending">Trending</option>
-                                        <option value="New Product">New Product</option>
-                                        <option value="Exclusive Products ">Exclusive Products </option>
-                                    </select>
-                                </div>
-                            </div> --}}
+                              
                                 <br>
                                 <div id="space">
-                                    {{!-- place for serials --}}
+                                  
                                 </div>
                                 <div class="row">
                                     <center>
@@ -240,6 +174,32 @@
                 </div>
             </div>
         </div>
+        <script>
+  $(document).ready(function () {
+    $('#save_inventory').validate({ // initialize the plugin
+      rules: {
+        name: {
+          alphanumeric: true,
+          required: true,
+          maxlength: 30
+        },
+        warranty: {
+            required: false,
+            digits: true,
+            max:100,
+            min:1
+        },
+        description: {
+          required: false
+        }
+      },
+      submitHandler: function (form) { // for demo
+        alert('valid form submitted'); // for demo
+        return false; // for demo
+      }
+    });
+  });
+</script>
     </div>
     <div class="box">
         <button class="collapsible active"><span style="float:left ">
@@ -303,7 +263,7 @@
         <div id="tag1"></div>
         <button class="collapsible"><span style="float:left ">
                 <i class="fa fa-tag" aria-hidden="true"></i>
-                </li>Product Tag
+                </li>PRODUCT TAG
             </span><span style="float:right" id="sp">+</span></button>
         <div class="content" style="background-color: white;min-height: 100px; display:block">
             <div class="box-body">
@@ -344,7 +304,7 @@
         <div id="Shipping1"></div>
         <button class="collapsible"><span style="float:left ">
                 <i class="fa fa-truck panel-icon" aria-hidden="true"></i>
-                </li>Shipping
+                </li>SHIPPING
             </span><span style="float:right" id="sp">+</span></button>
         <div class="content" style="background-color: white; min-height: 100px; display:block">
             <div class="box-body">
@@ -359,11 +319,6 @@
         </div>
     </div>
 
-    {{!--<div class="box">
-    <button class="collapsible active"><span style="float:left ">RELATED PRODUCT</span><span style="float:right"
-            id="sp">+</span></button>
-    <div class="content" style="background-color: white">
-    </div>
-</div> --}}
+
 
 </div>
