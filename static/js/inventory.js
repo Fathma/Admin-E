@@ -15,17 +15,15 @@ $(document).ready(()=>{
 
     if (invoice.value != "0") {
       $.get("/purchase/getProducts/" + invoice.value, {}, (data)=>{
-        
-        // var date = data.lp.date.split("T");
         byId("supplier").value = data.lp.supplier.cname;
-        // byId("date").value = date[0];
         configureDropDownL4( byId("products_invoice"), data.lp.products );
         var date = data.lp.date.split('T')[0]
         byId('date').value = date
+        
         products = data.lp.products;
-       
         serial_lp = data.serials;
-        console.log(serial_lp)
+        byId("supplier").disabled= true
+        byId('date').disabled= true
       });
     }
   });
@@ -64,72 +62,59 @@ $(document).ready(()=>{
     var product = products.filter(product=> product.product._id == id)
     const { _id, name, productName, pid, category,subcategory,brand, model, weight, warranty, description, image }= product[0].product
     var serial = serial_lp.filter(serial=> serial.pid ==_id)
-    console.log(serial)
+   
     if(serial.length > 0){
-      alert("This product is already defined for the given lp number!")
-      byId("save_inventory").disabled = true;
+      alert('This product is already defined for the given lp number!')
+      byId('save_inventory').disabled = true;
     }else{
-      console.log('in')
-      byId("save_inventory").disabled = false;
+      
+      byId('save_inventory').disabled = false;
       const {serial_availablity}= product[0].product;
       const {quantity,purchasePrice}= product[0];
   
       byId( 'unitPrice' ).value = purchasePrice;
-      byId( 'unitPrice' ).readOnly = true
-      byId("category").value = category.name;
-      byId("category").readOnly = true
+      byId( 'unitPrice' ).disabled = true
+      byId('category').value = category.name;
+      byId('category').disabled = true
       if (subcategory) {
-        byId("subcategory").value = subcategory.name;
-        byId("subcategory").readOnly = true
+        byId('subcategory').value = subcategory.name;
+        byId('subcategory').disabled = true
       }
       else{
-        byId("subcategory").readOnly = true
+        byId('subcategory').disabled = true
       }
-      byId("brand").value = brand.name;
-      byId("brand").readOnly = true
-      byId("model").value = model;
-      byId("model").readOnly = true
-      byId("quantity").value = quantity;
-      byId("quantity").readOnly = true
-      byId("warranty").value = warranty;
-      byId("description").value = description;
-      byId("serial").value = serial_availablity;
-      // byId("serial").readOnly = true
-  
-      // var nums = features.length;
-      // byId("new_feat").value = nums;
-  
-      // remove_child(byId("add"))
-  
-      // creates the div containing label and one helping input containing label text
-      // for (var i = 0; i < nums; i++) {
-      //   var label = createLabel("v", i, features[i].label);
-      //   var input1 = createInputfield("hidden","new_feat_",i, features[i].label);
-      //   var input = createInputfield("text","v",i, features[i].value);
-  
-      //   create_row_feature(nums,label, input, input1)
-      // }
-  
-      remove_child(byId("space"))
+      byId('brand').value = brand.name;
+      byId('brand').disabled = true
+      byId('model').value = model;
+      byId('model').disabled = true
+      byId('quantity').value = quantity;
+      byId('quantity').disabled = true
+      byId('warranty').value = warranty;
+      byId('description').value = description;
+      byId('serial').value = serial_availablity;
+     
+      remove_child(byId('space'))
   
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, "0");
-      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       var yyyy = today.getFullYear();
       today = `${yyyy}-${mm}-${dd}` ;
   
-      // byId("new_feat").value = nums;
     
       for (var i = 0; i < quantity; i++) {
-        var label1 = createLabel("pid", i, "PID" + (i + 1));
-        var input1 = createInputfield("text", "pid", i, `${pid}${randomString(3)}`);
-        input1.readOnly = true;
+        var label1 = createLabel('pid', i, 'PID' + (i + 1));
+        var input1 = createInputfield('text', 'pid', i, `${pid}${randomString(3)}`);
+        input1.disabled = true;
+
         create_row(i, label1, input1);
   
         if (serial_availablity) {
-          var label = createLabel("v", i, "Serial" + (i + 1));
-          var input = createInputfield("text", "s", i, "");
+          var label = createLabel('v', i, 'Serial' + (i + 1));
+          var input = createInputfield('text', 's', i, '');
+        
           create_row(i, label, input);
+          
         }
       }
     }
@@ -170,9 +155,9 @@ $(document).ready(()=>{
 
   // creates fields for serial number
   function create_row(i, label, input) {
-    var out = create_div("row", "out", i);
-    var outc1 = create_div("col-md-5 col5", "outc1r1c1", i);
-    var outc2 = create_div("col-md-6", "outc1", i);
+    var out = create_div('row', 'out', i);
+    var outc1 = create_div('col-md-5 col5', 'outc1r1c1', i);
+    var outc2 = create_div('col-md-6', 'outc1', i);
 
     out.appendChild(outc1);
     out.appendChild(outc2);
@@ -180,8 +165,8 @@ $(document).ready(()=>{
     outc1.appendChild(label);
     outc2.appendChild(input);
 
-    byId("space").appendChild(out);
-    byId("space").appendChild(document.createElement("br"));
+    byId('space').appendChild(out);
+    byId('space').appendChild(document.createElement('br'));
   }
 
   function createLabel(pre, num, text) {
@@ -237,6 +222,7 @@ $(document).ready(()=>{
     // window.location.href="http://localhost:3000/products/Update/5d1b2b63e9ad1500a4c2aa80";
 
     // for getting serial numbers
+   
     e.preventDefault();
 
     var pid = byId("products_invoice").value

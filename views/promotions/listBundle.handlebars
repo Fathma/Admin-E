@@ -11,7 +11,7 @@
         </button>
     <a  class="btn bg-purple" href="/promotions/newBundleOffer" style="float: right;margin: 10px 5px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New Bundle Offer</a>
 </div><br>
-    <div style="background-color: white">
+    <div style="background-color: white" id="abcd" >
         <table id="ptable" style="width:100%" class="table table-striped" >
             <thead>
             <tr>
@@ -33,7 +33,8 @@
                 {{else}}
                 <td><span  class="tags"  style="background: rgb(202, 111, 129)">Disabled</span></td>
                 {{/if}}
-                <td><a data-toggle="tooltip" title="Edit info" class="btn btn-primary btn-sm" href="/promotions/updateBundle/{{this._id}}">Edit</a>
+                <td>
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-primary btn-sm" href="/promotions/updateBundle/{{this._id}}">Edit</a>
                     {{# if this.enabled}}
                     <a href="/promotions/changeBundle/{{this._id}}/false" data-toggle="tooltip" title="Disable the Bundle"
                         class="btn btn-primary btn-sm">Disable</a>
@@ -48,5 +49,13 @@
             </tbody>
         </table>
     </div>
-
+   
 </div>
+<br>
+<script>
+    $(document).ready(function() {
+        $('#ptable').DataTable( {
+            stateSave: true
+        } );
+    } );
+</script>
