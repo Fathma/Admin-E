@@ -28,7 +28,7 @@
                 <td>{{this.contact}}</td>
                 <td>{{# if this.status}}<span  class="tags">Active</span>{{else}}<span  class="tags"  style="background: rgb(202, 111, 129)">Blocked</span>{{/if}}</td>
                 <td>
-                     <a href="/customers/profile/{{this._id}}" class="btn btn-primary btn-sm">Details</a>
+                    <a href="/customers/profile/{{this._id}}" class="btn btn-primary btn-sm">Details</a>
                             {{# if this.status}}
                             <a href="/customers/block/{{this._id}}" class="btn btn-primary btn-sm">Block</a>
                             {{else}}

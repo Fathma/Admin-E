@@ -60,7 +60,10 @@ $(document).ready(()=>{
     
     // creating label and input fields for previous features
     var product = products.filter(product=> product.product._id == id)
-    const { _id, name, productName, pid, category,subcategory,brand, model, weight, warranty, description, image }= product[0].product
+    const { _id, name, productName, pid, category, subcategory, brand, model, weight, warranty, description, image }= product[0].product
+    console.log(productName)
+    console.log(subcategory.name)
+    console.log(brand.name)
     var serial = serial_lp.filter(serial=> serial.pid ==_id)
    
     if(serial.length > 0){

@@ -24,8 +24,32 @@ exports.NewDiscountPage = ( req, res )=> res.render('promotions/newDiscount')
 
 exports.NewCouponPage = ( req, res )=> res.render('promotions/newCoupon')
 
-exports.SaveCoupon =async (req, res) =>{
-    await new Coupon(req.body).save()
+
+exports.CouponEdit =async (req, res)=>{
+    let coupon = await Coupon.findOne({ _id: req.params.id })
+    res.render('promotions/updateCoupon',{ coupon })
+}
+
+exports.SaveCoupon =async (req, res) =>{ 
+    let exist_coupon =await Coupon.findOne({code: req.body.code})
+   
+    if(exist_coupon){
+        res.render('promotions/NewCoupon',{coupon: req.body, error_msg: 'Coupon code already exists!!'})
+    }else{
+        if(req.body.usePercentageCoupon === "on"){
+            req.body.usePercentageCoupon= true
+            req.body.CouponAmount= null
+        }
+        else{
+            req.body.usePercentageCoupon= false
+            req.body.CouponPercent= null
+        } 
+        req.body.createdBy= req.user
+        await new Coupon(req.body).save().then((coupon)=>{
+            req.flash('success_msg', 'Coupon has created successfully!')
+            res.redirect('/promotions/CouponEdit/'+ coupon._id)
+        })
+    }             
 
 }
 
@@ -70,7 +94,18 @@ exports.SaveDiscount = (req, res)=>{
         res.redirect('/promotions/updateDiscount/'+discount._id)
     })
 }
-
+exports.SaveUpdateCoupon =async (req, res)=>{
+    if( req.body.usePercentageCoupon === "on" ){
+        req.body.usePercentageCoupon= true
+        req.body.CouponAmount= null
+    }
+    else{
+        req.body.usePercentageCoupon= false
+        req.body.CouponPercent= null
+    } 
+    await Coupon.update({_id: req.body.id},{$set:req.body})
+    res.redirect('/promotions/CouponEdit/'+req.body.id)
+}
 
 exports.SaveUpdateDiscount=async (req, res)=>{
     if( req.body.usePercentage === "on" ){
@@ -79,7 +114,7 @@ exports.SaveUpdateDiscount=async (req, res)=>{
     }
     else{
         req.body.usePercentage= false
-        req.body.usePercentage= null
+        req.body.discountPercent= null
     } 
     if( req.body.type == "totalOrder" ){
         if(req.body.couponrequired === "on"){
@@ -124,6 +159,11 @@ exports.enableDisableBundle =async (req, res)=>{
     res.redirect('/promotions/BundleList')
 }
 
+exports.enableDisableCoupon= async (req, res)=>{
+    await Coupon.updateOne({ _id: req.params.id }, {$set:{ enabled: req.params.value }})
+    res.redirect('/promotions/CouponList')
+}
+
 
 exports.BundleProductsDelete =async (req, res)=>{
     let bundle = await Bundle.findOne({ _id: req.params.id })
@@ -142,7 +182,7 @@ exports.BundleList = async (req, res)=>{
     res.render('promotions/listBundle', { bundle })
 }
 exports.CouponList = async (req, res)=>{
-    let coupon =await Coupon.find()
+    let coupon =await Coupon.find().populate('createdBy')
     var count = 1;
     coupon.map( doc=> doc.count = count++ )
     res.render('promotions/listCoupon', { coupon })

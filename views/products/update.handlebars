@@ -49,63 +49,6 @@
                                     </div>
                                 </div>
                                 <br>
-                                {{!-- <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="sellingPrice">Selling Price
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="sellingPrice"
-                                            id="sellingPrice" value="{{product.sellingPrice}}">
-                                    </div>
-                                </div>
-                                <br> --}}
-                                {{!-- {{# each product.features}}
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="v{{@index}}">{{this.label}}</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="hidden" name="new_feat_{{@index}}" id="new_feat_{{@index}}"
-                                        value="{{this.label}}">
-                                    <input type="text" class="form-control inp" name="v{{@index}}" id="v{{@index}}"
-                                        class="form-control" value="{{this.value}}">
-                                </div>
-                            </div>
-                            <br>
-                            {{/each}} --}}
-                                {{!-- <div id="add"> --}}
-                                {{!-- adds previous features --}}
-                                {{!-- </div> --}}
-
-                                {{!-- <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="new_feat_label">New Feature</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="hidden" id="new_feat" name="new_feat"
-                                        value="{{feature_total}}">--}}{{!-- counts the total newly added features --}}
-                                {{!--  <input type="text" id="new_feat_label" name="new_feat_label"
-                                        class="form-control inp" placeholder="write a new feature name">
-                                </div>
-                                <div class="col-md-1">
-                                    <a id="addNewfeature" class="btn btn-success" style="padding: 1px 12px">Add</a>
-                                </div>
-                            </div>
-                            <br> --}}
-
-                                <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="weight">Weight
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="weight" id="weight"
-                                            value="{{product.weight}}">
-                                    </div>
-                                </div>
-                                <br>
-
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="warranty">Warranty</label>
@@ -128,45 +71,7 @@
                                 </div>
                                 <br>
 
-                                {{!-- <div class="row">
-                                    <div class="col-md-5 col5">
-                                        <label class="lbl" for="shippingInfo">ShippingInfo</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <textarea type="text" class="form-control inp" name="shippingInfo"
-                                            id="shippingInfo">{{product.shippingInfo}}</textarea>
-                                    </div>
-                                </div>
-                                <br> --}}
-                                {{!-- 
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="HomePagetag">HomePagetag<span
-                                            style="color:red">*</span></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control inp" name="HomePagetag" id="HomePagetag">
-                                        <option value="None"
-                                            {{# equality product.HomePagetag 'None'}}selected{{/equality}}>None
-                                        </option>
-                                        <option value="Hot Deals"
-                                            {{# equality product.HomePagetag 'Hot Deals'}}selected{{/equality}}>
-                                            Hot Deals
-                                        </option>
-                                        <option value="Trending"
-                                            {{# equality product.HomePagetag 'Trending'}}selected{{/equality}}>
-                                            Trending</option>
-                                        <option value="New Product"
-                                            {{# equality product.HomePagetag 'New Product'}}selected{{/equality}}>
-                                            New Product
-                                        </option>
-                                        <option value="Exclusive Products"
-                                            {{# equality product.HomePagetag 'Exclusive Products'}}selected{{/equality}}>
-                                            Exclusive Products</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                           
+                              
 
                                 <div class="row">
                                     <center>
@@ -179,8 +84,30 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#update_product').validate({ // initialize the plugin
+                    rules: {
+                        name: {
+                            required: true,
+                            maxlength: 50
+                            
+                        },
+                         warranty: {
+                            required: false,
+                            maxlength: 7
+                            
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert('valid form submitted');
+                        return false;
+                    }
+                });
+            });
+        </script>
     </div>
-{{!-- PRICE --}}
+    {{!-- PRICE --}}
     <div class="box">
         <div id="PRICE"></div>
         <button class="collapsible"><span style="float:left ">
@@ -192,47 +119,71 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
-                            <form action="/products/price/save" method="POST">
-                            <div class="row">
-                                 <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="sellingPrice">Selling Price
-                                    </label>
+                            <form action="/products/price/save" id="price_update" method="POST">
+                                <div class="row">
+                                    <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="sellingPrice">Selling Price
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control inp" name="sellingPrice"
+                                            id="sellingPrice" value="{{product.sellingPrice}}">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control inp" name="sellingPrice"
-                                        id="sellingPrice" value="{{product.sellingPrice}}">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-5 col5">
-                                    <label class="lbl" for="discount">Discount:
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <select name="discount" id="discount" class="form-control inp">
-                                        <option value="">Select One</option>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-5 col5">
+                                        <label class="lbl" for="discount">Discount:
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="discount" id="discount" class="form-control inp">
+                                            <option value="">Select One</option>
                                             {{# each discount}}
-                                                <option value="{{this._id}}" {{# equality this._id ../product.discount }}selected{{/equality}}>{{this.name}}:{{# if this.usePercentage}}{{this.discountPercent}}%{{else}}{{this.discountAmount}}TK{{/if}}Off</option>
+                                            <option value="{{this._id}}"
+                                                {{# equality this._id ../product.discount }}selected{{/equality}}>
+                                                {{this.name}}:{{# if this.usePercentage}}{{this.discountPercent}}%{{else}}{{this.discountAmount}}TK{{/if}}Off
+                                            </option>
                                             {{/each}}
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <center>
-                                    <button class="btn btn-primary btn-md" type="submit">Update Price</button>
-                                </center>
-                            </div><br>
+                                <br>
+                                <div class="row">
+                                    <center>
+                                        <button class="btn btn-primary btn-md" type="submit">Update Price</button>
+                                    </center>
+                                </div><br>
                             </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#price_update').validate({ // initialize the plugin
+                    rules: {
+                        sellingPrice: {
+                            digits: true,
+                            required: true,
+                            maxlength: 7,
+                            min: 1
+                        },
+                        discount: {
+                            required: false
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert('valid form submitted');
+                        return false;
+                    }
+                });
+            });
+        </script>
     </div>
-    </div>
-{{!-- SPECIFICATIONS --}}
+    {{!-- SPECIFICATIONS --}}
     <div class="box">
         <div id="SPECIFICATIONS1"></div>
         <button class="collapsible"><span style="float:left ">
@@ -245,29 +196,31 @@
                     <div class="col-sm-12 col-md-6 col-md-offset-3 col-sm-offset-3">
                         <div class="well">
                             {{# if ram}}
-                          
+
                             <div class="row">
                                 <center>
                                     <div class="col-md-12  ">
-                                        <span style="color: red">You have to add value for min bus speed, max bus speed </span>
+                                        <span style="color: red">You have to add value for min bus speed, max bus speed
+                                        </span>
                                     </div>
                                 </center>
-                             </div>   <br>   
+                            </div> <br>
                             {{/if}}
                             {{# if motherboard}}
                             <div class="row">
                                 <center>
                                     <div class="col-md-12">
-                                        <span style="color: red">you have toadd value for Max RAM size, Ram Slot, Graphics Support, PCI Bus</span>
+                                        <span style="color: red">you have toadd value for Max RAM size, Ram Slot,
+                                            Graphics Support, PCI Bus</span>
                                     </div>
                                 </center>
                             </div> <br>
-                           
+
                             {{/if}}
 
-                            <form action="/products/attribute/save" method="POST">
-
-                                <div class="row">
+                            <form action="/products/attribute/save" id="specification_update" method="POST">
+                                <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                {{!-- <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="pid">Product Name
                                         </label>
@@ -276,10 +229,10 @@
 
                                         <input type="text" class="form-control inp" name="pname" id="pname"
                                             value="{{ product.productName }}">
-                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                        
                                     </div>
                                 </div>
-                                <br>
+                                <br> --}}
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="label">Product Specification
@@ -287,7 +240,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control inp" name="label" id="label" required>
-                                            <option value="">Select One</option>
+                                            <option value=''>Select One</option>
                                             {{# each specifications }}
                                             <option value="{{this._id}}">{{this.name}}</option>
                                             {{/each}}
@@ -296,10 +249,10 @@
 
 
                                     <div class="col-md-1">
-                                        <a   class="btn btn-success inp"
+                                        <a class="btn btn-success inp"
                                             href="/products/specifications/new/{{product._id}}">New</a>
                                     </div>
-                                   
+
                                     {{!-- <div class="col-md-6">
                                         <input type="text" class="form-control inp" name="label" id="label" required>
                                     </div> --}}
@@ -318,7 +271,7 @@
                                 <br>
                                 <div class="row">
                                     <center>
-                                        <button type="submit" class="btn btn-primary btn-md" >Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-md">Submit</button>
                                     </center>
                                 </div>
                             </form><br>
@@ -352,7 +305,7 @@
             </div>
         </div>
     </div>
-{{!-- iMG --}}
+    {{!-- iMG --}}
     <div class="box">
         <div id="IMAGES1"></div>
         <button class="collapsible">
@@ -386,6 +339,7 @@
                             <div class="row">
 
                             </div>
+                            <hr>
                             <br>
                             <form action="/products/upload/update" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="img_number" id="img_number">
@@ -396,7 +350,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control inp" name="pname" id="pname"
-                                            value="{{product.productName}}">
+                                            value="{{product.productName}}" disabled>
                                         <input type="hidden" name="pid" id="pid" value="{{product._id}}">
                                     </div>
                                 </div>
@@ -426,7 +380,7 @@
 
         </div>
     </div>
-{{!-- PRODUCT TAG --}}
+    {{!-- PRODUCT TAG --}}
     <div class="box">
         <div id="ProductTag1"></div>
         <button class="collapsible"><span style="float:left ">
@@ -485,7 +439,7 @@
             </div>
         </div>
     </div>
-{{!-- RELATED PRODUCT --}}
+    {{!-- RELATED PRODUCT --}}
     <div class="box">
         <div id="RELATED1"></div>
         <button class="collapsible">
@@ -500,7 +454,8 @@
                             {{# if product }}
                             <form action="/products/relatedProducts1" method="POST">
                                 <input type="hidden" name="img_number" id="img_number">
-                                <div class="row">
+                                <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                {{!-- <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="pid">Product Name
                                         </label>
@@ -509,17 +464,19 @@
 
                                         <input type="text" class="form-control inp" name="pname" id="pname"
                                             value="{{product.productName}}">
-                                        <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
+                                       
                                     </div>
                                 </div>
-                                <br>
+                                <br> --}}
                                 <div class="row">
                                     <div class="col-md-5 col5">
                                         <label class="lbl" for="imagePath">Select Product
                                         </label>
                                     </div>
                                     <div class="col-md-6">
-                                        <select name="relatedProducts" class="form-control inp" id="relatedProducts">
+                                        <select name="relatedProducts" class="form-control inp" id="relatedProducts"
+                                            required>
+                                            <option value="">Select One</option>
                                             {{# each Product}}
                                             <option value="{{this._id}}">{{this.productName}}</option>
                                             {{/each}}
@@ -568,7 +525,7 @@
             </div>
         </div>
     </div>
-{{!-- SHIPPING --}}
+    {{!-- SHIPPING --}}
     <div class="box">
         <div id="Shipping1"></div>
         <button class="collapsible"><span style="float:left ">
@@ -582,7 +539,7 @@
                         <div class="well">
 
                             {{# if product }}
-                            <form action="/products/shipping/save" method="POST">
+                            <form action="/products/shipping/save" id="shipping_update" method="POST">
                                 <input type="hidden" name="pid" id="pid" value="{{ product._id }}">
                                 <div class="row">
                                     <div class="col-md-5 col5">
@@ -647,8 +604,9 @@
                                                 style="color:red">*</span></label>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control inp" name="deliveryDate"
-                                            id="deliveryDate" value="{{ product.shippingInfo.deliveryDate }}" required>
+                                        <input type="date" class="form-control inp" style=" line-height: 19px; "
+                                            name="deliveryDate" id="deliveryDate"
+                                            value="{{ product.shippingInfo.deliveryDate }}" required>
                                     </div>
                                 </div><br>
                                 <div class="row">
@@ -666,6 +624,50 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('#shipping_update').validate({ // initialize the plugin
+                    rules: {
+                        weight: {
+                           
+                            required: true,
+                            maxlength: 7
+                            
+                        },
+                         length: {
+                           
+                            required: true,
+                            maxlength: 7
+                            
+                        },
+                         height: {
+                           
+                            required: true,
+                            maxlength: 7
+                            
+                        },
+                         width: {
+                           
+                            required: true,
+                            maxlength: 7
+                           
+                        },
+                        additionalCharge: {
+                            required: true,
+                            digits:true,
+                            min:1
+                        },
+                        deliveryDate: {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        alert('valid form submitted');
+                        return false;
+                    }
+                });
+            });
+        </script>
     </div>
     {{!--  <div class="box">
         <button class="collapsible"><span style="float:left ">RELATED PRODUCT</span><span style="float:right"

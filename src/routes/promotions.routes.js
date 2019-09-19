@@ -36,8 +36,8 @@ const upload = multer({ storage })
 
 router.get('/NewDiscount', promotions.NewDiscountPage)
 router.get('/updateDiscount/:id', promotions.updateDiscountPage)
-router.post('/SaveDiscount',  promotions.SaveDiscount)
-router.post('/SaveUpdateDiscount', promotions.SaveUpdateDiscount)
+router.post('/SaveDiscount', validation.discount,  promotions.SaveDiscount)
+router.post('/SaveUpdateDiscount',validation.discount, promotions.SaveUpdateDiscount)
 
 router.get('/DiscountList', promotions.DiscountList)
 router.get('/change/:id/:value', promotions.enableDisable)
@@ -54,6 +54,9 @@ router.post('/bundleImage/update', upload.single('image'), promotions.bundleImag
 router.post('/SaveUpdateBundlePrice', promotions.SaveUpdateBundlePrice)
 
 router.get('/NewCoupon', promotions.NewCouponPage)
-router.post('/SaveCoupon', promotions.SaveCoupon)
+router.post('/SaveCoupon',validation.couponSave, promotions.SaveCoupon)
 router.get('/CouponList', promotions.CouponList)
+router.get('/CouponEdit/:id', promotions.CouponEdit)
+router.post('/SaveUpdateCoupon',validation.couponEdit, promotions.SaveUpdateCoupon)
+router.get('/changeCoupon/:id/:value', promotions.enableDisableCoupon)
 module.exports = router

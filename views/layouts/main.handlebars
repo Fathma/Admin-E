@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/jquery.modal.min.css">
     <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css">
-
-
-
-
     <!-- Ionicons -->
     <link rel="stylesheet" href="/assets/css/ionicons/css/ionicons.min.css">
     <!-- Theme style -->
@@ -54,7 +50,7 @@
 
 <body class="hold-transition skin-blue sidebar-mini" onload="set_var()">
     <div class="wrapper">
-        <header class="main-header">
+        <header class="main-header"  >
             <!-- Logo -->
             {{# if user}}
             <a href="#" class="logo">
@@ -79,8 +75,8 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         {{#if user}}
-                        <li class="nav-items">
-                            <div id="google_translate_element"></div>
+                        <li class="nav-item">
+                            <a id="google_translate_element" ></a>
                         </li>
 
                         <li class="nav-item">
@@ -124,7 +120,7 @@
 
         <!-- Left side column. contains the logo and sidebar -->
         {{#if user}}
-        <aside class="main-sidebar">
+        <aside class="main-sidebar" style="position: fixed;">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
@@ -144,7 +140,7 @@
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 {{#if user}}
-                <ul class="sidebar-menu" data-widget="tree">
+                <ul class="sidebar-menu " data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
 
                     <li>
@@ -240,8 +236,8 @@
                             <li><a href="/promotions/DiscountList"><i class="fa fa-circle-o"></i>Discount</a></li>
                             <li><a href="/promotions/BundleList"><i class="fa fa-circle-o"></i>Bundle Product</a>
                             </li>
-                            {{!-- <li><a href="/promotions/CouponList"><i class="fa fa-circle-o"></i>Coupons</a>
-                            </li> --}}
+                            <li><a href="/promotions/CouponList"><i class="fa fa-circle-o"></i>Coupons</a>
+                            </li>
                             
                         </ul>
                     </li>

@@ -1,9 +1,12 @@
-<div class="row">
-    <a  class="btn bg-purple" href="/promotions/NewCoupon" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New coupon</a>
-</div><br>
+
 
 <div class="container-fluid" style="width:100%;min-height: 700px">
-    
+    <div class="register-logo">
+        <a href="#"><b>Discount</b>List</a>
+    </div>
+    <div class="row">
+    <a  class="btn bg-purple" href="/promotions/NewCoupon" style="float: right;margin: 10px 28px;"><li class="fa fa-plus-square" style="padding: 5px"></li>New coupon</a>
+</div>
 
     <div style="background-color: white">
         <table id="ptable" style="width:100%" class="table table-striped" >
@@ -11,7 +14,10 @@
             <tr>
                 <th>#</th>
                 <th>Coupon</th>
+                <th>Code</th>
+                <th>Discount</th>
                 <th>Created</th>
+                <th>Created By</th>
                 <th>Enabled</th>
                 <th>Action</th>
             </tr>
@@ -21,20 +27,24 @@
             <tr>
                 <td>{{this.count}}</td>
                 <td>{{this.name}}</td>
+                <td>{{this.code}}</td>
+                <td>{{# if this.usePercentageCoupon}}{{this.CouponPercent}}%{{else}}{{this.CouponAmount}}TK{{/if}}</td>
+                
                 <td>{{formatDate this.created}}</td>
+                <td>{{this.createdBy.name}}</td>
                 {{# if this.enabled}}
-                <td>Enabled</td>
+                <td ><span class="tags">Enabled</span></td>
                 {{else}}
-                <td>Disabled</td>
+                <td><span class="tags" style="background: rgb(202, 111, 129)">Disabled</span></td>
                 {{/if}}
                 <td>
-                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/updateDiscount/{{this._id}}"
+                    <a data-toggle="tooltip" title="Edit info" class="btn btn-default" href="/promotions/CouponEdit/{{this._id}}"
                         >Edit</a>
                     {{# if this.enabled}}
-                    <a href="/promotions/change/{{this._id}}/false" data-toggle="tooltip" title="Disable the discount"
+                    <a href="/promotions/changeCoupon/{{this._id}}/false" data-toggle="tooltip" title="Disable the coupon"
                         class="btn btn-default">Disable</a>
                     {{else}}
-                    <a href="/promotions/change/{{this._id}}/true" data-toggle="tooltip" title="enable the discount"
+                    <a href="/promotions/changeCoupon/{{this._id}}/true" data-toggle="tooltip" title="enable the coupon"
                         class="btn btn-default">Enable</a>
                     {{/if}}
                 </td>

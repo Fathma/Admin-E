@@ -134,23 +134,34 @@ $(document).ready(function() {
     }
   };  
 
-  $("#couponrequired").change(function() {
-    if(this.checked) {
-      byId("coupon-required").style.display = "block";
-    }
-    if(!this.checked) {
-      byId("coupon-required").style.display = "none";
-    }
-  });
+
 
   $("#usePercentage").change(function() {
     if(this.checked) {
       byId("discount_percentage").style.display = "block"
       byId("discount_amount").style.display = "none"
+      byId("discount_percentage").required = true
+      byId("discount_amount").required = false
     }
     if(!this.checked) {
       byId("discount_percentage").style.display = "none"
       byId("discount_amount").style.display = "block"
+      byId("discount_percentage").required = false
+      byId("discount_amount").required = true
+    }
+  });
+  $("#usePercentageCoupon").change(function() {
+    if(this.checked) {
+      byId("Coupon_percentage").style.display = "block"
+      byId("Coupon_percentage").required = true
+      byId("Coupon_amount").style.display = "none"
+      byId("Coupon_amount").required = false
+    }
+    if(!this.checked) {
+      byId("Coupon_percentage").style.display = "none"
+      byId("Coupon_percentage").required = false
+      byId("Coupon_amount").style.display = "block"
+      byId("Coupon_amount").required = true
     }
   });
 
