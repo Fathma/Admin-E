@@ -28,9 +28,9 @@
                 <td>{{this.count}}</td>
                 <td>{{this.invoiceId}}</td>
                 <td>{{this.order.orderId}}</td>
-                <td>{{formatDate this.order.created}}</td>
+                {{!-- <td>{{this.order.created}}</td> --}}
                 <td>{{this.order.currentStatus}}</td>
-                <td>{{formatNumber this.order.totalAmount}}TK</td>
+                <td>{{this.order.totalAmount}}TK</td>
                 <td><a href="/orders/ViewInvoice/{{this._id}}" data-toggle="tooltip" data-placement="top" title="View details"  class="btn btn-primary btn-sm">View</a></td>
             </tr>
            
