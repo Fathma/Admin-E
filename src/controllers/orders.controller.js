@@ -130,7 +130,7 @@ exports.addSerialToProductPage = (req, res) => {
 
 // show an invoice
 exports.ViewInvoice = (req, res) => {
-  Invoice.find({ _id: req.params.id })
+  Invoice.findOne({ _id: req.params.id })
     .populate('user')
     .populate({
       path: 'order',
@@ -146,15 +146,15 @@ exports.ViewInvoice = (req, res) => {
     })
     .exec((err, rs) => {
       var count = 1
-      console.log(rs[0])
-      if(rs[0].order.cart != null ){
-        for (var i = 0; i < rs[0].order.cart.length; i++) {
-          rs[0].order.cart[i].num = count;
+      console.log(rs)
+      if(rs.order.cart != null ){
+        for (var i = 0; i < rs.order.cart.length; i++) {
+          rs.order.cart[i].num = count;
           count++
         }
       }
      
-      res.render('orders/viewInvoice', { invoice: rs[0] })
+      res.render('orders/viewInvoice', { invoice: rs })
     })
 }
 
