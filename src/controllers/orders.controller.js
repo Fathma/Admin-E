@@ -146,6 +146,7 @@ exports.ViewInvoice = (req, res) => {
     })
     .exec((err, rs) => {
       var count = 1
+      console.log(rs[0])
       if(rs[0].order.cart != null ){
         for (var i = 0; i < rs[0].order.cart.length; i++) {
           rs[0].order.cart[i].num = count;
