@@ -18,6 +18,8 @@ const Grid = require('gridfs-stream')
 const keys = require('./config/keys')
 var vlaues = require('./config/values')
 
+let Serial = require('./src/models/serials.model')
+
 
 moment().format();
 

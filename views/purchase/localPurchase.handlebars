@@ -266,7 +266,7 @@
                             <tbody>
                                 {{# each lp.products}}
                                 <tr>
-                                    <td class="text-left"> {{this.num}} </td>
+                                    <td class="text-left"><a href="/purchase/deleteProduct/{{../lp._id}}/{{this.product._id}}">X</a> {{this.num}} </td>
                                     <td class="text-left">
                                         <a href="#"> {{this.product.productName}}</a>
                                     </td>
@@ -298,6 +298,7 @@
         </div>
     </div>
 </div>
+
 <script>
     let today = new Date().toISOString().substr(0, 10);
     document.querySelector("#date11").value = today;

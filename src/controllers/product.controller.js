@@ -123,7 +123,7 @@ exports.shippingSave = async(req, res)=>{
 }
 
 exports.SavePrice =async (req, res)=>{
-  console.log(req.body.discount)
+  if(req.body.discount == '') req.body.discount=null
   await Product.update({ _id: req.body.pid }, {$set:req.body})
   res.redirect('/products/Update/'+ req.body.pid+'#PRICE')
 }

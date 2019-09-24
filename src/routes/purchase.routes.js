@@ -11,5 +11,7 @@ router.post('/SaveLocalPurchase', purchase.SaveLocalPurchase);
 router.get('/getProducts/:invc', purchase.getProducts);
 router.get('/getLPList', purchase.getLPList);
 router.get('/productList/:_id', purchase.productList);
+router.get('/deleteProduct/:lpid/:pid', purchase.deleteProduct);
+
 
 module.exports = router;

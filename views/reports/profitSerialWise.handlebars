@@ -1,0 +1,68 @@
+    
+
+<div class="container-fluid" style="width:100%;min-height: 700px">
+    <div class="register-logo">
+        <a href="#"><b>Profit</b>ByProduct</a>
+    </div>
+  <div class="row">
+   <button class="btn bg-green" style="float: right;margin: 10px 20px;" id="btnExport" onclick="javascript:xport.toXLS('ptable');"> <li class="fa fa-download" style="padding: 5px"></li>Export as Excel</button>
+    </div><br>
+     <form action="/general/profitProductWiseByMonth" method="POST">
+        <label for="startDate">Select Month :</label>
+        <input name="startDate"  id="startDate" class="date-picker" />
+        <button type="submit" >submit</button>
+    </form><br>
+    <b>Profit of sold Products: {{profit}}tk</b><br>
+    <b>Total Cost of sold Products: {{cost}}tk</b><br>
+    <b>Total Selling price of Sold Products: {{earning}}tk</b><br>
+
+
+    <div style="background-color: white">
+        <table id="ptable" style="width:100%" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>MODEL</th>
+                    <th>SERIAL</th>
+                    <th>PRODUCT ID</th>
+                    <th>COST</th>
+                    <th>SELLING</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {{# each serial}}
+                <tr>
+                    <td>{{this.count}}</td>
+                    <td>{{this.pid.model}}</td>
+                    <td>{{this.number}}</td>
+                    <td>{{this.sid}}</td>
+                    <td>{{this.cost}}</td>
+                    <td>{{this.selling}}</td>
+                </tr> 
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<script>
+    $(document).ready(function() {
+        $('#ptable').DataTable( {
+            stateSave: true
+        } );
+    } );
+   
+  $(function () {
+    $('.date-picker').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'm/yy',
+            onClose: function(dateText, inst) { 
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+            });
+    });
+
+
+</script>

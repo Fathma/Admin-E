@@ -10,6 +10,7 @@ const Order = require('../models/customerOrder')
 const Post = require('../models/posts.model')
 
 
+
 // get all the data for notification and dashboard
 async function notification( cb ){
   let orders = await Order.find({ currentStatus: 'New Order'})
@@ -126,4 +127,55 @@ exports.productNeverSold = async(req, res) => {
     productleft.map( doc=> doc.count = count++ )
     res.render('reports/neverSold',{ products:productleft })
   })
+}
+
+function processProfitByProduct (serial, res){
+  var cost = 0;
+  serial.map(async ser=>{
+    let pro = ser.lp.products.filter( pro=> JSON.stringify(pro.product) == JSON.stringify(ser.pid._id))
+    ser.cost = pro[0].purchasePrice
+    cost +=pro[0].purchasePrice
+    
+  })
+ 
+  var earning = 0;
+  serial.map((ser)=>{
+    let pro = ser.invoice.order.cart.filter(pro=>JSON.stringify(pro.product) == JSON.stringify(ser.pid._id))
+    ser.selling = pro[0].unitPrice
+    earning +=  pro[0].unitPrice
+   
+  })
+
+  let profit = earning-cost
+  var count = 1;
+  serial.map( doc=> doc.count = count++ )
+  res.render('reports/profitSerialWise', {serial,cost, earning, profit})
+}
+
+exports.profitByProductCost =async (req, res)=>{
+  let serial = await Serial.find({status: 'Delivered'}).populate('lp').populate('pid')
+  .populate({
+          path: "invoice",
+          populate: { path: "order" }
+        })
+  processProfitByProduct(serial, res)
+}
+
+exports.profitProductWiseByMonth =async (req, res)=>{
+  let month =parseInt(req.body.startDate.split('/')[0], 10)
+  let year =parseInt(req.body.startDate.split('/')[1], 10)
+  
+  
+  let serial = await Serial.find({status: 'Delivered'}).populate('lp').populate('pid')
+  .populate({
+    path: "invoice",
+    populate: { path: "order" }
+  })
+
+  serial = serial.filter((data)=>{
+    if(new Date(data.invoice.order.lastModified).getMonth()+1 === month && new Date(data.invoice.order.lastModified).getFullYear() === year){
+      return data
+    }
+  })
+  processProfitByProduct(serial, res)
 }

@@ -41,16 +41,21 @@ exports.OrdersByMonthPage = async(req, res) => {
 exports.saveSerialInOrders = async (req, res) => {
   var serials = req.body.Serial.split(',')
   var serial_id = []
+ 
+
+  
   serials.map( async serial=>{
     // getting id of the serial
-    var id = await Serial.findOne({$or: [{number: serial}, {sid: serial}]})
+    var id = await Serial.findOne({$and:[{pid:req.params.model_id},{$or: [{number: serial}, {sid: serial}]}]})
+    console.log(id)
     if(id.pid == req.params.model_id){
       serial_id.push(id._id) 
     }
   })
+  
   // setting serials in order
   var docs = await Order.findOne({ _id: req.params.oid })
-  
+  console.log(serial_id)
   docs.cart.map(item=>{
     if(item._id == req.params.item_id){
       item.serials = serial_id

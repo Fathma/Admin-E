@@ -50,7 +50,7 @@ var ProductSchema = new Schema({
     relatedProducts: [
         { type: Schema.Types.ObjectId, ref: 'Product' },
     ],
-    discount:{ type: Schema.Types.ObjectId, ref: 'Discount', default:null }
+    discount:{ type: Schema.Types.ObjectId, ref: 'Discount' }
 });
 
 

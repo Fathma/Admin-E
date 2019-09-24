@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select name="discount" id="discount" class="form-control inp">
-                                            <option value="">Select One</option>
+                                            <option value=''>Select One</option>
                                             {{# each discount}}
                                             <option value="{{this._id}}"
                                                 {{# equality this._id ../product.discount }}selected{{/equality}}>
@@ -176,8 +176,8 @@
                         }
                     },
                     submitHandler: function (form) {
-                        alert('valid form submitted');
-                        return false;
+                       
+                        return true;
                     }
                 });
             });

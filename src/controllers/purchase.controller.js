@@ -9,6 +9,22 @@ const Serials = require('../models/serials.model');
 const Supplier = require('../models/supplier.model');
 const Brand = require('../models/brand.model');
 
+exports.deleteProduct =async (req, res)=>{
+  let lp = await LP.findOne({_id: req.params.lpid})
+  
+  let products = lp.products.filter((pro)=> pro.product != req.params.pid)
+  lp.products = products
+  
+  lp.subTotal = 0;
+  lp.products.map((pro)=>{
+    lp.subTotal += pro.total
+  })
+
+  new LP(lp).save().then((lp)=>{
+    res.redirect('/purchase/localPurchase/'+ lp.number)
+  })
+}
+
 // get supplier registration page
 exports.LocalPurchasePage =async (req, res) => { 
   let today = new Date()
@@ -72,7 +88,7 @@ exports.getProducts = (req, res) => {
 
 // fires local purchase page for a specific local purchase
 exports.LocalPurchaseLPPage = (req, res) => {
-
+  console.log(req.params.invc)
   LP.findOne({ number: req.params.invc })
     .populate('products.product')
     .populate({
@@ -89,7 +105,7 @@ exports.LocalPurchaseLPPage = (req, res) => {
     })
     .populate('supplier')
     .exec(async (err, doc) => {
-
+      console.log(doc)
       var count = 1;
 
       for (var i = 0; i < doc.products.length; i++) {
