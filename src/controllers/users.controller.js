@@ -8,6 +8,7 @@ const Email = require('../../config/email')
 const jwt = require('jsonwebtoken')
 const _ = require('lodash') 
 const User = require('../models/user.model')
+const keys = require('../../config/keys')
 
 // User login route
 exports.loginPage = (req, res, next) => res.render('users/login')
@@ -106,7 +107,7 @@ exports.changePass = (req, res)=>{
 
   User.findOne({_id: req.params.id}, (err, user)=>{
     
-    jwt.sign({ user: _.pick(user, '_id') }, 'sceretkey', { expiresIn:'1h' }, async (err, token)=> {
+    jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'1h' }, async (err, token)=> {
       let url = `http://localhost:3000/users/changePassPage/${token}`
       await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
         req.flash('success_msg', 'A token has been sent to your email.')
@@ -117,7 +118,7 @@ exports.changePass = (req, res)=>{
 
 // redirects to a temporary page
 exports.changePassPage = (req, res)=>{
-  const { user } = jwt.verify(req.params.token, 'sceretkey') 
+  const { user } = jwt.verify(req.params.token, keys.jwt.secret) 
   if(user){
     res.render('users/setPass', { id: user._id, token: req.params.token })
   }

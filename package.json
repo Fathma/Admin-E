@@ -9,6 +9,7 @@
   "author": "Jihad",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^16.1.4",
     "array-includes": "^3.0.3",
     "array-unique": "^0.3.2",
     "bcryptjs": "^2.4.3",

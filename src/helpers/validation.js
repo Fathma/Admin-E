@@ -1,5 +1,6 @@
 
 
+// use @hapi/joi ...
 var coupon= (req)=> {
     req.checkBody("name","Name is required").notEmpty()
     req.checkBody("code","Code is required").notEmpty()
