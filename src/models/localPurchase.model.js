@@ -2,8 +2,8 @@
 //  Author: Fathma siddique
 //  last modified: 07/23/19
 //  Description: LocalPurchase model schema 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 var LocalPurchaseSchema = new Schema({
     date: { type:Date },
@@ -22,4 +22,4 @@ var LocalPurchaseSchema = new Schema({
     subTotal:{ type: Number},
     created: { type: Date,default: Date.now }
 });
-module.exports = mongoose.model('LocalPurchase', LocalPurchaseSchema, 'LocalPurchases');
+module.exports = mongoose.model('LocalPurchase', LocalPurchaseSchema, 'LocalPurchases')

@@ -2,7 +2,7 @@
 //  Author: Fathma siddique
 //  last modified: 07/23/19
 //  Description: Invoice model schema 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 
 
@@ -15,4 +15,4 @@ var InvoiceSchema = new Schema({
     order: { type: Schema.Types.ObjectId, ref: 'CustomerOrder' }
 });
 
-module.exports = mongoose.model('Invoice', InvoiceSchema, 'Invoices');
+module.exports = mongoose.model('Invoice', InvoiceSchema, 'Invoices')

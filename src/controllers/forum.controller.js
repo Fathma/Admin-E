@@ -29,15 +29,13 @@ exports.blockPost = ( req, res )=>{
 }
 
 // makes a post active
-exports.activePost = ( req, res )=>{
-    Post.update({ _id: req.params.id },{ $set:{ status: 'Active' } }, (err, post)=>{
-        res.redirect('/forum/posts')
-    })
+exports.activePost = async ( req, res )=>{
+    await Post.update({ _id: req.params.id },{ $set:{ status: 'Active' } })
+    res.redirect('/forum/posts')
 }
 
 // shows all the posts with status 'new'
-exports.viewNewPost = (req, res)=>{
-    Post.find({ status: 'New'}, (err, posts)=>{
-        res.render('forum/allPosts', { posts })
-    })
+exports.viewNewPost = async (req, res)=>{
+    await Post.find({ status: 'New'})
+    res.render('forum/allPosts', { posts })
 }

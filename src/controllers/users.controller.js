@@ -1,6 +1,7 @@
 // author : fathma Siddique
 // lastmodified : 31/7/2019
 // description : all the user related controllers/funtions are written in here 
+
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const Validation = require('../../static/js/validations')
@@ -82,6 +83,7 @@ exports.getUsers = (req, res)=>{
   })
 }
 
+
 // edit user update page
 exports.edit = (req, res)=>{
   User.findOne({ _id: req.params.id }, (err, user)=> res.render('users/updateUser',{ user }))
@@ -95,26 +97,28 @@ exports.saveEdit = (req, res)=>{
   })
 }
 
+
 // show user profile
-exports.profile = (req, res)=>{
-  User.findOne({ _id: req.params.id }, (err, user)=>{
-    res.render('users/profile', { user })
-  })
+exports.profile = async (req, res)=>{
+  let user =await User.findOne({ _id: req.params.id })
+  res.render('users/profile', { user })
 }
+
 
 // changing user password by sending a temporary link to the use email
-exports.changePass = (req, res)=>{
+exports.changePass = async (req, res)=>{
 
-  User.findOne({_id: req.params.id}, (err, user)=>{
+  let user = await User.findOne({_id: req.params.id})
     
-    jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'1h' }, async (err, token)=> {
-      let url = `http://localhost:3000/users/changePassPage/${token}`
-      await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
-        req.flash('success_msg', 'A token has been sent to your email.')
-        res.redirect(`/users/profile/${user._id}`)
-    })
+  jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'1h' }, async (err, token)=> {
+    let url = `http://localhost:3000/users/changePassPage/${token}`
+    await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
+      req.flash('success_msg', 'A token has been sent to your email.')
+      res.redirect(`/users/profile/${user._id}`)
   })
+
 }
+
 
 // redirects to a temporary page
 exports.changePassPage = (req, res)=>{

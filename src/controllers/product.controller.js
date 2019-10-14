@@ -142,6 +142,7 @@ exports.SaveAttribute = async (req, res)=>{
     res.redirect('/products/Update/'+ req.body.pid+'#SPECIFICATIONS1')
   })
 }
+
 // saves homePage tags
 exports.SaveHomePageTag = async (req, res)=>{
   await Product.update({_id: req.body.pid},{ $set:{HomePagetag: req.body.HomePagetag} })

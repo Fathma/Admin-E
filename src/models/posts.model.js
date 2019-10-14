@@ -4,8 +4,8 @@
 //  Description: Post model schema for ECL E-Commerce Forum
 
 //  Library imports
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 //Sechema defination
 const PostSchema = new Schema({
@@ -53,4 +53,4 @@ const PostSchema = new Schema({
 });
 
 //Exporting model
-module.exports = mongoose.model("Post", PostSchema, "posts");
+module.exports = mongoose.model("Post", PostSchema, "posts")

@@ -99,12 +99,11 @@ var orderedProducts =async (cb)=>{
       })
     })
     unique.push(multi)
-    // var count = 1;
-    // unique.map( doc=> doc.count = count++ )
-
     cb(unique)
   })
 }
+
+// gets products which have sold at least once
 exports.bestSellers= async(req, res) => {
   orderedProducts(unique=>{
     var count = 1;
@@ -113,6 +112,8 @@ exports.bestSellers= async(req, res) => {
   })
 }
 
+
+// get products which have never been sold
 exports.productNeverSold = async(req, res) => {
   orderedProducts(async unique=>{
     let products = await Product.find()
@@ -129,6 +130,8 @@ exports.productNeverSold = async(req, res) => {
   })
 }
 
+
+// this funtion takes each sold products by serial/ product id. finds their purchase price and selling price. from totalSellingPrice - totalPruchasePrice = profit
 function processProfitByProduct (serial, res){
   var cost = 0;
   serial.map(async ser=>{
@@ -147,10 +150,14 @@ function processProfitByProduct (serial, res){
   })
 
   let profit = earning-cost
+
   var count = 1;
   serial.map( doc=> doc.count = count++ )
+
   res.render('reports/profitSerialWise', {serial,cost, earning, profit})
 }
+
+
 
 exports.profitByProductCost =async (req, res)=>{
   let serial = await Serial.find({status: 'Delivered'}).populate('lp').populate('pid')
@@ -160,6 +167,7 @@ exports.profitByProductCost =async (req, res)=>{
         })
   processProfitByProduct(serial, res)
 }
+
 
 exports.profitProductWiseByMonth =async (req, res)=>{
   let month =parseInt(req.body.startDate.split('/')[0], 10)

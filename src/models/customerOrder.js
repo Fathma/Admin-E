@@ -2,8 +2,8 @@
 //  Author: Fathma siddique
 //  last modified: 07/23/19
 //  Description: CustomerOrder model schema 
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 var CustomerOrderSchema = new Schema({
  created: { type: Date, default: Date.now },
  orderId: { type: String },
@@ -35,8 +35,8 @@ var CustomerOrderSchema = new Schema({
  currentStatus: { type: String, default: "New Order" },
  history: { type: Array },
  lastModified: { type: Date, default: Date.now },
-});
+})
 
 
 
-module.exports = mongoose.model('CustomerOrder', CustomerOrderSchema, 'customerOrders');
+module.exports = mongoose.model('CustomerOrder', CustomerOrderSchema, 'customerOrders')

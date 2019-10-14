@@ -70,12 +70,8 @@ var UserSchema = new Schema({
  creditCardLast4Digits: { type: String, default: "" },
  status: Boolean,
  isSeller: Boolean
-});
+})
 
 
-module.exports = mongoose.model("Customer", UserSchema, "users");
+module.exports = mongoose.model("Customer", UserSchema, "users")
 
-
-
-
-module.exports = mongoose.model('Customer', UserSchema, 'users');

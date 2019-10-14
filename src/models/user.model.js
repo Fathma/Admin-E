@@ -1,8 +1,8 @@
 //  Author: Fathma siddique
 //  last modified: 07/23/19
 //  Description: users model schema 
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 // Create Schema
 const UserSchema = new Schema({
@@ -12,12 +12,14 @@ const UserSchema = new Schema({
   role: { type: String, required: true },
   date: { type: Date, default: Date.now },
   branch: { type: String }
-});
-UserSchema.methods.encryptPassword = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-};
-UserSchema.methods.validPassword = function(password){
-  return bcrypt.compareSync(password, this.password); 
+})
+
+UserSchema.methods.encryptPassword = (password)=>{
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null)
 }
 
-module.exports = mongoose.model("users", UserSchema,'admin');
+UserSchema.methods.validPassword = (password)=>{
+  return bcrypt.compareSync(password, this.password)
+}
+
+module.exports = mongoose.model("users", UserSchema,'admin')

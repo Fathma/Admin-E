@@ -15,7 +15,7 @@ module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
       // checks whether user already exists or not
-      User.findOne({ email: email }).then(user => {
+      User.findOne({ email }).then(user => {
         if (!user) {
           return done(null, false, { message: "No user found" });
         }

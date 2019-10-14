@@ -1,6 +1,7 @@
 //  Author: Fathma siddique
 //  last modified: 07/23/19
-//  Description: Supplier model schema 
+//  Description: Supplier model schema
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -17,7 +18,7 @@ var SupplierSchema = new Schema({
     registration_no: { type: String },
     contactPerson:{ type: Array },
     additionalInfo: { type: String },
-    created: { type: Date, default: Date.now },
+    created: { type: Date, default: Date.now }
 })
 
 

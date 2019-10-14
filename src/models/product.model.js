@@ -1,8 +1,8 @@
 //  Author: Fathma siddique
 //  last modified: 04/8/19
 //  Description: Product model schema 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 var ProductSchema = new Schema({
     subcategory: { type: Schema.Types.ObjectId, ref: 'SubCategory' },
@@ -38,23 +38,28 @@ var ProductSchema = new Schema({
         admin: { type: Schema.Types.ObjectId, ref: 'users' },
         created: { type: Date, default: Date.now }, 
     },
+    // availablity is to check whether the product is available
+    // in stock or not
     availablity: { type:Boolean, default:false },
     warranted: { type: Boolean},
-    sellingPrice: { type: Number , default: 0 },
+    // sellingPrice is the price shows in the client site
+    sellingPrice: { type: Number , default: 0 }, 
     isActive:{ type: Boolean, default: false },
-    dealer: { type: Boolean, default: false },
+    //dealer is to check whether the product is non stock product or not
+    dealer: { type: Boolean, default: false }, 
     status: { type: Boolean, required: false },
     admin: { type: Schema.Types.ObjectId, ref: 'users' },
     created: { type: Date, default: Date.now },
-    HomePagetag: { type: String, default:'None'},
+    //HomePagetag is for some specific sections in client site home page like special deals, tranding products etc
+    HomePagetag: { type: String, default:'None'}, 
     relatedProducts: [
         { type: Schema.Types.ObjectId, ref: 'Product' },
     ],
     discount:{ type: Schema.Types.ObjectId, ref: 'Discount' }
-});
+})
 
 
-module.exports = mongoose.model('Product', ProductSchema, 'products');
+module.exports = mongoose.model('Product', ProductSchema, 'products')
 
 
 

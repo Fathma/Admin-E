@@ -13,7 +13,7 @@ let BundleSchema = new Schema({
     enabled: { type: Boolean, default: false },
     sellingPrice: { type: Number },
     days: { type: Number },
-    products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+    products: [{ type: Schema.Types.ObjectId, ref: "Product" }]
    
 })
 
