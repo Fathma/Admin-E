@@ -1,11 +1,13 @@
 // author : fathma Siddique
 // lastmodified : 31/7/2019
 // description : all the supplier related controllers/funtions are written in here 
+
 const Supplier = require('../models/supplier.model')
 var randomstring = require('randomstring')
 
 // get supplier registration page
 exports.supplierRegistrationPage = (req, res) => res.render('supplier/supplierReg', { date: new Date() })
+
 
 // save supplier info
 exports.supplierSave = (req, res) => {
@@ -29,6 +31,7 @@ exports.supplierList = async(req, res) => {
   supplier.map( doc=> doc.count = count++ )
   res.render('supplier/supplierList', { supplier }) 
 }
+
 
 // get all registered suppliers
 exports.supplierEditPage = (req, res) => {

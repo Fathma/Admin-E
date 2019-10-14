@@ -11,6 +11,7 @@ const Coupon = require('../models/coupon.model')
 const mongoose = require('mongoose')
 const Grid = require('gridfs-stream')
 const key = require('../../config/keys')
+
 const conn = mongoose.createConnection(key.database.mongoURI);
 let gfs;
 conn.once('open', function () {
@@ -29,6 +30,7 @@ exports.CouponEdit =async (req, res)=>{
     let coupon = await Coupon.findOne({ _id: req.params.id })
     res.render('promotions/updateCoupon',{ coupon })
 }
+
 
 exports.SaveCoupon =async (req, res) =>{ 
     let exist_coupon =await Coupon.findOne({code: req.body.code})
@@ -53,10 +55,12 @@ exports.SaveCoupon =async (req, res) =>{
 
 }
 
+
 exports.updateDiscountPage = async (req, res)=>{
     let discount = await Discount.findOne({ _id: req.params.id })
     res.render('promotions/updateDiscount',{ discount })
 }
+
 
 exports.updateBundlePage=async (req, res)=>{
     let bundle = await Bundle.findOne({ _id: req.params.id }).populate('products')
@@ -94,6 +98,8 @@ exports.SaveDiscount = (req, res)=>{
         res.redirect('/promotions/updateDiscount/'+discount._id)
     })
 }
+
+
 exports.SaveUpdateCoupon =async (req, res)=>{
     if( req.body.usePercentageCoupon === "on" ){
         req.body.usePercentageCoupon= true
@@ -106,6 +112,7 @@ exports.SaveUpdateCoupon =async (req, res)=>{
     await Coupon.update({_id: req.body.id},{$set:req.body})
     res.redirect('/promotions/CouponEdit/'+req.body.id)
 }
+
 
 exports.SaveUpdateDiscount=async (req, res)=>{
     if( req.body.usePercentage === "on" ){
@@ -134,8 +141,8 @@ exports.SaveUpdateDiscount=async (req, res)=>{
 
 }
 
+
 exports.SaveUpdateBundle= async(req, res)=>{
-    
     await Bundle.update({_id: req.body.id},{$set:req.body})
     res.redirect('/promotions/updateBundle/'+req.body.id)
 }
@@ -153,6 +160,7 @@ exports.enableDisable =async (req, res)=>{
     await Discount.updateOne({ _id: req.params.id }, {$set:{ enabled: req.params.value }})
     res.redirect('/promotions/DiscountList')
 }
+
 
 exports.enableDisableBundle =async (req, res)=>{
     await Bundle.updateOne({ _id: req.params.id }, {$set:{ enabled: req.params.value }})
@@ -175,19 +183,21 @@ exports.BundleProductsDelete =async (req, res)=>{
 
 exports.newBundleOffer = async (req, res)=> res.render('promotions/newBundleOffer')
 
+
 exports.BundleList = async (req, res)=>{
     let bundle =await Bundle.find()
     var count = 1;
     bundle.map( doc=> doc.count = count++ )
     res.render('promotions/listBundle', { bundle })
 }
+
+
 exports.CouponList = async (req, res)=>{
     let coupon =await Coupon.find().populate('createdBy')
     var count = 1;
     coupon.map( doc=> doc.count = count++ )
     res.render('promotions/listCoupon', { coupon })
 }
-
 
 
 exports.newBundleOfferSave =async (req, res)=>{
@@ -205,10 +215,14 @@ exports.newBundleOfferSave =async (req, res)=>{
     })
     
 }
+
+
 exports.SaveUpdateBundlePrice =async (req, res)=>{
     await Bundle.update({_id:req.body.id},{ $set: { sellingPrice:req.body.sellingPrice }})
     res.redirect('/promotions/updateBundle/'+req.body.id+"#price")
 }
+
+
 exports.bundleImage =async (req, res)=>{
     let filename =req.file.filename
     let bundle = await Bundle.findOne({_id:req.body.id})
@@ -221,10 +235,7 @@ exports.bundleImage =async (req, res)=>{
             
         })
     })
-    
-    
 }
-
 
 exports.addProduct =async (req, res)=>{
     let bundle = await Bundle.findOne({ _id: req.body.id })
@@ -237,17 +248,4 @@ exports.addProduct =async (req, res)=>{
 }
 
 
-// delete image url from product 
-// exports.deteteImg = (req, res)=>{
-//     filename = req.body.img.split('image/')[1];
-    
-//     Product.updateOne({ _id: req.body.id }, { $pull: { image: req.body.img }},{ upsert: true }, ( err, docs )=>{
-//       if(err) console.log(err);
-//       else {
-//         gfs.remove({ filename }, (err) => {
-//           res.redirect( `/products/Update/${req.body.id}#IMAGES1` )
-//         })
-//       }
-//     })
-//   }
 

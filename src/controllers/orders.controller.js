@@ -8,6 +8,7 @@ const Order = require('../models/customerOrder')
 const Serial = require('../models/serials.model')
 const Email = require('../../config/email')
 
+
 // view list of customers
 exports.showOrdersPage = (req, res) => {
   Order.find()
@@ -19,11 +20,10 @@ exports.showOrdersPage = (req, res) => {
   })
 }
 
+
 exports.OrdersByMonthPage = async(req, res) => {
   let month =parseInt(req.body.startDate.split('/')[0], 10)
   let year =parseInt(req.body.startDate.split('/')[1], 10)
-  
-  
   let orders =await Order.find();
 
   let orderlist = orders.filter((data)=>{
@@ -31,23 +31,22 @@ exports.OrdersByMonthPage = async(req, res) => {
       return data
     }
   })
-  console.log(orderlist.length)
+  
   var count = 1;
   orderlist.map( doc=> doc.count = count++ )
+
   res.render('orders/orders', { orders: orderlist })
 }
+
 
 // saving serial for order
 exports.saveSerialInOrders = async (req, res) => {
   var serials = req.body.Serial.split(',')
   var serial_id = []
  
-
-  
   serials.map( async serial=>{
     // getting id of the serial
     var id = await Serial.findOne({$and:[{pid:req.params.model_id},{$or: [{number: serial}, {sid: serial}]}]})
-    console.log(id)
     if(id.pid == req.params.model_id){
       serial_id.push(id._id) 
     }
@@ -55,64 +54,17 @@ exports.saveSerialInOrders = async (req, res) => {
   
   // setting serials in order
   var docs = await Order.findOne({ _id: req.params.oid })
-  console.log(serial_id)
   docs.cart.map(item=>{
     if(item._id == req.params.item_id){
       item.serials = serial_id
     }
   })
+
   new Order(docs).save().then(()=>{
     res.redirect('/orders/orderDetails/' + req.params.oid)
-    })
-
-  // var serials = req.body.Serial.split(',')
-  // var serial_id = []
-  
-  // serials.map( async serial=>{
-  //   // getting id of the serial
-  //   var id = await Serial.find({$or: [{number: serial}, {sid: serial}]})
-  //   id.map( new_id =>{
-  //     if(new_id.pid == req.params.model_id){
-  //       serial_id.push(new_id._id)
-  //     }
-  //   })
-  // })
-  // // setting serials in order
-  // var docs = await Order.findOne({ _id: req.params.oid })
-  // docs.cart.map(item=>{
-  //   if(item._id == req.params.item_id){
-  //     item.serials = serial_id
-  //     new Order(docs).save().then(()=>{
-  //     res.redirect('/orders/orderDetails/' + req.params.oid)
-  //     })
-  //   }
-  // })
+  })
 }
 
-// // edit ordered products' quantity
-// exports.saveEdit = (req, res) => {
-//   Order.find({ _id: req.params.oid }, (err, docs) => {
-//     var total = 0
-//     docs[0].cart.map(items => {
-//       if (items._id != req.params.item_id)  total += items.price
-//     })
-
-//     Order.update(
-//       { _id: req.params.oid, 'cart._id': req.params.item_id },
-//       {
-//         $set: {
-//           'cart.$.quantity': req.body.quantity,
-//           'cart.$.price': req.body.quantity * parseInt(req.body.unitprice),
-//           totalAmount:
-//             total + parseInt(req.body.quantity) * parseInt(req.body.unitprice)
-//         }
-//       },
-//       { upsert: true }, (err, rs) => {
-//         if (err) res.send(err);
-//         else res.redirect('/orders/orderDetails/' + req.params.oid)
-//     })
-//   })
-// }
 
 // returns the page to add serial to an ordered product
 exports.addSerialToProductPage = (req, res) => {
@@ -151,7 +103,7 @@ exports.ViewInvoice = (req, res) => {
     })
     .exec((err, rs) => {
       var count = 1
-      console.log(rs)
+
       if(rs.order.cart != null ){
         for (var i = 0; i < rs.order.cart.length; i++) {
           rs.order.cart[i].num = count;
@@ -163,16 +115,21 @@ exports.ViewInvoice = (req, res) => {
     })
 }
 
+
 // orders
 var get_orders = (condition, cb)=>{
-  Order.find(condition).sort({ "created": 1 }).populate("cart.product").populate("user").populate('cart.serials').exec((err, rs)=>{ cb(rs); })
+  Order.find(condition).sort({ "created": 1 })
+  .populate("cart.product")
+  .populate("user")
+  .populate('cart.serials')
+  .exec((err, rs)=>{ cb(rs); })
 }
+
 
 // view list of customers
 exports.showOrderDetails = (req, res) => {
   get_orders({ _id: req.params.id }, async rs => {
     if(rs){
-     
       for (var i = 0; i < rs[0].cart.length; i++) {
         rs[0].cart[i].oid = req.params.id
         rs[0].cart[i].totalAmount = rs[0].totalAmount
@@ -203,14 +160,15 @@ exports.updateHistory =async (req, res) => {
     customerNotified: notify
   };
 
-
   // updating order history
   Order.findOneAndUpdate( { _id: req.params.oid },
     {
-      $addToSet: { history: history },
+      $addToSet: { history },
       currentStatus: status,
       lastModified: new Date()
-    }, { upsert: true },async (err, rs2) => {
+    }, 
+    { upsert: true },
+    async (err, rs2) => {
       if (err)  res.send(err)  
       else {
         // if the status is Delivered all the serial number's status of this order will be changed to delivered 
@@ -220,9 +178,9 @@ exports.updateHistory =async (req, res) => {
           rs2.cart.map( item=>{
             item.serials.map(async serial=>{
               await Serial.update({ _id: serial },{$set: { status:'Delivered', invoice: invoice._id }})
-
             })
           })
+          
         }
         res.redirect('/orders/orderDetails/' + req.params.oid)
       }

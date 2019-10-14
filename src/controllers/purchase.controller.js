@@ -9,6 +9,7 @@ const Serials = require('../models/serials.model');
 const Supplier = require('../models/supplier.model');
 const Brand = require('../models/brand.model');
 
+
 exports.deleteProduct =async (req, res)=>{
   let lp = await LP.findOne({_id: req.params.lpid})
   
@@ -25,6 +26,7 @@ exports.deleteProduct =async (req, res)=>{
   })
 }
 
+
 // get supplier registration page
 exports.LocalPurchasePage =async (req, res) => { 
   let today = new Date()
@@ -37,12 +39,14 @@ exports.LocalPurchasePage =async (req, res) => {
   res.render('purchase/localPurchase',{ date, Supplier: supplier, cat, categories, brand })
 }
 
+
 // product list a purchase
 exports.productList = async (req, res)=>{
   var lp = await LP.findOne({_id: req.params._id}).populate('products.product')
  
   res.render('purchase/productList', { products: lp.products })
 }
+
 
 // list of local purchase
 exports.getLPList = async (req, res) =>{
@@ -51,6 +55,7 @@ exports.getLPList = async (req, res) =>{
   lp.map( doc=> doc.count = count++ )
   res.render('purchase/allPurchase', { lp })
 } 
+
 
 // fetching products of a specific local purchase 
 exports.getProducts = (req, res) => {
@@ -119,6 +124,7 @@ exports.LocalPurchaseLPPage = (req, res) => {
       res.render('purchase/localPurchase', { lp: doc, cat, categories, brand });
     });
 };
+
 
 // saves local purchase
 exports.SaveLocalPurchase = async (req, res) => {
