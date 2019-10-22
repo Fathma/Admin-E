@@ -23,11 +23,8 @@ var cors = require('cors')
 app.use(cors())
 
 
-
-
 const keys = require('./config/keys')
 var vlaues = require('./config/values')
-
 
 
 moment().format();
@@ -187,7 +184,7 @@ var io = require('socket.io')(server);
 
 server.listen(process.env.PORT || 3000);
 
-io.on('connection', function (socket) {
+io.on('connection', function ( socket ) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
     
