@@ -40,7 +40,7 @@ module.exports = function(passport) {
   });
   
 
-  // gets the user id form session and get user info by that id
+  // gets the user id form session and gets user info by that id
   passport.deserializeUser(function(id, done) {
     User.findById(id, (err, user)=> {
       done(err, user);

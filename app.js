@@ -15,10 +15,24 @@ const moment = require("moment");
 const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
 
+// note, io(<port>) will create a http server for you
+var io = require('socket.io')(80);
+
+io.on('connection', function (socket) {
+  io.emit('this', { will: 'be received by everyone'});
+
+  socket.on('private message', function (from, msg) {
+    console.log('I received a private message by ', from, ' saying ', msg);
+  });
+
+  socket.on('disconnect', function () {
+    io.emit('user disconnected');
+  });
+});
+
 const keys = require('./config/keys')
 var vlaues = require('./config/values')
 
-let Serial = require('./src/models/serials.model')
 
 
 moment().format();
