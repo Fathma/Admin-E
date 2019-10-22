@@ -150,7 +150,8 @@ app.get("/image/:filename", (req, res) => {
     if(file != null ){
 
       const inp = gfs.createReadStream(file.filename);
-      inp.pipe(gzip).pipe(res);
+      const out = gfs.createWriteStream(file.filename+".gz");
+      inp.pipe(gzip).pipe(out);
       // const readstream = gfs.createReadStream(file.filename)
       // readstream.pipe(res)
     }
