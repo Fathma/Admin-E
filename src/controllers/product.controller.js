@@ -206,8 +206,8 @@ exports.viewProducts = (req, res)=>{
 // get Product update page
 exports.getProductUpdatePage = async(req, res)=>{
   let product = await Product.findOne({ _id: req.params._id }).populate('relatedProducts').populate('features.label').populate('category').populate('subcategory')
-  let specifications = await Specification.find({enabled:true})
-  let discount = await Discount.find({type:"product"})
+  let specifications = await Specification.find({ enabled: true})
+  let discount = await Discount.find({ type: "product" })
   let cat = product.category
   let sub = product.subcategory
   let motherboard = false
@@ -222,11 +222,7 @@ exports.getProductUpdatePage = async(req, res)=>{
   }
   let pro = await Product.find()
 
-
   res.render('products/update',{ product, feature_total: product.features.length, specifications, motherboard, ram, discount, Product:pro})
-  
-
-  
 }
 
 

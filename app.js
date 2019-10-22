@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const path = require("path");
 const mongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
@@ -73,7 +73,7 @@ con.once('open', function () {
 
 HandlebarsIntl.registerWith(Handlebars);
 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -188,4 +188,4 @@ io.on('connection', function (socket) {
   socket.on('my other event', function (data) {
     console.log(data);
   });
-});
+})
