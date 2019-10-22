@@ -14,6 +14,7 @@ const Handlebars = require("handlebars");
 const moment = require("moment");
 const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
+
 const app = express();
 
 var cors = require('cors')
@@ -140,12 +141,18 @@ app.use((req, res, next)=>{
   next();
 });
 
+const zlib = require('zlib');
+const gzip = zlib.createGzip();
+
 // route for fetching image
 app.get("/image/:filename", (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if(file != null ){
-      const readstream = gfs.createReadStream(file.filename)
-      readstream.pipe(res)
+
+      const inp = gfs.createReadStream(file.filename);
+      inp.pipe(gzip).pipe(res);
+      // const readstream = gfs.createReadStream(file.filename)
+      // readstream.pipe(res)
     }
   })
 });
@@ -186,6 +193,6 @@ server.listen(process.env.PORT || 3000);
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
-    console.log(data);
+    
   });
 })
