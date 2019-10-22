@@ -19,7 +19,7 @@ const app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-server.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT || 80);
 // WARNING: app.listen(80) will NOT work here!
 
 app.get('/', function (req, res) {
