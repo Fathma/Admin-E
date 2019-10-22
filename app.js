@@ -184,7 +184,7 @@ app.use("/forum", ensureAuthenticated, Contributor, forumRoutes)
 app.use("/promotions", ensureAuthenticated, Contributor, promotionsRoutes)
 
 
-// //Port For the Application
-const port = process.env.PORT || 3000
+// // //Port For the Application
+// const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log("The server is live on http://127.0.0.1:3000/"))
+// app.listen(port, () => console.log("The server is live on http://127.0.0.1:3000/"))
