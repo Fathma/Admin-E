@@ -141,19 +141,13 @@ app.use((req, res, next)=>{
   next();
 });
 
-const zlib = require('zlib');
-const gzip = zlib.createGzip();
 
 // route for fetching image
 app.get("/image/:filename", (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if(file != null ){
-
-      const inp = gfs.createReadStream(file.filename);
-      const out = gfs.createWriteStream(file.filename+".gz");
-      inp.pipe(gzip).pipe(out);
-      // const readstream = gfs.createReadStream(file.filename)
-      // readstream.pipe(res)
+      const readstream = gfs.createReadStream(file.filename)
+      readstream.pipe(res)
     }
   })
 });
