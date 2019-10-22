@@ -16,17 +16,11 @@ const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
 const app = express();
 
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var cors = require('cors')
+app.use(cors())
 
-server.listen(process.env.PORT || 3000);
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+
 
 const keys = require('./config/keys')
 var vlaues = require('./config/values')
@@ -183,3 +177,15 @@ app.use("/promotions", ensureAuthenticated, Contributor, promotionsRoutes)
 // const port = process.env.PORT || 3000
 
 // app.listen(port, () => console.log("The server is live on http://127.0.0.1:3000/"))
+
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(process.env.PORT || 3000);
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
