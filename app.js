@@ -14,19 +14,22 @@ const Handlebars = require("handlebars");
 const moment = require("moment");
 const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
+const app = express();
 
-// note, io(<port>) will create a http server for you
-var io = require('socket.io')(80);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(80);
+// WARNING: app.listen(80) will NOT work here!
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
 io.on('connection', function (socket) {
-  io.emit('this', { will: 'be received by everyone'});
-
-  socket.on('private message', function (from, msg) {
-    console.log('I received a private message by ', from, ' saying ', msg);
-  });
-
-  socket.on('disconnect', function () {
-    io.emit('user disconnected');
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
   });
 });
 
@@ -41,7 +44,7 @@ moment().format();
 const { ensureAuthenticated } = require("./src/helpers/auth");
 const { Administrator, Editor, Contributor } = require("./src/helpers/rolecheck");
 
-const app = express();
+
 
 // Load routes controller
 const ordersRoutes = require("./src/routes/orders.routes");
