@@ -16,6 +16,8 @@ const expressValidator = require('express-validator');
 const Grid = require('gridfs-stream')
 
 const app = express();
+var compression = require('compression')
+app.use(compression())
 
 var cors = require('cors')
 app.use(cors())
