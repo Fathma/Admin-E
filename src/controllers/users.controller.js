@@ -110,7 +110,7 @@ exports.changePass = async (req, res)=>{
 
   let user = await User.findOne({_id: req.params.id})
     
-  jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'1h' }, async (err, token)=> {
+  jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'30s' }, async (err, token)=> {
     let url = `http://localhost:3000/users/changePassPage/${token}`
     await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
       req.flash('success_msg', 'A token has been sent to your email.')
@@ -122,10 +122,15 @@ exports.changePass = async (req, res)=>{
 
 // redirects to a temporary page
 exports.changePassPage = (req, res)=>{
-  const { user } = jwt.verify(req.params.token, keys.jwt.secret) 
-  if(user){
-    res.render('users/setPass', { id: user._id, token: req.params.token })
+  try{
+    const { user } = jwt.verify(req.params.token, keys.jwt.secret) 
+    if(user){
+      res.render('users/setPass', { id: user._id, token: req.params.token })
+    }
+  }catch(err){
+    res.send("Session Expired!")
   }
+  
 }
 
 

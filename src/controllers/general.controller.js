@@ -21,7 +21,7 @@ async function notification( cb ){
   var total_low = 0
 
   for( var i = 0; i< products.length; i++ ){
-    var amount = await Serial.find({$and:[{pid: products[i]._id},{status: 'In Stock'}]  })
+    var amount = await Serial.find({ $and: [{ pid: products[i]._id }, { status: 'In Stock' }] })
     if( amount.length < 5 ) total_low++
   }
   
@@ -33,14 +33,14 @@ async function notification( cb ){
 }
 
 // gets all the notifications
-exports.getAllNotification=async(req, res, next) => {
+exports.getAllNotification=async(req, res) => {
   notification((quantity,new_order,newPost, count)=>{
     res.json({ quantity, new_order, newPost, count })
   })
 }
 
 // get dashboard 
-exports.showDashboard =async (req, res, next) => {
+exports.showDashboard =async (req, res) => {
   notification((quantity,new_order,newPost, count)=>{
     res.render('general/dashboard', { quantity ,  new_order, newPost, count })
   })

@@ -1,0 +1,63 @@
+<header class="main-header" >
+    <!-- Logo -->
+    {{# if user}}
+    <a href="#" class="logo">
+        <span class="logo-mini"><b>A</b>DB</span>
+        <span class="logo-lg"><b>Admin</b>Dashboard</span>
+    </a>
+    {{else}}
+    <a href="#" class="logo"><span class="logo-lg">ECL</span></a>
+    {{/if}}
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+    {{# if user}}
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <span class="sr-only">Toggle navigation</span>
+    </a>
+    {{/if}}
+    <div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+    {{#if user}}
+    <li class="nav-item">
+    <a id="google_translate_element" ></a>
+    </li>
+
+    <li class="nav-item">
+    <a id="dLabel" data-toggle="dropdown" data-target="hash" href="hash" aria-expanded="true">
+    <img src="https://img.icons8.com/ios/20/ffffff/appointment-reminders-filled.png">
+    <span id="notification" style="color: red"></span>
+    </a>
+    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+    <li>
+    <a id="set_href"><img
+    src="https://img.icons8.com/color/20/000000/medium-battery.png"> Low Stock Product <span name="lowLive" id="lowLive" style="padding: 5%; color:red"></span>
+    </a>
+    <a id="newOrder_href"><img
+    src="https://img.icons8.com/ios/20/ffffff/shopping-cart-filled.png"> New
+    Orders<span name="newOrder" id="newOrder" style="padding: 5%; color:red"></span>
+    </a>
+    <a id="newPost_href"><img src="https://img.icons8.com/office/20/000000/chat.png">
+    New
+    Posts <span name="newPost" id="newPost" style="padding: 5%; color:red"></span>
+    </a>
+    </li>
+    </ul>
+    </li>
+
+    {{!-- <li class="nav-item">
+    <a href="/users/register" class="nav-link">
+    <img src="https://img.icons8.com/ios/20/ffffff/add-user-group-man-man-filled.png">
+    </a>
+    </li> --}}
+
+    <li class="nav-item"><a href="/users/logout" class="nav-link">Logout</a></li>
+
+    {{else}}
+    <li><a href="/users/login" class="nav-link">Login</a></li>
+
+    {{/if}}
+    </ul>
+    </div>
+    </nav>
+</header>

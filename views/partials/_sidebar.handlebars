@@ -1,0 +1,206 @@
+<!-- Left side column. contains the logo and sidebar -->
+{{#if user}}
+<aside class="main-sidebar" style="position: fixed;">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/assets/img/avatar5.png" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p> <a href="/users/profile/{{user._id}}">{{user.name}}</a></p>
+                {{#if user}}
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                {{else}}
+                <a href="#"><i class="fa fa-circle text-danger"></i> Offline</a>
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        {{#if user}}
+        <ul class="sidebar-menu " data-widget="tree">
+            <li class="header">MAIN NAVIGATION</li>
+
+            <li>
+                <a href="/general/showDashboard">
+                    <i class="fa fa-dashboard"></i> Dashboard
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <span>Purchase Details</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-truck" aria-hidden="true"></i>
+                            <span>Supplier</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/supplier/SupplierRegistrationPage"><i
+                                        class="fa fa-circle-o"></i>New</a></li>
+                            <li><a href="/supplier/SupplierList"><i class="fa fa-circle-o"></i>List</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                            <span>Purchase</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/purchase/localPurchase"><i class="fa fa-circle-o"></i>New Purchase</a>
+                            </li>
+                            <li><a href="/purchase/getLPList"><i class="fa fa-circle-o"></i>List</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                    <span>Catalog</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>Product</a></li>
+                    <li><a href="/category/categoryList"><i class="fa fa-circle-o"></i>Category</a></li>
+                    <li><a href="/category/subCategoryList"><i class="fa fa-circle-o"></i>Sub Category</a>
+                    </li>
+                    <li><a href="/category/brandList"><i class="fa fa-circle-o"></i>Brand</a></li>
+                    <li><a href="/products/Specifications"><i class="fa fa-circle-o"></i>Product Specification</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-cubes"></i>
+                    <span>Inventory</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    
+                    <li><a href="/products/serials"><i class="fa fa-circle-o"></i>Product Status</a></li>
+                    {{!-- <li><a href="/products/viewProducts"><i class="fa fa-circle-o"></i>Product List</a></li> --}}
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+
+                    <span>Promotions</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/promotions/DiscountList"><i class="fa fa-circle-o"></i>Discount</a></li>
+                    <li><a href="/promotions/BundleList"><i class="fa fa-circle-o"></i>Bundle Product</a>
+                    </li>
+                    <li><a href="/promotions/CouponList"><i class="fa fa-circle-o"></i>Coupons</a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Sales</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/orders/orders"><i class="fa fa-circle-o"></i>Orders</a></li>
+                    <li><a href="/invoice/invoiceList"><i class="fa fa-circle-o"></i>Invoice</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>Reports</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/products/viewLowQuantityProducts"><i class="fa fa-circle-o"></i>Low Stock</a></li>
+                    <li><a href="/general/bestSellers"><i class="fa fa-circle-o"></i>BestSellers</a></li>
+                    <li><a href="/general/productNeverSold"><i class="fa fa-circle-o"></i>Products Never Purchased</a></li>
+                    <li><a href="/general/profitByProductCost"><i class="fa fa-circle-o"></i>Profit By Product Price</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>Customers' Information</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="/customers/RegisteredCustomer">
+                            <i class="fa fa-circle-o"></i>Registered Customers
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-commenting" aria-hidden="true"></i>
+                    <span>Forum</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/forum/posts"><i class="fa fa-circle-o"></i>Posts</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <span>Admin</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/users/getUsers"><i class="fa fa-circle-o"></i>Registered Admins</a></li>
+                    <li><a href="/users/register"><i class="fa fa-circle-o"></i>New Admin</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        {{else}}
+        <h4 style="color:lightskyblue">Please Log in first to Get Access</h4>
+        {{/if}}
+    </section>
+    <!-- /.sidebar -->
+</aside>
+{{else}}
+<aside class="main-sidebar" style="background-color: #ecf0f5"></aside>
+{{/if}}

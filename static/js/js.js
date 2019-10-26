@@ -191,9 +191,8 @@ $(document).ready(function() {
   notificationCheck();
 
   window.setInterval(function() {
-
     notificationCheck();
-  }, 10000);
+  }, 20000);
 
   // gets the notifications
   function notificationCheck() {
