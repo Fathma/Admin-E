@@ -110,7 +110,7 @@ exports.changePass = async (req, res)=>{
 
   let user = await User.findOne({_id: req.params.id})
     
-  jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'30s' }, async (err, token)=> {
+  jwt.sign({ user: _.pick(user, '_id') }, keys.jwt.secret, { expiresIn:'1h' }, async (err, token)=> {
     let url = `http://localhost:3000/users/changePassPage/${token}`
     await Email.sendEmail( 'devtestjihad@gmail.com', user.email, 'Password Change', `<a href='${url}'>${url}</a>` );
       req.flash('success_msg', 'A token has been sent to your email.')

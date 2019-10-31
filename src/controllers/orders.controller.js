@@ -24,7 +24,7 @@ exports.showOrdersPage = (req, res) => {
 exports.OrdersByMonthPage = async(req, res) => {
   let month =parseInt(req.body.startDate.split('/')[0], 10)
   let year =parseInt(req.body.startDate.split('/')[1], 10)
-  let orders =await Order.find();
+  let orders =await Order.find().populate('user');
 
   let orderlist = orders.filter((data)=>{
     if(new Date(data.created).getMonth()+1 === month && new Date(data.created).getFullYear() === year){
@@ -34,6 +34,7 @@ exports.OrdersByMonthPage = async(req, res) => {
   
   var count = 1;
   orderlist.map( doc=> doc.count = count++ )
+
 
   res.render('orders/orders', { orders: orderlist })
 }
