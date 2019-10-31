@@ -35,7 +35,6 @@ exports.OrdersByMonthPage = async(req, res) => {
   var count = 1;
   orderlist.map( doc=> doc.count = count++ )
 
-
   res.render('orders/orders', { orders: orderlist })
 }
 

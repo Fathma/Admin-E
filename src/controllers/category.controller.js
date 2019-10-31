@@ -9,12 +9,12 @@ const value= require('../../config/values')
 
 
 // simply fires a page
-exports.newCategory=(req, res)=> res.render('parents/newCategory')
-exports.newBrand=(req, res)=> res.render('parents/newBrand')
-exports.newSubCategory=(req, res)=> res.render('parents/newSubCategory')
+exports.newCategory= (req, res) => res.render('parents/newCategory')
+exports.newBrand= (req, res) => res.render('parents/newBrand')
+exports.newSubCategory= (req, res) => res.render('parents/newSubCategory')
 
 
-exports.updateCategory =async (req, res)=>{
+exports.updateCategory = async (req, res) => {
   let category = await Cat.findOne({ _id: req.params.id })
   let discount = await Discount.find({type:"category"})
   req.flash( 'success_msg', value.update.succ)
@@ -22,7 +22,7 @@ exports.updateCategory =async (req, res)=>{
 }
 
 
-exports.updateSubCategory =async (req, res)=>{
+exports.updateSubCategory = async (req, res) => {
   let subcategory = await subCategory.findOne({ _id: req.params.id })
   let discount = await Discount.find({type:"subcategory"})
   let cat = await Cat.find()
@@ -31,35 +31,35 @@ exports.updateSubCategory =async (req, res)=>{
 }
 
 
-exports.updateBrand =async (req, res)=>{
+exports.updateBrand = async (req, res) => {
   let brand = await Brand.findOne({ _id: req.params.id })
   let discount = await Discount.find({type:"brand"})
   res.render('parents/updateBrand', { brand, discount })
 }
 
 
-exports.updateBrandSave = async (req, res)=>{
+exports.updateBrandSave = async (req, res) => {
   await Brand.update({ _id: req.body.id }, { $set: { name: req.body.name} })
   req.flash( 'success_msg', value.update.succ)
   res.redirect('/category/updateBrand/'+req.body.id)
 }
 
 
-exports.updateSubCategorySave = async (req, res)=>{
+exports.updateSubCategorySave = async (req, res) => {
   await subCategory.update({ _id: req.body.id }, { $set: req.body})
   req.flash( 'success_msg', value.update.succ)
   res.redirect('/category/updateSubCategory/'+ req.body.id)
 }
 
 
-exports.updateCategorySave = async (req, res)=>{
+exports.updateCategorySave = async (req, res) => {
   await Cat.update({ _id: req.body.id }, { $set: { name: req.body.name} })
   req.flash( 'success_msg', value.update.succ)
   res.redirect('/category/updateCategory/'+req.body.id)
 }
 
 
-exports.SaveDiscountCategory = async (req, res)=>{
+exports.SaveDiscountCategory = async (req, res) => {
   await Cat.update({ _id: req.body.id }, { $set: { discount: req.body.discount} })
   req.flash( 'success_msg', value.update.succ)
   res.redirect('/category/updateCategory/'+req.body.id)
@@ -73,7 +73,7 @@ exports.SaveDiscountBrand = async (req, res)=>{
 }
 
 
-exports.SaveDiscountSubCategory = async (req, res)=>{
+exports.SaveDiscountSubCategory = async (req, res) => {
   await subCategory.update({ _id: req.body.id }, { $set: { discount: req.body.discount} })
   req.flash( 'success_msg', value.update.succ)
   res.redirect('/category/updateSubCategory/'+req.body.id)

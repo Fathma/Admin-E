@@ -143,12 +143,16 @@ app.use((req, res, next)=>{
 
 // route for fetching image
 app.get("/image/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    if(file != null ){
-      const readstream = gfs.createReadStream(file.filename)
-      readstream.pipe(res)
-    }
-  })
+  try{
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+      if(file != null ){
+        const readstream = gfs.createReadStream(file.filename)
+        readstream.pipe(res)
+      }
+    })
+  }catch(err){
+    res.send(err)
+  }
 });
 
 
