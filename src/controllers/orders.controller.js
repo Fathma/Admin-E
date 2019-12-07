@@ -5,17 +5,40 @@
 const Invoice = require('../models/invoice.model')
 const Product = require('../models/product.model')
 const Order = require('../models/customerOrder')
+const Customer = require('../models/userCustomer.model')
+
 const Serial = require('../models/serials.model')
 const Email = require('../../config/email')
 
 
 // view list of customers
 exports.showOrdersPage = (req, res) => {
-  Order.find()
-  .populate('user')
+  // Order.find()
+  // .populate('user')
+  // .select({lastModified:1, orderId:1, created: 1, currentStatus: 1})
+  // .exec((err, orders)=>{
+  //   console.log(orders)
+  //   var count = 1;
+  //   orders.map( doc=> doc.count = count++ )
+  //   res.render('orders/orders', { orders })
+  // })
+  Order.aggregate([
+    {
+    $lookup:{
+      from: "users",
+      localField: 'user',
+      foreignField: '_id',
+      as: 'users'
+    }},
+    {$project: { lastModified:1, orderId:1, created: 1, currentStatus: 1,users: 1 } }
+  ])
+ 
   .exec((err, orders)=>{
     var count = 1;
-    orders.map( doc=> doc.count = count++ )
+    orders.map( doc=> {
+      doc.count = count++ 
+      doc.users = doc.users[0]
+    })
     res.render('orders/orders', { orders })
   })
 }

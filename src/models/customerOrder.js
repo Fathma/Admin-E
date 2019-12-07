@@ -35,6 +35,7 @@ var CustomerOrderSchema = new Schema({
  currentStatus: { type: String, default: "New Order" },
  history: { type: Array },
  lastModified: { type: Date, default: Date.now },
+ users: { type: Object }
 })
 
 
