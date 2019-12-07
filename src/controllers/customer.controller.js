@@ -7,7 +7,6 @@ const Order = require('../models/customerOrder')
 const Post = require('../models/posts.model') 
 const Wishlist = require('../models/wishlist.model')
 const Email = require('../../config/email')
-var convert = require('object-array-converter')
 
 
 // fires emailall page 
@@ -16,7 +15,7 @@ exports.emailAllPage = ( req, res )=> res.render('customer/emailAll')
 
 // view list of customers
 exports.viewListOfCustomers =async (req, res) => {
-    let customers = await Customerr.find()
+    let customers = await Customerr.find().select({ email: 1, profile:1, contact:1, status:1, _id:1})
     var new_cus = []
     
     // getting all customers wishlist
@@ -51,6 +50,7 @@ exports.emailAll =async ( req, res )=>{
 
 // shows all info of a customer
 exports.getprofile =async (req, res)=>{
+    
     var customer = await Customerr.findOne({ _id: req.params.id })
     var posts = await Post.find({ user: req.params.id })
     var orders = await Order.find({ user: req.params.id })
