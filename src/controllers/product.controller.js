@@ -17,6 +17,7 @@ const Serial = require('../models/serials.model');
 const LocalPurchase = require('../models/localPurchase.model');
 const Brand = require('../models/brand.model');
 const Discount = require('../models/discount.model');
+const logger = require('../utils/logger');
 
 mongoose.Promise = global.Promise;
 
@@ -330,7 +331,7 @@ exports.deteteImg = (req, res) => {
     { $pull: { image: req.body.img } },
     { upsert: true },
     (err, docs) => {
-      if (err) console.log(err);
+      if (err) logger.info(err);
       else {
         gfs.remove({ filename }, (err) => {
           res.redirect(`/products/Update/${req.body.id}#IMAGES1`);
@@ -404,15 +405,13 @@ exports.showProductRegistrationFields = async (req, res, next) => {
     // checks whether the model already exists or not
     Product.findOne({ model: model }, (err, result) => {
       if (!result) {
-        new Product(product)
-          .save()
-          .then((product) =>
-            res.render('products/dealerProduct', {
-              product,
-              features,
-              feature_total: features.length,
-            })
-          );
+        new Product(product).save().then((product) =>
+          res.render('products/dealerProduct', {
+            product,
+            features,
+            feature_total: features.length,
+          })
+        );
       } else {
         req.flash('error_msg', 'The product already exists!');
         res.render('products/dealerProduct');
@@ -427,7 +426,7 @@ var changeStatus = (condition, object, res, cb) => {
     { $set: object },
     { upsert: true },
     function (err, docs) {
-      if (err) console.log(err);
+      if (err) logger.info(err);
       cb(docs);
     }
   );
@@ -489,7 +488,7 @@ exports.getSerials = (req, res) => {
       var count = 1;
       serials.map((doc) => {
         if (doc.status == 'Delivered') {
-          console.log(doc);
+          logger.info(doc);
         }
         doc.count = count++;
       });
@@ -560,406 +559,3 @@ exports.check_availablity = (req, res, next) => {
     }
   });
 };
-
-// exports.getSearchResult = (req, res)=>{
-//    var search =  new RegExp(req.body.searchData, 'i')
-//    var data =[];
-//    Inventory.find()
-//   .populate({
-//     path:'product_id',
-//     match: {
-//       $or:[
-//       {'title': { $regex: search }} ,
-//       {'model': { $regex: search }} ,
-//       {'description': { $regex: search }},
-//       {'warranty': { $regex: search }},
-//       {'weight': { $regex: search }},
-//       {'features.value': { $regex: search }}
-//     ]
-//   }})
-//   .exec((err, docs)=>{
-//     if(docs){
-//       docs.map((items)=>{
-//         if(items.product_id != null){
-//           data.push(items);
-//         }
-//       })
-//       allFuctions.live_wise_inventory(data, (rs)=>{
-//       allFuctions.get_allProduct_page(res, rs, 'Inventories')
-//       })
-//     }
-//   })
-// }
-
-// // Total stock and live info of a product
-// exports.stockInfo = (req, res) => {
-//   Product.findOne({ _id: req.params.id },(err, docs)=>{
-
-//     docs.invtry = []
-//     docs.total_stock = 0
-//     docs.total = docs.live.quantity
-
-//     Inventory.find({ product_id: req.params.id }, (err2, inv)=>{
-//       inv.map((inven)=>{
-//         docs.invtry.push(inven)
-//         docs.total_stock +=inven.remaining
-//         docs.total += inven.remaining
-//       })
-//       res.render('viewSerial', {product:docs})
-//     })
-//   })
-// };
-
-// // updateing stock quantity and price of prducts with no serial
-// exports.stockEditNoSerial =(req, res) => {
-//   var pre_Q = parseInt(req.body.pre_all_Q)
-//   var quan = parseInt(req.body.quantity)
-//   var obj ={
-//     purchasePrice:req.body.purchase_price,
-//     remaining: req.body.quantity,
-//     stockQuantity :req.body.quantity
-//   }
-//   if( quan > pre_Q ){
-//     quantity = quan-pre_Q;
-//     var new_s=[]
-//     for( var i=0; i<quantity; i++ ){
-//       new_s.push((mongoose.Types.ObjectId()).toString())
-//     }
-
-//     Inventory.update({ _id: req.params.lot },{ $addToSet: { serial: { $each: new_s }, original_serial: { $each: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
-//       if(err){
-//         res.send(err)
-//       }else{
-//         res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
-//       }
-//     })
-//   }
-//   if( quan < pre_Q ){
-//     quantity = pre_Q-quan
-//     var new_s=[]
-//     Inventory.find({ _id: req.params.lot },(eer, rs)=>{
-//       for(var i=0; i<quantity; i++){
-//         new_s.push((rs[0].serial[i]).toString());
-//       }
-
-//       Inventory.update({_id:req.params.lot},{ $pull: { serial: { $in: new_s }, original_serial: { $in: new_s }},$set:obj },{upsert:true}, (err, docs)=>{
-//         if(err) res.send(err)
-//         else res.redirect('/products/stockEditNoSerialPage/'+req.params.lot+'/'+req.params.pid)
-//       })
-//     })
-//   }
-// }
-
-// // getting product models by Category
-// exports.getProductByCat = (req, res, next)=>{
-//   find({category: req.params.cat},(rs)=>{
-//     res.render('addNewLot', {product:rs})
-//   })
-// };
-
-// // getting product models by Sub category
-// exports.getProductBySubcat = (req, res, next)=>{
-//   find({subcategory: req.params.sub_cat},(rs)=>{
-//     res.render('addNewLot', {product:rs})
-//   })
-// }
-
-// // edit Purchase Price of inventory with serial
-// exports.EditPP = (req, res, next)=>{
-//   Inventory.update({ _id: req.params.lot_id },{ $set:{ purchasePrice: req.body.PP } }, { upsert: true }, (err,rs)=>{
-//     if(err){
-//       res.send(err)
-//     }else{
-//       res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-//     }
-//   })
-// }
-
-// // Delete One serial
-// exports.EditDelete = (req, res, next)=>{
-//   Inventory.update({_id: req.params.lot_id },
-//     {
-//       $pull:{
-//         original_serial: req.body.pre_serial_del,
-//         serial:req.body.pre_serial_del
-//       },
-//       $inc:{ remaining:-1 }
-//     }, { upsert:true }, (err,rs)=>{
-//       if(err){
-//         res.send(err)
-//       }else{
-//         res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-//       }
-//   })
-// }
-
-// // replace one serial number from inventory
-// exports.EditReplace = (req, res, next)=>{
-//   if(req.body.msg_err1 === 'No'){
-//   Inventory.update({_id: req.params.lot_id },{$addToSet:{original_serial:req.body.replace_serial, serial:req.body.replace_serial}},
-//     {upsert:true}, (err,rs)=>{
-//       if(err) res.send(err)
-//       else {
-//         Inventory.update({_id: req.params.lot_id },{$pull:{original_serial: req.body.pre_serial, serial:req.body.pre_serial}},
-//           {upsert:true}, (err,rs)=>{
-//           if(err){ res.send(err); }
-//           else{
-//             res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-//           }
-//         })
-//       }
-//     })
-//   }
-//   else{
-//     req.flash('error_msg', 'Given serial number already exists!')
-//     res.redirect('/products/stockEditPage/'+ req.params.lot_id+'/'+req.params.pid)
-//   }
-// };
-
-// // getting product models by Sub category
-// exports.getProductBySub_filter = (req, res, next)=>{
-//   Inventory.find({})
-//   .populate({
-//     path:'product_id',
-//     match:{'subcategory': req.params.sub_cat}
-//   })
-//   .exec((err, rs)=>{
-//     var data = []
-//     rs.map((inven)=>{
-//       if(inven.product_id != null){
-//         data.push(inven)
-//       }
-//     })
-//     allFuctions.live_wise_inventory(data, (docs)=>{
-//       allFuctions.get_allProduct_page(res, docs, 'Sub Category')
-//     })
-//   })
-// };
-
-// // getting product models by Sub category
-// exports.getProductByCat_filter = (req, res, next)=>{
-//   Inventory.find({})
-//   .populate({
-//     path:'product_id',
-//     match:{'category': req.params.cat}
-//   })
-//   .exec((err, rs)=>{
-//     var data = []
-//     rs.map((inven)=>{
-//       if(inven.product_id != null){
-//         data.push(inven)
-//       }
-//     })
-//     allFuctions.live_wise_inventory(data, (docs)=>{
-//       allFuctions.get_allProduct_page(res, docs, 'Category')
-//     })
-//   })
-// };
-
-// // getting product models by Category
-// exports.getProductByCatNoSerial = (req, res, next)=>{
-//   find({category: req.params.cat},(rs)=>{
-//     res.render('addNewLotNoSerial', {product:rs})
-//   })
-// };
-
-// // get lot without serial page
-// exports.saveInventoryNoSerial= (req, res, next) => {
-//   var quantity = parseInt(req.body.quantity);
-//   var serials= [];
-//   for(var i=0; i<quantity; i++){
-//     serials.push((mongoose.Types.ObjectId()).toString())
-//   }
-//   var inventory = {
-//     product_id: req.body.model,
-//     stockQuantity: req.body.quantity,
-//     purchasePrice: req.body.purchase_price,
-//     remaining: req.body.quantity,
-//     admin: req.user._id,
-//     original_serial: serials,
-//     serial: serials
-//   }
-//   Product.update({_id:req.body.model}, { $set:{ warranted: false } },{ upsert:true }, (err, rs)=>{
-//     if(err){
-//       console.log(err)
-//     }else{
-//       new Inventory(inventory).save().then(inventory => {
-//         res.redirect("/products/saveInventoryNoSerialPage");
-//       });
-//     }
-//   })
-// };
-
-// // Save Inventory
-// exports.saveInventory = (req, res, next) => {
-//   var serials= (req.body.serial).split(",");
-//   var inventory = {
-//     product_id:req.body.model,
-//     stockQuantity:req.body.quantity,
-//     purchasePrice: req.body.purchase_price,
-//     remaining: req.body.quantity,
-//     serial: serials,
-//     original_serial:serials,
-//     admin: req.user._id
-//   }
-//   Product.update({_id:req.body.model}, { $set:{ warranted: true } },{ upsert:true }, (err, rs)=>{
-//     if(err){
-//       console.log((err))
-//     }else{
-//       new Inventory(inventory).save().then(inventory => {
-//         res.json({})
-//       });
-//     }
-//   })
-// };
-
-// const multer = require("multer");
-// const GridFsStorage = require('multer-gridfs-storage');
-// const Grid = require('gridfs-stream');
-// const mongoo = 'mongodb://jihad:jihad1234@ds115353.mlab.com:15353/e-commerce_db';
-
-// const conn = mongoose.createConnection(mongoo);
-// let gfs;
-// conn.once('open', function () {
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection('fs');
-// })
-// var filename;
-// // create storage engine
-// const storage = new GridFsStorage(
-//   {
-//     url: mongoo,
-//     file: (req, file) => {
-//       return new Promise((resolve, reject) => {
-//         crypto.randomBytes(16, (err, buf) => {
-//           if (err) { return reject(err); }
-//           filename = buf.toString('hex') + path.extname(file.originalname);
-//           const fileInfo = {
-//             filename: filename,
-//             bucketName: 'fs'
-//           };
-//           resolve(fileInfo);
-//         });
-//       });
-//     }
-//   });
-// const upload = multer({ storage });
-// 892
-// // single product view
-// exports.singleProduct = (req, res) => {
-//   Product.find({_id:req.params.id})
-//     .populate("brand")
-//     .populate("admin")
-//     .populate("subcategory")
-//     .populate("category")
-//     // .populate({
-//     //   path: "subcategory",
-//     //   populate: { path: "category" }
-//     // })
-//     .exec(function(err, product) {
-//       console.log("DFGDF")
-//       console.log(err)
-//       var obj = resultArray.features;
-//       res.render("single", {
-//         title: "Single",
-//         product: product,
-//         features: obj
-//       });
-//     });
-// };
-
-// exports.addLotPage= (req, res, next) => {
-//   res.render("addNewLot");
-// };
-
-// // returns setDiscount to the selected product
-// exports.addDiscount = (req, res, next)=>{
-
-//   allFuctions.find({_id: req.params.id}, function(rs){
-
-//     var listPrice = rs[0].productPrice.listPrice;
-//     var with_discount = listPrice-((req.body.discount/100)*listPrice);
-
-//     if(with_discount <= rs[0].productPrice.wholeSalePrice ){
-
-//       req.flash('error_msg', "Discounted price is less than the wholesale price!");
-//       var obj = {'productPrice.salePrice': Number((with_discount).toFixed(0)), onSale:true};
-//       changeStatus(req, res, obj);
-//       res.redirect('/products/view');
-
-//     }else{
-//       var obj = {'productPrice.salePrice': Number((with_discount).toFixed(0)), onSale:true };
-//       changeStatus(req, res, obj);
-//       res.redirect('/products/view');
-//     }
-//   })
-// }
-
-// // function for updateting category table
-// function update_category(condition, values, cb){
-//   Category.update(condition,values,{ upsert: true },function(err, docs){
-//       if(err){ console.log(err)}
-//     }
-//   )
-// }
-// function update_subcategory(condition, values, cb){
-//   Category.update(condition,values,{ upsert: true },function(err, docs){
-//       if(err){ console.log(err)}
-//     }
-//   )
-// }
-
-// // adds to the sale list
-// exports.makeOnSale = (req, res, next) => {
-
-//   var obj = { onSale: true };
-//   changeStatus(req, res, obj);
-//   res.redirect("/products/Online/" + req.params.cid);
-
-// };
-
-// // returns Remove product sale
-// exports.removeFromSale = (req, res, next) => {
-
-//   var obj = {
-//     onSale: false,
-//     'productPrice.salePrice': null
-//   };
-//   changeStatus(req, res, obj);
-//   res.redirect("/products/view");
-// };
-
-// // delete product
-// exports.deleteProduct = (req, res, next) => {
-//   Product.deleteOne({ _id: mongo.ObjectID(req.params.id) }, function(err,bear) {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       res.redirect("/products/view");
-//     }
-//   });
-// };
-
-// returns all product with stock info page
-// exports.getAllProductStock = (req, res, next) => {
-
-//   var resultArray = [];
-//   Product.find()
-//   .sort({ "quantity.stock": -1 })
-//   .populate("subcategory")
-//   .populate("quantity.userID")
-//   .exec(function(err, docs) {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       for (var i = docs.length - 1; i > -1; i -= 1) {
-//         resultArray.push(docs[i]);
-//       }
-//     }
-//     res.render("stock", {
-//       title: "Stock",
-//       products: resultArray
-//     });
-//   });
-
-// };
